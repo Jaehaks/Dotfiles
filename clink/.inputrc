@@ -1,0 +1,25 @@
+# .inputc = Readline init file in path %CLINK_INPUTRC%
+# it can set "Readline configuration variables" and "Bindasble Commands" 
+# (!warning) if "clinks_settings" is set in this file, clink does not work properly
+
+######## special shortcut #######
+# <C-A-c> : copy command line to clip board ('y' yank is applyed in terminal only)
+# <C-A-e> : expand environment variable under cursor
+# <C-A-u> / <S-up> : up directory
+# <C-u> : add ..\ in command line
+# <A-h> : show active keymaps
+$if clink
+
+set blink-matching-paren      on
+set colored-completion-prefix on
+set colored-stats             on
+
+set editing-mode              vi
+# set keymap                    vi
+set show-mode-in-prompt       on
+set visible-stats             on
+
+# it works only "set keymap emacs"
+"\e[Z": clink-insert-suggested-line
+
+$endif
