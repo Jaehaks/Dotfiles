@@ -1,0 +1,73 @@
+classic: false
+blocks:
+  - permission
+  - user
+  - size
+  - date
+  - name
+  - git
+
+
+color:
+  when: auto
+  theme: default
+
+date: '+%Y/%m/%d %H:%M:%S'
+
+dereference: false
+
+display: all
+
+# == Icons ==
+icons:
+  when: auto
+  theme: fancy
+  separator: " "
+
+# == Ignore Globs ==
+# A list of globs to ignore when listing.
+#   - .git
+
+# == Indicators ==
+# Whether to add indicator characters to certain listed files.
+indicators: false
+
+layout: grid
+
+recursion:
+  enabled: false
+
+size: default
+
+# show permission rwx format (default : attribute, it only for windows)
+# but if attribute set, permission and user / group does not show information properly
+permission: rwx
+
+# == Sorting ==
+sorting:
+  column: name
+  reverse: false
+  dir-grouping: first
+
+# == No Symlink ==
+no-symlink: false
+
+# == Total size ==
+total-size: false
+
+# == Hyperlink ==
+hyperlink: never
+
+# == Symlink arrow ==
+symlink-arrow: ⇒
+
+# == Header ==
+header: true
+
+# == Literal ==
+literal: false
+
+# == Truncate owner ==
+# truncate-owner:
+#   after: 5
+#   marker: ".."
