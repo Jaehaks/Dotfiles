@@ -1,6 +1,7 @@
 local green   = "\x1b[92m"
 local yellow  = "\x1b[33m"
 local magenta = "\x1b[95m"
+local cyan    = "\x1b[96m"
 local normal  = "\x1b[0m"
 
 -- prompt filter for getting cwd 
@@ -25,8 +26,20 @@ function git_branch_prompt:filter(prompt)
     end
 end
 
+-- A prompt filter that show python virtual env name
+local venv_prompt = clink.promptfilter(100)
+function venv_prompt:filter(prompt)
+	local env = os.getenv('VIRTUAL_ENV')
+	if env then
+		env = env:match("^.+[/\\](.*)$")
+		return prompt .. cyan .. '\n[' .. env .. ']' .. normal
+	else
+		return prompt .. '\n'
+	end
+end
+
 -- A prompt filter that adds a line feed and angle bracket.
 local bracket_prompt = clink.promptfilter(150)
 function bracket_prompt:filter(prompt)
-    return prompt.."\n > "
+    return prompt.." >> "
 end
