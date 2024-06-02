@@ -1,0 +1,61 @@
+[shell]
+program = "wsl"
+args = [
+	"--cd ~",
+	'-d Ubuntu-22.04',
+]
+
+# program = "cmd"
+# args = [
+# 	"/k",
+# 	'C:\Users\USER\.config\\Dotfiles\clink\aliase.cmd',
+# ]
+
+[env]
+TERM = "xterm-256color"
+# alacritty cannot expand path variables in config file
+# use \\ instead of \ when you use ",   use \ when you use ',
+CLINK_INPUTRC = "C:\\Users\\USER\\.config\\Dotfiles\\clink"
+CLINK_SETTINGS = "C:\\Users\\USER\\.config\\Dotfiles\\clink"
+
+
+[font]
+normal = {family = 'FiraCode Nerd Font Mono', style = 'SemiBold'}
+size = 12
+offset.x = 1 # extra space around each character
+offset.y = 0
+
+[window]
+dimensions = {columns = 120, lines = 30}
+padding = {x = 10, y = 10}
+
+[colors] # customize ascii color code
+normal = { red = '#d00000', yellow = '#d0d000', green = '#00d000', blue = '#0000d0', magenta = '#d000d0', cyan = '#00d0d0', white = '#dddddd'}
+bright = { red = '#FF0000', yellow = '#FFFF00', green = '#00FF00', blue = '#0000FF', magenta = '#FF00FF', cyan = '#00FFFF', white = '#FFFFFF'}
+dim = { green = '#009900' }
+draw_bold_text_with_bright_colors = true # bold text is drawn using the bright color
+
+[mouse]
+hide_when_typing = true
+bindings = [
+{ mouse = 'Right', mods = 'Control', action = 'Paste'} # it does not work?
+]
+
+[keyboard]
+bindings = [
+{key = 'K', mods = 'Alt|Shift', mode = '~Alt', action = 'ScrollPageDown'},
+{key = 'J', mods = 'Alt|Shift', mode = '~Alt', action = 'ScrollPageUp'},
+{key = 'K', mods = 'Alt', mode = '~Alt', action = 'ScrollLineDown'},
+{key = 'J', mods = 'Alt', mode = '~Alt', action = 'ScrollLineUp'},
+{key = 'J', mods = 'Alt', mode = '~Alt', action = 'ScrollLineUp'},
+{key = 'Enter', mods = 'Alt', action = 'ToggleFullscreen'},
+# <C-L> : clear
+# don't use <C-j> and <C-k>, these are used in fzf
+
+# VI mode keys
+{key = 'Space', mods = 'Control|Shift', mode = '~Search', action = 'ToggleViMode'}, # toggle to vi normal mode
+{key = 'I', mode = 'Vi|~Search', action = 'ToggleViMode'}, # in VI mode, 'i' acts [toggleViMode] and [ScrollToBottom] together
+{key = 'I', mode = 'Vi|~Search', action = 'ScrollToBottom'}, # toggle to vi normal mode
+{key = 'J', mode = 'Vi|~Search', action = 'Up'},
+{key = 'K', mode = 'Vi|~Search', action = 'Down'},
+]
