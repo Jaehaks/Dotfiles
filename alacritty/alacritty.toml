@@ -1,15 +1,17 @@
 [shell]
-program = "wsl"
-args = [
-	"--cd ~",
-	'-d Ubuntu-22.04',
-]
-
-# program = "cmd"
+# program = "wsl"
 # args = [
-# 	"/k",
-# 	'C:\Users\USER\.config\\Dotfiles\clink\aliase.cmd',
+# 	"--cd ~",
+# 	'-d Ubuntu-22.04',
 # ]
+
+program = "cmd"
+args = [
+	"/k",
+	# 'cd %USERPROFILE%'
+	'%USERPROFILE%\.config\Dotfiles\clink\aliase.cmd &&',
+	'cd %USERPROFILE%'
+]
 
 [env]
 TERM = "xterm-256color"
