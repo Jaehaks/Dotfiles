@@ -14,11 +14,11 @@ args = [
 ]
 
 [env]
-TERM = "xterm-256color"
+# TERM = "xterm-256color"
 # alacritty cannot expand path variables in config file
 # use \\ instead of \ when you use ",   use \ when you use ',
-CLINK_INPUTRC = "C:\\Users\\USER\\.config\\Dotfiles\\clink"
-CLINK_SETTINGS = "C:\\Users\\USER\\.config\\Dotfiles\\clink"
+# CLINK_INPUTRC = "C:\\Users\\USER\\.config\\Dotfiles\\clink"
+# CLINK_SETTINGS = "C:\\Users\\USER\\.config\\Dotfiles\\clink"
 
 
 [font]
@@ -32,9 +32,10 @@ dimensions = {columns = 120, lines = 30}
 padding = {x = 10, y = 10}
 
 [colors] # customize ascii color code
+primary = {background = '#000000'} # terminal background
 normal = { red = '#d00000', yellow = '#d0d000', green = '#00d000', blue = '#0000d0', magenta = '#d000d0', cyan = '#00d0d0', white = '#dddddd'}
-bright = { red = '#FF0000', yellow = '#FFFF00', green = '#00FF00', blue = '#0000FF', magenta = '#FF00FF', cyan = '#00FFFF', white = '#FFFFFF'}
-dim = { green = '#009900' }
+bright = { red = '#FF0000', yellow = '#FFFF00', green = '#00FF00', blue = '#0052FF', magenta = '#FF00FF', cyan = '#00FFFF', white = '#FFFFFF'}
+dim = { red = '#FF0000', yellow = '#FFFF00', green = '#00FF00', blue = '#d000FF', magenta = '#FF00FF', cyan = '#00FFFF', white = '#FFFFFF'}
 draw_bold_text_with_bright_colors = true # bold text is drawn using the bright color
 
 [mouse]
