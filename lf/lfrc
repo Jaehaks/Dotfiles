@@ -1,0 +1,84 @@
+## options
+set shell cmd
+set number
+set relativenumber
+set preview false		# disable preview window
+set ratios 1:4			# window ratios
+set icons true			# show icons with lf\icons file
+set info size:time		# show size / time column
+set hidden true			# show hidden files
+set infotimefmtnew "2006/01/02 15:04:05"	# see https://pkg.go.dev/time
+set infotimefmtold "2006/01/02 15:04:05"	# see https://pkg.go.dev/time
+set incsearch true		# jump to first match during searching
+set mouse true			# left : select / right : enter / middle : wheel
+set filesep ' '			# set separator of %fx%, %fs%. default is \n
+
+## mapping to default function
+map j :up
+map k :down
+map ; :read # #command mode key  (':' must be remained, do not change map)
+map V :invert-below	#like visual-block
+map <f-5> :reload	# reload, (default <c-r>)
+map <c-s> :calcdirsize	# calculate total size for selected dir
+map sn :set sortby natural
+map ss :set sortby size
+map st :set sortby time
+map sa :set sortby atime
+map sc :set sortby ctime
+map se :set sortby ext		# extension
+cmap <c-g> cmd-left # move in cmd mode
+cmap <c-h> cmd-left # move in cmd mode (windows terminal use <c-h> as backspace, so cannot use it in wt)
+cmap <c-l> cmd-right # move in cmd mode
+cmap <c-e> cmd-delete #delete in cmd mode
+
+## short command
+	# open explorer in current directory
+map gd push &start.<enter>
+	# copy file dirpath
+map Y &for %F in (%f%) do set /p=%~dpF|clip
+	# copy file name
+map U &for %F in (%f%) do set /p=%~nxF|clip
+	# open with nvim-qt
+map e &nvim-qt %f%
+	# preview the file with bat
+map i $bat --paging always %f%
+	# browse file using fzf in current directory (require fzff.bat)
+map gff $fzff
+	# browse directory using fzf in current directory (require fzff.bat)
+map gfd $fzfd
+	# zip with name 'Archive.7z'	(if name of file to archive is same with Archive.7z, it invokes error )
+map gz &bandizip c -fmt:7z archive.7z %fx%
+	# unzip
+map gu &bandizip bx -target:auto %fx%
+
+
+## -- command - documentation with bat(more is default in windows)
+cmd doc $lf -doc | bat --paging always -l "Command Help"
+
+## -- command - delete to Recycle.Bin (require 'trash-cli' from npm)
+# 'filesep' option must be ' '
+map D &trash %fx%
+
+## -- command - edit lfrc
+cmd lfrc &nvim-qt "%LF_CONFIG_HOME%\\lf\\lfrc"
+
+## -- command - make directory
+# if you add whitespace, use \
+	# write dirname and enter
+cmd createdir %sh -c 'mkdir "$0"'
+map a push :createdir<space>
+	# write filename and enter
+cmd createfile %sh -c 'touch "$0"'
+map a push :createfile<space>
+
+
+## advice
+# 1) % and $ means executing external command
+# 	$ means that open the shell and execute the command (it is independent with lf)
+# 		but you can see the blinking because it opens shell
+# 		the command which is not supported in lf like 'less' is must be executed by shell
+# 	% means that execute the command within lf. so if the process doesn't quit, '>' will show in below if window
+# 	& means that execute shell command asynchronously (if you don't want to show blinking, use it)
+# 2) Do not comment beside to statement, especially external command
+# 3) trash cannot delete directory which terminal prompt is located
+# 4) tmux cannot support Windows, so I use window-terminal instead of alacritty
