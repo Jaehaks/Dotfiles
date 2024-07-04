@@ -1,6 +1,6 @@
 :: You must register ms_office and Acrobat in %PATH%
 @echo off
-fzf --layout=reverse --border --preview="bat {}" --bind=ctrl-j:up,ctrl-k:down> %TMP%\fzff.txt
+fd --hidden --type file %* . | fzf --layout=reverse --border --preview="bat {}" --bind=ctrl-j:up,ctrl-k:down,ctrl-d:page-down,ctrl-u:page-up > %TMP%\fzff.txt
 iconv -f utf-8 -t cp949 %TMP%\fzff.txt > %TMP%\fzff_cp949.txt
 for /f "delims=" %%i in (%TMP%\fzff_cp949.txt) do (
 	for %%e in (.xlsx;.xls;.csv;.xlsm) do (
