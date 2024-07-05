@@ -69,7 +69,7 @@ cmd createdir %sh -c 'mkdir "$0"'
 map a push :createdir<space>
 	# write filename and enter
 cmd createfile %sh -c 'touch "$0"'
-map a push :createfile<space>
+map A push :createfile<space>
 
 
 ## advice
