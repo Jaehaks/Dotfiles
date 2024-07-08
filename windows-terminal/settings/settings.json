@@ -10,10 +10,10 @@
         {
             "command": 
             {
-                "action": "splitPane",
-                "split": "down"
+                "action": "copy",
+                "singleLine": false
             },
-            "keys": "alt+s"
+            "keys": "ctrl+shift+c"
         },
         {
             "command": "unbound",
@@ -354,19 +354,17 @@
         {
             "command": 
             {
-                "action": "copy",
-                "singleLine": false
+                "action": "splitPane",
+                "split": "down"
             },
-            "keys": "ctrl+shift+c"
-        },
-        {
-            "command": "find"
+            "keys": "alt+s"
         },
         {
             "command": 
             {
-                "action": "resizePane",
-                "direction": "left"
+                "action": "splitPane",
+                "split": "auto",
+                "splitMode": "duplicate"
             }
         },
         {
@@ -379,10 +377,12 @@
         {
             "command": 
             {
-                "action": "splitPane",
-                "split": "auto",
-                "splitMode": "duplicate"
+                "action": "resizePane",
+                "direction": "left"
             }
+        },
+        {
+            "command": "find"
         },
         {
             "command": "scrollUpPage",
@@ -402,17 +402,17 @@
         {
             "command": 
             {
-                "action": "moveFocus",
-                "direction": "previousInOrder"
+                "action": "scrollUp"
             },
-            "keys": "f3"
+            "keys": "alt+j"
         },
         {
             "command": 
             {
-                "action": "scrollUp"
+                "action": "moveFocus",
+                "direction": "previousInOrder"
             },
-            "keys": "alt+j"
+            "keys": "f3"
         },
         {
             "command": 
@@ -431,17 +431,17 @@
         {
             "command": 
             {
-                "action": "splitPane",
-                "split": "right"
-            },
-            "keys": "alt+d"
+                "action": "moveFocus",
+                "direction": "down"
+            }
         },
         {
             "command": 
             {
-                "action": "moveFocus",
-                "direction": "down"
-            }
+                "action": "splitPane",
+                "split": "right"
+            },
+            "keys": "alt+d"
         },
         {
             "command": 
@@ -472,6 +472,7 @@
     "copyFormatting": "none",
     "copyOnSelect": false,
     "defaultProfile": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
+    "language": "ko",
     "newTabMenu": 
     [
         {
@@ -487,7 +488,13 @@
             "elevate": false,
             "font": 
             {
-                "face": "FiraCode Nerd Font Mono"
+                "face": "FiraCode Nerd Font Mono",
+				"weight" : "semi-bold",
+				"features" : 
+				{
+					"liga" : 0,
+					"calt" : 0,
+				}
             }
         },
         "list": 
