@@ -16,20 +16,21 @@ set filesep ' '			# set separator of %fx%, %fs%. default is \n
 ## mapping to default function
 map j :up
 map k :down
-map ; :read # #command mode key  (':' must be remained, do not change map)
-map V :invert-below	#like visual-block
-map <f-5> :reload	# reload, (default <c-r>)
-map <c-s> :calcdirsize	# calculate total size for selected dir
+map ; :read            # #command mode key  (':' must be remained, do not change map)
+map V :invert-below    # like visual-block
+map <f-5> :reload      # reload, (default <c-r>)
+map <c-s> :calcdirsize # calculate total size for selected dir
+map <enter> :open      # open
 map sn :set sortby natural
 map ss :set sortby size
 map st :set sortby time
 map sa :set sortby atime
 map sc :set sortby ctime
-map se :set sortby ext		# extension
-cmap <c-g> cmd-left # move in cmd mode
-cmap <c-h> cmd-left # move in cmd mode (windows terminal use <c-h> as backspace, so cannot use it in wt)
-cmap <c-l> cmd-right # move in cmd mode
-cmap <c-e> cmd-delete #delete in cmd mode
+map se :set sortby ext # extension
+cmap <c-g> cmd-left    # move in cmd mode
+cmap <c-h> cmd-left    # move in cmd mode (windows terminal use <c-h> as backspace, so cannot use it in wt)
+cmap <c-l> cmd-right   # move in cmd mode
+cmap <c-e> cmd-delete  # delete in cmd mode
 
 ## short command
 	# open explorer in current directory
@@ -38,8 +39,8 @@ map gd push &start.<enter>
 map Y &for %F in (%f%) do set /p=%~dpF|clip
 	# copy file name
 map U &for %F in (%f%) do set /p=%~nxF|clip
-	# open with nvim-qt
-map e &nvim-qt %f%
+	# open with nvim (nvim v0.10 is not compatible with nvim-qt yet)
+map e &nvim %f%
 	# preview the file with bat
 map i $bat --paging always %f%
 	# browse file using fzf in current directory (require fzff.bat)
