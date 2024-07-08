@@ -40,7 +40,8 @@ map Y &for %F in (%f%) do set /p=%~dpF|clip
 	# copy file name
 map U &for %F in (%f%) do set /p=%~nxF|clip
 	# open with nvim (nvim v0.10 is not compatible with nvim-qt yet)
-map e &nvim %f%
+# map e &nvim-qt %f%
+map e $nvim %f%
 	# preview the file with bat
 map i $bat --paging always %f%
 	# browse file using fzf in current directory (require fzff.bat)
