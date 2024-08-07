@@ -494,6 +494,11 @@
 				{
 					"liga" : 0,
 					"calt" : 0,
+				},
+				"unfocusedAppearance" : 
+				{
+					"useAcrylic" : true,
+					"opacity" : 90,
 				}
             }
         },
