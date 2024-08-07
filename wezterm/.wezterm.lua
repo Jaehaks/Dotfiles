@@ -50,7 +50,7 @@ default_color.cursor_border = '#00FF00'
 
 config.inactive_pane_hsb = { -- color for inactive pane
 	saturation = 1.0,        -- color changed
-	brightness = 0.1,        -- brightness changed
+	brightness = 0.8,        -- brightness changed
 }
 
 config.colors = default_color
