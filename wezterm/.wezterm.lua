@@ -18,6 +18,9 @@ config.default_prog = {'cmd.exe', '/k', wezterm.home_dir .. '\\.config\\Dotfiles
 config.hide_tab_bar_if_only_one_tab = true
 config.initial_cols = 110
 config.initial_rows = 30
+config.front_end = 'OpenGL'
+config.max_fps = 240
+config.prefer_egl=false
 
 -- check $HOME/.local/share/wezterm/wezterm-gui.exe-log    for variable check like this
 -- wezterm.log_error('home' .. wezterm.home_dir)
