@@ -63,6 +63,8 @@ map D &trash %fx%
 
 ## -- command - edit lfrc
 cmd lfrc &nvim-qt "%LF_CONFIG_HOME%\\lf\\lfrc"
+## -- command - edit colors
+cmd colors &nvim-qt "%LF_CONFIG_HOME%\\lf\\colors"
 
 ## -- command - make directory
 # if you add whitespace, use \
