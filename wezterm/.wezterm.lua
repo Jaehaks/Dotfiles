@@ -44,8 +44,9 @@ config.command_palette_font_size = 12.0
 -- INFO: colors
 local default_color = wezterm.color.get_default_colors()
 default_color.split = '#FF00FF' -- split pane line color
-default_color.cursor_bg = '#00FFE0'
-default_color.cursor_border = '#00FFE0'
+default_color.cursor_fg = '#333333'
+default_color.cursor_bg = '#00FF00'
+default_color.cursor_border = '#00FF00'
 
 config.inactive_pane_hsb = { -- color for inactive pane
 	saturation = 1.0,        -- color changed
