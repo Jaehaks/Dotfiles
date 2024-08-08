@@ -524,7 +524,11 @@
                 "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
                 "hidden": false,
                 "name": "\uba85\ub839 \ud504\ub86c\ud504\ud2b8",
-                "useAcrylic": false
+				"unfocusedAppearance" : 
+				{
+					"useAcrylic" : true,
+					"opacity" : 90,
+				}
             },
             {
                 "commandline": "cmd.exe /k \"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat\" -startdir=none -arch=x64 -host_arch=x64",
