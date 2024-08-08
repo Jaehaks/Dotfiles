@@ -17,6 +17,7 @@ set _ZL_NO_CHECK=1
 
 REM set environment variables for zoxide
 set _ZO_DATA_DIR=%HOME%
+doskey zl=zoxide query -ls $*
 
 
 doskey ls=ls --color=always $*
