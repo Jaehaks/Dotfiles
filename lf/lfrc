@@ -76,12 +76,8 @@ cmd createfile %sh -c 'touch "$0"'
 map A push :createfile<space>
 
 ## -- command - zoxide
-# cmd z ${{
-# 	set lf_dir=%*
-# 	# lf -remote "send $id cd '%lf_dir%'"
-# 	lf -remote 'send cd c:\Users\USER\Desktop'
-# }}
-
+cmd z &%LF_CONFIG_HOME%lf\lf_z.bat
+cmd zi $%LF_CONFIG_HOME%lf\lf_zi.bat
 
 
 
