@@ -5,6 +5,8 @@ luarocks config variables.LUA_INCDIR %USERPROFILE%\scoop\apps\lua\current\includ
 REM 2) for lua-iconv
 luarocks config external_deps_dirs[2] %USERPROFILE%\scoop\apps\mingw\current\x86_64-w64-mingw32 > nul
 set LUA_CPATH=%USERPROFILE%\scoop\persist\luarocks\rocks\lib\lua\5.4\?.dll;%LUA_CPATH%
+REM 3) for fugit2.nvim
+REM luarocks --lua-version=5.1 --local config variables.LUA 
 
 
 REM set EZA_COLOR for date(da)  [you must don't use double quotes]
@@ -18,6 +20,8 @@ set _ZL_NO_CHECK=1
 REM set environment variables for zoxide
 set _ZO_DATA_DIR=%HOME%
 doskey zl=zoxide query -ls $*
+doskey z=z $*
+doskey zi=zi $*
 
 
 doskey ls=ls --color=always $*
