@@ -5,7 +5,7 @@ chcp 65001 > nul 2>&1
 for /F "usebackq tokens=*" %%a in (`zoxide query --exclude %cd% %*`) do (
 	set z_dir=%%a
 	set "z_dir=!z_dir:\=\\!"
-	lf -remote "send %id% cd /d !z_dir!"
+	lf -remote "send %id% cd '!z_dir!'"
 )
 endlocal
 
