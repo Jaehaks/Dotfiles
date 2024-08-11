@@ -62,9 +62,9 @@ cmd doc $lf -doc | bat --paging always -l "Command Help"
 map D &trash %fx%
 
 ## -- command - edit lfrc
-cmd lfrc &nvim-qt "%LF_CONFIG_HOME%lf\lfrc"
+cmd lfrc &nvim-qt "%LF_CONFIG_HOME%\lf\lfrc"
 ## -- command - edit colors
-cmd colors &nvim-qt "%LF_CONFIG_HOME%lf\colors"
+cmd colors &nvim-qt "%LF_CONFIG_HOME%\lf\colors"
 
 ## -- command - make directory
 # if you add whitespace, use \
@@ -76,8 +76,8 @@ cmd createfile %sh -c 'touch "$0"'
 map A push :createfile<space>
 
 ## -- command - zoxide
-cmd z &%LF_CONFIG_HOME%lf\lf_z.bat
-cmd zi $%LF_CONFIG_HOME%lf\lf_zi.bat
+cmd z &%LF_CONFIG_HOME%\lf\lf_z.bat
+cmd zi $%LF_CONFIG_HOME%\lf\lf_zi.bat
 
 
 
