@@ -30,7 +30,7 @@ map se :set sortby ext # extension
 cmap <c-g> cmd-left    # move in cmd mode
 cmap <c-h> cmd-left    # move in cmd mode (windows terminal use <c-h> as backspace, so cannot use it in wt)
 cmap <c-l> cmd-right   # move in cmd mode
-cmap <c-e> cmd-delete  # delete in cmd mode
+cmap <c-d> cmd-delete  # delete in cmd mode
 
 ## short command
 	# open explorer in current directory
