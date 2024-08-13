@@ -9,6 +9,11 @@ REM 3) for fugit2.nvim
 REM luarocks --lua-version=5.1 --local config variables.LUA 
 
 
+
+REM set komorebi environment variable
+set KOMOREBI_CONFIG_HOME=%HOME%\.config\Dotfiles\komorebi
+set WHKD_CONFIG_HOME=%HOME%\.config\Dotfiles\komorebi
+
 REM set EZA_COLOR for date(da)  [you must don't use double quotes]
 set EZA_COLORS=da=38;2;90;241;188:*.pdf=38;2;255;100;100:*.pptx=38;2;255;150;100:*.PPTX=38;2;255;150;100:*.PPT=38;2;255;150;100:*.ppt=38;2;255;150;100:*.xlsx=38;2;200;255;200:*.xls=38;2;200;255;200:*.csv=38;2;200;255;200:*.lnk=38;2;255;255;150:
 
@@ -34,4 +39,5 @@ REM doskey zi=z -I $*
 REM doskey zl=z -l $*
 REM doskey zt=z -t $*
 doskey lf=lfcd $*
+doskey komo=komorebic start --whkd
 @echo on
