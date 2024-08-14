@@ -39,5 +39,4 @@ REM doskey zi=z -I $*
 REM doskey zl=z -l $*
 REM doskey zt=z -t $*
 doskey lf=lfcd $*
-doskey komo=komorebic start --whkd
 @echo on
