@@ -10,9 +10,8 @@ alt + shift + o         : komorebic reload-configuration
 # alt + f                 : if ($wshell.AppActivate('Firefox') -eq $False) { start firefox }
 # alt + b                 : if ($wshell.AppActivate('Chrome') -eq $False) { start chrome }
 
-# alt + q                 : komorebic close
-alt + q                 : komorebic stop --whkd
-alt + m                 : komorebic minimize
+alt + q                 : komorebic close
+alt + shift + q         : komorebic stop --whkd
 
 # Focus windows
 alt + h                 : komorebic focus left
@@ -27,7 +26,7 @@ alt + shift + h         : komorebic move left
 alt + shift + k         : komorebic move down
 alt + shift + j         : komorebic move up
 alt + shift + l         : komorebic move right
-alt + shift + return    : komorebic promote
+# alt + shift + return    : komorebic promote
 
 # Stack windows
 alt + left              : komorebic stack left
@@ -39,18 +38,24 @@ alt + oem_4             : komorebic cycle-stack previous # oem_4 is [
 alt + oem_6             : komorebic cycle-stack next # oem_6 is ]
 
 # Resize
-alt + oem_plus          : komorebic resize-axis horizontal increase
-alt + oem_minus         : komorebic resize-axis horizontal decrease
-alt + shift + oem_plus  : komorebic resize-axis vertical increase
-alt + shift + oem_minus : komorebic resize-axis vertical decrease
+alt + shift + oem_plus  : komorebic resize-axis horizontal increase
+alt + shift + oem_minus : komorebic resize-axis horizontal decrease
+# alt + shift + oem_plus  : komorebic resize-axis vertical increase
+# alt + shift + oem_minus : komorebic resize-axis vertical decrease
 
 # Manipulate windows
-alt + t                 : komorebic toggle-float
-alt + shift + f         : komorebic toggle-monocle
+	# monocle : use full screen but not maximize. it shows border
+	# maximize : use full screen such as maximize button. it doesn't show border
+	# float : turn off managing of specific windows
+	# pause : turn off managing of all windows
+alt + w                 : komorebic toggle-float
+# alt + shift + f         : komorebic toggle-monocle
+alt + m        			: komorebic toggle-maximize
+alt + shift + m         : komorebic minimize
+alt + p                 : komorebic toggle-pause
 
 # Window manager options
 alt + shift + r         : komorebic retile
-alt + p                 : komorebic toggle-pause
 
 # Layouts
 alt + x                 : komorebic flip-layout horizontal
@@ -67,11 +72,11 @@ alt + 7                 : komorebic focus-workspace 6
 alt + 8                 : komorebic focus-workspace 7
 
 # Move windows across workspaces
-alt + shift + 1         : komorebic move-to-workspace 0
-alt + shift + 2         : komorebic move-to-workspace 1
-alt + shift + 3         : komorebic move-to-workspace 2
-alt + shift + 4         : komorebic move-to-workspace 3
-alt + shift + 5         : komorebic move-to-workspace 4
-alt + shift + 6         : komorebic move-to-workspace 5
-alt + shift + 7         : komorebic move-to-workspace 6
-alt + shift + 8         : komorebic move-to-workspace 7
+alt + ctrl + 1         : komorebic move-to-workspace 0
+alt + ctrl + 2         : komorebic move-to-workspace 1
+alt + ctrl + 3         : komorebic move-to-workspace 2
+alt + ctrl + 4         : komorebic move-to-workspace 3
+alt + ctrl + 5         : komorebic move-to-workspace 4
+alt + ctrl + 6         : komorebic move-to-workspace 5
+alt + ctrl + 7         : komorebic move-to-workspace 6
+alt + ctrl + 8         : komorebic move-to-workspace 7
