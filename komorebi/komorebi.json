@@ -10,7 +10,7 @@
   "border_offset": -1,
   "border_colours": {
     "single": "#FF3333",
-    "stack": "#49FF33",
+    "stack": "#FF0000",
     "monocle": "#3368FF",
     "unfocused": "#808080"
   },
@@ -27,17 +27,38 @@
   "monitors": [
     {
 		"workspaces": [
-        {
-          "name": "II",
-          "layout": "VerticalStack"
-        },
-        {
-          "name": "VII",
-          "layout": "RightMainVerticalStack"
-        }
+        { "name": "I"  , "layout": "BSP" },
+        { "name": "II" , "layout": "VerticalStack" },
+        { "name": "VII", "layout": "VerticalStack" }
       ]
     }
   ],
   "mouse_follows_focus": false,
   "window_container_behaviour": "Append",
+  "float_rules": [
+	  { "kind" : "Exe"  , "id" : "mda.exe"         , "matching_strategy" : "Equals" },
+	  { "kind" : "Exe"  , "id" : "Inca.exe"        , "matching_strategy" : "Equals" },
+	  { "kind" : "Exe"  , "id" : "lync.exe"        , "matching_strategy" : "Equals" },
+	  { "kind" : "Title", "id" : "Figure"          , "matching_strategy" : "StartsWith" },
+	  { "kind" : "Exe"  , "id" : "Kalkules.exe"    , "matching_strategy" : "Equals" },
+	  { "kind" : "Exe"  , "id" : "Everything.exe"  , "matching_strategy" : "Equals" },
+	  { "kind" : "Exe"  , "id" : "DeepL.exe"       , "matching_strategy" : "Equals" },
+	  { "kind" : "Exe"  , "id" : "Lingoes64.exe"   , "matching_strategy" : "Equals" },
+	  { "kind" : "Exe"  , "id" : "mstsc.exe"       , "matching_strategy" : "Equals" },
+	  { "kind" : "Exe"  , "id" : "GCS-User-App.exe", "matching_strategy" : "Equals" },
+	  { "kind" : "Exe"  , "id" : "creoagent.exe"   , "matching_strategy" : "Equals" },
+	  { "kind" : "Exe"  , "id" : "Memoit.exe"      , "matching_strategy" : "Equals" },
+	  { "kind" : "Exe"  , "id" : "Rainmeter.exe"   , "matching_strategy" : "Equals" },
+	  { "kind" : "Exe"  , "id" : "vlc.exe"         , "matching_strategy" : "Equals" },
+	  { "kind" : "Title", "id" : "계산기"          , "matching_strategy" : "Equals" },
+  ],
+  "manage_rules": [
+	  { "kind" : "Exe"  , "id" : "matlab.exe"         , "matching_strategy" : "Equals"},
+	  { "kind" : "Exe"  , "id" : "CANoe64.exe"        , "matching_strategy" : "Equals"},
+	  { "kind" : "Exe"  , "id" : "IntegrityClient.exe", "matching_strategy" : "Equals"},
+	  { "kind" : "Exe"  , "id" : "nvim-qt.exe"        , "matching_strategy" : "Equals"},
+	  { "kind" : "Exe"  , "id" : "SumatraPDF.exe"     , "matching_strategy" : "Equals"},
+	  { "kind" : "Exe"  , "id" : "WinMergeU.exe"      , "matching_strategy" : "Equals"},
+	  { "kind" : "Title", "id" : ".xlsx"              , "matching_strategy" : "EndsWith"},
+  ]
 }
