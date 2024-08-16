@@ -49,9 +49,9 @@ alt + shift + oem_minus : komorebic resize-axis horizontal decrease
 	# float : turn off managing of specific windows
 	# pause : turn off managing of all windows
 alt + w                 : komorebic toggle-float
-# alt + shift + f         : komorebic toggle-monocle
-alt + shift + m 		: komorebic toggle-maximize
-alt + shift + n         : komorebic minimize
+alt + ctrl + m         : komorebic toggle-monocle
+# alt + ctrl + m 		: komorebic toggle-maximize
+alt + ctrl + n         : komorebic minimize
 alt + p                 : komorebic toggle-pause
 
 # Window manager options
