@@ -51,6 +51,8 @@
 	  { "kind" : "Exe"  , "id" : "Rainmeter.exe"   , "matching_strategy" : "Equals" },
 	  { "kind" : "Exe"  , "id" : "vlc.exe"         , "matching_strategy" : "Equals" },
 	  { "kind" : "Title", "id" : "계산기"          , "matching_strategy" : "Equals" },
+	  { "kind" : "Exe",  "id" : "KakaoTalk.exe"          , "matching_strategy" : "Equals" },
+	  { "kind" : "Title",  "id" : "Microsoft"          , "matching_strategy" : "StartsWith" },
   ],
   "manage_rules": [
 	  { "kind" : "Exe"  , "id" : "matlab.exe"         , "matching_strategy" : "Equals"},
