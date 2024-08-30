@@ -150,5 +150,32 @@ Dotfiles besides of nvim_config
 - **Reference**
     * Detailed configuration list : [Alacritty configuration page](https://alacritty.org/config-alacritty.html)
 
+---
+### 5.[yazi](https://github.com/sxyazi/yazi) 
 
+- **Description**
+	- TUI file manager
 
+- **Installation**
+	1. install `git for windows` : 
+	2. `scoop install yazi 7zip jq poppler fd ripgrep fzf zoxide imagemagick`
+	3. `scoop install jid` : suggest instead of `jq` when install `jq` from scoop
+	4. `scoop install jid ghostscript` : `imagemagick` needs ghostscript
+	5. Add environment variable to `aliase.cmd` : `set "YAZI_FILE_ONE=C:\Program Files\Git\usr\bin\file.exe"`
+	6. Add environment variable to `aliase.cmd` : `set "YAZI_CONFIG_HOME=%HOME%\.config\Dotfiles\yazi"`
+	7. make yazi home directory : `mkdir %HOME%\.config\Dotfiles\yazi`
+	8. copy default yazi configuration files to `YAZI_CONFIG_HOME` from [yazi-config/preset](https://github.com/sxyazi/yazi/tree/main/yazi-config/preset)
+
+- **Tips**
+	- `file --mime-type <filename>`
+		- For checking and using `mime` field in yazi.toml, use this command 
+
+- **plugins**
+	- [ouch.yazi](https://github.com/ndtoan96/ouch.yazi) => Can I replace it by bandizip? (`bz l <filename>`)
+		- Show archive preview even though is has subdirectories, 
+		  it shows folder tree in preview.
+		- ouch cannot show non-english word properly.
+		- _pre-required*_
+			- `scoop install ouch`
+	- [bookmarks.yazi](https://github.com/dedukun/bookmarks.yazi)
+		- using vim-like mark to go to marked folder
