@@ -1,4 +1,7 @@
 @echo off
+REM change code page to view git status message properly
+chcp 65001 > nul 2>&1
+
 REM set luarocks config for install library from luarocks
 REM 1) for luautf8
 luarocks config variables.LUA_INCDIR %USERPROFILE%\scoop\apps\lua\current\include > nul
