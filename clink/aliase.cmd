@@ -29,6 +29,9 @@ set _ZL_ADD_ONCE=1
 set _ZL_MATCH_MODE=1
 set _ZL_NO_CHECK=1
 
+REM set environment variable for fzf
+set FZF_DEFAULT_OPTS=--bind=ctrl-j:up,ctrl-k:down,ctrl-d:page-down,ctrl-u:page-up
+
 REM set environment variables for zoxide
 set _ZO_DATA_DIR=%HOME%
 doskey zl=zoxide query -ls $*
