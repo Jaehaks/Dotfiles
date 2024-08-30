@@ -10,15 +10,15 @@ yazi --cwd-file="%yazi_tmp%"
 
 :: Read the CWD from the temporary file
 set /p cwd=<"%yazi_tmp%"
-
-:: Remove the temporary file
 del "%yazi_tmp%"
-
-endlocal
 
 :: Check if the CWD is not empty and different from the current directory
 if defined cwd (
     if not "%cwd%"=="%CD%" (
-        cd /d "%cwd%"
-    )
+        endlocal & cd /d "%cwd%"
+    ) else (
+		endlocal
+	)
+) else (
+	endlocal
 )
