@@ -20,6 +20,10 @@ set EZA_COLORS=da=38;2;90;241;188:*.pdf=38;2;255;100;100:*.pptx=38;2;255;150;100
 REM set lf environment variables
 set LF_CONFIG_HOME=%HOME%\.config\Dotfiles
 
+REM set yazi environment variables
+set "YAZI_FILE_ONE=C:\Program Files\Git\usr\bin\file.exe"
+set "YAZI_CONFIG_HOME=%HOME%\.config\Dotfiles\yazi"
+
 REM set environment variables for z.lua
 set _ZL_ADD_ONCE=1
 set _ZL_MATCH_MODE=1
