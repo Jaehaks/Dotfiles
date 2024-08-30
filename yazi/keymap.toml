@@ -16,6 +16,7 @@ keymap = [
 	{ on = "j", run = "arrow -1", desc = "Move cursor up" },
 	{ on = "k", run = "arrow 1",  desc = "Move cursor down" },
 
+
 	{ on = "<Up>",    run = "arrow -1", desc = "Move cursor up" },
 	{ on = "<Down>",  run = "arrow 1",  desc = "Move cursor down" },
 
@@ -119,10 +120,10 @@ keymap = [
 	{ on = [ ",", "r" ], run = "sort random --reverse=no",                         desc = "Sort randomly" },
 
 	# Goto
-	{ on = [ "g", "h" ],       run = "cd ~",             desc = "Go to the home directory" },
-	{ on = [ "g", "c" ],       run = "cd ~/.config",     desc = "Go to the config directory" },
-	{ on = [ "g", "d" ],       run = "cd ~/Downloads",   desc = "Go to the downloads directory" },
-	{ on = [ "g", "<Space>" ], run = "cd --interactive", desc = "Go to a directory interactively" },
+	# { on = [ "g", "h" ],       run = "cd ~",             desc = "Go to the home directory" },
+	# { on = [ "g", "c" ],       run = "cd ~/.config",     desc = "Go to the config directory" },
+	# { on = [ "g", "d" ],       run = "cd ~/Downloads",   desc = "Go to the downloads directory" },
+	# { on = [ "g", "<Space>" ], run = "cd --interactive", desc = "Go to a directory interactively" },
 
 	# Tabs
 	{ on = "t", run = "tab_create --current", desc = "Create a new tab with CWD" },
@@ -153,10 +154,20 @@ keymap = [
 
 prepend_keymap = [
 	# plugin : bookmarks.yazi
-	{ on = [ "m" ], 	 run = "plugin bookmarks --args=save", 		 desc = "Save current position as a bookmark"},
-	{ on = [ "'" ],  	 run = "plugin bookmarks --args=jump", 	 	 desc = "Jump to a bookmark"},
-	{ on = [ "b", "d" ], run = "plugin bookmarks --args=delete", 	 desc = "Delete a bookmark"},
-	{ on = [ "b", "D" ], run = "plugin bookmarks --args=delete_all", desc = "Delete all bookmarks"},
+	# { on = [ "m" ], 	 run = "plugin bookmarks --args=save", 		 desc = "Save current position as a bookmark"},
+	# { on = [ "'" ],  	 run = "plugin bookmarks --args=jump", 	 	 desc = "Jump to a bookmark"},
+	# { on = [ "b", "d" ], run = "plugin bookmarks --args=delete", 	 desc = "Delete a bookmark"},
+	# { on = [ "b", "D" ], run = "plugin bookmarks --args=delete_all", desc = "Delete all bookmarks"},
+
+	# plugin : yamb.yazi
+	# if cursor under the file => current directory is bookmarked
+	# if cursor under the folder => the selected folder is bookmarked
+	{ on = [ "m" ], 	 run = "plugin yamb --args=save", 		 desc = "Add bookmark"},
+	{ on = [ "'" ],  	 run = "plugin yamb --args=jump_by_key", desc = "Jump to a bookmark"},
+	{ on = [ "\"" ],  	 run = "plugin yamb --args=jump_by_fzf", desc = "Jump to a bookmark by fzf"},
+	{ on = [ "b", "d" ], run = "plugin yamb --args=delete_by_fzf", 	 desc = "Delete a bookmark by fzf"},
+	{ on = [ "b", "r" ], run = "plugin yamb --args=rename_by_fzf", 	 desc = "rename a bookmark by fzf"},
+
 ]
 
 [tasks]

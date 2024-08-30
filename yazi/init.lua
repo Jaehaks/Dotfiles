@@ -13,19 +13,12 @@ function Linemode:size_and_time()
 	return ui.Line(string.format(" %s %s ", size and ya.readable_size(size) or '-', time))
 end
 
--- [plugins] - bookmarks.yazi
-require('bookmarks'):setup({
-	save_last_directory = false,
-	last_directory = { enable = true, persist = false }, -- save last directory to '
-	persist = "all", -- all bookmarks are saved in persistent memory
-	desc_format = "parent", -- show bookmark list only parent directory in absolute path
-	notify = {
-		enable = false,
-		timeout = 1,
-		message = {
-			new = "New bookmark '<key>' -> '<folder>'",
-			delete = "Deleted bookmark in '<key>'",
-			delete_all = "Deleted all bookmarks",
-		},
-	},
-})
+-- [plugins] - yamb.yazi
+require("yamb"):setup {
+  -- Optional, the cli of fzf.
+  cli = "fzf",
+  -- Optional, a string used for randomly generating keys, where the preceding characters have higher priority.
+  keys = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
+  -- Optional, the path of bookmark file
+  path = os.getenv("HOME") .. "\\.config\\Dotfiles\\yazi\\bookmark"
+}
