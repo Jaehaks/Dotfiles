@@ -175,7 +175,12 @@ Dotfiles besides of nvim_config
 		- Show archive preview even though is has subdirectories, 
 		  it shows folder tree in preview.
 		- ouch cannot show non-english word properly.
-		- _pre-required*_
+		- _pre-required_
 			- `scoop install ouch`
 	- [bookmarks.yazi](https://github.com/dedukun/bookmarks.yazi)
 		- using vim-like mark to go to marked folder
+	- [what-size.yazi](https://github.com/pirafrank/what-size.yazi)
+		- calculate size of current selection or cwd (if there are not selection)
+		- _pre-required_
+			- `du` : `scoop install uutils-coreutils`
+			- changed notify time from 5s to 1s
