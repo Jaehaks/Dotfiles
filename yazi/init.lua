@@ -22,3 +22,8 @@ require("yamb"):setup {
   -- Optional, the path of bookmark file
   path = os.getenv("HOME") .. "\\.config\\Dotfiles\\yazi\\bookmark"
 }
+
+
+-- [plugins] - hide-preview.yazi
+-- turn off preview default (at startup)
+require('hide-preview'):entry()
