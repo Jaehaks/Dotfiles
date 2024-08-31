@@ -112,12 +112,12 @@ local action_jump = function(bookmarks, path)
   else
     ya.manager_emit("reveal", { path })
   end
-  -- ya.notify {
-  --   title = "Bookmarks",
-  --   content = 'Jump to "' .. tag .. '"',
-  --   timeout = 2,
-  --   level = "info",
-  -- }
+  ya.notify {
+    title = "Bookmarks",
+    content = 'Jump to "' .. tag .. '"',
+    timeout = 2,
+    level = "info",
+  }
 end
 
 local generate_key = function(bookmarks)
