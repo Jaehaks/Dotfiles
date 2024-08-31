@@ -162,6 +162,21 @@ prepend_keymap = [
 	{ on = [ "b", "d" ], run = "plugin yamb --args=delete_by_fzf", 	 desc = "Delete a bookmark by fzf"},
 	{ on = [ "b", "r" ], run = "plugin yamb --args=rename_by_fzf", 	 desc = "rename a bookmark by fzf"},
 
+	# plugin : diff.yazi
+	# -- diff result is copied to clibboard. check with pasting other editor
+	{ on = [ "g", "f" ], run = "plugin diff", 	 desc = "Diff the selected with the hovered file"},
+
+	# plugin : hide-preview.yazi
+	# -- turn on/off preview window
+	{ on = [ "T" ], run = "plugin --sync hide-preview", 	 desc = "Toggle hiding preview"},
+
+	# plugin : max_preview.yazi
+	# -- maximize / restore preveiw
+	{ on = [ "i" ], run = "plugin --sync max-preview", 	 desc = "Toggle maximizing preview"},
+
+	# plugin : smart-filter.yazi
+	# -- continuous filtering 
+	{ on = [ "F" ], run = "plugin smart-filter", 	 desc = "Smart filter"},
 ]
 
 [tasks]
