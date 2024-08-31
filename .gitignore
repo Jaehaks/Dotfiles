@@ -1,6 +1,5 @@
 lf/marks
 lf/history
 lf/files
-yazi/plugins/
-yazi/flavors/
 yazi/bookmark
+yazi/plugins/*/.git/
