@@ -18,8 +18,8 @@ title_format   = "Yazi: {cwd}"
 
 [preview]
 tab_size        = 2
-max_width       = 600
-max_height      = 900
+max_width       = 690
+max_height      = 930 # image preview size is fixed under this value, and cannot adapt to terminal size
 cache_dir       = ""
 image_delay     = 30
 image_filter    = "triangle"
