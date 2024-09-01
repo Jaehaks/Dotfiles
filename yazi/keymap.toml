@@ -189,6 +189,9 @@ prepend_keymap = [
 
 	# manual : dir-open.yazi
 	{ on = ["g", 'd'], run = "plugin dir-open",      desc = "open explorer of current dir" },
+
+	# manual : compress.yazi
+	{ on = ["g", 'z'], run = "plugin compress",      desc = "compress of selected files" },
 ]
 
 [tasks]
