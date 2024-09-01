@@ -192,6 +192,9 @@ prepend_keymap = [
 
 	# manual : compress.yazi
 	{ on = ["g", 'z'], run = "plugin compress",      desc = "compress of selected files" },
+
+	# manual : echo-filename.yazi
+	{ on = '<C-g>', run = "plugin --sync echo-filename",      desc = "echo hovered filename" },
 ]
 
 [tasks]
