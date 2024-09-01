@@ -9,7 +9,10 @@ set "yazi_tmp=%TMP%\yazi\yazi_cd.tmp"
 yazi --cwd-file="%yazi_tmp%"
 
 :: Read the CWD from the temporary file
-set /p cwd=<"%yazi_tmp%"
+:: set /p doesn't work with unicode. use for instead
+for /f "usebackq delims=" %%a in ("%yazi_tmp%") do (
+	set cwd=%%a
+)
 del "%yazi_tmp%"
 
 :: Check if the CWD is not empty and different from the current directory
@@ -22,3 +25,4 @@ if defined cwd (
 ) else (
 	endlocal
 )
+
