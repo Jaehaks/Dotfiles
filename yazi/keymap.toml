@@ -66,7 +66,7 @@ keymap = [
 	{ on = "-",         run = "link",                        desc = "Symlink the absolute path of yanked files" },
 	{ on = "_",         run = "link --relative",             desc = "Symlink the relative path of yanked files" },
 	{ on = "<C-->",     run = "hardlink",                    desc = "Hardlink yanked files" },
-	{ on = ["c", "y"],         run = "unyank",                      desc = "Cancel the yank status" },
+	{ on = ["c", "y"],  run = "unyank",                      desc = "Cancel the yank status" },
 	{ on = "X",         run = "unyank",                      desc = "Cancel the yank status" },
 	{ on = "d",         run = "remove",                      desc = "Trash selected files" },
 	{ on = "D",         run = "remove --permanently",        desc = "Permanently delete selected files" },
@@ -224,7 +224,7 @@ keymap = [
 keymap = [
 	{ on = "<Esc>",   run = "close",          desc = "Cancel selection" },
 	{ on = "<C-[>",   run = "close",          desc = "Cancel selection" },
-	{ on = "<C-c>",   run = "close",          desc = "Cancel selection" },
+	# { on = "<C-c>",   run = "close",          desc = "Cancel selection" },
 	{ on = "<Enter>", run = "close --submit", desc = "Submit the selection" },
 
 	{ on = "j", run = "arrow -1", desc = "Move cursor up" },
@@ -243,7 +243,7 @@ keymap = [
 keymap = [
 	{ on = "<C-c>",   run = "close",          desc = "Cancel input" },
 	{ on = "<Enter>", run = "close --submit", desc = "Submit input" },
-	{ on = "<Esc>",   run = "escape",         desc = "Go back the normal mode, or cancel input" },
+	{ on = "<Esc>",   run = "close",          desc = "close input box" },
 	{ on = "<C-[>",   run = "escape",         desc = "Go back the normal mode, or cancel input" },
 
 	# Mode
