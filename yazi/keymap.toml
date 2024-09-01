@@ -186,6 +186,9 @@ prepend_keymap = [
 	# plugin : system-clipboard.yazi
 	# -- yank selected file to system-clipboard
 	{ on = "Y", run = "plugin system-clipboard",      desc = "Yank selected files to system clipboard" },
+
+	# manual : dir-open.yazi
+	{ on = ["g", 'd'], run = "plugin dir-open",      desc = "open explorer of current dir" },
 ]
 
 [tasks]
