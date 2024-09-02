@@ -62,13 +62,13 @@ keymap = [
 	{ on = "y",         run = "yank",                        desc = "Yank selected files (copy)" },
 	{ on = "x",         run = "yank --cut",                  desc = "Yank selected files (cut)" },
 	{ on = "p",         run = "paste",                       desc = "Paste yanked files" },
-	{ on = "P",         run = "paste --force",               desc = "Paste yanked files (overwrite if the destination exists)" },
+	# { on = "P",         run = "paste --force",               desc = "Paste yanked files (overwrite if the destination exists)" },
 	{ on = "-",         run = "link",                        desc = "Symlink the absolute path of yanked files" },
 	{ on = "_",         run = "link --relative",             desc = "Symlink the relative path of yanked files" },
 	{ on = "<C-->",     run = "hardlink",                    desc = "Hardlink yanked files" },
 	{ on = ["c", "y"],  run = "unyank",                      desc = "Cancel the yank status" },
 	{ on = "X",         run = "unyank",                      desc = "Cancel the yank status" },
-	{ on = "d",         run = "remove",                      desc = "Trash selected files" },
+	{ on = "d",         run = "remove --force",              desc = "Trash selected files" },
 	{ on = "D",         run = "remove --permanently",        desc = "Permanently delete selected files" },
 	{ on = "a",         run = "create",                      desc = "Create a file (ends with / for directories)" },
 	{ on = "r",         run = "rename --cursor=before_ext",  desc = "Rename selected file(s)" },
@@ -183,9 +183,10 @@ prepend_keymap = [
 	# -- calculate size of directory of selected directory or cwd(unselected)
 	{ on = "<C-r>", run = "plugin what-size", 	 desc = "calc size of selection dir"},
 
-	# plugin : system-clipboard.yazi
-	# -- yank selected file to system-clipboard
-	{ on = "Y", run = "plugin system-clipboard",      desc = "Yank selected files to system clipboard" },
+	# manual : clipboard.yazi
+	# -- yank selected file from and to system-clipboard
+	{ on = "Y", run = "plugin clipboard --args=copy",      desc = "Yank selected files to system clipboard" },
+	{ on = "P", run = "plugin clipboard --args=paste",     desc = "Paste files from system clipboard" },
 
 	# manual : dir-open.yazi
 	{ on = ["g", 'd'], run = "plugin dir-open",      desc = "open explorer of current dir" },
