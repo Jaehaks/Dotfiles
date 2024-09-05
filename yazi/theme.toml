@@ -195,7 +195,7 @@ rules = [
 	{ name = "*.pdf" , fg = "#FF6464" },
 	{ name = "*.lnk" , fg = "#FFFF96" },
 	{ name = "*.md"  , fg = "#EEAEFF" },
-	{ name = "*.dat" , fg = "#721080" },
+	{ name = "*.dat" , fg = "#C258DE" },
 	{ name = "*.exe" , fg = "green" },
 	{ name = "*.reg" , fg = "#DAFF99" },
 
