@@ -263,8 +263,8 @@ keymap = [
 	{ on = "l",       run = "move 1",  desc = "Move forward a character" },
 	{ on = "<Left>",  run = "move -1", desc = "Move back a character" },
 	{ on = "<Right>", run = "move 1",  desc = "Move forward a character" },
-	{ on = "<C-b>",   run = "move -1", desc = "Move back a character" },
-	{ on = "<C-f>",   run = "move 1",  desc = "Move forward a character" },
+	{ on = "<C-h>",   run = "move -1", desc = "Move back a character" },
+	{ on = "<C-l>",   run = "move 1",  desc = "Move forward a character" },
 
 	# Word-wise movement
 	{ on = "b",     run = "backward",              desc = "Move back to the start of the current or previous word" },
@@ -284,7 +284,7 @@ keymap = [
 	# Delete
 	{ on = "<Backspace>", run = "backspace",	       desc = "Delete the character before the cursor" },
 	{ on = "<Delete>",    run = "backspace --under", desc = "Delete the character under the cursor" },
-	{ on = "<C-h>",       run = "backspace",         desc = "Delete the character before the cursor" },
+	# { on = "<C-h>",       run = "backspace",         desc = "Delete the character before the cursor" },
 	{ on = "<C-d>",       run = "backspace --under", desc = "Delete the character under the cursor" },
 
 	# Kill
