@@ -4,7 +4,8 @@
 
 
 -- [manager] - linemode
-function Linemode:size_and_time()
+-- show size and mtime together
+function Linemode:size_and_mtime()
 	local time = (self._file.cha.modified or 0) // 1 -- get file date
 	time = time and os.date("%Y/%m/%d %H:%M:%S", time) or "" -- show date only when it has
 
