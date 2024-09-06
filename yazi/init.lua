@@ -41,3 +41,15 @@ require("yamb"):setup {
 -- [plugins] - hide-preview.yazi
 -- turn off preview default (at startup)
 require('hide-preview'):entry()
+
+
+
+-- [plugins] - githead.yazi
+-- show git branch and stochastics right after heading
+-- require('githead'):setup()
+
+
+
+-- [plugins] - yazi-rs/git.yazi
+-- show git status right after directory
+require('git'):setup()
