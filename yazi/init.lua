@@ -14,6 +14,19 @@ function Linemode:size_and_mtime()
 	return ui.Line(string.format(" %s %s ", size and ya.readable_size(size) or '-', time))
 end
 
+-- [manager] - Statusmode
+-- show original path of symbolic link in the status line (for 'show_symlink' = false)
+function Status:name()
+	local h = self._tab.current.hovered
+	local linked = ""
+	if h.link_to ~= nil then
+		linked = " 󰜴 " .. tostring(h.link_to)
+		return ui.Line("  " .. h.name .. linked)
+	else
+		return ui.Line(" " .. h.name)
+	end
+end
+
 -- [plugins] - yamb.yazi
 require("yamb"):setup {
   -- Optional, the cli of fzf.
