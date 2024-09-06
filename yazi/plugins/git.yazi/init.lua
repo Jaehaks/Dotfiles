@@ -1,3 +1,4 @@
+local WIN = ya.target_family() == "windows"
 local PATS = {
 	{ "[MT]", 6 }, -- Modified
 	{ "[AC]", 5 }, -- Added
@@ -14,6 +15,7 @@ local function match(line)
 		local path
 		if signs:find(p[1]) then
 			path = line:sub(4, 4) == '"' and line:sub(5, -2) or line:sub(4)
+			path = WIN and path:gsub("/", "\\") or path
 		end
 		if not path then
 		elseif path:find("[/\\]$") then
@@ -116,18 +118,12 @@ local function setup(st, opts)
 	}
 	-- TODO: Use nerd-font icons as default matching Yazi's default behavior
 	local icons = {
-		-- [6] = THEME.git_modified and THEME.git_modified.icon or "M",
-		-- [5] = THEME.git_added and THEME.git_added.icon or "A",
-		-- [4] = THEME.git_untracked and THEME.git_untracked.icon or "?",
-		-- [3] = THEME.git_ignored and THEME.git_ignored.icon or "!",
-		-- [2] = THEME.git_deleted and THEME.git_deleted.icon or "-",
-		-- [1] = THEME.git_updated and THEME.git_updated.icon or "U",
-		[6] = "M",
-		[5] = "A",
-		[4] = "?",
-		[3] = "!",
-		[2] = "-",
-		[1] = "U",
+		[6] = THEME.git_modified and THEME.git_modified.icon or "*",
+		[5] = THEME.git_added and THEME.git_added.icon or "+",
+		[4] = THEME.git_untracked and THEME.git_untracked.icon or "?",
+		[3] = THEME.git_ignored and THEME.git_ignored.icon or "!",
+		[2] = THEME.git_deleted and THEME.git_deleted.icon or "-",
+		[1] = THEME.git_updated and THEME.git_updated.icon or "U",
 	}
 
 	Linemode:children_add(function(self)
@@ -153,11 +149,6 @@ local function fetch(self)
 	local repo = root(cwd)
 	if not repo then
 		remove(tostring(cwd))
-		ya.notify({
-			title = 'test',
-			content = tostring(1),
-			timeout = 1,
-		})
 		return 1
 	end
 
@@ -175,11 +166,6 @@ local function fetch(self)
 		:output()
 	if not output then
 		ya.err("Cannot spawn git command, error code " .. tostring(err))
-		ya.notify({
-			title = 'test',
-			content = tostring(0),
-			timeout = 1,
-		})
 		return 0
 	end
 
@@ -206,11 +192,6 @@ local function fetch(self)
 	end
 	add(tostring(cwd), repo, changed)
 
-		ya.notify({
-			title = 'test',
-			content = tostring(3),
-			timeout = 1,
-		})
 	return 3
 end
 
