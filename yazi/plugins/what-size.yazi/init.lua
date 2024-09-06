@@ -65,7 +65,7 @@ return {
       ya.notify {
         title = "What size",
         content = notification_content,
-        timeout = 1,
+        timeout = 5,
       }
     end
   end,
