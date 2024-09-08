@@ -96,6 +96,8 @@ fetchers = [
 	# plugins - git.yazi
 	{ id = "git", name = "*", run = "git"},
 	{ id = "git", name = "*/", run = "git"},
+	{ id = "githead", name = "*", run = "githead"},
+	{ id = "githead", name = "*/", run = "githead"},
 ]
 preloaders = [
 	# Image
