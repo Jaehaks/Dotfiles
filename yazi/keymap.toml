@@ -198,7 +198,7 @@ prepend_keymap = [
 	{ on = '<C-g>', run = "plugin --sync echo-filename",      desc = "echo hovered filename" },
 
 	# manual : githead.yazi
-	{ on = '<C-t>', run = "plugin githead",      desc = "echo hovered filename" },
+	# { on = '<C-t>', run = "plugin githead",      desc = "echo hovered filename" },
 ]
 
 [tasks]

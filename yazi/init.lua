@@ -46,7 +46,7 @@ require('hide-preview'):entry()
 
 -- [plugins] - githead.yazi
 -- show git branch and stochastics right after heading
--- require('githead'):setup()
+require('githead'):setup()
 
 
 
