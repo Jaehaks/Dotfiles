@@ -106,7 +106,7 @@ function git_branch_prompt:filter(prompt)
         if line:match("^1 .D(.+)$") then status.workingDeleted  = status.workingDeleted + 1 end
 
         if line:match("^%?(.+)$") then status.untracked         = status.untracked + 1 end
-        if line:match("^%!(.+)$") then status.ignored           = status.ignored + 1 end
+        -- if line:match("^%!(.+)$") then status.ignored           = status.ignored + 1 end
 
         status.anyChanges = true
 
