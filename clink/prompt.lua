@@ -43,6 +43,8 @@ local git_status = function (status, name)
 		result = status.ignored > 0 and gray .. '!' .. status.ignored or ''
 	elseif name == 'stash' then
 		result = status.stash > 0 and blue .. '$' .. status.stash or ''
+	elseif name == 'commit' then
+		result = status.commit > 0 and yellow .. '#' .. status.commit or ''
 	else
 		result = ''
 	end
@@ -56,7 +58,6 @@ function git_branch_prompt:filter(prompt)
 	local status = {
 		branch          = nil,
 		oid             = nil,
-		Chnaged         = false,
 		-- after add
 		stagingAdded    = 0, -- A
 		stagingModified = 0, -- M
@@ -69,6 +70,7 @@ function git_branch_prompt:filter(prompt)
 		untracked       = 0, -- ??
 		ignored         = 0, -- !!
 		stash           = 0, -- stash 
+		commit          = 0, -- committed 
 	}
 
 	for line in io.popen('git status --porcelain=v2 --branch --ignored=matching --show-stash 2>nul'):lines() do
@@ -84,6 +86,12 @@ function git_branch_prompt:filter(prompt)
 			else
 				status.branch = branch
 			end
+		end
+
+		-- get number of commit
+		local commit = line:match("^# branch%.ab%s+%+(%d+)")
+		if commit then
+			status.commit = tonumber(commit)
 		end
 
 		-- get stash
@@ -108,8 +116,6 @@ function git_branch_prompt:filter(prompt)
         if line:match("^%?(.+)$") then status.untracked         = status.untracked + 1 end
         -- if line:match("^%!(.+)$") then status.ignored           = status.ignored + 1 end
 
-        status.anyChanges = true
-
 	end
 
 	if status.branch then
@@ -121,12 +127,13 @@ function git_branch_prompt:filter(prompt)
 									git_status(status, 'untracked'),
 									git_status(status, 'ignored'),
 									git_status(status, 'stash'))
-		local git_status_staging = string.format('\x1b[0m| %s%s%s',
+		local git_status_staging = string.format('\x1b[0m| %s%s%s%s',
 									git_status(status, 'stagingAdded'),
 									git_status(status, 'stagingModified'),
-									git_status(status, 'stagingDeleted'))
+									git_status(status, 'stagingDeleted'),
+									git_status(status, 'commit'))
 
-		if (status.stagingAdded + status.stagingModified + status.stagingDeleted) == 0 then
+		if (status.stagingAdded + status.stagingModified + status.stagingDeleted + status.commit) == 0 then
 			return prompt .. ' ' .. git_status_branch .. git_status_working .. normal
 		else
 			return prompt .. ' ' .. git_status_branch .. git_status_working .. git_status_staging .. normal
