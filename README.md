@@ -189,3 +189,4 @@ Dotfiles besides of nvim_config
 		- _pre-required_
 			- `clipboard` : `scoop install clipboard`
 		- key : `Y` 
+		- test
