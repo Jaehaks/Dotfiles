@@ -71,6 +71,7 @@ keymap = [
 	# { on = "d",         run = "remove --force",              desc = "Trash selected files" },
 	{ on = "D",         run = "remove --force",        		 desc = "Trash selected files" },
 	{ on = "a",         run = "create",                      desc = "Create a file (ends with / for directories)" },
+	{ on = "A",         run = "plugin newfile",       	 	 desc = "Create xlsx or pptx file" },
 	{ on = "r",         run = "rename --cursor=before_ext",  desc = "Rename selected file(s)" },
 	{ on = ";",         run = "shell --interactive",         desc = "Run a shell command" },
 	{ on = ":",         run = "shell --block --interactive", desc = "Run a shell command (block until finishes)" },
