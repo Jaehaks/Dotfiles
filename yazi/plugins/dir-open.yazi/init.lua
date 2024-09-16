@@ -5,7 +5,7 @@ end)
 return {
 	entry = function ()
 		local cwd = get_cwd()
-		local output, err = Command('explorer'):arg(cwd):output()
+		local output, err = Command('explorer'):arg('.'):output()
 		if err then
 			return ya.notify({
 				title = 'dir-open',
