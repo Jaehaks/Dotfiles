@@ -134,7 +134,7 @@ previewers = [
 	# Empty file
 	{ mime = "inode/x-empty", run = "empty" },
 	# Fallback
-	{ name = "*", run = "file" },
+	{ name = "*", run = "filename" },
 ]
 
 prepend_previewers = [
