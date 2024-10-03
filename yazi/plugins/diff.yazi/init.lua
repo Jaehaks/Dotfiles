@@ -46,5 +46,6 @@ return {
 			return info("Diff Error : Failed to run diff (code : " .. err .. ")")
 		end
 		_permit:drop()
+		ya.manager_emit('escape', {visual = true, select = true})
 	end,
 }
