@@ -91,7 +91,7 @@ keymap = [
 	# { on = [ "m", "n" ], run = "linemode none",        desc = "Set linemode to none" },
 
 	# Copy
-	{ on = [ "c", "c" ], run = "copy path",             desc = "Copy the file path" },
+	{ on = [ "c", "a" ], run = "copy all path",    		desc = "Copy the entire path include filename" },
 	{ on = [ "c", "d" ], run = "copy dirname",          desc = "Copy the directory path" },
 	{ on = [ "c", "f" ], run = "copy filename",         desc = "Copy the filename" },
 	{ on = [ "c", "n" ], run = "copy name_without_ext", desc = "Copy the filename without extension" },
