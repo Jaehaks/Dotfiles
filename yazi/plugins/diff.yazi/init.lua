@@ -2,36 +2,49 @@ local function info(content)
 	return ya.notify {
 		title = "Diff",
 		content = content,
-		timeout = 5,
+		timeout = 2,
+		level = 'error',
 	}
 end
 
 local selected_url = ya.sync(function()
-	for _, u in pairs(cx.active.selected) do
-		return u
-	end
-end)
+	local paths = {}
 
-local hovered_url = ya.sync(function()
-	local h = cx.active.current.hovered
-	return h and h.url
+	-- check selected path
+	for _, u in pairs(cx.active.selected) do
+		paths[#paths + 1] = tostring(u)
+	end
+
+	-- check rationality
+	if #paths == 1 then
+		paths[#paths + 1] = tostring(cx.active.current.hovered.url)
+		return paths
+	elseif #paths == 2 then
+		return paths
+	else
+		return nil
+	end
 end)
 
 return {
 	entry = function()
-		local a, b = selected_url(), hovered_url()
-		if not a then
-			return info("No file selected")
-		elseif not b then
-			return info("No file hovered")
+		local paths = selected_url()
+		if not paths then
+			info('Diff Error : select two files')
+			return
 		end
 
-		local output, err = Command("diff"):arg("-Naur"):arg(tostring(a)):arg(tostring(b)):output()
-		if not output then
-			return info("Failed to run diff, error: " .. err)
+		local _permit = ya.hide()
+		-- use INHERIT as stdin/stdout/stderr for interactive app like nvim
+		local status, err = Command("nvim"):arg("-d")
+						 	:arg(paths[1]):arg(paths[2])
+							:stdin(Command.INHERIT)
+							:stdout(Command.INHERIT)
+							:stderr(Command.INHERIT)
+							:spawn():wait()
+		if not status then
+			return info("Diff Error : Failed to run diff (code : " .. err .. ")")
 		end
-
-		ya.clipboard(output.stdout)
-		info("Diff copied to clipboard")
+		_permit:drop()
 	end,
 }
