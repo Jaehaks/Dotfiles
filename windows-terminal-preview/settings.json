@@ -1,26 +1,10 @@
 {
     "$help": "https://aka.ms/terminal-documentation",
     "$schema": "https://aka.ms/terminal-profiles-schema-preview",
-    "actions":
+    "actions": 
     [
         {
-            "command":
-            {
-                "action": "copy",
-                "singleLine": false
-            },
-            "id": "User.copy.644BA8F2"
-        },
-        {
-            "command":
-            {
-                "action": "splitPane",
-                "split": "down"
-            },
-            "id": "User.splitPane.D5151347"
-        },
-        {
-            "command":
+            "command": 
             {
                 "action": "moveFocus",
                 "direction": "previousInOrder"
@@ -28,7 +12,23 @@
             "id": "User.moveFocus.787314EB"
         },
         {
-            "command":
+            "command": 
+            {
+                "action": "splitPane",
+                "split": "down"
+            },
+            "id": "User.splitPane.D5151347"
+        },
+        {
+            "command": 
+            {
+                "action": "copy",
+                "singleLine": false
+            },
+            "id": "User.copy.644BA8F2"
+        },
+        {
+            "command": 
             {
                 "action": "splitPane",
                 "split": "right"
@@ -40,14 +40,21 @@
             "id": "User.paste"
         },
         {
-            "command":
+            "command": 
+            {
+                "action": "newTab"
+            },
+            "id": "User.newTab.5DEADB41"
+        },
+        {
+            "command": 
             {
                 "action": "scrollDown"
             },
             "id": "User.scrollDown.0"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "scrollUp"
             },
@@ -62,23 +69,34 @@
             "id": "User.closePane"
         },
         {
+            "command": "openNewTabDropdown",
+            "id": "User.openNewTabDropdown"
+        },
+        {
             "command": "scrollUpPage",
             "id": "User.scrollUpPage"
+        },
+        {
+            "command": 
+            {
+                "action": "nextTab"
+            },
+            "id": "User.nextTab.0"
         }
     ],
     "confirmCloseAllTabs": false,
     "copyFormatting": "none",
     "copyOnSelect": false,
     "defaultProfile": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
-    "keybindings":
+    "keybindings": 
     [
-        {
-            "id": "User.scrollDownPage",
-            "keys": "ctrl+shift+k"
-        },
         {
             "id": null,
             "keys": "ctrl+shift+tab"
+        },
+        {
+            "id": "User.scrollDownPage",
+            "keys": "ctrl+shift+k"
         },
         {
             "id": null,
@@ -110,14 +128,6 @@
         },
         {
             "id": null,
-            "keys": "ctrl+shift+comma"
-        },
-        {
-            "id": null,
-            "keys": "ctrl+0"
-        },
-        {
-            "id": null,
             "keys": "ctrl+shift+5"
         },
         {
@@ -126,7 +136,11 @@
         },
         {
             "id": null,
-            "keys": "ctrl+shift+period"
+            "keys": "ctrl+0"
+        },
+        {
+            "id": null,
+            "keys": "ctrl+shift+comma"
         },
         {
             "id": null,
@@ -138,11 +152,15 @@
         },
         {
             "id": null,
-            "keys": "ctrl+shift+home"
+            "keys": "ctrl+shift+period"
         },
         {
             "id": null,
             "keys": "ctrl+shift+7"
+        },
+        {
+            "id": null,
+            "keys": "ctrl+shift+home"
         },
         {
             "id": null,
@@ -153,16 +171,12 @@
             "keys": "ctrl+alt+comma"
         },
         {
-            "id": null,
-            "keys": "alt+shift+down"
-        },
-        {
-            "id": null,
+            "id": "User.nextTab.0",
             "keys": "ctrl+tab"
         },
         {
             "id": null,
-            "keys": "ctrl+alt+9"
+            "keys": "alt+shift+down"
         },
         {
             "id": null,
@@ -170,11 +184,15 @@
         },
         {
             "id": null,
+            "keys": "ctrl+alt+9"
+        },
+        {
+            "id": null,
             "keys": "ctrl+alt+left"
         },
         {
-            "id": "User.scrollUp.0",
-            "keys": "alt+j"
+            "id": null,
+            "keys": "menu"
         },
         {
             "id": null,
@@ -182,7 +200,7 @@
         },
         {
             "id": null,
-            "keys": "menu"
+            "keys": "ctrl+alt+8"
         },
         {
             "id": "User.paste",
@@ -190,19 +208,7 @@
         },
         {
             "id": null,
-            "keys": "ctrl+alt+8"
-        },
-        {
-            "id": null,
             "keys": "shift+insert"
-        },
-        {
-            "id": null,
-            "keys": "ctrl+shift+n"
-        },
-        {
-            "id": null,
-            "keys": "ctrl+alt+7"
         },
         {
             "id": null,
@@ -210,7 +216,15 @@
         },
         {
             "id": null,
-            "keys": "ctrl+shift+4"
+            "keys": "ctrl+alt+7"
+        },
+        {
+            "id": null,
+            "keys": "ctrl+shift+n"
+        },
+        {
+            "id": null,
+            "keys": "alt+down"
         },
         {
             "id": null,
@@ -218,7 +232,7 @@
         },
         {
             "id": null,
-            "keys": "alt+down"
+            "keys": "ctrl+shift+4"
         },
         {
             "id": null,
@@ -229,16 +243,16 @@
             "keys": "ctrl+shift+1"
         },
         {
-            "id": "User.closePane",
-            "keys": "alt+shift+s"
+            "id": null,
+            "keys": "ctrl+insert"
         },
         {
             "id": null,
             "keys": "ctrl+shift+6"
         },
         {
-            "id": null,
-            "keys": "ctrl+insert"
+            "id": "User.closePane",
+            "keys": "alt+shift+s"
         },
         {
             "id": null,
@@ -250,19 +264,19 @@
         },
         {
             "id": null,
-            "keys": "ctrl+comma"
-        },
-        {
-            "id": null,
             "keys": "ctrl+shift+f"
         },
         {
             "id": null,
-            "keys": "alt+shift+plus"
+            "keys": "ctrl+comma"
         },
         {
             "id": null,
             "keys": "alt+space"
+        },
+        {
+            "id": null,
+            "keys": "alt+shift+plus"
         },
         {
             "id": null,
@@ -289,24 +303,24 @@
             "keys": "alt+shift+minus"
         },
         {
-            "id": "User.copy.644BA8F2",
-            "keys": "ctrl+shift+c"
+            "id": null,
+            "keys": "ctrl+alt+5"
         },
         {
             "id": null,
             "keys": "alt+shift+right"
         },
         {
-            "id": null,
-            "keys": "ctrl+alt+5"
-        },
-        {
-            "id": null,
-            "keys": "alt+shift+left"
+            "id": "User.copy.644BA8F2",
+            "keys": "ctrl+shift+c"
         },
         {
             "id": null,
             "keys": "ctrl+alt+1"
+        },
+        {
+            "id": null,
+            "keys": "alt+shift+left"
         },
         {
             "id": null,
@@ -361,63 +375,76 @@
             "keys": "alt+d"
         },
         {
-            "id": "User.scrollDown.0",
-            "keys": "alt+k"
-        },
-        {
             "id": "User.moveFocus.787314EB",
             "keys": "f3"
         },
         {
             "id": "User.scrollUpPage",
             "keys": "ctrl+shift+j"
+        },
+        {
+            "id": "User.newTab.5DEADB41",
+            "keys": "alt+t"
+        },
+        {
+            "id": "User.openNewTabDropdown",
+            "keys": "ctrl+alt+t"
+        },
+        {
+            "id": "User.scrollDown.0",
+            "keys": "alt+shift+k"
+        },
+        {
+            "id": "User.scrollUp.0",
+            "keys": "alt+shift+j"
         }
     ],
-    "newTabMenu":
+    "newTabMenu": 
     [
         {
             "type": "remainingProfiles"
         }
     ],
-    "profiles":
+    "profiles": 
     {
-        "defaults": {
-			"font":
-			{
-				"face" : "FiraCode Nerd Font Mono",
-				"features":
-				{
-					"calt" : 0,
-					"liga" : 0,
-				},
-				"weight": "semi-bold"
-			},
-		},
-        "list":
+        "defaults": 
+        {
+            "font": 
+            {
+                "face": "FiraCode Nerd Font Mono",
+                "features": 
+                {
+                    "calt": 0,
+                    "liga": 0
+                },
+                "weight": "semi-bold"
+            }
+        },
+        "list": 
         [
             {
                 "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
                 "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
-                "hidden": false,
+                "hidden": true,
                 "name": "Windows PowerShell"
             },
             {
                 "commandline": "%SystemRoot%\\System32\\cmd.exe /k %USERPROFILE%\\.config\\Dotfiles\\clink\\aliase.cmd",
                 "cursorShape": "filledBox",
-                "font":
+                "font": 
                 {
-					"face" : "FiraCode Nerd Font Mono",
-					"features":
-					{
-						"calt" : 0,
-						"liga" : 0,
-					},
+                    "face": "FiraCode Nerd Font Mono",
+                    "features": 
+                    {
+                        "calt": 0,
+                        "liga": 0
+                    },
                     "weight": "semi-bold"
                 },
                 "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
                 "hidden": false,
                 "name": "\uba85\ub839 \ud504\ub86c\ud504\ud2b8",
-                "unfocusedAppearance":
+                "unfocusedAppearance": 
                 {
                     "opacity": 90,
                     "useAcrylic": true
@@ -437,30 +464,65 @@
             },
             {
                 "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
-                "hidden": false,
+                "hidden": true,
                 "name": "Azure Cloud Shell",
                 "source": "Windows.Terminal.Azure"
             },
             {
                 "guid": "{9b9a00ec-9c37-58f6-9003-0037a7a34bd6}",
-                "hidden": false,
+                "hidden": true,
                 "name": "Developer Command Prompt for VS 2022",
                 "source": "Windows.Terminal.VisualStudio"
             },
             {
                 "guid": "{4f7b0018-2adf-5096-8e49-026c1feb16cb}",
-                "hidden": false,
+                "hidden": true,
                 "name": "Developer PowerShell for VS 2022",
                 "source": "Windows.Terminal.VisualStudio"
             },
             {
-                "guid": "{e5a83caa-4c73-52b3-ae6b-bc438d721ef9}",
+                "guid": "{4ff56d04-d9cf-57ea-bae2-ad396374e7e3}",
                 "hidden": false,
-                "name": "Ubuntu 22.04.3 LTS",
+                "name": "Ubuntu 22.04.5 LTS",
                 "source": "CanonicalGroupLimited.Ubuntu22.04LTS_79rhkp1fndgsc"
+            },
+            {
+                "altGrAliasing": true,
+                "antialiasingMode": "grayscale",
+                "closeOnExit": "automatic",
+                "colorScheme": "Campbell",
+                "commandline": "%SystemRoot%\\System32\\cmd.exe /k %USERPROFILE%\\.config\\Dotfiles\\clink\\aliase.cmd",
+                "cursorShape": "filledBox",
+                "elevate": true,
+                "font": 
+                {
+                    "face": "FiraCode Nerd Font Mono",
+                    "features": 
+                    {
+                        "calt": 0,
+                        "liga": 0
+                    },
+                    "size": 12,
+                    "weight": "semi-bold"
+                },
+                "guid": "{b765154a-955f-4958-82f7-7900f95a4b96}",
+                "hidden": false,
+                "historySize": 9001,
+                "icon": "ms-appx:///ProfileIcons/{0caa0dad-35be-5f56-a8ff-afceeeaa6101}.png",
+                "name": "\uba85\ub839 \ud504\ub86c\ud504\ud2b8 (Admin)",
+                "padding": "8, 8, 8, 8",
+                "snapOnInput": true,
+                "startingDirectory": "%USERPROFILE%",
+                "unfocusedAppearance": 
+                {
+                    "opacity": 90,
+                    "useAcrylic": true
+                },
+                "useAcrylic": false
             }
         ]
     },
     "schemes": [],
+    "tabSwitcherMode": "disabled",
     "themes": []
 }
