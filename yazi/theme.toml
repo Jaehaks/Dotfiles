@@ -33,7 +33,7 @@ marker_selected = { fg = "lightyellow", bg = "lightyellow" }
 # Tab
 tab_active   = { reversed = true }
 tab_inactive = {}
-tab_width    = 1
+tab_width    = 12
 
 # Count
 count_copied   = { fg = "white", bg = "green" }
@@ -200,7 +200,7 @@ rules = [
 	{ name = "*.reg" , fg = "#DAFF99" },
 
 	# symlink -- {mime 'inode/symlink'} doesn't work
-	{ name = "*", is = "link", fg = "#00E6E6" }, # for file 
+	{ name = "*", is = "link", fg = "#00E6E6" }, # for file
 	{ name = "*/", is = "link", fg = "#00E6E6" }, # for dir
 
 	# Fallback
