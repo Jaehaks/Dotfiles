@@ -1,4 +1,4 @@
-# Dotfiles
+# Dotfiles2
 
 Dotfiles besides of nvim_config
 
