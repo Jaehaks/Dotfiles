@@ -29,7 +29,7 @@ Dotfiles besides of nvim_config
     2. Unzip the zip file to wanted location
     3. Register the installed location to system path
     4. Register system variables to recognize configuration path : (`clink info` to confirm inputrc path is right)
-        - `CLINK_INPUTRC` : `<Dotfile path>\Dotfiles\clink`  
+        - `CLINK_INPUTRC` : `<Dotfile path>\Dotfiles\clink`
         - `CLINK_SETTINGS` : `<Dotfile path>\Dotfiles\clink`
     5. Make symbolic link to use `prompt.lua` :
         - `cd <clink installed location>`
@@ -54,7 +54,7 @@ Dotfiles besides of nvim_config
 
 - **Description**
     - A command-line fuzzy finder
-    - It has some limitation on Windows to use like Linux.  
+    - It has some limitation on Windows to use like Linux.
       With these files, you can use fzf for file opening and finding directories
 
 <br>
@@ -63,7 +63,7 @@ Dotfiles besides of nvim_config
     - `clink\fzff.cmd` : To open selected file (supports excel / powerpoint / acrobat pdf)
     - `clink\fzfd.cmd` : To navigate directories
 
-<br>    
+<br>
 
 - **Installation**
     1. Install fzf : `scoop install fzf`
@@ -82,7 +82,7 @@ Dotfiles besides of nvim_config
         - If you input path as \<directory\>, it finds subdirectories in \<directory\> using fzf.
     - `fzff`
         - It finds all files in current subdirectories.
-        - `Enter` will open the sleeted file along to file extension.  
+        - `Enter` will open the sleeted file along to file extension.
             Files which are not belonged to excel, ppt and pdf will open using `nvim`
 
 ---
@@ -98,7 +98,7 @@ Dotfiles besides of nvim_config
 - **Related file list**
     - `clink\aliases.cmd` : To make aliases command
 
-<br>    
+<br>
 
 - **Installation**
     1. (pre-required) Install clink
@@ -136,14 +136,14 @@ Dotfiles besides of nvim_config
     - `alacritty\` : configuration file
     - `clink\ac.cmd` : To call alacritty.exe with shorten name.
 
-<br>    
+<br>
 
 - **Installation**
     1. Install alacritty : `scoop install alacritty`
     2. Make dir for configuration : `mkdir %APPDATA%\alacritty`
     3. Make link with configuration file :
-        `mklink %APPDATA%\alacritty\alacritty.toml <path to dotfile>\Dotfiles\alacritty\alacritty.toml`  
-        (:exclamation::exclamation: Caution : terminal should have administrator privilege)  
+        `mklink %APPDATA%\alacritty\alacritty.toml <path to dotfile>\Dotfiles\alacritty\alacritty.toml`
+        (:exclamation::exclamation: Caution : terminal should have administrator privilege)
 
 <br>
 
@@ -151,13 +151,13 @@ Dotfiles besides of nvim_config
     * Detailed configuration list : [Alacritty configuration page](https://alacritty.org/config-alacritty.html)
 
 ---
-### 5.[yazi](https://github.com/sxyazi/yazi) 
+### 5.[yazi](https://github.com/sxyazi/yazi)
 
 - **Description**
 	- TUI file manager
 
 - **Installation**
-	1. install `git for windows` : 
+	1. install `git for windows` :
 	2. `scoop install yazi 7zip jq poppler fd ripgrep fzf zoxide imagemagick`
 	3. `scoop install jid` : suggest instead of `jq` when install `jq` from scoop
 	4. `scoop install jid ghostscript` : `imagemagick` needs ghostscript
@@ -168,11 +168,11 @@ Dotfiles besides of nvim_config
 
 - **Tips**
 	- `file --mime-type <filename>`
-		- For checking and using `mime` field in yazi.toml, use this command 
+		- For checking and using `mime` field in yazi.toml, use this command
 
 - **plugins**
 	- [ouch.yazi](https://github.com/ndtoan96/ouch.yazi) => Can I replace it by bandizip? (`bz l <filename>`)
-		- Show archive preview even though is has subdirectories, 
+		- Show archive preview even though is has subdirectories,
 		  it shows folder tree in preview.
 		- ouch cannot show non-english word properly.
 		- _pre-required_
@@ -188,5 +188,5 @@ Dotfiles besides of nvim_config
 		- copy files from yazi and paste to other windows explorer
 		- _pre-required_
 			- `clipboard` : `scoop install clipboard`
-		- key : `Y` 
+		- key : `Y`
 		- test
