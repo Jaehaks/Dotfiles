@@ -19,7 +19,7 @@ for /f "tokens=*" %%a in ('fzf --ansi --disabled --print-query ^
 --bind "change:reload:!RG_PREFIX! {q} " ^
 --delimiter ":" ^
 --preview "bat_range {1} {2} {2}-5 {2}+5" ^
---preview-window "down,12" ^
+--preview-window "down,12,nohidden" ^
 --nth "3.." ^
 ') do (
 	set "result=%%a"

@@ -17,7 +17,7 @@ REM do fzf using rg
 for /f "tokens=*" %%a in ('!RG_PREFIX! "" ^| fzf --ansi ^
 --delimiter ":" ^
 --preview "bat_range {1} {2} {2}-5 {2}+5" ^
---preview-window "down,12" ^
+--preview-window "down,12,nohidden" ^
 --nth "3.." ^
 ') do (
 	set "result=%%a"
