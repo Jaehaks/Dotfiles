@@ -9,7 +9,7 @@ REM 2) for lua-iconv
 luarocks config external_deps_dirs[2] %USERPROFILE%\scoop\apps\mingw\current\x86_64-w64-mingw32 > nul
 set LUA_CPATH=%USERPROFILE%\scoop\persist\luarocks\rocks\lib\lua\5.4\?.dll;%LUA_CPATH%
 REM 3) for fugit2.nvim
-REM luarocks --lua-version=5.1 --local config variables.LUA 
+REM luarocks --lua-version=5.1 --local config variables.LUA
 
 
 
