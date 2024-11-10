@@ -61,7 +61,7 @@ keymap = [
 	{ on = "<S-Enter>", run = "open --interactive",          desc = "Open selected files interactively" },
 	{ on = "y",         run = "yank",                        desc = "Yank selected files (copy)" },
 	{ on = "x",         run = "yank --cut",                  desc = "Yank selected files (cut)" },
-	{ on = "p",         run = ["paste", 'unyank'],                       desc = "Paste yanked files" },
+	{ on = "p",         run = ["paste", 'unyank'],           desc = "Paste yanked files" },
 	{ on = "U",         run = "paste --force",               desc = "Paste yanked files (overwrite if the destination exists)" },
 	{ on = "-",         run = "link",                        desc = "Symlink the absolute path of yanked files" },
 	{ on = "_",         run = "link --relative",             desc = "Symlink the relative path of yanked files" },
@@ -94,10 +94,10 @@ keymap = [
 	# { on = [ "m", "n" ], run = "linemode none",        desc = "Set linemode to none" },
 
 	# Copy
-	{ on = [ "c", "a" ], run = "copy all path",    		desc = "Copy the entire path include filename" },
-	{ on = [ "c", "d" ], run = "copy dirname",          desc = "Copy the directory path" },
-	{ on = [ "c", "f" ], run = "copy filename",         desc = "Copy the filename" },
-	{ on = [ "c", "n" ], run = "copy name_without_ext", desc = "Copy the filename without extension" },
+	# { on = [ "c", "a" ], run = "copy all path",    		desc = "Copy the entire path include filename" },
+	# { on = [ "c", "d" ], run = "copy dirname",          desc = "Copy the directory path" },
+	# { on = [ "c", "f" ], run = "copy filename",         desc = "Copy the filename" },
+	# { on = [ "c", "n" ], run = "copy name_without_ext", desc = "Copy the filename without extension" },
 
 	# Filter
 	{ on = "f", run = "filter --smart", desc = "Filter files" },
@@ -189,8 +189,12 @@ prepend_keymap = [
 
 	# manual : clipboard.yazi
 	# -- yank selected file from and to system-clipboard
-	{ on = "Y", run = "plugin clipboard --args=copy",      desc = "Yank selected files to system clipboard" },
-	{ on = "P", run = "plugin clipboard --args=paste",     desc = "Paste files from system clipboard" },
+	{ on = "Y", 		 run = "plugin clipboard --args=copy",      	    desc = "Yank selected files to system clipboard" },
+	{ on = "P", 		 run = "plugin clipboard --args=paste",     	    desc = "Paste files from system clipboard" },
+	{ on = [ "c", "a" ], run = "plugin clipboard --args=copy_fullpath"    , desc = "Copy the entire path include filename" },
+	{ on = [ "c", "d" ], run = "plugin clipboard --args=copy_dirpath"     , desc = "Copy the directory path" },
+	{ on = [ "c", "f" ], run = "plugin clipboard --args=copy_filename"    , desc = "Copy the filename" },
+	{ on = [ "c", "n" ], run = "plugin clipboard --args=copy_filenameonly", desc = "Copy the filename without extension" },
 
 	# manual : dir-open.yazi
 	{ on = ["g", 'd'], run = "plugin dir-open",      desc = "open explorer of current dir" },
