@@ -24,6 +24,8 @@ for /f "tokens=*" %%a in ('fzf --ansi --disabled --print-query ^
 	set "result=%%a"
 )
 
-echo !result!
+if defined result (
+	echo !result!
+)
 
 endlocal
