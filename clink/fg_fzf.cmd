@@ -10,8 +10,8 @@ shift
 goto loop
 :endloop
 
-REM set default rg_options
-set "RG_PREFIX=rg --column --line-number --no-heading --color=always --sort=path --smart-case !rg_options!"
+REM set default rg_options (if you use pipe, --sort option makes broken character with non-english)
+set "RG_PREFIX=rg --column --line-number --no-heading --color=always --smart-case !rg_options!"
 
 REM do fzf using rg
 for /f "tokens=*" %%a in ('!RG_PREFIX! "" ^| fzf --ansi ^
