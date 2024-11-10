@@ -165,6 +165,11 @@ Dotfiles besides of nvim_config
 	6. Add environment variable to `aliase.cmd` : `set "YAZI_CONFIG_HOME=%HOME%\.config\Dotfiles\yazi"`
 	7. make yazi home directory : `mkdir %HOME%\.config\Dotfiles\yazi`
 	8. copy default yazi configuration files to `YAZI_CONFIG_HOME` from [yazi-config/preset](https://github.com/sxyazi/yazi/tree/main/yazi-config/preset)
+	9. (optional) add `excel.exe` path to system environment variables for opening with excel
+	10. (optional) add `sumatraPDF.exe` path to system environment variables for opening with sumatraPDF
+	11. (optional) add `fg.cmd` path to system environment variables for plugin `fg`
+	12. (optional) add `fg_fzf.cmd` path to system environment variables for plugin `fg`
+	13. (optional) add `bat_range.cmd` path to system environment variables for plugin `fg`
 
 - **Tips**
 	- `file --mime-type <filename>`
