@@ -35,11 +35,15 @@ edit = [
 	{ run = '${EDITOR:-vi} "$@"', block = true    , desc = "$EDITOR", for = "unix" }   ,
 	{ run = 'nvim %*'           , block = true    , desc = "nvim"   , for = "windows" },
 	{ run = 'nvim-qt %*'        , orphan = true   , desc = "nvim-qt", for = "windows" },
+	{ run = 'excel /e "%1"'     , orphan = true   , desc = "excel",   for = "windows" },
 ]
 open = [ # if folder, open explorer location under cursor
 	{ run = 'xdg-open "$1"',                desc = "Open", for = "linux" },
 	{ run = 'open "$@"',                    desc = "Open", for = "macos" },
 	{ run = 'start "" "%1"', orphan = true, desc = "Open", for = "windows" },
+]
+sumatrapdf = [
+	{ run = 'sumatraPDF "%1"', orphan = true, desc = "SumatraPDF", for = "windows" },
 ]
 reveal = [ # if folder, open explorer current location
 	{ run = 'xdg-open "$(dirname "$1")"',           desc = "Reveal", for = "linux" },
@@ -58,7 +62,7 @@ play = [
 ]
 
 [open] # set rules for opening for specific file + show open list
-# mime is detected by file() function
+# mime is detected by `file --mime-type {}` function
 rules = [
 	# Folder
 	{ name = "*/", use = [ "open", "reveal" ] }, # open explorer of current selected directory
@@ -74,6 +78,8 @@ rules = [
 	# JSON
 	{ mime = "application/{json,x-ndjson}", use = [ "edit", "reveal" ] },
 	{ mime = "*/javascript", use = [ "edit", "reveal" ] },
+	# pdf
+	{ mime = "application/pdf", use = [ "open", "sumatrapdf" ] },
 	# Empty file
 	{ mime = "inode/x-empty", use = [ "edit", "reveal" ] },
 	# Fallback
