@@ -38,6 +38,7 @@ set FZF_DEFAULT_OPTS=^
 --border ^
 --color=hl:#FF0000,hl+:#00FF00 ^
 --preview="bat --color=always {}" ^
+--preview-window "down,50%%,hidden" ^
 --bind=ctrl-j:up,^
 ctrl-k:down,^
 ctrl-d:half-page-down,^
