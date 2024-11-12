@@ -96,6 +96,9 @@ suppress_preload = false
 
 [plugin]
 
+prepend_fetchers = [
+	{ id = "mime", name = "*", run = "mime-ext", if = "!mime", prio = "high" },
+]
 fetchers = [
 	# Mimetype
 	{ id = "mime", name = "*", run = "mime", if = "!mime", prio = "high" },
