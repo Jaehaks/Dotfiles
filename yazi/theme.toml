@@ -606,6 +606,7 @@ exts = [
 	{ name = "mts"          , text = "", fg_dark = "#519aba", fg_light = "#36677c" },
 	{ name = "mustache"     , text = "", fg_dark = "#e37933", fg_light = "#975122" },
 	{ name = "m"            , text = "󰘨", fg_dark = "#FF853B", fg_light = "#FF853B" },
+	{ name = "mlx"          , text = "󰘨", fg_dark = "#FF6D01", fg_light = "#FF6D01" },
 	{ name = "mat"          , text = "󰉻", fg_dark = "#FFD349", fg_light = "#FFD349" },
 	{ name = "slx"          , text = "󰿈", fg_dark = "#E1FF49", fg_light = "#E1FF49" },
 	{ name = "mdl"          , text = "󰿈", fg_dark = "#E1FF49", fg_light = "#E1FF49" },
