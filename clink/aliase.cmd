@@ -49,6 +49,9 @@ ctrl-a:beginning-of-line,^
 ctrl-e:end-of-line,^
 ctrl-i:toggle-preview
 
+set "BAT_CONFIG_DIR=%HOME%\.config\Dotfiles\bat"
+set "BAT_CONFIG_PATH=%HOME%\.config\Dotfiles\bat\config"
+
 REM set environment variables for zoxide
 set _ZO_DATA_DIR=%HOME%
 doskey zl=zoxide query -ls $*
