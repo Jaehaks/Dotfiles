@@ -11,6 +11,11 @@ if !ls! lss 0 (
 	set "ls=1"
 )
 
-bat !filename! --color=always --line-range !ls!:!le! --highlight-line=!hl! --theme=OneHalfDark --style=numbers,header
+bat !filename! ^
+--color=always ^
+--line-range !ls!:!le! ^
+--highlight-line=!hl! ^
+--style=numbers,header ^
+--theme=Catppuccin-Mocha-Modi
 
 endlocal
