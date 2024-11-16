@@ -2,8 +2,12 @@
 local get_selected = ya.sync(function ()
 	local select = cx.active.selected
 	local paths_tb = {}
-	for _, path in pairs(select) do
-		paths_tb[#paths_tb+1] = tostring(path)
+	if #select > 0 then
+		for _, path in pairs(select) do
+			paths_tb[#paths_tb+1] = tostring(path)
+		end
+	else
+		paths_tb = {tostring(cx.active.current.hovered.url)}
 	end
 	return paths_tb
 end)
