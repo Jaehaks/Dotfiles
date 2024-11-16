@@ -12,6 +12,10 @@ local get_selected = ya.sync(function ()
 	return paths_tb
 end)
 
+local get_cwd = ya.sync(function ()
+	return tostring(cx.active.current.cwd:name())
+end)
+
 -- append list of table to string
 -- local dump_table = ya.sync(function (state, tb)
 -- 	local dump_tb = ''
@@ -25,10 +29,12 @@ end)
 return {
 	entry = function ()
 		local plugin_name = 'Zip with 7z'
+		local cwd = get_cwd()
 
 		-- input for archive file name
 		local archive_name, event = ya.input({
 			title = plugin_name,
+			value = cwd,
 			position = {'top-center', w = 50},
 		})
 
