@@ -13,7 +13,7 @@ fzf ^
 --bind "ctrl-s:toggle-sort" ^
 --tiebreak=index ^
 --preview "git show -p {1} | bat --color=always --style=header,grid --language=diff --theme=ansi" ^
---preview-window=bottom,60%%
+--preview-window=bottom,50%%,nohidden
 
 :: check git log has error
 %git_log_cmd% > git_log_output.tmp 2>&1
