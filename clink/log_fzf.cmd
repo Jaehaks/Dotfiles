@@ -15,7 +15,20 @@ fzf ^
 --preview "git show -p {1} | bat --color=always --style=header,grid --language=diff --theme=ansi" ^
 --preview-window=bottom,60%%
 
+:: check git log has error
+%git_log_cmd% > git_log_output.tmp 2>&1
+if %errorlevel% neq 0 (
+	type git_log_output.tmp
+	del git_log_output.tmp
+	exit /b %errorlevel%
+)
+
 :: Combine the commands
-%git_log_cmd% | %fzf_cmd%
+type git_log_output.tmp | %fzf_cmd%
+
+:: delete tmp file
+del git_log_output.tmp
+
+
 
 endlocal
