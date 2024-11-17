@@ -24,6 +24,21 @@ Dotfiles besides of nvim_config
 
 <br>
 
+- **Features**
+    - `clink_settings` :
+		- customized prompt colors
+		- hide autosuggestion hint
+	- `.inputrc` :
+		- set <S-TAB> as accept autosuggestion
+	- `prompt.lua` :
+		- show current git branch name / git status
+		- customize prompt and arg colors
+		- show virtual environment name
+	- `git_checkout.lua` :
+		- show completion list when input `TAB` after command {checkout, branch, merge}
+
+<br>
+
 - **Installation**
     1. Download clink from release page Assets : `clink.1.6.14.93b83f.zip`
     2. Unzip the zip file to wanted location
@@ -32,16 +47,18 @@ Dotfiles besides of nvim_config
         - `CLINK_INPUTRC` : `<Dotfile path>\Dotfiles\clink`
         - `CLINK_SETTINGS` : `<Dotfile path>\Dotfiles\clink`
     5. Make symbolic link to use `prompt.lua` :
-        - `cd <clink installed location>`
-        - `mklink prompt.lua <Dotfile path>\Dotfiles\clink\prompt.lua`
+        - `mklink <clink install path>\prompt.lua <Dotfiles path>\clink\prompt.lua`
+    5. Make symbolic link to use `git_checkout.lua` :
+        - `mklink <clink install path>\git_checkout.lua <Dotfiles path>\clink\git_checkout.lua`
     6. open `cmd.exe` and do `clink autorun install`
 
 <br>
 
 - **Related file list**
     - `clink\.inputrc` : configuration file
-    - `clink_settings` : setting file
+    - `clink\clink_settings` : setting file
     - `clink\prompt.lua` : prompt customization file
+    - `clink\git_checkout.lua` : show completion of branch when checkout
 
 <br>
 
