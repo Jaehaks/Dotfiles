@@ -34,6 +34,7 @@ alt + shift + down  	: komorebic stack down
 alt + shift + up    	: komorebic stack up
 alt + shift + right 	: komorebic stack right
 alt + shift + oem_1 	: komorebic unstack # oem_1 is ;
+alt + shift + ctrl + oem_1 	: komorebic unstack-all # oem_1 is ;
 alt + shift + oem_4 	: komorebic cycle-stack previous # oem_4 is [
 alt + shift + oem_6 	: komorebic cycle-stack next # oem_6 is ]
 
@@ -55,7 +56,7 @@ alt + ctrl + n         : komorebic minimize
 alt + p                 : komorebic toggle-pause
 
 # Window manager options
-alt + shift + r         : komorebic retile
+# alt + shift + r         : komorebic retile
 
 # Layouts
 alt + ctrl + h          : komorebic flip-layout horizontal
