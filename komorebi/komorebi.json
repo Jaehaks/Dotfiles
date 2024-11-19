@@ -1,6 +1,6 @@
 {
-  "$schema": "https://raw.githubusercontent.com/LGUG2Z/komorebi/v0.1.28/schema.json",
-  "app_specific_configuration_path": "$Env:KOMOREBI_CONFIG_HOME/applications.yaml",
+  "$schema": "https://raw.githubusercontent.com/LGUG2Z/komorebi/v0.1.30/schema.json",
+  "app_specific_configuration_path": "$Env:KOMOREBI_CONFIG_HOME/applications.json",
   "window_hiding_behaviour": "Cloak",
   "cross_monitor_move_behaviour": "Insert",
   "default_workspace_padding": 0,
@@ -24,18 +24,19 @@
       "background": "#141414"
     }
   },
-  "monitors": [
-    {
-		"workspaces": [
-        { "name": "I"  , "layout": "BSP" },
-        { "name": "II" , "layout": "VerticalStack" },
-        { "name": "VII", "layout": "VerticalStack" }
-      ]
-    }
-  ],
+	"monitors": [
+		{
+			"workspaces": [
+				{
+					"name": "I",
+					"layout": "VerticalStack"
+				},
+			]
+		}
+	],
   "mouse_follows_focus": false,
   "window_container_behaviour": "Append",
-  "float_rules": [
+  "floating_applications": [
 	  { "kind" : "Exe"  , "id" : "mda.exe"         , "matching_strategy" : "Equals" },
 	  { "kind" : "Exe"  , "id" : "Inca.exe"        , "matching_strategy" : "Equals" },
 	  { "kind" : "Exe"  , "id" : "lync.exe"        , "matching_strategy" : "Equals" },
@@ -62,5 +63,11 @@
 	  { "kind" : "Exe"  , "id" : "SumatraPDF.exe"     , "matching_strategy" : "Equals"},
 	  { "kind" : "Exe"  , "id" : "WinMergeU.exe"      , "matching_strategy" : "Equals"},
 	  { "kind" : "Title", "id" : ".xlsx"              , "matching_strategy" : "EndsWith"},
+	  { "kind" : "Title", "id" : ".xls"               , "matching_strategy" : "EndsWith"},
+	  { "kind" : "Title", "id" : ".csv"               , "matching_strategy" : "EndsWith"},
+	  { "kind" : "Title", "id" : ".xlsm"              , "matching_strategy" : "EndsWith"},
+	  { "kind" : "Title", "id" : ".pptx"              , "matching_strategy" : "EndsWith"},
+	  { "kind" : "Title", "id" : ".ppt"               , "matching_strategy" : "EndsWith"},
+	  { "kind" : "Title", "id" : ".pptm"              , "matching_strategy" : "EndsWith"},
   ]
 }
