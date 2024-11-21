@@ -17,6 +17,7 @@
   "stackbar": {
     "height": 20,
     "mode": "OnStack",
+		"label" : "Title",
     "tabs": {
       "width": 150,
       "focused_text": "#F333FF",
