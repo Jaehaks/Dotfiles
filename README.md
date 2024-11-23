@@ -212,3 +212,20 @@ Dotfiles besides of nvim_config
 			- `clipboard` : `scoop install clipboard`
 		- key : `Y`
 		- test
+
+
+
+---
+### 6. [komorebi](https://github.com/LGUG2Z/komorebi)
+
+- **Description**
+	- tiling manager for windows
+	- tiling manager lists
+		- `glazewm` :
+			- It is very fast and simple. It looks work well with other bug
+			- It doesn't support stacking window
+			- It use zebar to show where I am in workspace. but it doesn't support independent workspace in multi monitor
+		- `FancyWM` :
+			- It is very stable to use but it is little slow to response
+			- It use virtual desktop of windows instead of workspace
+
