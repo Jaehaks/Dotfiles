@@ -2,7 +2,7 @@ local M = {}
 
 function M:peek()
 	local filename = self.file.name
-	local cmd = os.getenv("YAZI_FILE_ONE") or "file"
+	local cmd = "file"
 	local output, code = Command(cmd):args({ "-bL", tostring(self.file.url) }):stdout(Command.PIPED):output()
 
 	local p
