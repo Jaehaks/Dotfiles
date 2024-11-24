@@ -1,3 +1,4 @@
+--- show error information
 local function info(content)
 	return ya.notify {
 		title = "Diff",
@@ -7,30 +8,49 @@ local function info(content)
 	}
 end
 
+--- get selected file lists
+---@return paths table file list includes selected file
 local selected_url = ya.sync(function()
+	local tabs = cx.tabs
+	local hovered = tostring(cx.active.current.hovered.url)
+
+	local raw_paths = {}
 	local paths = {}
 
-	-- check selected path
-	for _, u in pairs(cx.active.selected) do
-		paths[#paths + 1] = tostring(u)
+	-- get selected file list in all tabs
+	for _, tab in ipairs(tabs) do -- cx.tabs can be used with ipairs(), not pairs()
+		for _, path in pairs(tab.selected) do
+			raw_paths[#raw_paths + 1] = tostring(path)
+		end
 	end
 
-	-- check rationality
-	if #paths == 1 then
-		paths[#paths + 1] = tostring(cx.active.current.hovered.url)
-		return paths
-	elseif #paths == 2 then
-		return paths
-	else
-		return nil
+	-- remove duplicated items
+	local seen = {}
+	for _, path in ipairs(raw_paths) do
+		if not seen[path] then
+			seen[path] = true
+			table.insert(paths, path)
+		end
 	end
+	local len_path = #paths
+
+	-- if only one path is selected, add hovered files to the list
+	if len_path == 1 then
+		if paths[1] ~= hovered then
+			table.insert(paths, hovered)
+		end
+	end
+
+	return paths
 end)
 
 return {
 	entry = function()
 		local paths = selected_url()
-		if not paths then
-			info('Diff Error : select two files')
+		local len_paths = #paths
+
+		if not len_paths or len_paths ~= 2 then
+			info('Diff Error : ' .. len_paths .. ' file(s) are selected, choose only 2 files')
 			return
 		end
 
