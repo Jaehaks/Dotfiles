@@ -214,6 +214,9 @@ prepend_keymap = [
 
 	# plugin : smart-visual
 	{ on = "V", run = "plugin --sync smart-visual",      desc = "select files with same file extensions" },
+
+	# plugin : relative-motions.yazi
+	{ on = ["e"], run = "plugin relative-motions",      desc = "Move in relative steps" },
 ]
 
 [tasks]
