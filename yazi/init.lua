@@ -34,7 +34,9 @@ require("yamb"):setup {
   -- Optional, a string used for randomly generating keys, where the preceding characters have higher priority.
   keys = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
   -- Optional, the path of bookmark file
-  path = os.getenv("HOME") .. "\\.config\\Dotfiles\\yazi\\bookmark"
+  path = os.getenv("HOME") .. "\\.config\\Dotfiles\\yazi\\bookmark",
+  -- Optional, disable notify message when jump
+  jump_notify = false,
 }
 
 
@@ -52,7 +54,16 @@ require('githead'):setup()
 
 -- [plugins] - yazi-rs/git.yazi
 -- show git status right after directory
-require('git'):setup()
+THEME.git = THEME.git or {}
+THEME.git.modified_sign  = "M"
+THEME.git.deleted_sign   = "D"
+THEME.git.added_sign     = "A"
+THEME.git.untracked_sign = "?"
+THEME.git.ignored_sign   = "-"
+THEME.git.updated_sign   = "U"
+require('git'):setup({
+	order = 500 -- order to show directory list. if 1500, gitsign go to rightmost
+})
 
 
 -- [plugins] - yazi-rs/mime-ext.yazi
