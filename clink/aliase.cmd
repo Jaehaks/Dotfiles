@@ -64,10 +64,7 @@ doskey zi=zi $*
 
 
 doskey ls=ls --color=always $*
-doskey ll=eza -al --icons=auto --sort=extension --time-style "+%%Y-%%m-%%d %%H:%%M:%%S" $*
+doskey ll=eza --git --git-repos-no-status -al --icons=auto --sort=extension --time-style "+%%Y-%%m-%%d %%H:%%M:%%S" $*
 doskey grep=grep -i --color=auto $*
-REM doskey zi=z -I $*
-REM doskey zl=z -l $*
-REM doskey zt=z -t $*
 doskey lf=lfcd $*
 @echo on
