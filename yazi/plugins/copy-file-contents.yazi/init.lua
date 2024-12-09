@@ -18,7 +18,7 @@ local function notify(str)
 	})
 end
 
-local function entry()
+local function entry(self, job)
 	-- Copy the contents of selected files into clipboard
 	local files = selected_files()
 	local contents = ''

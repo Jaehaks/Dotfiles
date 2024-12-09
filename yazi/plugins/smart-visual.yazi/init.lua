@@ -1,3 +1,6 @@
+--- @sync entry
+
+
 -- -- cx can be called once
 -- local get_ext = ya.sync(function()
 -- 	local folder   = cx.active.current
@@ -37,7 +40,7 @@ local entry = function ()
 	if hovered_ext == 'directory' then
 		for _, file in ipairs(filelist) do
 			if file.cha.is_dir then
-				ya.manager_emit("select", {state = true})
+				ya.manager_emit("toggle", {state = 'on'})
 			end
 			ya.manager_emit("arrow", {1})
 		end
@@ -45,7 +48,7 @@ local entry = function ()
 		for _, file in ipairs(filelist) do
 			ext = string.match(file.url:name(), '%.([^.]+)$') -- check extension from the file name
 			if ext == hovered_ext then
-				ya.manager_emit("select", {state = true})
+				ya.manager_emit("toggle", {state = 'on'})
 			end
 			ya.manager_emit("arrow", {1})
 		end

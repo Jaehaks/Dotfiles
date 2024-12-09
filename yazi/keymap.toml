@@ -35,7 +35,7 @@ keymap = [
 
 	# Navigation
 	{ on = "h", run = "leave", desc = "Go back to the parent directory" },
-	{ on = "l", run = "plugin --sync smart-enter", desc = "Enter or Open" },
+	{ on = "l", run = "plugin smart-enter", desc = "Enter or Open" },
 
 	{ on = "<Left>",  run = "leave",    desc = "Go back to the parent directory" },
 	{ on = "<Right>", run = "enter",    desc = "Enter the child directory" },
@@ -48,11 +48,11 @@ keymap = [
 	{ on = "K", run = "seek 5",  desc = "Seek down 5 units in the preview" },
 
 	# Selection
-	{ on = "<Space>", run = [ "select --state=none", "arrow 1" ], desc = "Toggle the current selection state" },
-	{ on = "v",       run = "visual_mode",                        desc = "Enter visual mode (selection mode)" },
+	{ on = "<Space>", run = [ "toggle" , "arrow 1" ], desc = "Toggle the current selection state" },
+	{ on = "v",       run = "visual_mode"           , desc = "Enter visual mode (selection mode)" },
 	# { on = "V",       run = "visual_mode --unset",                desc = "Enter visual mode (unset mode)" },
-	{ on = "<C-a>",   run = "select_all --state=true",            desc = "Select all files" },
-	{ on = "<C-v>",   run = "select_all --state=none",            desc = "Inverse selection of all files" },
+	{ on = "<C-a>",   run = "toggle_all --state=on" , desc = "Select all files" },
+	{ on = "<C-v>",   run = "toggle_all"            , desc = "Inverse selection of all files" },
 
 	# Operation
 	{ on = "o",         run = "plugin open_nvim",            desc = "Open selected files" },
@@ -110,10 +110,10 @@ keymap = [
 	{ on = "N", run = "find_arrow --previous",   desc = "Go to the previous found" },
 
 	# Sorting
-	{ on = [ ",", "t" ], run = [ "sort modified --reverse"       , "linemode size_and_mtime" ] , desc = "Sort by modified time (reverse)" },
-	{ on = [ ",", "T" ], run = [ "sort modified --reverse=no"    , "linemode size_and_mtime" ] , desc = "Sort by modified time" },
-	{ on = [ ",", "c" ], run = [ "sort created --reverse"        , "linemode ctime" ]          , desc = "Sort by created time (reverse)" },
-	{ on = [ ",", "C" ], run = [ "sort created --reverse=no"     , "linemode ctime" ]          , desc = "Sort by created time" },
+	{ on = [ ",", "t" ], run = [ "sort mtime --reverse"       , "linemode size_and_mtime" ] , desc = "Sort by modified time (reverse)" },
+	{ on = [ ",", "T" ], run = [ "sort mtime --reverse=no"    , "linemode size_and_mtime" ] , desc = "Sort by modified time" },
+	{ on = [ ",", "c" ], run = [ "sort btime --reverse"          , "linemode btime" ]          , desc = "Sort by created time (reverse)" },
+	{ on = [ ",", "C" ], run = [ "sort btime --reverse=no"       , "linemode btime" ]          , desc = "Sort by created time" },
 	{ on = [ ",", "e" ], run = [ "sort extension --reverse=no"   , "linemode size_and_mtime "] , desc = "Sort by extension" },
 	{ on = [ ",", "E" ], run = [ "sort extension --reverse"      , "linemode size_and_mtime "] , desc = "Sort by extension (reverse)" },
 	{ on = [ ",", "a" ], run = [ "sort alphabetical --reverse=no", "linemode size_and_mtime "] , desc = "Sort alphabetically" },
@@ -174,11 +174,11 @@ prepend_keymap = [
 
 	# plugin : hide-preview.yazi
 	# -- turn on/off preview window
-	{ on = [ "T" ], run = "plugin --sync hide-preview", 	 desc = "Toggle hiding preview"},
+	{ on = [ "T" ], run = "plugin hide-preview", 	 desc = "Toggle hiding preview"},
 
 	# plugin : max_preview.yazi
 	# -- maximize / restore preview
-	{ on = [ "i" ], run = "plugin --sync max-preview", 	 desc = "Toggle maximizing preview"},
+	{ on = [ "i" ], run = "plugin max-preview", 	 desc = "Toggle maximizing preview"},
 
 	# plugin : smart-filter.yazi
 	# -- continuous filtering
@@ -204,7 +204,7 @@ prepend_keymap = [
 	{ on = ["g", 'z'], run = "plugin compress",      desc = "compress of selected files" },
 
 	# manual : echo-filename.yazi
-	{ on = '<C-g>', run = "plugin --sync echo-filename",      desc = "echo hovered filename" },
+	{ on = '<C-g>', run = "plugin echo-filename",      desc = "echo hovered filename" },
 
 	# manual : githead.yazi
 	# { on = '<C-t>', run = "plugin githead",      desc = "echo hovered filename" },
@@ -213,7 +213,7 @@ prepend_keymap = [
 	{ on = ['c', 'g'], run = "plugin copy-file-contents",      desc = "copy contents of file" },
 
 	# plugin : smart-visual
-	{ on = "V", run = "plugin --sync smart-visual",      desc = "select files with same file extensions" },
+	{ on = "V", run = "plugin smart-visual",      desc = "select files with same file extensions" },
 
 	# plugin : relative-motions.yazi
 	{ on = ["e"], run = "plugin relative-motions",      desc = "Move in relative steps" },
@@ -241,7 +241,7 @@ keymap = [
 	{ on = "<F1>", run = "help", desc = "Open help" },
 ]
 
-[select]
+[pick]
 
 keymap = [
 	{ on = "<Esc>",   run = "close",          desc = "Cancel selection" },

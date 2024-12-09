@@ -111,22 +111,22 @@ end
 
 
 -- fetch contents whenever entities have some changes
--- it seems that once fetch, 
+-- it seems that once fetch,
 -- it must return any value
-local fetch = function (self)
-	-- in yazi.toml, fetch call at * and */ => it means when I enter in directory, 
-	-- fetch first item with self.files[1].url each of them. 
+local fetch = function (self, job)
+	-- in yazi.toml, fetch call at * and */ => it means when I enter in directory,
+	-- fetch first item with job.files[1].url each of them.
 	-- so fetch one folder and one file at the top of the list (entering or file changing)
 	--
 	-- setting branch is fast, but clearing branch is slower than it
 	-- I think all files are fetched at first time entering
 	-- it will be waste time to show correct branch name because if they have lots of files to fetch
 
-	local cwd = self.files[1].url:parent() -- get cwd
+	local cwd = job.files[1].url:parent() -- get cwd
 	-- if return is done early, branch is changed too slowly
 
 	-- if there are no --no-optional-locks options, command call permanently
-	-- if `2>nul` is added, it works in terminal to delete stderr, 
+	-- if `2>nul` is added, it works in terminal to delete stderr,
 	-- but it erase commit / staged lists in Commnad()
 	local status, err = Command('git')
 						:cwd(tostring(cwd))

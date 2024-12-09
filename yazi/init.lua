@@ -6,7 +6,7 @@
 -- [manager] - linemode
 -- show size and mtime together
 function Linemode:size_and_mtime()
-	local time = (self._file.cha.modified or 0) // 1 -- get file date
+	local time = (self._file.cha.mtime or 0) // 1 -- get file date
 	time = time and os.date("%Y/%m/%d %H:%M:%S", time) or "" -- show date only when it has
 
 	local size = self._file:size() -- get file size
@@ -106,6 +106,9 @@ require('mime-ext'):setup({
 
 		-- for email
 		pst = "application/outlook",
+
+		-- for archive
+		["7z"] = "application/x-7z-compressed",
 	},
 	fallback_file1 = false,
 })
