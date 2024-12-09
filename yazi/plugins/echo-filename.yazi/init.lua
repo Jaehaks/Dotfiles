@@ -1,3 +1,5 @@
+--- @sync entry
+
 local info = function (txt)
 	ya.notify({
 		title = 'echo-filename',

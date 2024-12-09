@@ -29,8 +29,8 @@ end
 
 
 return {
-	entry = function(_, args)
-		local action = args[1]
+	entry = function(_, job)
+		local action = job.args[1]
 		ya.manager_emit("escape", { visual = true })
 
 		local urls = selected_or_hovered()
