@@ -17,6 +17,7 @@ mouse_events   = [ "click", "scroll" ]
 title_format   = "Yazi: {cwd}"
 
 [preview]
+wrap			= "no"
 tab_size        = 2
 max_width       = 690
 max_height      = 930 # image preview size is fixed under this value, and cannot adapt to terminal size
@@ -108,6 +109,19 @@ fetchers = [
 	{ id = "githead", name = "*", run = "githead"},
 	{ id = "githead", name = "*/", run = "githead"},
 ]
+spotters = [
+	{ name = "*/", run = "folder" },
+	# Code
+	{ mime = "text/*", run = "code" },
+	{ mime = "*/{xml,javascript,wine-extension-ini}", run = "code" },
+	# Image
+	{ mime = "image/{avif,hei?,jxl,svg+xml}", run = "magick" },
+	{ mime = "image/*", run = "image" },
+	# Video
+	{ mime = "video/*", run = "video" },
+	# Fallback
+	{ name = "*", run = "file" },
+]
 preloaders = [
 	# Image
 	{ mime = "image/{avif,hei?,jxl,svg+xml}", run = "magick" },
@@ -122,12 +136,7 @@ preloaders = [
 ]
 prepend_previewers = [
 	# plugin : ouch.yazi / preview zip file
-	{ mime = "application/*zip"           , run = "ouch" }, # for zip
-	{ mime = "application/tar"          , run = "ouch" }, # for tar
-	{ mime = "application/bzip2"        , run = "ouch" },
-	{ mime = "application/7z-compressed", run = "ouch" }, # for 7z
-	{ mime = "application/rar"          , run = "ouch" },
-	{ mime = "application/xz"           , run = "ouch" },
+	{ mime = "application/{*zip,tar,bzip2,7z-compressed,rar,xz}" , run = "ouch" }, # for zip
 ]
 previewers = [
 	{ name = "*/", run = "folder", sync = true },
@@ -217,16 +226,13 @@ quit_content = "The following task is still running, are you sure you want to qu
 quit_origin  = "center"
 quit_offset  = [ 0, 0, 50, 15 ]
 
-[select]
+[pick]
 open_title  = "Open with:"
 open_origin = "hovered"
 open_offset = [ 0, 1, 50, 7 ]
 
 [which]
-sort_by      	 = "none"
+sort_by        = "none"
 sort_sensitive = false
-sort_reverse 	 = false
+sort_reverse   = false
 sort_translit  = false
-
-[log]
-enabled = false
