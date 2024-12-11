@@ -136,7 +136,7 @@ preloaders = [
 ]
 prepend_previewers = [
 	# plugin : ouch.yazi / preview zip file
-	{ mime = "application/{*zip,tar,bzip2,7z-compressed,rar,xz}" , run = "ouch" }, # for zip
+	{ mime = "application/{*zip,tar,bzip2,x-7z-compressed,rar,xz}" , run = "ouch" }, # for zip
 ]
 previewers = [
 	{ name = "*/", run = "folder", sync = true },
@@ -154,7 +154,7 @@ previewers = [
 	{ mime = "application/pdf", run = "pdf" },
 	# Archive
 	{ mime = "application/{,g}zip", run = "archive" },
-	{ mime = "application/{tar,bzip*,7z-compressed,xz,rar,iso9660-image}", run = "archive" },
+	{ mime = "application/{tar,bzip*,x-7z-compressed,xz,rar,iso9660-image}", run = "archive" },
 	# Font
 	{ mime = "font/*", run = "font" },
 	{ mime = "application/vnd.ms-opentype", run = "font" },
