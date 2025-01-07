@@ -21,7 +21,7 @@ local function split_and_get_first(input, sep)
 end
 
 -- main function
-local entry = function(_, args)
+local entry = function(_, job)
 
 	-- read additional rg option
 	local value, event = ya.input({
@@ -39,7 +39,7 @@ local entry = function(_, args)
 	local cmd = ''
 
 	-- fg.cmd must be in system path
-	if args[1] == 'fzf' then
+	if job.args[1] == 'fzf' then
 		cmd = 'fg_fzf.cmd'
 	else
 		cmd = 'fg.cmd'
