@@ -67,6 +67,8 @@ play = [
 rules = [
 	# Folder
 	{ name = "*/", use = [ "open", "reveal" ] }, # open explorer of current selected directory
+	# csv
+	{ mime = "text/csv", use = [ "open", "reveal" ] },
 	# Text
 	{ mime = "text/*", use = [ "edit", "reveal" ] },
 	# Image
