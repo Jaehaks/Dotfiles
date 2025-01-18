@@ -1,17 +1,17 @@
 .shell cmd
 
 # Reload whkd configuration
-alt + o                 : taskkill /f /im whkd.exe && start /b whkd # if shell is cmd
+# alt + o                 : taskkill /f /im whkd.exe && start /b whkd # if shell is cmd
 # alt + o                 : taskkill /f /im whkd.exe; Start-Process whkd -WindowStyle hidden # if shell is pwsh / powershell
-alt + shift + o         : komorebic reload-configuration
+# alt + shift + o         : komorebic reload-configuration
 
 # App shortcuts - these require shell to be pwsh / powershell
 # The apps will be focused if open, or launched if not open
 # alt + f                 : if ($wshell.AppActivate('Firefox') -eq $False) { start firefox }
 # alt + b                 : if ($wshell.AppActivate('Chrome') -eq $False) { start chrome }
 
-alt + q                 : komorebic close
-alt + shift + q         : komorebic stop --whkd
+# alt + q                 : komorebic close
+# alt + shift + q         : komorebic stop --whkd
 
 # Focus windows
 alt + left               : komorebic focus left
@@ -34,16 +34,18 @@ alt + shift + down  	: komorebic stack down
 alt + shift + up    	: komorebic stack up
 alt + shift + right 	: komorebic stack right
 # alt + shift + oem_1 	: komorebic unstack # oem_1 is ;
-alt + ctrl + f 		: komorebic unstack # oem_1 is ;
-alt + shift + oem_1 	: komorebic unstack-all # oem_1 is ;
-alt + shift + oem_4 	: komorebic cycle-stack previous # oem_4 is [
-alt + shift + oem_6 	: komorebic cycle-stack next # oem_6 is ]
+# alt + ctrl + f 		: komorebic unstack # oem_1 is ;
+alt + q 				: komorebic unstack # oem_1 is ;
+alt + shift + q 		: komorebic unstack-all # oem_1 is ;
+alt + w 				: komorebic cycle-stack previous # oem_4 is [
+alt + e 				: komorebic cycle-stack next # oem_6 is ]
+
 # move other monitor
-alt + ctrl + r         : komorebic cycle-move-to-monitor next
+alt + z         		: komorebic cycle-move-to-monitor next
 
 # Resize
-alt + shift + oem_plus  : komorebic resize-axis horizontal increase
-alt + shift + oem_minus : komorebic resize-axis horizontal decrease
+# alt + shift + oem_plus  : komorebic resize-axis horizontal increase
+# alt + shift + oem_minus : komorebic resize-axis horizontal decrease
 # alt + shift + oem_plus  : komorebic resize-axis vertical increase
 # alt + shift + oem_minus : komorebic resize-axis vertical decrease
 
@@ -52,11 +54,11 @@ alt + shift + oem_minus : komorebic resize-axis horizontal decrease
 	# maximize : use full screen such as maximize button. it doesn't show border
 	# float : turn off managing of specific windows
 	# pause : turn off managing of all windows
-alt + w                 : komorebic toggle-float
-alt + ctrl + m         : komorebic toggle-monocle
-# alt + ctrl + m 		: komorebic toggle-maximize
-alt + ctrl + n         : komorebic minimize
+alt + f                 : komorebic toggle-float
 alt + p                 : komorebic toggle-pause
+alt + ctrl + m          : komorebic toggle-monocle
+# alt + ctrl + m 			: komorebic toggle-maximize
+alt + ctrl + n          : komorebic minimize
 
 # Window manager options
 # alt + shift + r         : komorebic retile
