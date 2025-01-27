@@ -27,6 +27,11 @@ function Status:name()
 	end
 end
 
+-- [plugins] - zoxide (builtin)
+require("zoxide"):setup {
+	update_db = true, -- update db.zo automatically whenever move directories
+}
+
 -- [plugins] - yamb.yazi
 require("yamb"):setup {
   -- Optional, the cli of fzf.
