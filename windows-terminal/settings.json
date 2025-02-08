@@ -1,10 +1,10 @@
 {
     "$help": "https://aka.ms/terminal-documentation",
     "$schema": "https://aka.ms/terminal-profiles-schema",
-    "actions": 
+    "actions":
     [
         {
-            "command": 
+            "command":
             {
                 "action": "moveFocus",
                 "direction": "previousInOrder"
@@ -12,7 +12,7 @@
             "id": "User.moveFocus.787314EB"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "copy",
                 "singleLine": false
@@ -20,7 +20,7 @@
             "id": "User.copy.644BA8F2"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "splitPane",
                 "split": "down"
@@ -44,14 +44,14 @@
             "id": "User.scrollDownPage"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "scrollUp"
             },
             "id": "User.scrollUp.0"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "scrollDown"
             },
@@ -62,14 +62,14 @@
             "id": "User.paste"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "newTab"
             },
             "id": "User.newTab.5DEADB41"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "splitPane",
                 "split": "right"
@@ -77,7 +77,7 @@
             "id": "User.splitPane.864CD510"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "nextTab"
             },
@@ -88,7 +88,7 @@
     "copyFormatting": "none",
     "copyOnSelect": false,
     "defaultProfile": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
-    "keybindings": 
+    "keybindings":
     [
         {
             "id": null,
@@ -399,22 +399,22 @@
             "keys": "alt+s"
         }
     ],
-    "newTabMenu": 
+    "newTabMenu":
     [
         {
             "type": "remainingProfiles"
         }
     ],
-    "profiles": 
+    "profiles":
     {
-        "defaults": 
+        "defaults":
         {
             "cursorShape": "filledBox",
             "experimental.retroTerminalEffect": false,
-            "font": 
+            "font":
             {
                 "face": "FiraCode Nerd Font",
-                "features": 
+                "features":
                 {
                     "calt": 0,
                     "liga": 0
@@ -422,13 +422,13 @@
                 "weight": "semi-bold"
             },
             "startingDirectory": "%USERPROFILE%",
-            "unfocusedAppearance": 
+            "unfocusedAppearance":
             {
                 "background": "#333333",
                 "useAcrylic": true
             }
         },
-        "list": 
+        "list":
         [
             {
                 "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
@@ -438,10 +438,6 @@
             },
             {
                 "commandline": "%SystemRoot%\\System32\\cmd.exe /k %USERPROFILE%\\.config\\Dotfiles\\clink\\aliase.cmd",
-                "font": 
-                {
-                    "features": {}
-                },
                 "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
                 "hidden": false,
                 "name": "\uba85\ub839 \ud504\ub86c\ud504\ud2b8"
@@ -489,7 +485,7 @@
                 "colorScheme": "Campbell",
                 "commandline": "%SystemRoot%\\System32\\cmd.exe /k %USERPROFILE%\\.config\\Dotfiles\\clink\\aliase.cmd",
                 "elevate": true,
-                "font": 
+                "font":
                 {
                     "features": {},
                     "size": 12
