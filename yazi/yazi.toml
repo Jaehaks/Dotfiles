@@ -54,7 +54,8 @@ reveal = [ # if folder, open explorer current location
 ]
 extract = [
 	{ run = 'ya pub extract --list "$@"', desc = "Extract here", for = "unix" },
-	{ run = 'bandizip bx -target:auto %*',   desc = "Extract here", for = "windows" },
+	# { run = 'bandizip bx -target:auto %*',   desc = "Extract here", for = "windows" },
+	{ run = '7z x -aoa -o* %*',   desc = "Extract here", for = "windows" },
 ]
 play = [
 	{ run = 'mpv --force-window "$@"', orphan = true, for = "unix" },
@@ -77,7 +78,7 @@ rules = [
 	{ mime = "{audio,video}/*", use = [ "play", "reveal" ] },
 	# Archive
 	{ mime = "application/{,g}zip", use = [ "extract", "reveal" ] },
-	{ mime = "application/{tar,bzip*,7z-compressed,xz,rar}", use = [ "extract", "reveal" ] },
+	{ mime = "application/{tar,bzip*,x-7z-compressed,xz,rar}", use = [ "extract", "reveal" ] },
 	# JSON
 	{ mime = "application/{json,ndjson}", use = [ "edit", "reveal" ] },
 	{ mime = "*/javascript", use = [ "edit", "reveal" ] },
