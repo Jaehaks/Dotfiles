@@ -45,12 +45,29 @@ return {
 		-- archive file using bandizip
 		local files = {}
 		files = get_selected()
-		local output, err = Command('bandizip')
-							:arg('c')
-							:arg('-fmt:7z')
+		-- local output, err = Command('bandizip')
+		-- 					:arg('c')
+		-- 					:arg('-fmt:7z')
+		-- 					:arg(archive_name .. '.7z')
+		-- 					:args(files)
+		-- 					:output()
+
+		local output, err = Command('7z')
+							:arg('a')
+							:arg('-t7z')
+							:arg('-m0=lzma2')
+							:arg('-md=256k')
+							:arg('-mfb=258')
+							:arg('-ms=on') -- set solid mode
+							:arg('-mmt=on')
+							:arg('-mx=9') -- set level of compression (0~9, default 5)
+							:arg('-bsp0')
+							:arg('-bso0')
+							:arg('--')
 							:arg(archive_name .. '.7z')
 							:args(files)
-							:output()
+							:spawn():wait()
+
 		if err then
 			ya.notify({
 				title = 'compress',
