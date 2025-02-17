@@ -53,16 +53,14 @@ return {
 		-- 					:output()
 
 		local output, err = Command('7z')
-							:arg('a')
-							:arg('-t7z')
-							:arg('-m0=lzma2')
-							:arg('-md=256k')
-							:arg('-mfb=258')
-							:arg('-ms=on') -- set solid mode
-							:arg('-mmt=on')
-							:arg('-mx=9') -- set level of compression (0~9, default 5)
-							:arg('-bsp0')
-							:arg('-bso0')
+							:arg('a')         -- compression operation
+							:arg('-t7z')      -- for .7z
+							:arg('-m0=lzma2') -- compress algorithm is LZMA2 (recent)
+							:arg('-mx=5')     -- compression level = 5(typical) : it's preset of other size option
+							:arg('-ms=on')    -- set solid mode (improve compression ratio)
+							:arg('-mmt=on')   -- set multi thread mode
+							:arg('-bsp0')     -- don't show process
+							:arg('-bso0')     -- don't show output
 							:arg('--')
 							:arg(archive_name .. '.7z')
 							:args(files)
