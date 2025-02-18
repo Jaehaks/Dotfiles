@@ -30,8 +30,8 @@ keymap = [
 	{ on = "<PageUp>",     run = "arrow -100%", desc = "Move cursor up one page" },
 	{ on = "<PageDown>",   run = "arrow 100%",  desc = "Move cursor down one page" },
 
-	{ on = [ "g", "g" ], run = "arrow -99999999", desc = "Move cursor to the top" },
-	{ on = "G",          run = "arrow 99999999",  desc = "Move cursor to the bottom" },
+	{ on = [ "g", "g" ], run = "arrow bot", desc = "Move cursor to the top" },
+	{ on = "G",          run = "arrow top",  desc = "Move cursor to the bottom" },
 
 	# Navigation
 	{ on = "h", run = "leave", desc = "Go back to the parent directory" },
@@ -82,7 +82,7 @@ keymap = [
 	{ on = "s",         run = "search fd",                   desc = "Search files by name using fd" },
 	# { on = "S",         run = "search rg",                   desc = "Search files by content using ripgrep" },
 	{ on = ["z", "r"],  run = "plugin fg",                   desc = "Search files by content (ripgrep match)" },
-	{ on = ["z", "g"],  run = "plugin fg --args='fzf'",      desc = "Search files by content (fuzzy match)" },
+	{ on = ["z", "g"],  run = "plugin fg 'fzf'",      desc = "Search files by content (fuzzy match)" },
 	{ on = ["z", "l"],  run = "plugin logfzf",     		     desc = "Search git logs with fzf" },
 	{ on = "<C-s>",     run = "escape --search",             desc = "Cancel the ongoing search" },
 	{ on = ["z", "z"],  run = "plugin zoxide",               desc = "Jump to a directory using zoxide" },
@@ -165,11 +165,11 @@ prepend_keymap = [
 	# plugin : yamb.yazi
 	# -- if cursor under the file => current directory is bookmarked
 	# -- if cursor under the folder => the selected folder is bookmarked
-	{ on = [ "m" ], 	 run = "plugin yamb --args=save", 		 desc = "Add bookmark"},
-	{ on = [ "'" ],  	 run = "plugin yamb --args=jump_by_key", desc = "Jump to a bookmark"},
-	{ on = [ "\"" ],  	 run = "plugin yamb --args=jump_by_fzf", desc = "Jump to a bookmark by fzf"},
-	{ on = [ "b", "d" ], run = "plugin yamb --args=delete_by_fzf", 	 desc = "Delete a bookmark by fzf"},
-	{ on = [ "b", "r" ], run = "plugin yamb --args=rename_by_fzf", 	 desc = "rename a bookmark by fzf"},
+	{ on = [ "m" ], 	 run = "plugin yamb 'save'", 		 desc = "Add bookmark"},
+	{ on = [ "'" ],  	 run = "plugin yamb 'jump_by_key'", desc = "Jump to a bookmark"},
+	{ on = [ "\"" ],  	 run = "plugin yamb 'jump_by_fzf'", desc = "Jump to a bookmark by fzf"},
+	{ on = [ "b", "d" ], run = "plugin yamb 'delete_by_fzf'", 	 desc = "Delete a bookmark by fzf"},
+	{ on = [ "b", "r" ], run = "plugin yamb 'rename_by_fzf'", 	 desc = "rename a bookmark by fzf"},
 
 	# plugin : diff.yazi
 	# -- diff result is copied to clibboard. check with pasting other editor
@@ -193,12 +193,12 @@ prepend_keymap = [
 
 	# manual : clipboard.yazi
 	# -- yank selected file from and to system-clipboard
-	{ on = "Y", 		 run = "plugin clipboard --args=copy",      	    desc = "Yank selected files to system clipboard" },
-	{ on = "P", 		 run = "plugin clipboard --args=paste",     	    desc = "Paste files from system clipboard" },
-	{ on = [ "c", "a" ], run = "plugin clipboard --args=copy_fullpath"    , desc = "Copy the entire path include filename" },
-	{ on = [ "c", "d" ], run = "plugin clipboard --args=copy_dirpath"     , desc = "Copy the directory path" },
-	{ on = [ "c", "f" ], run = "plugin clipboard --args=copy_filename"    , desc = "Copy the filename" },
-	{ on = [ "c", "n" ], run = "plugin clipboard --args=copy_filenameonly", desc = "Copy the filename without extension" },
+	{ on = "Y", 		 run = "plugin clipboard 'copy'",      	    desc = "Yank selected files to system clipboard" },
+	{ on = "P", 		 run = "plugin clipboard 'paste'",     	    desc = "Paste files from system clipboard" },
+	{ on = [ "c", "a" ], run = "plugin clipboard 'copy_fullpath'"    , desc = "Copy the entire path include filename" },
+	{ on = [ "c", "d" ], run = "plugin clipboard 'copy_dirpath'"     , desc = "Copy the directory path" },
+	{ on = [ "c", "f" ], run = "plugin clipboard 'copy_filename'"    , desc = "Copy the filename" },
+	{ on = [ "c", "n" ], run = "plugin clipboard 'copy_filenameonly'", desc = "Copy the filename without extension" },
 
 	# manual : dir-open.yazi
 	{ on = ["g", 'd'], run = "plugin dir-open",      desc = "open explorer of current dir" },
