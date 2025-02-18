@@ -150,9 +150,9 @@ local get_keys = ya.sync(function(state) return state._only_motions and MOTION_K
 
 local function normal_direction(dir)
 	if dir == "<Down>" then
-		return "j"
-	elseif dir == "<Up>" then
 		return "k"
+	elseif dir == "<Up>" then
+		return "j"
 	elseif dir == "<Left>" then
 		return "h"
 	elseif dir == "<Right>" then
@@ -267,9 +267,9 @@ return {
 				render_clear()
 				return
 			elseif direction == "j" then
-				cmd = "j"
-			elseif direction == "k" then
 				cmd = "k"
+			elseif direction == "k" then
+				cmd = "j"
 			elseif direction == "t" then
 				ya.manager_emit("tab_switch", { lines - 1 })
 				render_clear()
@@ -282,9 +282,9 @@ return {
 		end
 
 		if cmd == "j" then
-			ya.manager_emit("arrow", { lines })
-		elseif cmd == "k" then
 			ya.manager_emit("arrow", { -lines })
+		elseif cmd == "k" then
+			ya.manager_emit("arrow", { lines })
 		elseif cmd == "h" then
 			for _ = 1, lines do
 				ya.manager_emit("leave", {})
@@ -328,9 +328,9 @@ return {
 			ya.manager_emit("visual_mode", {})
 			-- invert direction when user specifies it
 			if direction == "k" then
-				ya.manager_emit("arrow", { -lines })
-			elseif direction == "j" then
 				ya.manager_emit("arrow", { lines })
+			elseif direction == "j" then
+				ya.manager_emit("arrow", { -lines })
 			else
 				ya.manager_emit("arrow", { lines - 1 })
 			end

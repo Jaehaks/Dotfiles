@@ -145,7 +145,7 @@ local fetch = function (self, job)
 	get_unstaged(status.stdout)
 	get_commit(status.stdout)
 	get_untracked(status.stdout)
-	return 3
+	return false
 
 end
 
