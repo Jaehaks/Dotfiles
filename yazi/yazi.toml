@@ -138,8 +138,8 @@ preloaders = [
 	{ mime = "application/vnd.ms-opentype", run = "font" },
 ]
 prepend_previewers = [
-	# plugin : ouch.yazi / preview zip file
-	{ mime = "application/{*zip,tar,bzip2,x-7z-compressed,rar,xz}" , run = "ouch" }, # for zip
+	# plugin : lsar.yazi / preview zip file
+	{ mime = "application/{*zip,tar,bzip2,x-7z-compressed,rar,xz}" , run = "lsar" }, # for zip
 ]
 previewers = [
 	{ name = "*/", run = "folder", sync = true },

@@ -19,11 +19,6 @@ rev = "b23e3a4"
 hash = "98e5f5af3efd3ba8bc2db0720187cc83"
 
 [[plugin.deps]]
-use = "ndtoan96/ouch"
-rev = "ce6fb75"
-hash = "ed6c185514109d7c5463f609282b220c"
-
-[[plugin.deps]]
 use = "h-hg/yamb"
 rev = "3f7c51f"
 hash = "e11b980e5635f0fbabd80931b1a1347e"
@@ -42,6 +37,11 @@ hash = "b03f3d80d26b6d7bb490b1380e9cb754"
 use = "dedukun/relative-motions"
 rev = "a4e6465"
 hash = "8edfc6a188058317daaed04663813daa"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:lsar"
+rev = "5186af7"
+hash = "fc2c9438d402f7c4ac230aebf5a746d1"
 
 [flavor]
 deps = []
