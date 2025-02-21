@@ -34,11 +34,6 @@ rev = "beb586a"
 hash = "b03f3d80d26b6d7bb490b1380e9cb754"
 
 [[plugin.deps]]
-use = "dedukun/relative-motions"
-rev = "a4e6465"
-hash = "8edfc6a188058317daaed04663813daa"
-
-[[plugin.deps]]
 use = "yazi-rs/plugins:lsar"
 rev = "5186af7"
 hash = "fc2c9438d402f7c4ac230aebf5a746d1"
