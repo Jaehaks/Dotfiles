@@ -28,7 +28,7 @@ local get_staged = ya.sync(function (state, status)
 				staged = staged + 1
 			end
 		end
-		state.staged = " +" .. staged
+		state.staged = " A" .. staged
 	else
 		state.staged = ""
 	end
@@ -46,7 +46,7 @@ local get_unstaged = ya.sync(function (state, status)
 				unstaged = unstaged + 1
 			end
 		end
-		state.unstaged = " *" .. unstaged
+		state.unstaged = " M" .. unstaged
 	else
 		state.unstaged = ""
 	end

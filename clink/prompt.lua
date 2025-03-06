@@ -7,7 +7,7 @@ local gray    = "\x1b[38;2;200;200;200m"
 local blue    = "\x1b[38;2;89;131;255m"
 local normal  = "\x1b[0m"
 
--- prompt filter for getting cwd 
+-- prompt filter for getting cwd
 local cwd_prompt = clink.promptfilter(30)
 function cwd_prompt:filter(prompt)
     return green .. os.getcwd() .. normal
@@ -26,13 +26,13 @@ local git_status = function (status, name)
 	if name == 'branch' then
 		result = status.branch and magenta .. ' ' .. status.branch or ''
 	elseif name == 'stagingAdded' then
-		result = status.stagingAdded > 0 and green .. '+' .. status.stagingAdded or ''
+		result = status.stagingAdded > 0 and green .. 'A' .. status.stagingAdded or ''
 	elseif name == 'stagingModified' then
 		result = status.stagingModified > 0 and red .. 'M' .. status.stagingModified or ''
 	elseif name == 'stagingDeleted' then
 		result = status.stagingDeleted > 0 and cyan .. 'D' .. status.stagingDeleted or ''
 	elseif name == 'workingAdded' then
-		result = status.workingAdded > 0 and green .. '+' .. status.workingAdded or ''
+		result = status.workingAdded > 0 and green .. 'A' .. status.workingAdded or ''
 	elseif name == 'workingModified' then
 		result = status.workingModified > 0 and red .. 'M' .. status.workingModified or ''
 	elseif name == 'workingDeleted' then
@@ -69,8 +69,8 @@ function git_branch_prompt:filter(prompt)
 		-- etc
 		untracked       = 0, -- ??
 		ignored         = 0, -- !!
-		stash           = 0, -- stash 
-		commit          = 0, -- committed 
+		stash           = 0, -- stash
+		commit          = 0, -- committed
 	}
 
 	for line in io.popen('git status --porcelain=v2 --branch --ignored=matching --show-stash 2>nul'):lines() do
