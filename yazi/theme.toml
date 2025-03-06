@@ -196,6 +196,7 @@ rules = [
 	{ name = "*.lnk" , fg = "#FFFF96" },
 	{ name = "*.md"  , fg = "#EEAEFF" },
 	{ name = "*.dat" , fg = "#C258DE" },
+	{ name = "*.mf4" , fg = "#C258DE" },
 	{ name = "*.exe" , fg = "green" },
 	{ name = "*.reg" , fg = "#DAFF99" },
 
@@ -611,6 +612,7 @@ exts = [
 	{ name = "slx"          , text = "󰿈", fg = "#E1FF49"},
 	{ name = "mdl"          , text = "󰿈", fg = "#E1FF49"},
 	{ name = "dat"          , text = "", fg = "#721080"},
+	{ name = "mf4"          , text = "", fg = "#721080"},
 	{ name = "nfo"          , text = "", fg = "#ffffcd"},
 	{ name = "nim"          , text = "", fg = "#f3d400"},
 	{ name = "nix"          , text = "", fg = "#7ebae4"},
