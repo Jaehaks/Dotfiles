@@ -27,6 +27,11 @@ function Status:name()
 	end
 end
 
+-- [plugins] - smart-enter
+require('smart-enter'):setup {
+	open_multi = false
+}
+
 -- [plugins] - zoxide (builtin)
 require("zoxide"):setup {
 	update_db = true, -- update db.zo automatically whenever move directories
