@@ -50,9 +50,9 @@ require("yamb"):setup {
 }
 
 
--- [plugins] - hide-preview.yazi
--- turn off preview default (at startup)
-require('hide-preview'):entry()
+-- [plugins] - toggle-pane.yazi
+-- preview is hidden by default
+require('toggle-pane'):entry('min-preview')
 
 
 
