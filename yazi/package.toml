@@ -1,17 +1,7 @@
 [[plugin.deps]]
-use = "yazi-rs/plugins:hide-preview"
-rev = "beb586a"
-hash = "55904f17e1053cfb91dacd9015a99f9d"
-
-[[plugin.deps]]
-use = "yazi-rs/plugins:max-preview"
-rev = "beb586a"
-hash = "15b2ff7f6563c14d5b2e93b3e9da35de"
-
-[[plugin.deps]]
 use = "yazi-rs/plugins:smart-filter"
-rev = "beb586a"
-hash = "b482f4f2d3c4e0aa3f8db89a95699439"
+rev = "79193b3"
+hash = "988f0630399c5ae3f491e4d874d5e085"
 
 [[plugin.deps]]
 use = "pirafrank/what-size"
@@ -20,23 +10,33 @@ hash = "98e5f5af3efd3ba8bc2db0720187cc83"
 
 [[plugin.deps]]
 use = "h-hg/yamb"
-rev = "3f7c51f"
-hash = "e11b980e5635f0fbabd80931b1a1347e"
+rev = "22af003"
+hash = "7cc42012a7c2099f80064d228feb8d44"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:git"
-rev = "beb586a"
-hash = "771f18427fb75fb19990ce602bb322f4"
+rev = "79193b3"
+hash = "8f15ff8b0dd5435cfb4d87db391a7dcf"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:mime-ext"
-rev = "beb586a"
-hash = "b03f3d80d26b6d7bb490b1380e9cb754"
+rev = "79193b3"
+hash = "f5c30a3ae4961042e7c4b48e53d09b7e"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:lsar"
-rev = "5186af7"
-hash = "fc2c9438d402f7c4ac230aebf5a746d1"
+rev = "79193b3"
+hash = "6efafb5f67db632b1b45211bea554376"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:toggle-pane"
+rev = "79193b3"
+hash = "d591ce05a9022b2a15bf1ae9ef670883"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:smart-enter"
+rev = "79193b3"
+hash = "f67b2a8848a95940bf5ae22762cc56f7"
 
 [flavor]
 deps = []
