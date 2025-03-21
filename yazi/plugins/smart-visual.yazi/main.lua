@@ -36,7 +36,7 @@ local entry = function ()
 	local hovered_ext = hovered.cha.is_dir and "directory" or ext
 
 	local init_pos = folder.cursor
-	ya.manager_emit("arrow", {-999999})
+	ya.manager_emit("arrow", {'top'})
 	if hovered_ext == 'directory' then
 		for _, file in ipairs(filelist) do
 			if file.cha.is_dir then
@@ -53,7 +53,7 @@ local entry = function ()
 			ya.manager_emit("arrow", {1})
 		end
 	end
-	ya.manager_emit("arrow", {-999999})
+	ya.manager_emit("arrow", {'top'})
 	ya.manager_emit("arrow", {init_pos})
 end
 
