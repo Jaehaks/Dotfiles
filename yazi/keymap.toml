@@ -177,9 +177,11 @@ prepend_keymap = [
 
 	# plugin : toggle-pane
 	# -- turn on/off preview window
-	{ on = [ "T" ], run = "plugin toggle-pane min-preview", 	 desc = "Toggle hiding preview"},
+	{ on = [ "T", "T" ], run = "plugin toggle-pane min-preview", 	 desc = "Toggle hiding preview"},
 	# -- maximize / restore preview
-	{ on = [ "I" ], run = "plugin toggle-pane max-preview", 	 desc = "Toggle maximizing preview"},
+	{ on = [ "T", "I" ], run = "plugin toggle-pane max-preview", 	 desc = "Toggle maximizing preview"},
+	{ on = [ "T", "C" ], run = "plugin toggle-pane max-current", 	 desc = "Toggle maximizing current panel"},
+	{ on = [ "T", "P" ], run = "plugin toggle-pane max-parent", 	 desc = "Toggle maximizing current panel"},
 
 	# plugin : smart-filter.yazi
 	# -- continuous filtering
