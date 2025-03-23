@@ -9,14 +9,19 @@ local function entry(st, job)
 	st.current = st.current and st.current or R.current
 	st.preview = st.preview and st.preview or R.preview
 
+	st.bf_state.parent  = st.bf_state.parent and st.bf_state.parent  or R.parent
+	st.bf_state.current = st.bf_state.current and st.bf_state.current  or R.current
+	st.bf_state.preview = st.bf_state.preview and st.bf_state.preview  or R.preview
+
 	local act, to = string.match(job.args[1] or "", "(.-)-(.+)")
 	if act == "min" then
 		st[to] = st[to] == R[to] and 0 or R[to]
+		st.bf_state[to] = st[to]
 	elseif act == "max" then
-		local max = st[to] == 65535 and R[to] or 65535
-		st.parent = st.parent == 65535 and R.parent or st.parent
-		st.current = st.current == 65535 and R.current or st.current
-		st.preview = st.preview == 65535 and R.preview or st.preview
+		local max = st[to] == 65535 and st.bf_state[to] or 65535
+		st.parent = st.parent == 65535 and st.bf_state.parent or st.parent
+		st.current = st.current == 65535 and st.bf_state.current or st.current
+		st.preview = st.preview == 65535 and st.bf_state.preview or st.preview
 		st[to] = max
 	end
 
@@ -43,4 +48,8 @@ local function entry(st, job)
 	ya.app_emit("resize", {})
 end
 
-return { entry = entry }
+local function setup(st, opts)
+	st.bf_state = {}
+end
+
+return { setup = setup, entry = entry }
