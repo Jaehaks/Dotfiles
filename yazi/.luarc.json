@@ -1,5 +1,17 @@
 {
 	"runtime": {
 		"version": "Lua 5.4"
+	},
+	"diagnostics": {
+		"globals": [
+			"th",
+			"ya",
+			"ui",
+			"rt",
+			"Tab",
+			"Linemode",
+			"Command",
+			"Status",
+		]
 	}
 }
