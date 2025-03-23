@@ -49,8 +49,4 @@ local function entry(st, job)
 	ya.app_emit("resize", {})
 end
 
--- local function setup(st, opts)
--- 	st.bf_state =
--- end
-
 return { entry = entry }
