@@ -128,8 +128,8 @@ require('mime-ext'):setup({
 -- show relative number and move cursor with relative number
 -- now this plugins version is downloaded and modified for yazi v0.3.3 branch
 -- for later, it will be modified
-require('relative-motions'):setup({
-	show_numbers = "relative_absolute", -- show relative number rendering
-	show_motion = false, -- what does it do?
-	only_motions = true, -- relative motion works in only motion key, not yank, delete etc...
-})
+-- require('relative-motions'):setup({
+-- 	show_numbers = "relative_absolute", -- show relative number rendering
+-- 	show_motion = false, -- what does it do?
+-- 	only_motions = true, -- relative motion works in only motion key, not yank, delete etc...
+-- })
