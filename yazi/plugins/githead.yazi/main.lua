@@ -122,7 +122,8 @@ local fetch = function (self, job)
 	-- I think all files are fetched at first time entering
 	-- it will be waste time to show correct branch name because if they have lots of files to fetch
 
-	local cwd = job.files[1].url:parent() -- get cwd
+	-- local cwd = job.files[1].url:parent() -- get cwd
+	local cwd = job.files[1].url.parent -- get cwd
 	-- if return is done early, branch is changed too slowly
 
 	-- if there are no --no-optional-locks options, command call permanently
@@ -130,9 +131,14 @@ local fetch = function (self, job)
 	-- but it erase commit / staged lists in Commnad()
 	local status, err = Command('git')
 						:cwd(tostring(cwd))
-						:args({'--no-optional-locks', '-c', 'core.quotePath='})
-						:args({'status'})
-						:args({'--ignore-submodules=dirty', '--branch', '--show-stash', '--ahead-behind'})
+						:arg('--no-optional-locks')
+						:arg('-c')
+						:arg('core.quotePath=')
+						:arg('status')
+						:arg('--ignore-submodules')
+						:arg('--branch')
+						:arg('--show-stash')
+						:arg('--ahead-behind')
 						:stdout(Command.PIPED)
 						:output()
 	if not status then

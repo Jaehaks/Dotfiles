@@ -3,7 +3,11 @@ local M = {}
 function M:peek(job)
 	local filename = job.file.name
 	local cmd = "file"
-	local output, code = Command(cmd):args({ "-bL", "--", tostring(job.file.url) }):stdout(Command.PIPED):output()
+	local output, code = Command(cmd)
+						 :arg("-bL")
+						 :arg("--")
+						 :arg(tostring(job.file.url))
+						 :stdout(Command.PIPED):output()
 
 	local text
 	if output then
