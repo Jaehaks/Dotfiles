@@ -233,11 +233,13 @@ alias fd='fd -H'
 ################################
 current_dir=$(pwd)
 
+# zsh-autosuggestions
 if [ ! -d ~/.plugins/zsh-autosuggestions ]; then
     cd ~/.plugins
     git clone https://github.com/zsh-users/zsh-autosuggestions
 fi
 
+# zsh-syntax-highlighting
 if [ ! -d ~/.plugins/zsh-syntax-highlighting ]; then
     cd ~/.plugins
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
@@ -254,8 +256,11 @@ eval "$(zoxide init zsh)"
 
 
 # zsh-autosuggestions 로딩
-source ~/.plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 
-bindkey '^[[Z' autosuggest-accept
+source ~/.plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+bindkey "^[[Z" autosuggest-accept
 
-# zsh-syntax-highlighting 로딩 
+# zsh-syntax-highlighting 로딩
 source ~/.plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+
+
