@@ -5,6 +5,12 @@ setopt GLOB_DOTS	# include dot files
 setopt EXTENDED_GLOB	# it can use (.) pattern for file
 
 
+export BAT_CONFIG_DIR="$HOME/.config/Dotfiles/bat"
+export BAT_CONFIG_PATH="$HOME/.config/Dotfiles/bat/config"
+export XDG_CONFIG_HOME="$HOME/.config"
+# export XDG_DATA_HOME="$HOME/.config/nvim-data"
+# export XDG_CACHE_HOME="$HOME/.config/nvim-data"
+# export XDG_STATE_HOME="$HOME/.config/nvim-data"
 
 ################################
 ####### path #############
@@ -23,7 +29,7 @@ done
 # path 배열에서 중복 제거 및 PATH 환경 변수에 반영
 typeset -U path
 export PATH # 명시적 export는 좋은 습관
-export TZ='Asia/Seoul' #timezome 설정 
+export TZ='Asia/Seoul' #timezome 설정
 
 ################################
 ####### locale #############
@@ -87,6 +93,8 @@ directories=(
 	"$HOME/.plugins"
 	"$HOME/.config"
 	"$HOME/.local/bin"
+	"$HOME/Obsidian_Nvim/Personal" # for neovim
+	"$HOME/Obsidian_Nvim/Project" # form neovim
 )
 for dir in "${directories[@]}"; do
 	if [ ! -d "$dir" ]; then
@@ -105,15 +113,16 @@ done
 
 packages=(
     "openssh" # openssh install both server and client in arch
-    "eza" 
+    "eza"
     "fd" # for yazi
     "bat"
     "zoxide" # for yazi, user
     "neovim"
     "which"
     "man"
-    "git" 
+    "git"
     "base-devel" # base development tools like build-essential, for `paru`
+
     "yazi" # for yazi
     "ffmpeg" # for yazi
     "7zip" # for yazi
@@ -122,20 +131,56 @@ packages=(
     "ripgrep" # for yazi
     "fzf" # for yazi
     "imagemagick" # for yazi
+
     "reflector" # for mirrorlist
     "rsync" # for mirrorlist
     "curl" # for mirrorlist
+
     "fontconfig" # fonts, it may be installed already
     "ttf-firacode-nerd" # fonts
 #    "noto-fonts-cjk" # fonts
     "noto-fonts-emoji" # fonts
+
+    "unzip" # neovim
+    "lua"	# neovim
+#    "python"	# neovim (default)
+	"nodejs" # neovim (nvim-treesitter)
+	"npm" # neovim (nvim-treesitter)
+	"github-cli" # neovim(blink-cmp-git)
+	"wget" # neovim (mason)
+	"python-pip" # neovim(mason), pip
+	"python-virtualenv" # neovim(provider), venv
 )
 sudo pacman -S --noconfirm --needed "${packages[@]}"
 
-# update fonts
+# update fonts (it seems don't need)
 if ! fc-list | grep -i "FiraCode Nerd Font" &>/dev/null; then
     fc-cache -v
 fi
+
+# npm install
+npm_packages=(
+	"tree-sitter-cli" # neovim (nvim-treesitter) to install parser
+	"neovim"
+)
+if command -v npm &> /dev/null; then
+	for pkg in "${npm_packages[@]}"; do
+		if ! npm list -g "$pkg" &> /dev/null; then
+			sudo npm install -g "${pkg}"
+			echo " '${pkg}' is installed"
+		fi
+	done
+fi
+
+# neovim python provider install
+nvim_venv_dir="$HOME/.config/.Nvim_venv"
+if [ ! -d "$nvim_venv_dir" ]; then
+	mkdir -p "$nvim_venv_dir"
+	python3 -m venv "$nvim_venv_dir" # create virtual env to dir
+	"$nvim_venv_dir/bin/pip" install --upgrade pip
+	"$nvim_venv_dir/bin/pip" install pynvim	 # install pynvim using pip in Nvim_venv
+fi
+
 
 # update mirrorlist
 if [ ! -f "/etc/pacman.d/mirrorlist.bak" ]; then
@@ -154,10 +199,11 @@ fi
 # add packages from paru
 paru_packages=(
     "resvg" # for yazi
+    "ttf-nanumgothic_coding"	# fonts for korean
 )
 paru -S --noconfirm --needed "${paru_packages[@]}"
 
-	
+
 # ssh agent for client start if there is no process
 if ! pgrep ssh-agent > /dev/null; then
     eval "$(ssh-agent -s > /dev/null)"
