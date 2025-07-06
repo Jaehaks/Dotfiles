@@ -6,8 +6,6 @@ setopt EXTENDED_GLOB	# it can use (.) pattern for file
 
 
 export MOZ_ENABLE_WAYLAND=0	# for proper operation scroll down box in firefox
-export BAT_CONFIG_DIR="$HOME/.config/Dotfiles/bat"
-export BAT_CONFIG_PATH="$HOME/.config/Dotfiles/bat/config"
 export XDG_CONFIG_HOME="$HOME/.config"
 # export XDG_DATA_HOME="$HOME/.config/nvim-data"
 # export XDG_CACHE_HOME="$HOME/.config/nvim-data"
@@ -305,6 +303,11 @@ ctrl-i:toggle-preview,\
 alt-k:preview-half-page-down,\
 alt-j:preview-half-page-up\
 '"
+
+# bat : do `bat cache --build`
+export BAT_CONFIG_DIR="$HOME/.config/Dotfiles/bat"
+export BAT_CONFIG_PATH="$HOME/.config/Dotfiles/bat/config"
+
 #zoxide
 export _ZO_DATA_DIR="$HOME"
 eval "$(zoxide init zsh)"
