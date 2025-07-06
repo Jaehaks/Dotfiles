@@ -37,6 +37,11 @@ require("zoxide"):setup {
 	update_db = true, -- update db.zo automatically whenever move directories
 }
 
+local bookmark_path = os.getenv("HOME") .. "\\.config\\Dotfiles\\yazi\\bookmark"
+if ya.target_os() == 'linux' then
+	bookmark_path = string.gsub(bookmark_path, '\\', '/')
+end
+
 -- [plugins] - yamb.yazi
 require("yamb"):setup {
   -- Optional, the cli of fzf.
@@ -44,7 +49,7 @@ require("yamb"):setup {
   -- Optional, a string used for randomly generating keys, where the preceding characters have higher priority.
   keys = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
   -- Optional, the path of bookmark file
-  path = os.getenv("HOME") .. "\\.config\\Dotfiles\\yazi\\bookmark",
+  path = bookmark_path,
   -- Optional, disable notify message when jump
   jump_notify = false,
 }
