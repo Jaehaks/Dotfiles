@@ -5,7 +5,7 @@ setopt GLOB_DOTS	# include dot files
 setopt EXTENDED_GLOB	# it can use (.) pattern for file
 
 
-export MOZ_ENABLE_WAYLAND=0
+export MOZ_ENABLE_WAYLAND=0	# for proper operation scroll down box in firefox
 export BAT_CONFIG_DIR="$HOME/.config/Dotfiles/bat"
 export BAT_CONFIG_PATH="$HOME/.config/Dotfiles/bat/config"
 export XDG_CONFIG_HOME="$HOME/.config"
