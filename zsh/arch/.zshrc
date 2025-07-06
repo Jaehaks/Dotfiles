@@ -12,6 +12,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 # export XDG_DATA_HOME="$HOME/.config/nvim-data"
 # export XDG_CACHE_HOME="$HOME/.config/nvim-data"
 # export XDG_STATE_HOME="$HOME/.config/nvim-data"
+export EDITOR="nvim"
 
 ################################
 ####### path #############
@@ -124,6 +125,7 @@ packages=(
 	"man-pages"         # documents for man
 	"git"
 	"base-devel"        # base development tools like build-essential, for `paru`
+	"xdg-utils"			# for yazi , utility like xdg-open, xdg-mime
 
 	"yazi"              # for yazi
 	"ffmpeg"            # for yazi
