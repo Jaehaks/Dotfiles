@@ -1,11 +1,11 @@
 # compress.yazi
 
-compress selected files and folders with 7z
+Compress selected files and folders with 7z
 
 
 ## Required
 
-- [bandizip](https://en.bandisoft.com/bandizip/)
+- [7zip](https://www.7-zip.org/)
 
 ## Usage
 

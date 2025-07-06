@@ -13,7 +13,7 @@ local get_selected = ya.sync(function ()
 end)
 
 local get_cwd = ya.sync(function ()
-	return tostring(cx.active.current.cwd:name())
+	return tostring(cx.active.current.cwd.name)
 end)
 
 -- append list of table to string
@@ -63,7 +63,7 @@ return {
 							:arg('-bso0')     -- don't show output
 							:arg('--')
 							:arg(archive_name .. '.7z')
-							:args(files)
+							:arg(files)
 							:spawn():wait()
 
 		if err then
