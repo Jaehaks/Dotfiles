@@ -5,6 +5,7 @@ setopt GLOB_DOTS	# include dot files
 setopt EXTENDED_GLOB	# it can use (.) pattern for file
 
 
+export MOZ_ENABLE_WAYLAND=0
 export BAT_CONFIG_DIR="$HOME/.config/Dotfiles/bat"
 export BAT_CONFIG_PATH="$HOME/.config/Dotfiles/bat/config"
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -59,16 +60,16 @@ _comp_options+=(globdots) # include dotfiles when auto completion
 ################################
 
 # history
-HISTFILE=~/.zsh_history # 히스토리 파일 경로 설정
-SAVEHIST=1000 # 저장할 히스토리 라인 수 (파일에 저장)
-HISTSIZE=1000 # 세션당 기억할 히스토리 라인 수 (메모리)
-# 히스토리 중복 제거 및 검색 관련 옵션
-setopt INC_APPEND_HISTORY    # 명령어를 실행할 때마다 히스토리 파일에 추가
-setopt HIST_IGNORE_ALL_DUPS  # 모든 중복된 명령어는 히스토리에 저장하지 않음
-setopt HIST_REDUCE_BLANKS    # 여러 공백을 하나의 공백으로 축소하여 저장
-setopt HIST_NO_STORE         # history, ! 등과 같은 히스토리 명령어 자체를 히스토리에 저장하지 않음
-setopt HIST_SAVE_NO_DUPS     # 히스토리 파일에 저장할 때 중복된 명령어는 저장하지 않음
-setopt HIST_EXPIRE_DUPS_FIRST # 중복된 히스토리 중 가장 오래된 것을 먼저 삭제
+HISTFILE=~/.zsh_history       # set path for history file
+SAVEHIST=1000                 # Number of history lines to save (to file)
+HISTSIZE=1000                 # Number of history lines to remember per session (memory)
+# Options for deduplication and search of history
+setopt INC_APPEND_HISTORY     # Append to history file each time a command is executed
+setopt HIST_IGNORE_ALL_DUPS   # Do not save all duplicate commands to history
+setopt HIST_REDUCE_BLANKS     # Reduce multiple spaces to a single space and save
+setopt HIST_NO_STORE          # Do not store history commands themselves, such as history, !, etc., in the history.
+setopt HIST_SAVE_NO_DUPS      # Do not save duplicate commands when saving to the history file.
+setopt HIST_EXPIRE_DUPS_FIRST # Delete oldest duplicate history first
 
 
 
@@ -112,46 +113,58 @@ done
 
 
 packages=(
-    "openssh" # openssh install both server and client in arch
-    "eza"
-    "fd" # for yazi
-    "bat"
-    "zoxide" # for yazi, user
-    "neovim"
-    "which"
-    "man"
-    "git"
-    "base-devel" # base development tools like build-essential, for `paru`
+	"openssh"           # openssh install both server and client in arch
+	"eza"
+	"fd"                # for yazi
+	"bat"
+	"zoxide"            # for yazi, user
+	"neovim"
+	"which"
+	"man-db"            # man, mandb apropos, whatis command
+	"man-pages"         # documents for man
+	"git"
+	"base-devel"        # base development tools like build-essential, for `paru`
 
-    "yazi" # for yazi
-    "ffmpeg" # for yazi
-    "7zip" # for yazi
-    "jq" # for yazi
-    "poppler" # for yazi
-    "ripgrep" # for yazi
-    "fzf" # for yazi
-    "imagemagick" # for yazi
+	"yazi"              # for yazi
+	"ffmpeg"            # for yazi
+	"7zip"              # for yazi
+	"jq"                # for yazi
+	"poppler"           # for yazi
+	"ripgrep"           # for yazi
+	"fzf"               # for yazi
+	"imagemagick"       # for yazi
 
-    "reflector" # for mirrorlist
-    "rsync" # for mirrorlist
-    "curl" # for mirrorlist
+	"reflector"         # for mirrorlist
+	"rsync"             # for mirrorlist
+	"curl"              # for mirrorlist
 
-    "fontconfig" # fonts, it may be installed already
-    "ttf-firacode-nerd" # fonts
-#    "noto-fonts-cjk" # fonts
-    "noto-fonts-emoji" # fonts
+	"fontconfig"        # fonts, it may be installed already
+	"ttf-firacode-nerd" # fonts
+	# "noto-fonts-cjk"    # fonts
+	"noto-fonts-emoji"  # fonts
 
-    "unzip" # neovim
-    "lua"	# neovim
-#    "python"	# neovim (default)
-	"nodejs" # neovim (nvim-treesitter)
-	"npm" # neovim (nvim-treesitter)
-	"github-cli" # neovim(blink-cmp-git)
-	"wget" # neovim (mason)
-	"python-pip" # neovim(mason), pip
+	"unzip"             # neovim
+	"lua"               # neovim
+	# "python"            # neovim (default)
+	"nodejs"            # neovim (nvim-treesitter)
+	"npm"               # neovim (nvim-treesitter)
+	"github-cli"        # neovim(blink-cmp-git)
+	"wget"              # neovim (mason)
+	"python-pip"        # neovim(mason), pip
 	"python-virtualenv" # neovim(provider), venv
 )
-sudo pacman -S --noconfirm --needed "${packages[@]}"
+# search these packages are installed to not use `pacman -Q` for fast loading
+valid_installed_packages=$(pacman -Q | awk '{print $1}' | grep -F -w -f <(printf "%s\n" "${packages[@]}"))
+packages_toinstall=()
+for package in "${packages[@]}"; do
+	if ! echo "${valid_installed_packages}" | grep -q -x -F "$package"; then
+		packages_toinstall+=("$package")
+	fi
+done
+if [[ ${#packages_toinstall[@]} -gt 0 ]]; then
+	sudo pacman -S --noconfirm --needed "${packages_toinstall[@]}"
+	sduo mandb # update man cache
+fi
 
 # update fonts (it seems don't need)
 if ! fc-list | grep -i "FiraCode Nerd Font" &>/dev/null; then
@@ -163,13 +176,18 @@ npm_packages=(
 	"tree-sitter-cli" # neovim (nvim-treesitter) to install parser
 	"neovim"
 )
-if command -v npm &> /dev/null; then
+npm_packages_toinstall=()
+npm_global_root=$(npm root -g)
+if [[ -d "$npm_global_root" ]]; then
 	for pkg in "${npm_packages[@]}"; do
-		if ! npm list -g "$pkg" &> /dev/null; then
-			sudo npm install -g "${pkg}"
-			echo " '${pkg}' is installed"
+		if [[ ! -d "${npm_global_root}/${pkg}" ]]; then
+			npm_packages_toinstall+=("${pkg}")
 		fi
 	done
+fi
+if [[ ${#npm_packages_toinstall[@]} -gt 0 ]]; then
+	sudo npm install -g "${npm_packages_toinstall[@]}"
+	echo "[ ${npm_packages_toinstall[@]} ] are installed from npm"
 fi
 
 # neovim python provider install
@@ -201,7 +219,11 @@ paru_packages=(
     "resvg" # for yazi
     "ttf-nanumgothic_coding"	# fonts for korean
 )
-paru -S --noconfirm --needed "${paru_packages[@]}"
+for package in "${paru_packages[@]}"; do
+	if ! pacman -Q "$package" &> /dev/null; then
+		paru -S --noconfirm --needed "${paru_packages[@]}"
+	fi
+done
 
 
 # ssh agent for client start if there is no process
@@ -265,6 +287,8 @@ function yy() {
 export _ZO_DATA_DIR="$HOME"
 eval "$(zoxide init zsh)"
 
+# the fuck
+eval $(thefuck --alias)
 
 # zsh-autosuggestions 로딩
 source ~/.plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -272,6 +296,4 @@ bindkey "^[[Z" autosuggest-accept
 
 # zsh-syntax-highlighting 로딩
 source ~/.plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-
 
