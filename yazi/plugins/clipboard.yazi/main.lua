@@ -45,7 +45,7 @@ return {
 			end
 
 			-- copy command
-			local status, err = Command("cb"):arg("copy"):args(urls):spawn():wait()
+			local status, err = Command("cb"):arg("copy"):arg(urls):spawn():wait()
 			if status or status.succes then
 				info("Succesfully copied the file(s) to system clipboard", 'info')
 			else
