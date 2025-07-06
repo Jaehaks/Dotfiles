@@ -163,7 +163,7 @@ for package in "${packages[@]}"; do
 done
 if [[ ${#packages_toinstall[@]} -gt 0 ]]; then
 	sudo pacman -S --noconfirm --needed "${packages_toinstall[@]}"
-	sduo mandb # update man cache
+	sudo mandb # update man cache
 fi
 
 # update fonts (it seems don't need)
