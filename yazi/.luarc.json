@@ -4,6 +4,7 @@
 	},
 	"diagnostics": {
 		"globals": [
+			"cx",
 			"th",
 			"ya",
 			"ui",
