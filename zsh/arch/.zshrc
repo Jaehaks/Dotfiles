@@ -79,7 +79,7 @@ setopt HIST_EXPIRE_DUPS_FIRST # Delete oldest duplicate history first
 # prompt 설정
 autoload -Uz vcs_info
 precmd() { vcs_info }
-zstyle ':vsc_info:git:*' formats '%F{magenta}%b%f'
+zstyle ':vcs_info:git:*' formats '%F{magenta}%b%f'
 
 setopt PROMPT_SUBST
 PROMPT='%F{yellow}%D{%Y/%m/%d} %D{%H:%M:%S}%f %F{green}%~%f ${vcs_info_msg_0_}
