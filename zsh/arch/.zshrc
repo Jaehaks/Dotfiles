@@ -270,6 +270,12 @@ if [ ! -d ~/.plugins/zsh-syntax-highlighting ]; then
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
 fi
 
+# zsh-autopair
+if [ ! -d ~/.plugins/zsh-autopair ]; then
+    cd ~/.plugins
+    git clone https://github.com/hlissner/zsh-autopair.git
+fi
+
 cd "$current_dir"
 
 ################################
@@ -318,10 +324,13 @@ eval "$(zoxide init zsh)"
 # the fuck
 eval $(thefuck --alias)
 
-# zsh-autosuggestions 로딩
+# zsh-autosuggestions loading
 source ~/.plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 bindkey "^[[Z" autosuggest-accept
 
-# zsh-syntax-highlighting 로딩
+# zsh-syntax-highlighting loading
 source ~/.plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+# zsh-autopair
+source ~/.plugins/zsh-autopair/autopair.zsh
+autopair-init
