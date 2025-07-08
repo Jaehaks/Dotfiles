@@ -11,6 +11,9 @@ export XDG_CONFIG_HOME="$HOME/.config"
 # export XDG_CACHE_HOME="$HOME/.config/nvim-data"
 # export XDG_STATE_HOME="$HOME/.config/nvim-data"
 export EDITOR="nvim"
+bindkey -e
+bindkey -r "^S"
+bindkey "^T" history-incremental-search-forward
 
 ################################
 ####### path #############
