@@ -1,0 +1,9 @@
+[submodule "zsh/arch/plugins/zsh-autopair"]
+	path = zsh/arch/plugins/zsh-autopair
+	url = https://github.com/hlissner/zsh-autopair.git
+[submodule "zsh/arch/plugins/zsh-syntax-highlighting"]
+	path = zsh/arch/plugins/zsh-syntax-highlighting
+	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
+[submodule "zsh/arch/plugins/zsh-autosuggestions"]
+	path = zsh/arch/plugins/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions.git

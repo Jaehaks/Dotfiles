@@ -1,0 +1,9 @@
+[core]
+	quotepath = false
+	editor = nvim
+	autocrlf = input
+[user]
+	email = wogkr3654@naver.com
+	name = Jaehaks(arch)
+[init]
+	defaultBranch = main
