@@ -5,12 +5,14 @@ if [ ! -f "/etc/pacman.d/mirrorlist.bak" ]; then
 fi
 
 # paru install
-if [ ! -d "$HOME/.plugins/paru" ]; then
-	cd "$HOME/.plugins"
+local currentdir=$(pwd)
+if [ ! -d "$LOCALOPT/paru" ]; then
+	cd "$LOCALOPT"
 	git clone https://aur.archlinux.org/paru.git
 	cd paru
 	makepkg -si
 fi
+cd $current_dir
 
 # add packages from paru
 paru_packages=(
