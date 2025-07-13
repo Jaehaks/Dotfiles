@@ -30,6 +30,7 @@ packages=(
 	"fzf"               # for yazi
 	"imagemagick"       # for yazi
 	"unarchiver"		# for yazi (lsar.yazi)
+	"trash-cli"			# to manage trash in ~/.local/share/Trash/
 
 	"reflector"         # for mirrorlist
 	"rsync"             # for mirrorlist
