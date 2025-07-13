@@ -7,3 +7,6 @@
 [submodule "zsh/arch/plugins/zsh-autosuggestions"]
 	path = zsh/arch/plugins/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions.git
+[submodule "zsh/arch/plugins/fzf-tab"]
+	path = zsh/arch/plugins/fzf-tab
+	url = https://github.com/Aloxaf/fzf-tab
