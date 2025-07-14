@@ -44,7 +44,9 @@ local git_status = function (status, name)
 	elseif name == 'stash' then
 		result = status.stash > 0 and blue .. '$' .. status.stash or ''
 	elseif name == 'commit' then
-		result = status.commit > 0 and yellow .. '#' .. status.commit or ''
+		result = status.commit > 0 and yellow .. '+' .. status.commit or ''
+	elseif name == 'behind' then
+		result = status.behind > 0 and yellow .. '-' .. status.behind or ''
 	else
 		result = ''
 	end
@@ -53,6 +55,8 @@ local git_status = function (status, name)
 end
 
 -- A prompt filter that appends the current git branch.
+local last_fetch_time = 0
+local wait_fetch_time = 10 * 60 -- 10 min
 local git_branch_prompt = clink.promptfilter(65)
 function git_branch_prompt:filter(prompt)
 	local status = {
@@ -70,9 +74,22 @@ function git_branch_prompt:filter(prompt)
 		untracked       = 0, -- ??
 		ignored         = 0, -- !!
 		stash           = 0, -- stash
-		commit          = 0, -- committed
+		commit          = 0, -- committed (remote hash < local hash)
+		behind          = 0, -- behind (remote hash > local hash)
 	}
 
+	-- get information of remote repo to gather `behind` as result of `git status`
+	-- INFO: git fetch is too heavy load operation because it use network.
+	-- INFO: To reduce the load at every prompt, wait time is set to reduce calling frequency
+	-- `--all` : fetch from all registered remote repo
+	-- `--prune` : remove local tracked status which don't exist in remote repo
+	local current_time = os.time()
+	if current_time - last_fetch_time > wait_fetch_time then
+		os.execute('git fetch --all --prune 2>nul 1>nul')
+		last_fetch_time = current_time
+	end
+
+	-- check status
 	for line in io.popen('git status --porcelain=v2 --branch --ignored=matching --show-stash 2>nul'):lines() do
 		-- get commit hash
 		local oid = line:match('^# branch%.oid%s+(.......)')
@@ -89,9 +106,10 @@ function git_branch_prompt:filter(prompt)
 		end
 
 		-- get number of commit
-		local commit = line:match("^# branch%.ab%s+%+(%d+)")
-		if commit then
+		local commit, behind = line:match("^# branch%.ab%s+%+(%d+)%s+%-(%d+)")
+		if commit and behind then
 			status.commit = tonumber(commit)
+			status.behind = tonumber(behind)
 		end
 
 		-- get stash
@@ -127,13 +145,14 @@ function git_branch_prompt:filter(prompt)
 									git_status(status, 'untracked'),
 									git_status(status, 'ignored'),
 									git_status(status, 'stash'))
-		local git_status_staging = string.format('\x1b[0m| %s%s%s%s',
+		local git_status_staging = string.format('\x1b[0m| %s%s%s%s%s',
 									git_status(status, 'stagingAdded'),
 									git_status(status, 'stagingModified'),
 									git_status(status, 'stagingDeleted'),
-									git_status(status, 'commit'))
+									git_status(status, 'commit'),
+									git_status(status, 'behind'))
 
-		if (status.stagingAdded + status.stagingModified + status.stagingDeleted + status.commit) == 0 then
+		if (status.stagingAdded + status.stagingModified + status.stagingDeleted + status.commit + status.behind) == 0 then
 			return prompt .. ' ' .. git_status_branch .. git_status_working .. normal
 		else
 			return prompt .. ' ' .. git_status_branch .. git_status_working .. git_status_staging .. normal
