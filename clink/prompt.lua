@@ -55,8 +55,8 @@ local git_status = function (status, name)
 end
 
 -- A prompt filter that appends the current git branch.
-local last_fetch_time = 0
-local wait_fetch_time = 10 * 60 -- 10 min
+-- local last_fetch_time = 0
+-- local wait_fetch_time = 10 * 60 -- 10 min
 local git_branch_prompt = clink.promptfilter(65)
 function git_branch_prompt:filter(prompt)
 	local status = {
@@ -83,11 +83,11 @@ function git_branch_prompt:filter(prompt)
 	-- INFO: To reduce the load at every prompt, wait time is set to reduce calling frequency
 	-- `--all` : fetch from all registered remote repo
 	-- `--prune` : remove local tracked status which don't exist in remote repo
-	local current_time = os.time()
-	if current_time - last_fetch_time > wait_fetch_time then
-		os.execute('git fetch --all --prune 2>nul 1>nul')
-		last_fetch_time = current_time
-	end
+	-- local current_time = os.time()
+	-- if current_time - last_fetch_time > wait_fetch_time then
+	-- 	os.execute('git fetch --all --prune 2>nul 1>nul')
+	-- 	last_fetch_time = current_time
+	-- end
 
 	-- check status
 	for line in io.popen('git status --porcelain=v2 --branch --ignored=matching --show-stash 2>nul'):lines() do
