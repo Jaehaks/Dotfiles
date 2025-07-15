@@ -12,7 +12,7 @@ if [ ! -d "$LOCALOPT/paru" ]; then
 	cd paru
 	makepkg -si
 fi
-cd $current_dir
+cd $currentdir
 
 # add packages from paru
 paru_packages=(
