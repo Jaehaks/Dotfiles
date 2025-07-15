@@ -10,3 +10,6 @@
 [submodule "zsh/arch/plugins/fzf-tab"]
 	path = zsh/arch/plugins/fzf-tab
 	url = https://github.com/Aloxaf/fzf-tab
+[submodule "zsh/arch/plugins/gitstatus"]
+	path = zsh/arch/plugins/gitstatus
+	url = https://github.com/romkatv/gitstatus.git
