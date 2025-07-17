@@ -6,3 +6,4 @@ alias sc="source $ZDOTDIR/.zshrc"
 alias ag='sudo pacman -Syu'
 alias grep='grep --color=auto'
 alias fd='fd -H'
+alias tmux="tmux -f $ZDOTDIR/.tmux.conf"
