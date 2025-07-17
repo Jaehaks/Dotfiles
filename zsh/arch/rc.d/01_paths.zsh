@@ -1,3 +1,4 @@
+## add paths
 add_paths=(
     "$HOME/.local/bin"
 )
@@ -12,3 +13,8 @@ done
 path=("${add_paths[@]}" "${path[@]}")
 
 export PATH # explicit declaration
+
+
+## add fpath
+fpath=("$ZDOTDIR/fpaths" ${fpath})
+export FPATH
