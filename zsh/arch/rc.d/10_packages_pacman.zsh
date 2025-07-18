@@ -20,6 +20,7 @@ packages=(
 	"git"
 	"base-devel"        # base development tools like build-essential, for `paru`
 	"xdg-utils"			# for yazi , utility like xdg-open, xdg-mime
+	"xclip"				# for tmux/neovim, copy mode/systemcopy
 
 	"yazi"              # for yazi
 	"ffmpeg"            # for yazi
