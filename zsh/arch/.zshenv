@@ -3,7 +3,7 @@
 # $ZDOTDIR is set by finding linked location of .zshenv
 local homezshenv="${HOME}/.zshenv"
 if [[ -z "${ZDOTDIR}" || -L "${homezshenv}" ]]; then
-	ZDOTDIR="${homezshenv:A:h}" # parent dir of absolute path of homezshenv
+	export ZDOTDIR="${homezshenv:A:h}" # parent dir of absolute path of homezshenv
 fi
 
 # don't load global config like `/etc/z~`
