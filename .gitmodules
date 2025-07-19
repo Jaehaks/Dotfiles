@@ -13,3 +13,6 @@
 [submodule "zsh/arch/plugins/gitstatus"]
 	path = zsh/arch/plugins/gitstatus
 	url = https://github.com/romkatv/gitstatus.git
+[submodule "zsh/arch/plugins/tmux-jump"]
+	path = zsh/arch/plugins/tmux-jump
+	url = https://github.com/schasse/tmux-jump

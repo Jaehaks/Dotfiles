@@ -21,6 +21,7 @@ packages=(
 	"base-devel"        # base development tools like build-essential, for `paru`
 	"xdg-utils"			# for yazi , utility like xdg-open, xdg-mime
 	"xclip"				# for tmux/neovim, copy mode/systemcopy
+	"ruby"				# for tmux-jump
 
 	"yazi"              # for yazi
 	"ffmpeg"            # for yazi
