@@ -16,3 +16,21 @@
 [submodule "zsh/arch/plugins/tmux-jump"]
 	path = zsh/arch/plugins/tmux-jump
 	url = https://github.com/schasse/tmux-jump
+[submodule "zsh/termux/plugins/fzf-tab"]
+	path = zsh/termux/plugins/fzf-tab
+	url = https://github.com/Aloxaf/fzf-tab.git
+[submodule "zsh/termux/plugins/gitstatus"]
+	path = zsh/termux/plugins/gitstatus
+	url = https://github.com/romkatv/gitstatus.git
+[submodule "zsh/termux/plugins/tmux-jump"]
+	path = zsh/termux/plugins/tmux-jump
+	url = https://github.com/schasse/tmux-jump.git
+[submodule "zsh/termux/plugins/zsh-autopair"]
+	path = zsh/termux/plugins/zsh-autopair
+	url = https://github.com/hlissner/zsh-autopair.git
+[submodule "zsh/termux/plugins/zsh-autosuggestions"]
+	path = zsh/termux/plugins/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions.git
+[submodule "zsh/termux/plugins/zsh-syntax-highlighting"]
+	path = zsh/termux/plugins/zsh-syntax-highlighting
+	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
