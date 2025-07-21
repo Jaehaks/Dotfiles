@@ -53,6 +53,9 @@ packages=(
 	"python-pip"        # neovim(mason), pip
 	"python-virtualenv" # neovim(provider), venv
 	"python-uv" 		# neovim(uv), python package manager
+
+	"zathura"			# pdf viewer
+	"zathura-pdf-mupdf" # pdf backend, which is support pdf/epub over than poppler)
 )
 # search these packages are installed to not use `pacman -Q` for fast loading
 valid_installed_packages=$(pacman -Q | awk '{print $1}' | grep -F -w -f <(printf "%s\n" "${packages[@]}"))
