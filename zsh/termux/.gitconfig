@@ -1,9 +1,11 @@
+[safe]
+	directory = /data/data/com.termux/files/home/storage/shared/Documents/Obsidian_Nvim/
 [core]
 	quotepath = false
-	editor = nvim
 	autocrlf = input
+	filemode = false
 [user]
 	email = wogkr3654@naver.com
-	name = Jaehaks(arch)
+	name = Jaehaks(termux)
 [init]
 	defaultBranch = main
