@@ -10,6 +10,8 @@ export XDG_CONFIG_HOME="$HOME/.config"
 
 ## editor
 export EDITOR="nvim"
+export SUDO_EDITOR="nvim"
+export VISUAL="nvim"
 bindkey -e # set emacs keybinding even thought EDITOR=vi
 		   # it must be called before other bindkey setting
 
