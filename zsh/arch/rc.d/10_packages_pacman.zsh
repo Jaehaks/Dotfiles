@@ -52,6 +52,7 @@ packages=(
 	"wget"              # neovim (mason)
 	"python-pip"        # neovim(mason), pip
 	"python-virtualenv" # neovim(provider), venv
+	"python-uv" 		# neovim(uv), python package manager
 )
 # search these packages are installed to not use `pacman -Q` for fast loading
 valid_installed_packages=$(pacman -Q | awk '{print $1}' | grep -F -w -f <(printf "%s\n" "${packages[@]}"))
