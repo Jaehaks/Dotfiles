@@ -25,3 +25,9 @@ export TZ='Asia/Seoul' #timezome setting
 # 	so these chunks are needed
 unset LANG
 source /etc/profile.d/locale.sh
+
+
+## manpages
+export GROFF_NO_SGR=1 # show colors using most in manpages
+# export MANROFFOPT=-c 	# show colors using most in manpages
+export MANPAGER='most'

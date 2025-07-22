@@ -1,0 +1,10 @@
+# set key binding
+unsetkey "j"
+unsetkey "k"
+setkey up "j"
+setkey down "k"
+
+
+
+# (선택 사항) 스크롤 단계를 조절할 수 있습니다.
+# set scroll-step 40
