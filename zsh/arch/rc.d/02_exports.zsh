@@ -7,6 +7,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 # export XDG_DATA_HOME="$HOME/.config/nvim-data"
 # export XDG_CACHE_HOME="$HOME/.config/nvim-data"
 # export XDG_STATE_HOME="$HOME/.config/nvim-data"
+export ZDOTCONFIG="$ZDOTDIR/configs"
 
 ## editor
 export EDITOR="nvim"

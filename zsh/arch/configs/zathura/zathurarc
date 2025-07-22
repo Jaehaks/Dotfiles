@@ -1,0 +1,40 @@
+# ######### theme ############
+# -- default color
+set default-bg "#1e1e1e"  # darkmode background
+set default-fg "#d0d0d0"  # light text
+
+# -- invert color (when 'i')
+set recolor-lightcolor "#d0d0d0"
+set recolor-darkcolor "#1e1e1e"
+
+set scroll-step 40 # speed of scroll
+set page-padding 5 # padding between pages
+
+# autoload when file is changed
+# set render-loading-threads 4 # rendering thread
+# set render-loading-timeout 500 #ms
+# set auto-reload true
+
+# statusbar
+# set statusbar-page-ratio true # page/total ratio
+
+# default view mode
+# "continuous" (연속), "single-page" (한 페이지), "half-page" (반 페이지)
+# set default-scale 0.0 # view total page
+set adjust-open "best-fit"
+
+
+
+# ########### keymaps ##############
+# map q quit # close zathura
+# map <C-m> fullscreen
+# map z zoom-in
+# map Z zoom-out
+
+# ########### scrolling ##########
+# map <C-d> scroll-half-page-down
+# map <C-u> scroll-half-page-up
+map j scroll up
+map k scroll down
+
+
