@@ -1,4 +1,8 @@
 ## aliases
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
 alias ll='eza -al --git --git-repos --time-style="+%Y-%m-%d"'
 alias ls='ls --color=auto'
 alias rc="yazi $ZDOTDIR/rc.d/"
@@ -7,3 +11,4 @@ alias ag='sudo pacman -Syu'
 alias grep='grep --color=auto'
 alias fd='fd -H'
 alias tmux="tmux -f $ZDOTCONFIG/tmux/.tmux.conf"
+alias q='exit'
