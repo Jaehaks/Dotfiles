@@ -17,6 +17,7 @@ packages=(
 	"which"
 	"man-db"            # man, mandb apropos, whatis command
 	"man-pages"         # documents for man
+	"most" 				# manpager for colored view
 	"git"
 	"base-devel"        # base development tools like build-essential, for `paru`
 	"xdg-utils"			# for yazi , utility like xdg-open, xdg-mime
@@ -67,6 +68,6 @@ for package in "${packages[@]}"; do
 done
 if [[ ${#packages_toinstall[@]} -gt 0 ]]; then
 	sudo pacman -S --noconfirm --needed "${packages_toinstall[@]}"
-	sudo mandb # update man cache
+	# sudo mandb # update man cache
 fi
 
