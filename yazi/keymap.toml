@@ -200,6 +200,9 @@ prepend_keymap = [
 	{ on = [ "c", "f" ], run = "plugin clipboard 'copy_filename'"    , desc = "Copy the filename" },
 	{ on = [ "c", "n" ], run = "plugin clipboard 'copy_filenameonly'", desc = "Copy the filename without extension" },
 
+	# plugin : copy-file-contents
+	{ on = ['c', 'g'], run = "plugin copy-file-contents",      desc = "copy contents of file" },
+
 	# manual : dir-open.yazi
 	{ on = ["g", 'd'], run = "plugin dir-open",      desc = "open explorer of current dir" },
 
@@ -212,14 +215,14 @@ prepend_keymap = [
 	# manual : githead.yazi
 	# { on = '<C-t>', run = "plugin githead",      desc = "echo hovered filename" },
 
-	# plugin : copy-file-contents
-	{ on = ['c', 'g'], run = "plugin copy-file-contents",      desc = "copy contents of file" },
-
 	# plugin : smart-visual
 	{ on = "V", run = "plugin smart-visual",      desc = "select files with same file extensions" },
 
 	# plugin : relative-motions.yazi
-	{ on = ["e"], run = "plugin relative-motions",      desc = "Move in relative steps" },
+	# { on = ["e"], run = "plugin relative-motions",      desc = "Move in relative steps" },
+
+	# plugin : save-clipbaord-to-file
+	{ on = ["c", "p"], run = "plugin save-clipbaord-to-file",      desc = "Paste clipbaord content to file" },
 ]
 
 [tasks]
