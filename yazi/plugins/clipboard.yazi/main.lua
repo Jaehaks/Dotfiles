@@ -1,3 +1,5 @@
+--- @since 25.5.31
+
 -- get select files
 ---@return table paths selected items or a hovered item
 local selected_or_hovered = ya.sync(function()
