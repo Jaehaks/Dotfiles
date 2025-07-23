@@ -46,7 +46,7 @@ local entry = function(_, job)
 	end
 
 	local child, err = Command(cmd)
-					   :args({value})
+					   :arg({value})
 					   :cwd(cwd)
 					   :stdin(Command.INHERIT)
 					   :stdout(Command.PIPED)
