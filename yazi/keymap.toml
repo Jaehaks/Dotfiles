@@ -221,8 +221,6 @@ prepend_keymap = [
 	# plugin : relative-motions.yazi
 	# { on = ["e"], run = "plugin relative-motions",      desc = "Move in relative steps" },
 
-	# plugin : save-clipbaord-to-file
-	{ on = ["c", "p"], run = "plugin save-clipbaord-to-file",      desc = "Paste clipbaord content to file" },
 ]
 
 [tasks]
