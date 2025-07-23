@@ -43,7 +43,7 @@ Dotfiles besides of nvim_config
 
 ```powershell
 	scoop install ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick bat clipboard unar wget curl unzip gzip tar pwsh openjdk11 go rustup python tree-sitter git gh
-	scoop install lua luarocks mingw neovim neovim-qt iconv uutils-coreutils less sed grep obs-studio scoop-search ghostscript windows-terminal yazi zip eza gawk
+	scoop install lua luarocks mingw neovim neovim-qt iconv uutils-coreutils less sed grep obs-studio scoop-search ghostscript windows-terminal yazi zip eza gawk uv
 ```
 
 1. [ffmpeg](https://github.com/FFmpeg/FFmpeg) (for yazi)
@@ -92,6 +92,7 @@ Dotfiles besides of nvim_config
 42. [zip](https://infozip.sourceforge.net/)
 43. [eza](https://github.com/eza-community/eza)
 44. [gawk](https://sourceforge.net/projects/ezwinports/)
+45. [uv](https://github.com/astral-sh/uv) (for neovim, uv.nvim)
 
 #### using manual download
 
