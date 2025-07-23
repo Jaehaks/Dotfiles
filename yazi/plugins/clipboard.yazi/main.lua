@@ -27,6 +27,9 @@ local info = function (content, level)
 	})
 end
 
+local get_cwd = ya.sync(function()
+	return tostring(cx.active.current.cwd)
+end)
 
 return {
 	entry = function(_, job)
@@ -56,11 +59,11 @@ return {
 			-- check clipboard has files or directories not text or image
 			local child, err      = Command("cb"):arg("info"):stdin(Command.INHERIT):stdout(Command.PIPED):spawn()
 			local output, err2    = child:wait_with_output()
-			local num_files       = string.match(output.stdout, 'files":%s*(%d+)')
-			local num_directories = string.match(output.stdout, 'directories":%s*(%d+)')
+			local num_files       = string.match(output.stdout, 'files":%s*(%d+)') or 0
+			local num_directories = string.match(output.stdout, 'directories":%s*(%d+)') or 0
 			local num_total       = num_files + num_directories
 
-			if num_total then
+			if num_total > 0 then -- if there are files in clipboard
 				-- overwrite even though there are same named files (by stderr(Command.PIPED))
 				-- FIXME: if there are same files, it must pop up menu
 				child, err = Command("cb"):arg("paste"):stderr(Command.PIPED):spawn()
@@ -69,9 +72,46 @@ return {
 				if output or output.succes then
 					info("Pasted " .. num_total .. " file(s) from Clipboard", 'info')
 				else
-					info(string.format( "Could not copy selected file(s) %s", status and status.code or err), 'error')
+					info(string.format( "Could not copy selected file(s) %s", output and output.code or err), 'error')
+				end
+			else
+				local text = ya.clipboard() -- check system clipboard
+				if not text then
+					info("Clipboard is empty!")
+					return
 				end
 
+				-- set filename
+				local filename, event = ya.input({
+					title = 'Filename only',
+					value = '',
+					position = {"top-center", y = 3, w = 50},
+				})
+				if event ~= 1 then
+					return
+				end
+				if not filename or filename == "" then
+					info("Filename is empty", 'error')
+					return
+				end
+
+				-- get path
+				local sep = (ya.target_family() == 'windows') and '\\' or '/'
+				local filepath = get_cwd() .. sep .. filename
+
+				-- save file
+				if text == '' then -- if there are image in clipboard
+					filepath = filepath .. '.png'
+					-- make image file from clipboard
+					child, err = Command("irfanview"):arg("/clippaste"):arg("/convert=" .. filepath):stderr(Command.PIPED):spawn()
+					output, err = child:wait()
+					if not (output or output.succes) then
+						info(string.format( "Could not paste %s", output and output.code or err), 'error')
+					end
+				else -- if there are text in clipboard
+					filepath = Url(filepath .. '.txt')
+					fs.write(filepath, text)
+				end
 			end
 		end
 
