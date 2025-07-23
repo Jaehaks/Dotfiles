@@ -38,10 +38,5 @@ use = "yazi-rs/plugins:smart-enter"
 rev = "63f9650"
 hash = "be2bd6442d806a0d3370198f3e222bcf"
 
-[[plugin.deps]]
-use = "boydaihungst/save-clipboard-to-file"
-rev = "40de82f"
-hash = "f79197930f23924827e81fa51a1413d0"
-
 [flavor]
 deps = []
