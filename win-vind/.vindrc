@@ -1,0 +1,192 @@
+" Choose the version of {tiny, small, normal, big, huge}.
+"
+" if version is 'big', 'y' and 'p' are supported to copy and paste.
+" 'x' is delete. 'u' is undo.
+" EDITOR visual mode can be used in GUI normal mode
+" virtual desktop option is open with <C-v> prefix in GUI normal mode
+"
+" if version is 'huge', only mkdir command is added
+version big " it must be on top of file
+
+" reload config file. it must be symbolic link for ~/scoop/persist/win-vind/config/.vindrc
+nnoremap r :source ~\.config\Dotfiles\win-vind\.vindrc<cr>
+nnoremap e :!nvim ~\.config\Dotfiles\win-vind\.vindrc<cr>
+
+
+
+
+
+" -- gui normal at startup
+set initmode=gn
+" -- set font in gui window which is created by win-vind
+set gui_fontname = "FiraCode Nerd Font Mono"
+set gui_fontsize = 10
+" -- set font in cmd/messages when mode change / command
+set cmd_bgcolor    = FF5733
+set cmd_fontcolor  = 111111
+set cmd_fontname   = "FiraCode Nerd Font Mono"
+set cmd_fontweight = 800
+set cmd_fontsize   = 23
+" when the command message will be close [s] it there are no keystroke
+set cmd_fadeout    = 9999
+" -- easyclick font
+set easyclick_fontname   = "FiraCode Nerd Font Mono"
+set easyclick_fontsize   = 20
+set easyclick_bgcolor    = FF5733
+set easyclick_fontcolor  = 111111
+set easyclick_fontweight = 1000
+" -- gridmove font
+set gridmove_fontname    = "FiraCode Nerd Font Mono"
+set gridmove_fontsize    = 20
+set gridmove_bgcolor     = 000000
+set gridmove_fontcolor   = FFFF00
+set gridmove_fontweight  = 1000
+
+
+
+" -- mouse setup
+" set mouse acceleration
+set cursor_accel=75
+set cursor_resolution=750
+
+
+
+
+" -- shell
+set shell=cmd " for :! command
+set shellcmdflag='-c' " for :! command
+
+
+
+
+
+
+
+" -- keymaps (don't add comment next to code. it will has side effect)
+" BUG: unmap doesn't supports for default keybindings
+
+" 1) GUI normal mode -----------------------
+
+" don't click left when go to insert mode
+nnoremap i <to_insert>
+
+" INFO: -- mouse movement
+nnoremap j <move_cursor_up>
+nnoremap k <move_cursor_down>
+nnoremap o <click_left>
+nnoremap O <click_right>
+
+" INFO: -- scroll
+nunmap <C-y>
+nunmap <C-e>
+nunmap <C-d>
+nunmap <C-u>
+nnoremap <c-d> <scroll_down_halfpage>
+nnoremap <c-u> <scroll_up_halfpage>
+" <c-h>, <c-l> to go left/right
+" t : jump cursor to active window
+" gg / G / gm / M / 0 / $ : go cursor to end/middle of screen
+
+" INFO: -- easyclick
+" f + <other> : jump cursor to keyboard layout location in screen
+" F + <other> : easyclick for current object which is focused
+" FF : easyclick + click left
+" Ft : cursor moved to text box to insert (it seems not useful)
+" Fh : easyclick only
+nnoremap FO <easyclick><click_right>
+
+" INFO: -- easyclick_all
+" A + <other> : easyclick for all object in current screen
+" Ah : easyclick_all only
+nnoremap AO <easyclick_all><click_right>
+
+" INFO: -- gridmove : show equal grid where cursor can go to
+nnoremap <c-g> <gridmove>
+nunmap <c-m>
+
+
+" INFO: -- window movement
+" <C-w>n : open new instance of current object
+" <C-w>q : close new instance of current object
+" <C-w>hjkl : select window
+" <C-w><c-hjkl> : move window with some interval
+"!!! <C-w>s : open Alt+tab window and select with hjkl movement
+nnoremap <c-w>k <select_lower_window>
+nnoremap <c-w>j <select_upper_window>
+nnoremap <c-w><c-k> <move_window_down>
+nnoremap <c-w><c-j> <move_window_up>
+
+"<C-w>u : maximize current window
+"C<jhkjj>
+"<c-w>= : tile all window
+"<c-w>r : rotate tiled window
+"<c-w>R : rotate reverse
+"<c-w>u : maximize current window
+"<c-w>d : go original size (from max) / minimize current window (from normal)
+"<c-w><HJKL> : snap window (move to anchor)
+nnoremap <c-w>J <snap_current_window_to_top>
+nnoremap <c-w>K <snap_current_window_to_bottom>
+
+"!!! <C-w>e : window_resizer (resize / focus / move mode)
+
+
+" ------- Editor visual / normal mode
+" since version is normal, win-vind supports editor visual / normal mode
+" GUI normal mode : it focuses cursor movement.
+" EDITOR normal mode : it focuses page movement in window. it supports g / G
+" EDITOR visual mode : it focuses word selection movement
+"
+" mode changes to EDITOR visual mode if current mode is EDITOR normal mode if
+" version is normal (if version is big, it can switches to visual mode from
+" GUI normal mode.
+" EDITOR visual mode will be helpful it there are need to visual selection
+" in current window without search.
+" but I don't know why EDITOR normal mode is needed
+
+
+" INFO: -- hotkey
+gnnoremap U <redo>
+
+
+" 2) insert mode -----------------------
+" C-] : to_gui_normal
+" F8 : instant_gui_normal
+" Esc-down : to resident
+
+
+
+
+
+
+" 3) resident mode -----------------------
+" I don't know why this mode exists.
+" it just different with insert mode except that possible keys includes only ESC
+
+
+
+
+
+
+" 4) command mode ------------------------
+" not necessary
+
+" resizer / max,min / lsp,rsp,tsp,bsp / arrange / rot
+" sw : window switcher
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+" ----------- misc ---------------
+
+" Map capslock to ctrl.
+" imap <capslock> {<ctrl>}

@@ -44,6 +44,7 @@ Dotfiles besides of nvim_config
 ```powershell
 	scoop install ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick bat clipboard unar wget curl unzip gzip tar pwsh openjdk11 go rustup python tree-sitter git gh
 	scoop install lua luarocks mingw neovim neovim-qt iconv uutils-coreutils less sed grep obs-studio scoop-search ghostscript windows-terminal yazi zip eza gawk uv
+	scoop install win-vind
 ```
 
 1. [ffmpeg](https://github.com/FFmpeg/FFmpeg) (for yazi)
@@ -93,6 +94,7 @@ Dotfiles besides of nvim_config
 43. [eza](https://github.com/eza-community/eza)
 44. [gawk](https://sourceforge.net/projects/ezwinports/)
 45. [uv](https://github.com/astral-sh/uv) (for neovim, uv.nvim)
+45. [win-vind](https://github.com/pit-ray/win-vind) (vim like control on windows)
 
 #### using manual download
 
@@ -330,4 +332,22 @@ Dotfiles besides of nvim_config
 		- `FancyWM` :
 			- It is very stable to use but it is little slow to response
 			- It use virtual desktop of windows instead of workspace
+
+
+
+---
+### 7. [win-vind](https://github.com/pit-ray/win-vind)
+
+- **Description**
+	- GUI control using keyboard
+	- if you install `win-vind` using `scoop`, it will be installed as portable executable file.
+	- location of config file is `~\scoop\persist\win-vind\config\.vindrc` for scoop install file.
+- **Setting**
+	- Make symbolic link of `.vindrc` to config directory of scoop
+	```powershell
+		# open terminal with authorized prompt
+		del %HOME%\scoop\persist\win-vind\config\.vindrc
+		mklink %HOME%\scoop\persist\win-vind\config\.vindrc %HOME%\.config\Dotfiles\win-vind\.vindrc
+	```
+	- Then, execute `win-vind` in cmd prompt to start `win-vind`
 
