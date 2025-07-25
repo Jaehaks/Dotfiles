@@ -17,7 +17,7 @@ nnoremap e :!nvim ~\.config\Dotfiles\win-vind\.vindrc<cr>
 
 
 " -- gui normal at startup
-set initmode=gn
+set initmode=i
 " -- set font in gui window which is created by win-vind
 set gui_fontname = "FiraCode Nerd Font Mono"
 set gui_fontsize = 10
