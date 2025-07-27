@@ -4,3 +4,9 @@ lf/files
 yazi/bookmark
 yazi/plugins/*/.git/
 clink/NewPptFile.pptx
+qutebrowser/cache/*
+qutebrowser/config/bookmarks/
+qutebrowser/config/greasemonkey/
+qutebrowser/config/autoconfig.yml
+qutebrowser/config/quickmarks
+qutebrowser/data/*
