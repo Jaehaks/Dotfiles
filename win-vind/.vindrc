@@ -111,8 +111,12 @@ nunmap <c-m>
 " <C-w>hjkl : select window
 " <C-w><c-hjkl> : move window with some interval
 "!!! <C-w>s : open Alt+tab window and select with hjkl movement
-nnoremap <c-w>k <select_lower_window>
-nnoremap <c-w>j <select_upper_window>
+" nnoremap <c-w>k <select_lower_window>
+" nnoremap <c-w>j <select_upper_window>
+nnoremap <a-h> <select_left_window>
+nnoremap <a-k> <select_lower_window>
+nnoremap <a-j> <select_upper_window>
+nnoremap <a-l> <select_right_window>
 nnoremap <c-w><c-k> <move_window_down>
 nnoremap <c-w><c-j> <move_window_up>
 
@@ -126,6 +130,10 @@ nnoremap <c-w><c-j> <move_window_up>
 "<c-w><HJKL> : snap window (move to anchor)
 nnoremap <c-w>J <snap_current_window_to_top>
 nnoremap <c-w>K <snap_current_window_to_bottom>
+nnoremap <a-H> <snap_current_window_to_left>
+nnoremap <a-K> <snap_current_window_to_bottom>
+nnoremap <a-J> <snap_current_window_to_top>
+nnoremap <a-L> <snap_current_window_to_right>
 
 "!!! <C-w>e : window_resizer (resize / focus / move mode)
 
