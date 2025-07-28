@@ -15,6 +15,46 @@
 # if qutebrowser is opened with --baredir flag, it must be needed
 config.load_autoconfig()
 
+
+
+config.set('url.start_pages', ['https://www.google.com']) # startup page
+config.set('url.default_page', 'https://www.google.com') # new tab page
+config.set('url.searchengines',{
+    'DEFAULT': 'https://www.google.com/search?q={}',
+    'y': 'https://www.youtube.com/results?search_query={}',
+    'gs': 'https://scholar.google.com/scholar?q={}',
+    'gh': 'https://github.com/search?q={}',
+    'n': 'https://search.naver.com/search.naver?query={}',
+    'nd': 'https://dict.naver.com/dict.search?dicQuery=%s&query={}',
+    'nm': 'https://namu.wiki/Go?q={}',
+})
+
+# fonts - tab / completion menus
+config.set('fonts.default_family', ['FiraCode Nerd Font Mono', '맑은 고딕'])
+config.set('fonts.default_size', '11pt') # for notebook
+
+
+# open new instance of cmd, and open nvim with command(-c) to go to {line} and first column
+# it will affect to <Ctrl-e> in insert mode
+c.editor.command = ["cmd", "/c", "start", "/wait", "nvim", "{file}", "-c", "normal {line}G{column0}l"]
+
+# colors
+config.set('colors.tabs.selected.even.bg', '#FF8D00')
+config.set('colors.tabs.selected.even.fg', '#000000')
+config.set('colors.tabs.selected.odd.bg', '#FF8D00')
+config.set('colors.tabs.selected.odd.fg', '#000000')
+
+# BUG: `c.colors~ = True` format has some bug which is not applied perfectly for all url like naver.com
+config.set('colors.webpage.preferred_color_scheme', 'dark') # if the webpage supports dark mode, it apply
+config.set('colors.webpage.darkmode.enabled', True)
+config.set('colors.webpage.darkmode.policy.images', 'smart-simple')
+
+# session
+config.set('auto_save.session', False)
+
+# cookies
+config.set('content.cookies.accept', 'no-3rdparty')
+
 # for google login
 # The issue of 'Signing in' displaying forever when login in to Google in Qutebrowser
 # is not a problem with Qutebrowser itself. When Google blocks logins from some browsers or
@@ -33,35 +73,55 @@ c.content.javascript.log_message.excludes = {"userscript:_qute_stylesheet": ["*R
                                              "userscript:_qute_js": ["*TrustedHTML*", "*TypeError*"],
                                              }
 
-c.url.start_pages = ['https://www.google.com'] # startup page
-c.url.default_page = 'https://www.google.com' # new tab page
-c.url.searchengines = {
-        'DEFAULT': 'https://www.google.com/search?q={}',
-        'y': 'https://www.youtube.com/results?search_query={}',
-        'gs': 'https://scholar.google.com/scholar?q={}',
-        'gh': 'https://github.com/search?q={}',
-        'n': 'https://search.naver.com/search.naver?query={}',
-        'nd': 'https://dict.naver.com/dict.search?dicQuery=%s&query={}',
-        'nm': 'https://namu.wiki/Go?q={}',
-}
-c.downloads.location.directory = '~\Desktop'
-c.fonts.default_family = ['FiraCode Nerd Font Mono', '맑은고딕']
+
+# downloads
+config.set('downloads.location.directory', '~\Desktop')
+config.set('downloads.location.prompt', False) # don't ask to confirm
+config.set('downloads.location.suggestion', 'both') # path + filename
+config.set('downloads.remove_finished', 3) # wait time to remove download finished alarm
+
+# file select
+config.set('fileselect.handler', 'external') # set yazi as fileselect handler along to below setting
+config.set('fileselect.folder.command', ['cmd', '/c', 'yazi', '--cwd-file={}'])
+config.set('fileselect.multiple_files.command', ['cmd', '/c', 'yazi', '--chooser-file={}'])
+config.set('fileselect.single_file.command', ['cmd', '/c', 'yazi', '--chooser-file={}'])
 
 
-# open new instance of cmd, and open nvim with command(-c) to go to {line} and first column
-# it will affect to <Ctrl-e> in insert mode
-c.editor.command = ["cmd", "/c", "start", "/wait", "nvim", "{file}", "-c", "normal {line}G{column0}l"]
+# input mode
+config.set('input.insert_mode.auto_load', True) # Automatically enter insert mode if an editable element is focused after loading the page.
 
-# colors
-c.colors.tabs.selected.even.bg = '#FF8D00'
-c.colors.tabs.selected.even.fg = '#000000'
-c.colors.tabs.selected.odd.bg = '#FF8D00'
-c.colors.tabs.selected.odd.fg = '#000000'
+# messages
+config.set('messages.timeout', 1000) # duration [ms] to show messages
 
-c.colors.webpage.preferred_color_scheme = 'auto'
+# search
+config.set('searach.wrap', False)
+config.set('search.incremental', False) # search after Enter
 
-# session
-c.auto_save.session = False
+# tabs
+config.set('tabs.close_mouse_button', 'right') # right button is close tab
+config.set('tabs.last_close', 'close') # close window when last tab is close
+config.set('tabs.select_on_remove', 'last-used') # focus last-used tab after current tab is closed
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -73,7 +133,7 @@ config.bind('k', 'scroll down', mode='normal' )
 # gu : navigate up
 
 # -- tab management
-config.bind('q', 'tab-close -o', mode='normal' ) # tab close and go to left tab
+config.bind('q', 'tab-close', mode='normal' ) # tab close and go to left tab
 config.bind('J', 'tab-prev', mode='normal' )
 config.bind('K', 'tab-next', mode='normal' )
 # Alt+num : move focus to tab (num)
@@ -87,6 +147,8 @@ config.unbind('gC') # tab-clone
 # wo : input new url and open in new window
 # wO : edit url and open in new window
 config.bind('ww', 'tab-only', mode='normal') # close other tabs
+config.bind('wq', 'tab-only --next', mode='normal') # close tabs on left
+config.bind('we', 'tab-only --prev', mode='normal') # close tabs on right
 # close right/left tab is not implemented (needs to implements manually)
 # T : show tab select window (go to with number)
 # gt : show tab select window (go to with number/string)
@@ -113,7 +175,7 @@ config.unbind('th') # go to prev page with new tab
 config.unbind('wh') # go to prev page with new window
 config.unbind('<Ctrl-h>') # go to homepage
 config.bind('gh', 'home', mode='normal') # go to homepage
-# Sh : history
+# Sh : big search in history
 
 # -- hint
 config.bind('f', 'hint', mode='normal' ) # show hint and open in current tab
@@ -170,11 +232,11 @@ config.unbind('wB')
 config.bind('mj', 'mode-enter set_mark') # mark for scroll
 # ' : jumpt to scroll mark
 config.bind('mq', 'quickmark-save') # mark for page using a character (useful more than bookmark)
-config.bind('qo', 'cmd-set-text -s :quickmark-load') # mark for page using a character (useful more than bookmark)
-config.bind('qO', 'cmd-set-text -s :quickmark-load -t') # mark for page using a character (useful more than bookmark)
+config.bind('bo', 'cmd-set-text -s :quickmark-load') # mark for page using a character (useful more than bookmark)
+config.bind('bO', 'cmd-set-text -s :quickmark-load -t') # mark for page using a character (useful more than bookmark)
 config.bind('mb', 'bookmark-add') # add bookmark
-config.bind('bo', 'cmd-set-text -s :bookmark-load') # mark for page using a character (useful more than bookmark)
-config.bind('bO', 'cmd-set-text -s :bookmark-load -t') # mark for page using a character (useful more than bookmark)
+config.bind('Bo', 'cmd-set-text -s :bookmark-load') # mark for page using a character (useful more than bookmark)
+config.bind('BO', 'cmd-set-text -s :bookmark-load -t') # mark for page using a character (useful more than bookmark)
 config.bind('ms', 'session-save default') # mark for page using a character (useful more than bookmark)
 config.bind('so', 'session-load default') # mark for page using a character (useful more than bookmark)
 
@@ -219,16 +281,46 @@ config.bind('<Ctrl-d>', 'rl-delete-char', mode='command')
 #            After I edit the content in neovim and :wq, the final contents are inputted in web text box.
 
 
+
+
+
 # -- passthrough mode
 # it is the same with `resident mode` in win-vind
+
+
+
 
 # -- misc
 config.unbind('<Ctrl-v>') # view-source
 # <Ctrl-Alt-p> : print page
+
+
+
+
+# -- config-cycle
+# -p : print what setting is applied
+# -u : url pattern (config-change is applied to current url page only)
+# -t : temp value
+config.bind('tda', 'config-cycle -p -u {url} colors.webpage.darkmode.enabled False True ;; reload', mode='normal')
+
+
+
+
+
+
+
+
+
+
+
+
 
 ######## commands #########
 # :version = show info of qutebrowser
 # :config-edit = edit current config file
 # :config-source = source current config file
 # :bind = show current key binding
+# :histroy = show history list and go to with f
+# :histroy-clear -f = clear history
+
 
