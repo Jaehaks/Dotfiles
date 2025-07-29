@@ -160,6 +160,7 @@ gnnoremap U <redo>
 " C-] : to_gui_normal
 " F8 : instant_gui_normal
 " Esc-down : to resident
+inoremap <C-=> <to_gui_normal>
 
 
 
