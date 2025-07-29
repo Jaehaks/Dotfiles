@@ -75,10 +75,13 @@ c.content.javascript.log_message.excludes = {"userscript:_qute_stylesheet": ["*R
 
 
 # downloads
-config.set('downloads.location.directory', '~\Desktop')
+download_dir = '~\Desktop'
+config.set('downloads.location.directory', download_dir)
 config.set('downloads.location.prompt', False) # don't ask to confirm
 config.set('downloads.location.suggestion', 'both') # path + filename
 config.set('downloads.remove_finished', 3) # wait time to remove download finished alarm
+config.set('downloads.position', 'bottom') # show download progress bar on bottom
+
 
 # file select
 config.set('fileselect.handler', 'external') # set yazi as fileselect handler along to below setting
@@ -91,10 +94,10 @@ config.set('fileselect.single_file.command', ['cmd', '/c', 'yazi', '--chooser-fi
 config.set('input.insert_mode.auto_load', True) # Automatically enter insert mode if an editable element is focused after loading the page.
 
 # messages
-config.set('messages.timeout', 1000) # duration [ms] to show messages
+config.set('messages.timeout', 5000) # duration [ms] to show messages
 
 # search
-config.set('searach.wrap', False)
+config.set('search.wrap', False)
 config.set('search.incremental', False) # search after Enter
 
 # tabs
@@ -194,6 +197,9 @@ config.unbind(';O')
 config.unbind(';R') # ;r for new window, but cannot continuous
 # ;t : show hint only input (For text)
 
+# streaming using mpv is too slow, yt-dlp is the best.
+config.bind(';m', f'hint links spawn cmd /c start yt-dlp -P "{download_dir}" {{hint-url}}', mode='normal') # download video using yt-dlp
+
 
 # -- visual
 # v : into visual / into caret toggle
@@ -252,15 +258,13 @@ config.unbind('wIf')
 config.unbind('gf') # view-source
 
 
-# -- config-cycle
-# tsh ~ tCh : quick change config with cycle
-# `config-cycle <config_name> <value1> <value2> <value3>` : change value 1~3
+
 
 
 
 # -- command mode / completion mode
-config.bind('<Ctrl-k>', 'completion-item-focus --history next', mode='command')
-config.bind('<Ctrl-j>', 'completion-item-focus --history prev', mode='command')
+config.bind('<Ctrl-k>', 'completion-item-focus next', mode='command')
+config.bind('<Ctrl-j>', 'completion-item-focus prev', mode='command')
 # <ctrl+tab> : next completion category
 # <ctrl+shift+tab> : prev completion category
 # <Ctrl+d> : completion item delete
@@ -298,6 +302,8 @@ config.unbind('<Ctrl-v>') # view-source
 
 
 # -- config-cycle
+# tsh ~ tCh : quick change config with cycle
+# `config-cycle <config_name> <value1> <value2> <value3>` : change value 1~3
 # -p : print what setting is applied
 # -u : url pattern (config-change is applied to current url page only)
 # -t : temp value
