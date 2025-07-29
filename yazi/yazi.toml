@@ -117,16 +117,19 @@ fetchers = [
 spotters = [
 	{ name = "*/", run = "folder" },
 	# Code
-	{ mime = "text/*", run = "code" },
-	{ mime = "application/{mbox,javascript,wine-extension-ini}", run = "code" },
+	# { mime = "text/*", run = "code" },
+	# { mime = "application/{mbox,javascript,wine-extension-ini}", run = "code" },
 	# Image
-	{ mime = "image/{avif,hei?,jxl}", run = "magick" },
-	{ mime = "image/svg+xml", run = "svg" },
-	{ mime = "image/*", run = "image" },
+	# { mime = "image/{avif,hei?,jxl}", run = "magick" },
+	# { mime = "image/svg+xml", run = "svg" },
+	# { mime = "image/*", run = "image" },
 	# Video
-	{ mime = "video/*", run = "video" },
+	# { mime = "video/*", run = "video" },
 	# Fallback
-	{ name = "*", run = "file" },
+	# { name = "*", run = "file" },
+]
+append_spotters = [
+	{ name = '*', run = "file-extra-metadata" }, # plugin : file-extra-metadata
 ]
 preloaders = [
 	# Image
@@ -176,7 +179,10 @@ previewers = [
 	# Empty file
 	{ mime = "inode/empty", run = "empty" },
 	# Fallback
-	{ name = "*", run = "filename" },
+	# { name = "*", run = "filename" },
+]
+append_previewers = [
+	{ name = "*" , run = "file-extra-metadata" }, # plugin : file-extra-metadata
 ]
 
 

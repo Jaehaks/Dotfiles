@@ -38,5 +38,10 @@ use = "yazi-rs/plugins:smart-enter"
 rev = "63f9650"
 hash = "be2bd6442d806a0d3370198f3e222bcf"
 
+[[plugin.deps]]
+use = "boydaihungst/file-extra-metadata"
+rev = "ec035d6"
+hash = "b23b7db6beb2854a689c648a38843f8c"
+
 [flavor]
 deps = []
