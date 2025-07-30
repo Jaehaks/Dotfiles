@@ -57,46 +57,41 @@ def main():
     if not filename:
         send_qute_message("message-error", f"Could not extract filename from URL: {url}")
         sys.exit(1)
-    fileextension = os.path.splitext(filename)[1].lower() # splitext will return tuple (filename_only, file_extension)
+    fileextension = os.path.splitext(filename)[1].lower() # splitext will return tuple (filename_only, fileextension)
 
-    # Go to the download directory
-    download_dir = os.environ.get('QUTE_DOWNLOAD_DIR', '.')
-    os.chdir(download_dir)
+    if fileextension == '.pdf':
+        # Go to the download directory
+        download_dir = os.environ.get('QUTE_DOWNLOAD_DIR', '.')
+        os.chdir(download_dir)
 
-    # Download if file does not exist
-    if not os.path.exists(filename):
-        send_qute_message("message-info", f"[curl] Downloading {filename}...")
-        try:
-            # check=True : if download is failed, invoke CalledProcessError
-            _ = subprocess.run(['curl', '-o', filename, url], check=True)
-            send_qute_message("message-info", "[curl] Downloading completed")
-        except subprocess.CalledProcessError:
-            send_qute_message("message-error", f"Failed to download {url} using curl")
-            sys.exit(1)
-        except FileNotFoundError:
-            send_qute_message("message-error", "Download tool not found. Please install curl.")
-            sys.exit(1)
-    else:
-        send_qute_message("message-warning", f"File '{filename}' already exists")
-
-    # Open file
-    try:
-        cmd = ''
-        if platform.system() == 'Windows':
-            if fileextension == '.pdf':
-                cmd = ['sioyek', '--new-window', filename]
-            else:
-                cmd = ['start', filename]
-            _ = subprocess.Popen(cmd)
+        # Download if file does not exist
+        if not os.path.exists(filename):
+            send_qute_message("message-info", f"[curl] Downloading {filename}...")
+            try:
+                # check=True : if download is failed, invoke CalledProcessError
+                # _ = subprocess.run(['curl', '-o', filename, url], check=True)
+                _ = subprocess.run(['cmd', '/c', 'curl', '-o', filename, url], check=True)
+                send_qute_message("message-info", "[curl] Downloading completed")
+            except subprocess.CalledProcessError:
+                send_qute_message("message-error", f"Failed to download {url} using curl")
+                sys.exit(1)
+            except FileNotFoundError:
+                send_qute_message("message-error", "Download tool not found. Please install curl.")
+                sys.exit(1)
         else:
-            if fileextension == '.pdf':
-                cmd = ['zathura', filename]
+            send_qute_message("message-warning", f"File '{filename}' already exists")
+
+        # Open file
+        try:
+            if platform.system() == 'Windows':
+                _ = subprocess.Popen(['sioyek', '--new-window', filename])
             else:
-                cmd = ['xdg-open', filename]
-            _ = subprocess.Popen(cmd)
-    except FileNotFoundError:
-        send_qute_message("message-error", "Viewer not found. zathura(Linux) or sioyek(Windows) in system path.")
-        sys.exit(1)
+                _ = subprocess.Popen(['zathura', filename])
+        except FileNotFoundError:
+            send_qute_message("message-error", "Viewer not found. zathura(Linux) or sioyek(Windows) in system path.")
+            sys.exit(1)
+    else: # if link, go to link, (not recommend because it is slower than original `hint links`)
+        send_qute_message('message-error', 'Use only .pdf file')
 
 
 # INFO: subprocess.run() executes command synchronously, it make the new instance of viewer has focus.
