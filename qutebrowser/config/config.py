@@ -140,8 +140,8 @@ config.bind('q', 'tab-close', mode='normal' ) # tab close and go to left tab
 config.bind('J', 'tab-prev', mode='normal' )
 config.bind('K', 'tab-next', mode='normal' )
 # Alt+num : move focus to tab (num)
-config.bind('gK', 'tab-move +', mode='normal' ) # move tab right
-config.bind('gJ', 'tab-move -', mode='normal' ) # move tab left
+config.bind('<Ctrl-Shift-k>', 'tab-move +', mode='normal' ) # move tab right
+config.bind('<Ctrl-Shift-j>', 'tab-move -', mode='normal' ) # move tab left
 config.unbind('gm') # move tab to first column
 config.unbind('gC') # tab-clone
 # gD : detach current tab to new window
