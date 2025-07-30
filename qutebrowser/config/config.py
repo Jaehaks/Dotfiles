@@ -75,7 +75,7 @@ c.content.javascript.log_message.excludes = {"userscript:_qute_stylesheet": ["*R
 
 
 # downloads
-download_dir = '~\Desktop'
+download_dir = '~/Desktop'
 config.set('downloads.location.directory', download_dir)
 config.set('downloads.location.prompt', False) # don't ask to confirm
 config.set('downloads.location.suggestion', 'both') # path + filename
@@ -198,7 +198,11 @@ config.unbind(';R') # ;r for new window, but cannot continuous
 # ;t : show hint only input (For text)
 
 # streaming using mpv is too slow, yt-dlp is the best.
+userscript_dir = '~/.config/Dotfiles/qutebrowser/config/userscripts/'
 config.bind(';m', f'hint links spawn cmd /c start yt-dlp -P "{download_dir}" {{hint-url}}', mode='normal') # download video using yt-dlp
+# download file and open automatically (spawn --userscript doesn't recognize userscript file)
+config.bind(';d', 'hint links userscript download_and_open.cmd', mode='normal')
+
 
 
 # -- visual
