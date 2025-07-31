@@ -117,8 +117,11 @@ nnoremap <a-h> <select_left_window>
 nnoremap <a-k> <select_lower_window>
 nnoremap <a-j> <select_upper_window>
 nnoremap <a-l> <select_right_window>
-nnoremap <c-w><c-k> <move_window_down>
-nnoremap <c-w><c-j> <move_window_up>
+nnoremap <c-h> <move_window_left>
+nnoremap <c-k> <move_window_down>
+nnoremap <c-j> <move_window_up>
+nnoremap <c-l> <move_window_right>
+nnoremap <c-w><c-w> <switch_window>
 
 "<C-w>u : maximize current window
 "C<jhkjj>
