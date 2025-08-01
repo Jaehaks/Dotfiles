@@ -70,6 +70,8 @@ play = [
 rules = [
 	# Folder
 	{ name = "*/", use = [ "open", "reveal" ] }, # open explorer of current selected directory
+	# user: unknown file extension (some files are recognized as octet_stream like binary)
+	{ name = "application/octet-stream", use = [ "edit", "reveal" ] },
 	# csv
 	{ mime = "text/csv", use = [ "open", "reveal" ] },
 	# Text
