@@ -37,3 +37,7 @@ Vim like pdf file viewer like zathura of linux
 > applied to file in `persist/` or `Dotfiles/`
 
 
+> [!CAUTION] Caution: check this file after editing other location
+> hard link cannot means synchronous relationship. The changes are applied when I open the file.
+> **so if you edit file in `apps/` to show immediate change in sioyek, you must open config file in `Dotfiles`
+> before git commit.**
