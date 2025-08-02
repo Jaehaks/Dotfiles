@@ -44,7 +44,7 @@ Dotfiles besides of nvim_config
 ```powershell
 	scoop install ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick bat clipboard unar wget curl unzip gzip tar pwsh openjdk11 go rustup python tree-sitter git gh
 	scoop install lua luarocks mingw neovim neovim-qt iconv uutils-coreutils less sed grep obs-studio scoop-search ghostscript windows-terminal yazi zip eza gawk uv
-	scoop install win-vind yt-dlp mpv
+	scoop install win-vind yt-dlp mpv sioyek
 ```
 
 1. [ffmpeg](https://github.com/FFmpeg/FFmpeg) (for yazi)
@@ -97,6 +97,7 @@ Dotfiles besides of nvim_config
 45. [win-vind](https://github.com/pit-ray/win-vind) (vim like control on windows)
 46. [yt-dlp](https://github.com/yt-dlp/yt-dlp) (for qutebrowser to view youtube)
 47. [mpv](https://mpv.io/) (for qutebrowser to view youtube)
+48. [sioyek](https://github.com/ahrm/sioyek) (pdf viewer)
 
 #### using manual download
 
@@ -352,4 +353,27 @@ Dotfiles besides of nvim_config
 		mklink %HOME%\scoop\persist\win-vind\config\.vindrc %HOME%\.config\Dotfiles\win-vind\.vindrc
 	```
 	- Then, execute `win-vind` in cmd prompt to start `win-vind`
+
+
+---
+### 8. [sioyek](https://github.com/ahrm/sioyek)
+
+- **Description**
+	- vim-like pdf viewer
+	- location of config file is `~\scoop\apps\sioyek\current\{keys,prefs}_user.config`
+	  These are hard linked to `~\scoop\persist\sioyek\{keys,prefs}_user.config`
+- **Setting**
+	- Make hard link of `{keys,prefs}_user.config` in `Dotfiles/` to config directory of scoop
+
+	```powershell
+		scoop install sioyek
+		del %HOME%\scoop\persist\sioyek\keys_user.config
+		del %HOME%\scoop\persist\sioyek\prefs_user.config
+		mklink /H %HOME%\scoop\persist\sioyek\keys_user.config %HOME%\.config\Dotfiles\sioyek\keys_user.config
+		mklink /H %HOME%\scoop\persist\sioyek\prefs_user.config %HOME%\.config\Dotfiles\sioyek\prefs_user.config
+		scoop reset sioyek # reconnect config file from persist/
+	```
+
+	- Set `sioyek` as default pdf viewer
+
 
