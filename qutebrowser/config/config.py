@@ -180,12 +180,6 @@ config.unbind('wh') # go to prev page with new window
 config.unbind('<Ctrl-h>') # go to homepage
 
 # -- hint
-config.bind('f', 'hint', mode='normal' ) # show hint and open in current tab
-config.bind('F', 'hint all tab-fg', mode='normal' ) # show hint and open in new tab and focus
-config.bind(';i', 'hint inputs', mode='normal' ) # show hint on input only
-# ;y : hint for yank links
-# ;Y : hint for yank links to primary clipboard (linux only)
-# ;r : show hint and continuous open in new tab unfocused
 config.unbind('wf') # hint all window
 config.unbind(';b') # show hint and open unfocused new tab
 config.unbind(';f') # it replaced with F
@@ -196,6 +190,12 @@ config.unbind(';o')
 config.unbind(';O')
 config.unbind(';R') # ;r for new window, but cannot continuous
 config.unbind(';t') # hint input
+config.bind('f', 'hint', mode='normal' ) # show hint and open in current tab
+config.bind('F', 'hint all tab-fg', mode='normal' ) # show hint and open in new tab and focus
+config.bind(';i', 'hint inputs', mode='normal' ) # show hint on input only
+# ;y : hint for yank links
+# ;Y : hint for yank links to primary clipboard (linux only)
+# ;r : show hint and continuous open in new tab unfocused
 
 # streaming using mpv is too slow, yt-dlp is the best.
 userscript_dir = '~/.config/Dotfiles/qutebrowser/config/userscripts/'
