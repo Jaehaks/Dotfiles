@@ -34,7 +34,7 @@ local function entry(self, job)
 	local shell_value = 'cmd'
 
 	-- Spawn the command to copy the file contents to clipboard
-	local output, err = Command(shell_value):args({ "/c", cmd_args }):spawn():wait()
+	local output, err = Command(shell_value):arg({ "/c", cmd_args }):spawn():wait()
 
 	if not output then
 		return ya.err("Cannot spawn clipboard command, error code " .. tostring(err))
