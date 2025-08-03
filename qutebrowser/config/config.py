@@ -94,7 +94,7 @@ config.set('fileselect.single_file.command', ['cmd', '/c', 'yazi', '--chooser-fi
 config.set('input.insert_mode.auto_load', True) # Automatically enter insert mode if an editable element is focused after loading the page.
 
 # messages
-config.set('messages.timeout', 5000) # duration [ms] to show messages
+config.set('messages.timeout', 1000) # duration [ms] to show messages
 
 # search
 config.set('search.wrap', False)
@@ -130,6 +130,7 @@ config.set('tabs.select_on_remove', 'last-used') # focus last-used tab after cur
 
 
 ######## key binding #########
+# [!] mark means important key
 # -- scrolling
 config.bind('j', 'scroll up', mode='normal' )
 config.bind('k', 'scroll down', mode='normal' )
@@ -139,50 +140,52 @@ config.bind('k', 'scroll down', mode='normal' )
 config.bind('q', 'tab-close', mode='normal' ) # tab close and go to left tab
 config.bind('J', 'tab-prev', mode='normal' )
 config.bind('K', 'tab-next', mode='normal' )
-# Alt+num : move focus to tab (num)
+# Ctrl+Tab : go to last focused tab
+# [!] Alt+num : move focus to tab (num)
 config.bind('<Ctrl-Shift-k>', 'tab-move +', mode='normal' ) # move tab right
 config.bind('<Ctrl-Shift-j>', 'tab-move -', mode='normal' ) # move tab left
 config.unbind('gm') # move tab to first column
-config.unbind('gC') # tab-clone
-# gD : detach current tab to new window
-# go : edit current url and open in current tab
-# gO : edit current url and open in new tab
-# wo : input new url and open in new window
-# wO : edit url and open in new window
+# [!] gC : tab-clone
+# [!] gD : detach current tab to new window
+# [!] go : edit current url and open in current tab
+# [!] gO : edit current url and open in new tab
+# [!] wo : input new url and open in new window
+# [!] wO : edit url and open in new window
 config.bind('ww', 'tab-only', mode='normal') # close other tabs
 config.bind('wq', 'tab-only --next', mode='normal') # close tabs on left
 config.bind('we', 'tab-only --prev', mode='normal') # close tabs on right
-# close right/left tab is not implemented (needs to implements manually)
-# T : show tab select window (go to with number)
+# [!] T : show tab select window (go to with number)
 # gt : show tab select window (go to with number/string)
 config.unbind('d')  # remove tab
 config.unbind('co') # tab-only
 config.unbind('xo') # input new url and open with unfocused tab
 config.unbind('xO') # edit url and open with unfocused tab
 config.unbind('<Ctrl-p>') # tab pin
-# config.bind('<Ctrl-q>', 'undo', mode='normal' )
-# Ctrl+Tab : go to last focused tab
 
 
 
 
 
 # -- window management
-# <C-n> : open new window
-# <C-S-n> : open new private window
+# [!] <C-n> : open new window
+# [!] <C-S-n> : open new private window
 # <C-S-w> : close window (all tabs)
 
 
 # -- history
+config.bind('gh', 'home', mode='normal') # go to homepage
+# [!] Sh : big search in history
 config.unbind('th') # go to prev page with new tab
 config.unbind('wh') # go to prev page with new window
 config.unbind('<Ctrl-h>') # go to homepage
-config.bind('gh', 'home', mode='normal') # go to homepage
-# Sh : big search in history
 
 # -- hint
 config.bind('f', 'hint', mode='normal' ) # show hint and open in current tab
 config.bind('F', 'hint all tab-fg', mode='normal' ) # show hint and open in new tab and focus
+config.bind(';i', 'hint inputs', mode='normal' ) # show hint on input only
+# ;y : hint for yank links
+# ;Y : hint for yank links to primary clipboard (linux only)
+# ;r : show hint and continuous open in new tab unfocused
 config.unbind('wf') # hint all window
 config.unbind(';b') # show hint and open unfocused new tab
 config.unbind(';f') # it replaced with F
@@ -191,11 +194,8 @@ config.unbind(';i')
 config.unbind(';I')
 config.unbind(';o')
 config.unbind(';O')
-# ;y : hint for yank links
-# ;Y : hint for yank links to primary clipboard (linux only)
-# ;r : show hint and continuous open in new tab unfocused
 config.unbind(';R') # ;r for new window, but cannot continuous
-# ;t : show hint only input (For text)
+config.unbind(';t') # hint input
 
 # streaming using mpv is too slow, yt-dlp is the best.
 userscript_dir = '~/.config/Dotfiles/qutebrowser/config/userscripts/'
@@ -220,9 +220,9 @@ config.bind('J', 'scroll up', mode='caret')
 # yd : copy url domain (standard url without parameter)
 # yp : copy url with pretty (decode %20 or other parameter)
 # ym : copy url with markdown format
-config.bind('p', 'open -- {cliboard}') # open url from yy
-config.bind('P', 'open -t -- {cliboard}') # open url from yy with new tab
-config.bind('wP', 'open -w -- {cliboard}') # open url from yy with new window
+config.bind('p', 'open -- {clipboard}') # open url from yy
+config.bind('P', 'open -t -- {clipboard}') # open url from yy with new tab
+config.bind('wP', 'open -w -- {clipboard}') # open url from yy with new window
 config.unbind('pp')
 config.unbind('pP')
 config.unbind('PP')
@@ -240,7 +240,7 @@ config.unbind('gb')
 config.unbind('gB')
 config.unbind('wB')
 config.bind('mj', 'mode-enter set_mark') # mark for scroll
-# ' : jumpt to scroll mark
+# ' : jump to scroll mark
 config.bind('mq', 'quickmark-save') # mark for page using a character (useful more than bookmark)
 config.bind('bo', 'cmd-set-text -s :quickmark-load') # mark for page using a character (useful more than bookmark)
 config.bind('bO', 'cmd-set-text -s :quickmark-load -t') # mark for page using a character (useful more than bookmark)
@@ -269,17 +269,17 @@ config.unbind('gf') # view-source
 # -- command mode / completion mode
 config.bind('<Ctrl-k>', 'completion-item-focus next', mode='command')
 config.bind('<Ctrl-j>', 'completion-item-focus prev', mode='command')
+config.bind('<Ctrl-c>', 'completion-item-del', mode='command') # remove items from completion menu
 # <ctrl+tab> : next completion category
 # <ctrl+shift+tab> : prev completion category
-# <Ctrl+d> : completion item delete
-# <Ctrl+c> : completion item yank
 # <Ctrl+Enter> : open/execute the item without closing menu
 config.bind('<Ctrl-h>', 'rl-backward-char', mode='command')
 config.bind('<Ctrl-l>', 'rl-forward-char', mode='command')
-config.bind('<Ctrl-f>', 'rl-forward-word', mode='command')
-config.bind('<Ctrl-b>', 'rl-backward-word', mode='command')
+config.bind('<Alt-h>', 'rl-backward-word', mode='command')
+config.bind('<Alt-l>', 'rl-forward-word', mode='command')
 config.bind('<Ctrl-d>', 'rl-delete-char', mode='command')
-# <Alt-backspace> : remove wordwise
+config.bind('<Ctrl-Alt-l>', 'rl-kill-word', mode='command') # remove word wise
+config.bind('<Ctrl-Alt-h>', 'rl-backward-kill-word', mode='command') # remove word wise
 
 
 
