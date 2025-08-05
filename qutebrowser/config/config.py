@@ -288,7 +288,8 @@ config.bind('<Ctrl-Alt-h>', 'rl-backward-kill-word', mode='command') # remove wo
 #            if cursor in text box to insert any text, it can be written using external editor like neovim
 #            After I edit the content in neovim and :wq, the final contents are inputted in web text box.
 
-
+# escape from insert mode and change ime to english
+config.bind('<Escape>', 'mode-leave ;; spawn --userscript ime_change.cmd', mode='insert')
 
 
 
