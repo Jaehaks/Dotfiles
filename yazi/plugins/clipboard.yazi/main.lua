@@ -25,7 +25,7 @@ local info = function (content, level)
 		title = "System Clipboard",
 		content = content,
 		level = level,
-		timeout = 1,
+		timeout = 5,
 	})
 end
 
@@ -38,6 +38,7 @@ return {
 		local action = job.args[1]
 		ya.manager_emit("escape", { visual = true })
 
+		-- get selected files
 		local urls = selected_or_hovered()
 
 		-- if there are not files even if hovered, fire error
@@ -58,14 +59,31 @@ return {
 			end
 
 		elseif action == "paste" then
-			-- check clipboard has files or directories not text or image
+			-- check clipboard has files or directories
 			local child, err      = Command("cb"):arg("info"):stdin(Command.INHERIT):stdout(Command.PIPED):spawn()
 			local output, err2    = child:wait_with_output()
 			local num_files       = string.match(output.stdout, 'files":%s*(%d+)') or 0
 			local num_directories = string.match(output.stdout, 'directories":%s*(%d+)') or 0
 			local num_total       = num_files + num_directories
 
-			if num_total > 0 then -- if there are files in clipboard
+			-- check contents type in clipboard
+			-- 'cb' command is related with files/folders only.
+			-- It cannot update the contents when clipboard includes text/image.
+			-- We cannot recognize what type is using 'cb' only.
+			-- Powershell has the same function but it needs to call shell multiple times to judge type and
+			-- pwsh has advantage about Boolean output.
+			child, err = Command("pwsh"):arg({
+				"-c",
+				[[Add-Type -AssemblyName System.Windows.Forms;
+				if ([System.Windows.Forms.Clipboard]::ContainsFileDropList()) {'Files'}
+				elseif ([System.Windows.Forms.Clipboard]::ContainsImage()) {'Image'}
+				elseif ([System.Windows.Forms.Clipboard]::ContainsText()) {'Text'}
+				else {'Other'}]]})
+				:stdin(Command.INHERIT):stdout(Command.PIPED):spawn()
+			output, err2 = child:wait_with_output()
+			local cbtype = string.gsub(output.stdout, "%s", "")
+
+			if cbtype == 'Files' then -- if there are files in clipboard
 				-- overwrite even though there are same named files (by stderr(Command.PIPED))
 				-- FIXME: if there are same files, it must pop up menu
 				child, err = Command("cb"):arg("paste"):stderr(Command.PIPED):spawn()
@@ -85,7 +103,7 @@ return {
 
 				-- set filename
 				local filename, event = ya.input({
-					title = 'Filename only',
+					title = 'Input filename only' .. ' (' .. cbtype .. ')',
 					value = '',
 					position = {"top-center", y = 3, w = 50},
 				})
@@ -102,7 +120,7 @@ return {
 				local filepath = get_cwd() .. sep .. filename
 
 				-- save file
-				if text == '' then -- if there are image in clipboard
+				if cbtype == 'Image' then -- if there are image in clipboard
 					filepath = filepath .. '.png'
 					-- make image file from clipboard
 					child, err = Command("irfanview"):arg("/clippaste"):arg("/convert=" .. filepath):stderr(Command.PIPED):spawn()
