@@ -14,6 +14,7 @@
 - Windows OS
 	- `clip` command : for `copy_fullpath/dirpath/filename/filenameonly` option
 	- [clipboard](https://github.com/Slackadays/Clipboard) : to `copy`/`paste` files or directories
+	- [pwsh](https://github.com/PowerShell/PowerShell) : to check contents type in clipboard
 	- [irfanview](https://bjansen.github.io/scoop-apps/extras/irfanview/) : To `paste` image or text from clipboard
 
 
