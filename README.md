@@ -65,7 +65,7 @@ Dotfiles besides of nvim_config
 16. [unzip](https://infozip.sourceforge.net/) (for neovim/mason)
 17. [gzip](https://www.mingw-w64.org/) (for neovim/mason)
 18. [tar](https://www.mingw-w64.org/) (for neovim/mason)
-19. [pwsh](https://github.com/PowerShell/PowerShell) (for neovim/mason)
+19. [pwsh](https://github.com/PowerShell/PowerShell) (for neovim/mason, yazi)
 	- or [download link](https://github.com/PowerShell/PowerShell/releases)
 20. [openjdk11](https://github.com/openjdk/jdk11u) (for neovim/mason)
 21. [go](https://github.com/golang/go) (for neovim/go)
@@ -370,11 +370,13 @@ Dotfiles besides of nvim_config
 		scoop install sioyek
 		del %HOME%\scoop\persist\sioyek\keys_user.config
 		del %HOME%\scoop\persist\sioyek\prefs_user.config
-		mklink /H %HOME%\scoop\persist\sioyek\keys_user.config %HOME%\.config\Dotfiles\sioyek\keys_user.config
-		mklink /H %HOME%\scoop\persist\sioyek\prefs_user.config %HOME%\.config\Dotfiles\sioyek\prefs_user.config
+		mklink /H %HOME%\scoop\persist\sioyek\keys_user.config %HOME%\.config\Dotfiles\sioyek\main\keys_user.config
+		mklink /H %HOME%\scoop\persist\sioyek\prefs_user.config %HOME%\.config\Dotfiles\sioyek\main\prefs_user.config
 		scoop reset sioyek # reconnect config file from persist/
 	```
 
 	- Set `sioyek` as default pdf viewer
+- **miscellaneous**
+	- I want to test `development` branch, but it has some bug as I think now.
 
 
