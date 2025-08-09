@@ -73,6 +73,7 @@ rules = [
 	{ name = "*/", use = [ "open", "reveal" ] }, # open explorer of current selected directory
 	# user: unknown file extension (some files are recognized as octet_stream like binary)
 	{ mime = "application/octet-stream", use = [ "edit", "reveal" ] },
+	{ mime = "application/tex", use = [ "edit", "reveal" ] },
 	# csv
 	{ mime = "text/csv", use = [ "open", "reveal" ] },
 	# Text
