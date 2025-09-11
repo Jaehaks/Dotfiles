@@ -53,8 +53,14 @@ ctrl-i:toggle-preview,^
 alt-k:preview-half-page-down,^
 alt-j:preview-half-page-up
 
+REM bat config
 set "BAT_CONFIG_DIR=%HOME%\.config\Dotfiles\bat"
 set "BAT_CONFIG_PATH=%HOME%\.config\Dotfiles\bat\config"
+:: theme cache update if bat is ok
+where bat >nul 2>&1
+if %errorlevel% eq 0 (
+	bat cache --build
+)
 
 REM set environment variables for zoxide
 set _ZO_DATA_DIR=%HOME%
