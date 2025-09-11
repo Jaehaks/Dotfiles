@@ -70,4 +70,9 @@ doskey ls=ls --color=always $*
 doskey ll=eza --git --git-repos-no-status -al --icons=auto --sort=extension --time-style "+%%Y-%%m-%%d %%H:%%M:%%S" $*
 doskey grep=grep -i --color=auto $*
 doskey lf=lfcd $*
+
+
+:: check package installed
+call check_package_installed.cmd
+
 @echo on
