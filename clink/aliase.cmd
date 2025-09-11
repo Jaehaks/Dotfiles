@@ -58,7 +58,7 @@ set "BAT_CONFIG_DIR=%HOME%\.config\Dotfiles\bat"
 set "BAT_CONFIG_PATH=%HOME%\.config\Dotfiles\bat\config"
 :: theme cache update if bat is ok
 where bat >nul 2>&1
-if %errorlevel% eq 0 (
+if %errorlevel% equ 0 (
 	bat cache --build
 )
 
