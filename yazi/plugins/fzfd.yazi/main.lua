@@ -13,7 +13,11 @@ local function entry()
 	local child_fd, err_fd =
 		Command("fd")
 		:cwd(cwd)
-		:arg({'--hidden', '--type', 'directory' , '.'})
+		:arg({
+			'--hidden',            -- includes hidden folder
+			'-E', '.git',          -- excludes .git folder
+			'--type', 'directory', -- only directoy
+			'.'})                  -- in cwd
 		:stdin(Command.INHERIT)
 		:stdout(Command.PIPED)
 		:stderr(Command.INHERIT)
