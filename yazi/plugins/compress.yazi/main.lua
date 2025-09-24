@@ -75,6 +75,6 @@ return {
 		end
 
 		-- clear selection
-		ya.manager_emit('escape', {visual = true, select = true})
+		ya.emit('escape', {visual = true, select = true})
 	end
 }
