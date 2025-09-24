@@ -5,13 +5,16 @@ Vim like pdf file viewer like zathura of linux
 `In Windows`
 
 ```powershell
-	# step1 - copy development release file
-	mklink /H %HOME%\user_installed\sioyek_v8d173d9_250709\keys_user.config %HOME%\.config\Dotfiles\sioyek\development\keys_user.config
-	mklink /H %HOME%\user_installed\sioyek_v8d173d9_250709\prefs_user.config %HOME%\.config\Dotfiles\sioyek\development\prefs_user.config
+# step1 - copy development release file
+mklink /H %HOME%\user_installed\sioyek_v8d173d9_250709\keys_user.config %HOME%\.config\Dotfiles\sioyek\development\keys_user.config
+mklink /H %HOME%\user_installed\sioyek_v8d173d9_250709\prefs_user.config %HOME%\.config\Dotfiles\sioyek\development\prefs_user.config
+# it needs to change default key config to remove some keys
+mklink /H %HOME%\user_installed\sioyek_v8d173d9_250709\keys.config %HOME%\.config\Dotfiles\sioyek\development\keys.config
+mklink /H %HOME%\user_installed\sioyek_v8d173d9_250709\prefs.config %HOME%\.config\Dotfiles\sioyek\development\prefs.config
 
-	# step2
-	nvim %HOME%\user_installed\sioyek_v8d173d9_250709\keys.config
-		# comment out `goto_toc t`
+# step2
+nvim %HOME%\user_installed\sioyek_v8d173d9_250709\keys.config
+	# comment out `goto_toc t`
 ```
 
 
