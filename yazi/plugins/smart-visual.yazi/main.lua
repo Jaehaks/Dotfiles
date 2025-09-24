@@ -1,3 +1,4 @@
+--- @since 25.5.31
 --- @sync entry
 
 
@@ -30,31 +31,33 @@ end
 
 local entry = function ()
 	local folder      = cx.active.current
+	info(folder)
 	local filelist    = folder.files
 	local hovered     = folder.hovered
 	local ext         = string.match(hovered.url:name(), '%.([^.]+)$') -- check extension from the file name
 	local hovered_ext = hovered.cha.is_dir and "directory" or ext
 
+	info('test', 'error')
 	local init_pos = folder.cursor
-	ya.manager_emit("arrow", {'top'})
+	ya.emit("arrow", {'top'})
 	if hovered_ext == 'directory' then
 		for _, file in ipairs(filelist) do
 			if file.cha.is_dir then
-				ya.manager_emit("toggle", {state = 'on'})
+				ya.emit("toggle", {state = 'on'})
 			end
-			ya.manager_emit("arrow", {1})
+			ya.emit("arrow", {1})
 		end
 	else
 		for _, file in ipairs(filelist) do
 			ext = string.match(file.url:name(), '%.([^.]+)$') -- check extension from the file name
 			if ext == hovered_ext then
-				ya.manager_emit("toggle", {state = 'on'})
+				ya.emit("toggle", {state = 'on'})
 			end
-			ya.manager_emit("arrow", {1})
+			ya.emit("arrow", {1})
 		end
 	end
-	ya.manager_emit("arrow", {'top'})
-	ya.manager_emit("arrow", {init_pos})
+	ya.emit("arrow", {'top'})
+	ya.emit("arrow", {init_pos})
 end
 
 return {entry = entry}

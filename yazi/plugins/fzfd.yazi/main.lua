@@ -41,7 +41,7 @@ local function entry()
 
 	local target = output.stdout:gsub("\n$", "")
 	if target ~= "" then
-		ya.manager_emit(target:find("[/\\]$") and "cd" or "reveal", { target })
+		ya.emit(target:find("[/\\]$") and "cd" or "reveal", { target })
 	end
 end
 

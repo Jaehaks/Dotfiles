@@ -36,7 +36,7 @@ end)
 return {
 	entry = function(_, job)
 		local action = job.args[1]
-		ya.manager_emit("escape", { visual = true })
+		ya.emit("escape", { visual = true })
 
 		-- get selected files
 		local urls = selected_or_hovered()
@@ -137,7 +137,7 @@ return {
 
 		if action == 'copy' or action == 'paste' then
 			-- disable selection and visual
-			ya.manager_emit("escape", { visual = true, select = true })
+			ya.emit("escape", { visual = true, select = true })
 			return
 		end
 
@@ -164,7 +164,7 @@ return {
 		local output, err = child2:wait_with_output()
 
 		-- disable selection and visual
-		ya.manager_emit("escape", { visual = true, select = true })
+		ya.emit("escape", { visual = true, select = true })
 
 	end,
 }
