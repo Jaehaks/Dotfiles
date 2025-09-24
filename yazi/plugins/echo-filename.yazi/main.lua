@@ -1,3 +1,4 @@
+--- @since 25.5.31
 --- @sync entry
 
 local info = function (txt)
@@ -12,7 +13,7 @@ return {
 	entry = function ()
 		local h = cx.active.current.hovered
 		if h then
-			info(h.url:name())
+			info(h.url.name)
 		else
 			info('echo-filename.yazi Error : Not hovered')
 		end
