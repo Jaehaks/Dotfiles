@@ -4,11 +4,6 @@ rev = "d1c8baa"
 hash = "186268c7330a1b3fea221aeed4d4f2f9"
 
 [[plugin.deps]]
-use = "pirafrank/what-size"
-rev = "d896656"
-hash = "62251f94eb67648d42cdfcfb8be0fad2"
-
-[[plugin.deps]]
 use = "h-hg/yamb"
 rev = "22af003"
 hash = "7cc42012a7c2099f80064d228feb8d44"
