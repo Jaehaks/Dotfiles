@@ -59,7 +59,7 @@ set "BAT_CONFIG_PATH=%HOME%\.config\Dotfiles\bat\config"
 :: theme cache update if bat is ok
 where bat >nul 2>&1
 if %errorlevel% equ 0 (
-	bat cache --build
+	bat cache --build >nul 2>&1
 )
 
 REM set environment variables for zoxide
