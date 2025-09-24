@@ -1,12 +1,12 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-filter"
-rev = "63f9650"
-hash = "b0e7403f2ee05f5de40805d50a71bb84"
+rev = "d1c8baa"
+hash = "186268c7330a1b3fea221aeed4d4f2f9"
 
 [[plugin.deps]]
 use = "pirafrank/what-size"
-rev = "0a4904c"
-hash = "fca231a128488a554823374f8f6d5241"
+rev = "d896656"
+hash = "62251f94eb67648d42cdfcfb8be0fad2"
 
 [[plugin.deps]]
 use = "h-hg/yamb"
@@ -15,33 +15,33 @@ hash = "7cc42012a7c2099f80064d228feb8d44"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:git"
-rev = "63f9650"
-hash = "1e9bd86b7c9f88c74fda39efbf1dc966"
+rev = "d1c8baa"
+hash = "8372320741a15c08a43edf053c268ab1"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:mime-ext"
-rev = "63f9650"
-hash = "386f16763ac80eb24d0ff58fb31ad9e2"
+rev = "d1c8baa"
+hash = "d7467b0a216c9b1a43932bf15d8255c7"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:lsar"
-rev = "63f9650"
-hash = "d5453d4ab19b1a3ae21adccd715b2377"
+rev = "d1c8baa"
+hash = "e1a72978a7c0f9548c1e96be18deafaa"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:toggle-pane"
-rev = "63f9650"
-hash = "4af377a12d3800b24f3e7aa32267ae2c"
+rev = "d1c8baa"
+hash = "e218acb81244ecc0dc37f58b72c69eef"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-enter"
-rev = "63f9650"
-hash = "be2bd6442d806a0d3370198f3e222bcf"
+rev = "d1c8baa"
+hash = "afb539b8877c08a04129af6d90aa395c"
 
 [[plugin.deps]]
 use = "boydaihungst/file-extra-metadata"
-rev = "ec035d6"
-hash = "b23b7db6beb2854a689c648a38843f8c"
+rev = "116a460"
+hash = "e65cd1dea5feb9ca58c33b870ca3070"
 
 [flavor]
 deps = []
