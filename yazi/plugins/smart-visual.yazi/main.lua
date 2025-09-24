@@ -29,35 +29,35 @@ local info = function (content, level)
 	})
 end
 
-local entry = function ()
+local function get_ext(file)
+	return file.cha.is_dir and "dir" or string.match(file.url.name, '%.([^.]+)$') -- check extension from the file name
+end
+
+local function entry()
 	local folder      = cx.active.current
-	info(folder)
 	local filelist    = folder.files
 	local hovered     = folder.hovered
-	local ext         = string.match(hovered.url:name(), '%.([^.]+)$') -- check extension from the file name
-	local hovered_ext = hovered.cha.is_dir and "directory" or ext
+	local hovered_ext = get_ext(hovered)
 
-	info('test', 'error')
 	local init_pos = folder.cursor
+
+	-- remove existing selected
+	ya.emit("escape", { all = true })
+	ya.emit("unyank", {})
+
+	-- select files which has same extension with hovered file
 	ya.emit("arrow", {'top'})
-	if hovered_ext == 'directory' then
-		for _, file in ipairs(filelist) do
-			if file.cha.is_dir then
-				ya.emit("toggle", {state = 'on'})
-			end
-			ya.emit("arrow", {1})
+	for _, file in  ipairs(filelist) do
+		local ext = get_ext(file)
+		if ext == hovered_ext then
+			ya.emit('toggle', {state = 'on'})
 		end
-	else
-		for _, file in ipairs(filelist) do
-			ext = string.match(file.url:name(), '%.([^.]+)$') -- check extension from the file name
-			if ext == hovered_ext then
-				ya.emit("toggle", {state = 'on'})
-			end
-			ya.emit("arrow", {1})
-		end
+		ya.emit('arrow', {1})
 	end
-	ya.emit("arrow", {'top'})
-	ya.emit("arrow", {init_pos})
+
+	-- restore cursor to initial state
+	ya.emit('arrow', {'top'})
+	ya.emit('arrow', {init_pos})
 end
 
 return {entry = entry}
