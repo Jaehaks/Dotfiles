@@ -15,6 +15,7 @@
 # if qutebrowser is opened with --baredir flag, it must be needed
 config.load_autoconfig()
 
+config.set('content.blocking.enabled', False) # it would be faster?
 
 
 config.set('url.start_pages', ['https://www.google.com']) # startup page
@@ -48,6 +49,7 @@ config.set('colors.tabs.selected.odd.fg', '#000000')
 config.set('colors.webpage.preferred_color_scheme', 'dark') # if the webpage supports dark mode, it apply
 config.set('colors.webpage.darkmode.enabled', True)
 config.set('colors.webpage.darkmode.policy.images', 'smart-simple')
+c.colors.webpage.bg = 'black' # remove white page flashing when switching pages
 
 # session
 config.set('auto_save.session', False)
