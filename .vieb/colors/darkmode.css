@@ -190,7 +190,7 @@ body:not(#app) ::placeholder {color: var(--placeholder-text);}
 #tabs {display: flex;overflow: hidden;max-width: 100vw;width: 100vw;z-index: 2;gap: .1em;}
 #tabs > span {color: var(--fg);background: var(--tab-background);display: flex;flex: 1;overflow: hidden;white-space: nowrap;height: 2em;counter-increment: tab-counter 1;}
 #tabs > span:before {content: counter(tab-counter) ": ";margin: auto .25em auto .25em;min-width: 1em;color: #50FA7B;font-weight: bold;}
-#tabs > span > img {margin: auto .5em auto .25em;padding: 0;height: 1.5em;width: 1.5em;min-height: 1.5em;min-width: 1.5em;pointer-events: none;}
+#tabs > span > img {margin: auto .5em auto .25em;padding: 0;height: 1em;width: 1em;min-height: 1em;min-width: 1em;pointer-events: none;}
 #tabs > span > span {margin: auto 0 auto 0;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
 #tabs .visible-tab {background: var(--visible-tab);color: #fff;font-weight: bold;border: solid 1px #45a0ff;}
 #tabs [suspended] {background: var(--tab-suspended);}
