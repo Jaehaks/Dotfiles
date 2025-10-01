@@ -24,7 +24,7 @@
     --fg: #eee;
     --tab-background: #444;
     --tab-suspended: #000;
-    --visible-tab: #666;
+    --visible-tab: #1f3050;
     --tab-split: #f90;
     --tab-audio: #09f;
     --tab-muted: #fff;
@@ -192,7 +192,7 @@ body:not(#app) ::placeholder {color: var(--placeholder-text);}
 #tabs > span:before {content: counter(tab-counter) ": ";margin: auto .25em auto .25em;min-width: 1em;color: #50FA7B;font-weight: bold;}
 #tabs > span > img {margin: auto .5em auto .25em;padding: 0;height: 1.5em;width: 1.5em;min-height: 1.5em;min-width: 1.5em;pointer-events: none;}
 #tabs > span > span {margin: auto 0 auto 0;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
-#tabs .visible-tab {background: var(--visible-tab);}
+#tabs .visible-tab {background: var(--visible-tab);color: #fff;font-weight: bold;border: solid 1px #45a0ff;}
 #tabs [suspended] {background: var(--tab-suspended);}
 #tabs.multiple #current-tab {border-left: solid .3em var(--tab-split);}
 #tabs .pinned {min-width: 2em !important;max-width: 2em;width: 2em;padding: 0;}
