@@ -1,0 +1,363 @@
+" Options
+
+" adblock
+set adblocker=static
+set adblockernotifications=all
+
+" external / download
+set externalcommand=
+set vimcommand=nvim
+set nocleardownloadsoncompleted
+set cleardownloadsonquit
+" -- don't ask
+set downloadmethod=confirm
+set downloadpath=~/Desktop/
+set pdfbehavior=view
+
+" font
+set guifontsize=18
+
+" key completion window
+set mapsuggest=9000000000000000
+set mapsuggestposition=bottomleft
+
+" restore tabs at startup
+set restoretabs=all
+
+" appearance (not work?)
+set windowfullscreen=restore
+set windowmaximize=restore
+set windowposition=restore
+set windowsize=restore
+set windowtitle="%app - %title"
+set noshowcmd
+set shell=cmd
+set smartcase
+set spell
+
+" agent - to login google
+set useragent=%filefox
+
+" windows management
+set closablepinnedtabs
+set tabclosefocus=previous
+set notabcycle
+set tabnewposition=right
+set tabreopenposition=right
+set keeprecentlyclosed
+" -- quit if last window is closed
+set quitonlasttabclose
+
+" split
+set splitbelow
+set splitright
+
+" darkmode
+set nodarkreader
+set darkreaderfg=#e8e6e3
+set darkreaderbg=#181a1b
+set darkreaderbrightness=100
+set darkreadercontrast=100
+set darkreadergrayscale=0
+set darkreadermode=dark
+set darkreadersepia=0
+set darkreadertextstroke=0
+" search
+set searchengine=["https://www.google.com/search?q=%s"]
+set ignorecase
+set incsearch
+" copy
+set encodeurlcopy=nospaces
+set encodeurlext=nospaces
+" notify
+set notificationduration=5000
+set notificationforpermissions=all
+set notificationforsystemcommands=errors
+set notificationlimitsmall=3
+set notificationposition=bottomright
+
+" mouse
+set mouse=all
+set mousedisabledbehavior=nothing
+set nomousefocus
+set mousenewtabswitch
+set mousevisualmode=onswitch
+
+" special pages
+" -- replace current tab if it is new tab
+set replacespecial=newtab
+set replacestartup=never
+
+
+
+
+
+
+set dialogalert=notifyblock
+set dialogconfirm=notifyallow
+set dialogprompt=notifyblock
+set explorehist=persist
+set favicons=session
+set followchars=alpha
+set followfallbackaction=filter
+set followlabelposition=outsiderighttop
+set follownewtabswitch
+set guifullscreennavbar=oninput
+set guifullscreentabbar=onupdate
+set guihidetimeout=2000
+set guinavbar=always
+set guiscrollbar=always
+set guitabbar=always
+set historyperpage=100
+set inputfocusalignment=rememberend
+set insertleavetimeout=0
+set loadingindicator=spinner
+set markposition=newtab
+set markpositionshifted=default
+set maxmapdepth=10
+set menupage=elementasneeded
+set menusuggest=both
+set menuvieb=both
+set mintabwidth=28
+set nativenotification=never
+set nativetheme=dark
+set newtaburl=
+set permissioncamera=block
+set permissioncertificateerror=block
+set permissionclipboardread=block
+set permissionclipboardwrite=allow
+set permissionclosepage=allow
+set permissiondisplaycapture=block
+set permissionfullscreen=allow
+set permissiongeolocation=block
+set permissionhid=block
+set permissionidledetection=block
+set permissionmediadevices=block
+set permissionmicrophone=block
+set permissionmidi=block
+set permissionmidisysex=block
+set permissionnotifications=block
+set permissionopenexternal=ask
+set permissionpersistentstorage=block
+set permissionpointerlock=block
+set permissionscreenwakelock=block
+set permissionsensors=block
+set permissionserial=block
+set permissionunknown=block
+set permissionusb=block
+set permissionwindowmanagement=block
+set pointerposlocalid=domain
+set pointerpostype=casing
+set noredirecttohttp
+set noreloadtaboncrash
+set requesttimeout=20000
+set scrollposlocalid=domain
+set scrollpostype=casing
+set searchemptyscope=global
+set searchpointeralignment=left
+set searchscope=global
+set nosponsorblock
+set suggestbouncedelay=100
+set suggestcommands=9000000000000000
+set suggesttopsites=10
+set suspendbackgroundtab
+set suspendonrestore=regular
+set suspendtimeout=0
+set tabopenmuted=never
+set taboverflow=scroll
+set tabreopenmuted=remember
+set tabreopenposition=right
+set timeout
+set timeoutlen=2000
+set translateapi=auto
+set translatekey=
+set translatelang=en-us
+set translateurl=https://api-free.deepl.com/v2/
+set nouserscript
+set nouserstyle
+
+" use user colorschem
+" 1) follow hint font size increase
+colorscheme darkmode
+
+" clear all maps
+" mapclear!
+
+" scrolling
+nmap j <scrollUp>
+nmap k <scrollDown>
+nmap ] <nextPage>
+nmap [ <previousPage>
+nmap <C-p> <increasePageNumber>
+nmap <C-n> <decreasePageNumber>
+
+" window managing
+nmap q <:close>
+nmap wq <:lclose>
+nmap we <:rclose>
+nmap ww <:lclose><:rclose>
+
+" tab
+nmap <C-j> <moveTabBackward>
+nmap <C-k> <moveTabForward>
+nmap J <previousTab>
+nmap K <nextTab>
+nmap u <reopenTab>
+nmap T <openNewTabWithCurrentUrl><CR>
+nmap o <toExploreMode><BS>
+nmap O <:tabnew><toExploreMode>
+nmap go <toExploreMode><End>
+nmap g0 <:buffer 0>
+nmap g$ <:buffer -1>
+nmap <C-Tab> <:buffer #>
+nmap p <openFromClipboard>
+nmap P <:tabnew><openFromClipboard>
+nmap r <refreshTab>
+nmap R <refreshTabWithoutCache>
+nmap H <backInHistory>
+nmap L <forwardInHistory>
+
+" using g command
+unmap g<C-a>
+unmap g<C-x>
+nmap gt <toggleTOC>
+" -- discard tailed slash in url
+nmap gu <toParentUrl>
+nmap gU <toRootUrl>
+nmap gh <:history>
+
+" split view
+nmap <C-w><C-n> <pageToClipboard><:split><openFromClipboard>
+nmap <C-w><C-m> <pageToClipboard><:vsplit><openFromClipboard>
+nmap <C-w><C-j> <toTopSplitWindow>
+nmap <C-w><C-k> <toBottomSplitWindow>
+nmap <C-w><C-J> <topHalfSplitWindow>
+nmap <C-w><C-K> <bottomHalfSplitWindow>
+" -- use it rather than close, it doesn't support split close
+nmap <C-w><C-o> <:only>
+
+" mark
+nmap m<Any> <storeScrollPos>
+nmap '<Any> <restoreScrollPos>
+" -- page mark
+nmap M<Any> <makeMark>
+nmap "<Any> <restoreMark>
+" -- pointer mark
+pmap a<Any> <p.storePos>
+vmap a<Any> <p.storePos>
+
+" zoom
+nmap = <zoomReset>
+nmap + <zoomIn>
+nmap - <zoomOut>
+
+" using url
+unmap d
+nmap x <:set externalcommand="python %HOME%/.vieb/download_and_run.py"><openLinkExternal>
+nmap yf <startFollowCopyLink>
+nmap yy <pageToClipboard>
+nmap ym <pageToClipboardMarkdown>
+" -- download the url
+nmap D <DownloadLink>
+pmap yi <p.copyImage>
+pmap yy <p.copyLink>
+pmap D <p.downloadLink>
+
+" editing
+nmap gi <insertAtFirstInput>
+imap <A-e> <editWithVim>
+inoremap <CR> <CR><toNormalMode>
+cmap <C-]> <toNormalMode>
+emap <C-]> <toNormalMode>
+imap <C-]> <toNormalMode>
+pmap <C-]> <toNormalMode>
+smap <C-]> <toNormalMode>
+vmap <C-]> <toNormalMode>
+
+" others
+nmap <C-A-p> <:print>
+" -- toggle dark mode
+" -- some insert box doesn't show their characters in dark mode
+nmap d <:set darkreader!>
+
+
+
+
+
+" command mode
+cmap <A-e> <editWithVim>
+cmap <C-a> <Home>
+cmap <C-e> <End>
+cmap <C-h> <Left>
+cmap <C-l> <Right>
+cmap <C-A-h> <C-Left>
+cmap <C-A-l> <C-Right>
+cmap <C-d> <Del>
+cmap <C-j> <prevSuggestion>
+cmap <C-k> <nextSuggestion>
+
+" search mode
+smap <A-e> <editWithVim>
+smap <C-a> <Home>
+smap <C-e> <End>
+smap <C-h> <Left>
+smap <C-l> <Right>
+smap <C-A-h> <C-Left>
+smap <C-A-l> <C-Right>
+smap <C-d> <Del>
+" -- remove highlight
+nnoremap <Esc> <Esc><emptySearch>
+
+" explorer mode
+emap <A-e> <editWithVim>
+emap <C-a> <Home>
+emap <C-e> <End>
+emap <C-h> <Left>
+emap <C-l> <Right>
+emap <C-A-h> <C-Left>
+emap <C-A-l> <C-Right>
+emap <C-d> <Del>
+emap <C-j> <prevSuggestion>
+emap <C-k> <nextSuggestion>
+emap <C-p> <exploreHistoryPrevious>
+emap <C-n> <exploreHistoryNext>
+emap <Tab> <nextSuggestionSection>
+emap <S-Tab> <prevSuggestionSection>
+
+" pointer mode
+punmap e
+nmap v <p.start>
+
+pmap <CR> <p.leftClick>
+pmap <S-CR> <p.newtabLink>
+pmap r <p.rightClick>
+pmap i <p.insertAtPosition>
+pmap j <p.moveUp>
+pmap k <p.moveDown>
+pmap J <p.scrollUp>
+pmap K <p.scrollDown>
+pmap <C-j> <p.moveSlowUp>
+pmap <C-k> <p.moveSlowDown>
+pmap M <p.centerOfView>
+pmap v <p.startVisualSelect>
+
+vmap c <toNormalMode><p.start>
+vmap r <p.rightClick>
+vmap j <p.moveUp>
+vmap k <p.moveDown>
+vmap J <p.scrollUp>
+vmap K <p.scrollDown>
+vmap <C-j> <p.moveSlowUp>
+vmap <C-k> <p.moveSlowDown>
+vmap M <p.centerOfView>
+vmap y <p.copyText><toNormalMode>
+vmap o <p.openText><toNormalMode>
+vmap ss <p.searchText><toNormalMode>
+vmap sh <p.splitText><toNormalMode>
+vmap sv <p.vsplitText><toNormalMode>
+vmap * <p.searchText><toNormalMode>
+
+
+
+" Viebrc generated by Vieb
+" vim: ft=vim
