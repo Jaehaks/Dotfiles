@@ -49,9 +49,15 @@ set useragent=%filefox
 
 " windows management
 set closablepinnedtabs
-set tabclosefocus=previous
+set tabclosefocus=left
 set notabcycle
 set tabnewposition=right
+set tabreopenposition=right
+" -- mute for new tab
+set tabopenmuted=never
+set taboverflow=scroll
+" -- mute for reopen tab
+set tabreopenmuted=remember
 set tabreopenposition=right
 set keeprecentlyclosed
 " -- quit if last window is closed
