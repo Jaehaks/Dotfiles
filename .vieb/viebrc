@@ -129,42 +129,18 @@ set menuvieb=both
 set replacespecial=newtab
 set replacestartup=never
 
-
-
-
-
-
-set dialogalert=notifyblock
-set dialogconfirm=notifyallow
-set dialogprompt=notifyblock
-set explorehist=persist
-set favicons=session
-set followchars=alpha
-set followfallbackaction=filter
-set followlabelposition=outsiderighttop
-set follownewtabswitch
-set guifullscreennavbar=oninput
-set guifullscreentabbar=onupdate
-set guihidetimeout=2000
-set guinavbar=always
-set guiscrollbar=always
-set guitabbar=always
-set historyperpage=100
-set inputfocusalignment=rememberend
-set insertleavetimeout=0
-set loadingindicator=spinner
-set markposition=newtab
-set markpositionshifted=default
-set maxmapdepth=10
-set menupage=elementasneeded
-set menusuggest=both
-set menuvieb=both
-set mintabwidth=28
-set nativenotification=never
-set nativetheme=dark
+" favorite list of new tab pages"
+set favoritepages+=www.google.com
+set favoritepages+=www.naver.com
+set favoritepages+=www.youtube.com
+set favoritepages+=www.github.com
+set favoritepages+=gemini.google.com/app
+set favoritepages+=www.perplexity.ai
+set favoritepages+=claude.ai/new
+" -- nothing no new tab
 set newtaburl=
-set permissioncamera=block
-set permissioncertificateerror=block
+" -- nothing suggestion site on new tab page
+set suggesttopsites=0
 set permissionclipboardread=block
 set permissionclipboardwrite=allow
 set permissionclosepage=allow
