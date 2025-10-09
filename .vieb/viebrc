@@ -244,8 +244,21 @@ nmap r <refreshTab>
 nmap R <refreshTabWithoutCache>
 nmap H <backInHistory>
 nmap L <forwardInHistory>
+nmap <C-m> <:mute>
 
 " using g command
+" -- toggle sourceview
+unmap gF
+unmap gf
+" -- toggle markview viewer
+unmap gM
+" -- toggle reader view : don't know
+unmap gr
+" -- toggle root/parent subdomain : don't know
+unmap gs
+unmap gS
+" -- previousTab
+unmap gT
 unmap g<C-a>
 unmap g<C-x>
 nmap gt <toggleTOC>
@@ -253,6 +266,9 @@ nmap gt <toggleTOC>
 nmap gu <toParentUrl>
 nmap gU <toRootUrl>
 nmap gh <:history>
+nmap gm <menuOpen>
+mmap <C-j> <menuUp>
+mmap <C-k> <menuDown>
 
 " split view
 nmap <C-w><C-n> <pageToClipboard><:split><openFromClipboard>
