@@ -271,14 +271,52 @@ mmap <C-j> <menuUp>
 mmap <C-k> <menuDown>
 
 " split view
+unmap <C-w>+
+unmap <C-w>-
+unmap <C-w><C->>
+unmap <C-w><C-b>
+unmap <C-w><C-c>
+unmap <C-w><C-H>
+unmap <C-w><C-J>
+unmap <C-w><C-K>
+unmap <C-w><C-L>
+unmap <C-w><C-lt>
+unmap <C-w><C-p>
+unmap <C-w><C-q>
+unmap <C-w><C-R>
+unmap <C-w><C-r>
+unmap <C-w><C-s>
+unmap <C-w><C-v>
+unmap <C-w><C-t>
+unmap <C-w>lt
+unmap <C-w>>
+unmap <C-w>b
+unmap <C-w>c
+unmap <C-w>H
+unmap <C-w>J
+unmap <C-w>K
+unmap <C-w>L
+unmap <C-w>p
+unmap <C-w>q
+unmap <C-w>R
+unmap <C-w>r
+unmap <C-w>s
+unmap <C-w>t
+unmap <C-w>v
+" -- open current page with new split
 nmap <C-w><C-n> <pageToClipboard><:split><openFromClipboard>
+nmap <C-w>n 	<pageToClipboard><:split><openFromClipboard>
 nmap <C-w><C-m> <pageToClipboard><:vsplit><openFromClipboard>
+nmap <C-w>m 	<pageToClipboard><:vsplit><openFromClipboard>
 nmap <C-w><C-j> <toTopSplitWindow>
 nmap <C-w><C-k> <toBottomSplitWindow>
 nmap <C-w><C-J> <topHalfSplitWindow>
 nmap <C-w><C-K> <bottomHalfSplitWindow>
 " -- use it rather than close, it doesn't support split close
 nmap <C-w><C-o> <:only>
+nmap <C-w>x <exchangeSplitWindow>
+" -- <C-w><C-w> <C-w><C-W> : to next/previous split window
+
 
 " mark
 nmap m<Any> <storeScrollPos>
