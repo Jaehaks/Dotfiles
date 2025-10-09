@@ -319,9 +319,11 @@ nmap <C-w>x <exchangeSplitWindow>
 
 
 " mark
+" -- scroll mark, you can see list that :scrollpos
 nmap m<Any> <storeScrollPos>
 nmap '<Any> <restoreScrollPos>
-" -- page mark
+" -- page mark (like bookmark),   if you open with shift+<Any>, it opens in new tab
+"    you can see list that :marks
 nmap M<Any> <makeMark>
 nmap "<Any> <restoreMark>
 " -- pointer mark
