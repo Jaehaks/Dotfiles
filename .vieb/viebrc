@@ -171,20 +171,14 @@ set permissionsallowed+=claude.ai~mediadevices
 set requesttimeout=10000
 " -- block sponsor ad on youtube"
 set sponsorblock
-set noredirecttohttp
-set noreloadtaboncrash
-set requesttimeout=20000
-set scrollposlocalid=domain
-set scrollpostype=casing
-set searchemptyscope=global
-set searchpointeralignment=left
-set searchscope=global
-set nosponsorblock
-set suggestbouncedelay=100
-set suggestcommands=9000000000000000
-set suggesttopsites=10
+
+
+" suspends
+" -- pause background tab to memory
 set suspendbackgroundtab
+" -- not load all restoretab to faster startup time
 set suspendonrestore=regular
+" -- pause timeout when you don't use the tab (not use this now)
 set suspendtimeout=0
 set tabopenmuted=never
 set taboverflow=scroll
