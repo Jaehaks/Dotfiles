@@ -104,9 +104,15 @@ set encodeurlext=nospaces
 " notify
 set notificationduration=5000
 set notificationforpermissions=all
+" -- for debug
 set notificationforsystemcommands=errors
 set notificationlimitsmall=3
 set notificationposition=bottomright
+" -- use vieb notification instead of system
+set nativenotification=never
+set dialogalert=notifyblock
+set dialogconfirm=notifyallow
+set dialogprompt=notifyblock
 
 " mouse
 set mouse=all
