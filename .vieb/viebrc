@@ -89,7 +89,15 @@ set searchwords+=gs~https://scholar.google.com/scholar?q=%s
 set searchwords+=nd~https://dict.naver.com/dict.search?dicQuery=%s&query=%s
 set searchwords+=nm~https://namu.wiki/Go?q=%s
 set ignorecase
-set incsearch
+set noincsearch
+" -- if <emptySearch>, remove searched word in query both global and local
+set searchemptyscope=both
+" -- if you enter 'pointer mode' while search word is highlighted, press 'n' or 'N'
+"  then pointer will stick to left of search word to convenient visualization
+set searchpointeralignment=left
+" -- if you enter 'n' after <useEnterData>(<CR>), it starts search from last
+"  searched word without moving focus.
+set searchscope=inclocal
 " copy
 set encodeurlcopy=nospaces
 set encodeurlext=nospaces
