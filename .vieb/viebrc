@@ -200,6 +200,9 @@ set translateurl=https://api-free.deepl.com/v2/
 " 1) follow hint font size increase
 colorscheme darkmode
 
+" user commands
+unmap s
+
 " clear all maps
 " mapclear!
 
@@ -212,6 +215,9 @@ nmap <C-p> <increasePageNumber>
 nmap <C-n> <decreasePageNumber>
 
 " window managing
+unmap q<Any>
+unmap q<C-[>
+unmap q<Esc>
 nmap q <:close>
 nmap wq <:lclose>
 nmap we <:rclose>
