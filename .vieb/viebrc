@@ -180,11 +180,9 @@ set suspendbackgroundtab
 set suspendonrestore=regular
 " -- pause timeout when you don't use the tab (not use this now)
 set suspendtimeout=0
-set tabopenmuted=never
-set taboverflow=scroll
-set tabreopenmuted=remember
-set tabreopenposition=right
-set timeout
+
+" don't timeout close for pressing key
+set notimeout
 set timeoutlen=2000
 set translateapi=auto
 set translatekey=
