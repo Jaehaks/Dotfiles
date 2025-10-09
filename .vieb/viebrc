@@ -79,7 +79,15 @@ set darkreadersepia=0
 set darkreadertextstroke=0
 set nativetheme=dark
 " search
+" -- default search engine
 set searchengine=["https://www.google.com/search?q=%s"]
+" -- additional search engines
+set searchwords+=y~youtube.com/results?search_query=%s
+set searchwords+=n~https://search.naver.com/search.naver?query=%s
+set searchwords+=gh~https://github.com/search?q=%s
+set searchwords+=gs~https://scholar.google.com/scholar?q=%s
+set searchwords+=nd~https://dict.naver.com/dict.search?dicQuery=%s&query=%s
+set searchwords+=nm~https://namu.wiki/Go?q=%s
 set ignorecase
 set incsearch
 " copy
