@@ -226,6 +226,8 @@ nmap ww <:lclose><:rclose>
 " tab
 nmap <C-j> <moveTabBackward>
 nmap <C-k> <moveTabForward>
+nmap <A-n> <previousTab>
+nmap <A-m> <nextTab>
 nmap J <previousTab>
 nmap K <nextTab>
 nmap u <reopenTab>
