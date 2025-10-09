@@ -16,8 +16,15 @@ set downloadmethod=confirm
 set downloadpath=~/Desktop/
 set pdfbehavior=view
 
-" font
+" gui
 set guifontsize=18
+" -- hide timeout navbar / tabbar in fullscreen mode
+set guihidetimeout=2000
+set guinavbar=always
+set guiscrollbar=always
+set guitabbar=always
+" -- page loading progress bar + spinner mark on tabbar
+set loadingindicator=all
 
 " key completion window
 set mapsuggest=9000000000000000
