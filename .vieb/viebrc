@@ -156,16 +156,21 @@ set follownewtabswitch
 set markposition=open
 " -- if you restore tab with "+shift+<Any>, open in new tab
 set markpositionshifted=newtab
+
+" permission
+set permissiongeolocation=allow
+set permissionmicrophone=ask
+set permissionnotifications=allow
 set permissionpersistentstorage=block
-set permissionpointerlock=block
-set permissionscreenwakelock=block
-set permissionsensors=block
-set permissionserial=block
-set permissionunknown=block
-set permissionusb=block
-set permissionwindowmanagement=block
-set pointerposlocalid=domain
-set pointerpostype=casing
+set permissionpointerlock=ask
+" -- to login naver, sensors allowed
+set permissionsallowed+=naver.com~sensors
+" -- to login claude, but only email login is allowed, not google id
+set permissionsallowed+=claude.ai~mediadevices
+" -- stopping page load automatically timeout
+set requesttimeout=10000
+" -- block sponsor ad on youtube"
+set sponsorblock
 set noredirecttohttp
 set noreloadtaboncrash
 set requesttimeout=20000
