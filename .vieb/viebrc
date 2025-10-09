@@ -150,11 +150,12 @@ set followlabelposition=outsidebottomright
 " -- focus to new tab if you enter using 'F'
 " -- if you remain pressing 'shift', the focus remains current tab and you can open continuous tabs
 set follownewtabswitch
-set permissionmicrophone=block
-set permissionmidi=block
-set permissionmidisysex=block
-set permissionnotifications=block
-set permissionopenexternal=ask
+
+" mark
+" -- if restoretab from 'M<Any>', open in current tab. It is like bookmark
+set markposition=open
+" -- if you restore tab with "+shift+<Any>, open in new tab
+set markpositionshifted=newtab
 set permissionpersistentstorage=block
 set permissionpointerlock=block
 set permissionscreenwakelock=block
