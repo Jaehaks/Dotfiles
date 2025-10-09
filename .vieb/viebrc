@@ -120,6 +120,9 @@ set mousedisabledbehavior=nothing
 set nomousefocus
 set mousenewtabswitch
 set mousevisualmode=onswitch
+set menupage=elementasneeded
+set menusuggest=never
+set menuvieb=both
 
 " special pages
 " -- replace current tab if it is new tab
