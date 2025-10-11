@@ -22,8 +22,9 @@ mklink /H .\keys.config %HOME%\.config\Dotfiles\sioyek\development\keys.config
 mklink /H .\prefs.config %HOME%\.config\Dotfiles\sioyek\development\prefs.config
 ```
 
-
-> [!CAUTION] Caution: link with persist folder
+> [!CAUTION]
+> **link with persist folder**
+>
 > `apps/sioyek/current/keys_user.config` file is hard linked `persist/sioyek/keys_user.config`.
 > Modifying the file like removing file in `persist/` breaks the link between these two files.
 > The possible way to edit is two method.
