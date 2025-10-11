@@ -1,20 +1,25 @@
 ## comment
 
 Vim like pdf file viewer like zathura of linux
+It is guide for usage of sioyek from building development branch.
 
 `In Windows`
 
 ```powershell
-# step1 - copy development release file
-mklink /H %HOME%\user_installed\sioyek_v8d173d9_250709\keys_user.config %HOME%\.config\Dotfiles\sioyek\development\keys_user.config
-mklink /H %HOME%\user_installed\sioyek_v8d173d9_250709\prefs_user.config %HOME%\.config\Dotfiles\sioyek\development\prefs_user.config
-# it needs to change default key config to remove some keys
-mklink /H %HOME%\user_installed\sioyek_v8d173d9_250709\keys.config %HOME%\.config\Dotfiles\sioyek\development\keys.config
-mklink /H %HOME%\user_installed\sioyek_v8d173d9_250709\prefs.config %HOME%\.config\Dotfiles\sioyek\development\prefs.config
+# step1 - make symbolic link from directory which has executable program
+# open terminal in admin mode
+# If the executable path is %HOME%\user_installed\sioyek-release-windows-xxxxxxx\
+# cd to the parent directory of the path. Then make link like this.
+mklink /D .\sioyek_current .\sioyek-release-windows-xxxxxxx
 
-# step2
-nvim %HOME%\user_installed\sioyek_v8d173d9_250709\keys.config
-	# comment out `goto_toc t`
+# step2 - copy config file
+# cd to the sioyek_current\ link directory which is created
+mklink /H .\keys_user.config %HOME%\.config\Dotfiles\sioyek\development\keys_user.config
+mklink /H .\prefs_user.config %HOME%\.config\Dotfiles\sioyek\development\prefs_user.config
+# it needs to change default key config to remove some keys also.
+# like `goto_toc t`
+mklink /H .\keys.config %HOME%\.config\Dotfiles\sioyek\development\keys.config
+mklink /H .\prefs.config %HOME%\.config\Dotfiles\sioyek\development\prefs.config
 ```
 
 
@@ -119,12 +124,30 @@ nvim %HOME%\user_installed\sioyek_v8d173d9_250709\keys.config
 
 
 5) Execute git clone `development branch` of sioyek
-	- I installed to `C:\Users\USER\user_installed\sioyek`
+	- I installed to `C:\Users\USER\user_installed\sioyek_build`
 	```powershell
-		git clone --recursive -b development https://github.com/ahrm/sioyek.git
+	git clone --recursive -b development https://github.com/ahrm/sioyek.git sioyek_build
+	```
+	- If you want to update this repo later, you need to do it recursively in `sioyek_build` directory.
+	```powershell
+	git pull --rebase
+	git submodule update --init --recursive
+	```
+	- If you meet conflict, You need force synchronization with the contents of the remote repository.
+	```powershell
+	# reset local repository
+	git reset --hard HEAD
+	git clean -df
+	# fetch origin repo
+	git fetch origin
+	git reset --hard origin/development
+	# update git repo submodules
+	git submodule update --init --recursive --force
 	```
 
-6) Modify `build_windows.bat` in `sioyek/` like this
+
+6) Modify `build_windows.bat` in `sioyek_build/` like this.
+   I attached modified version of `build_windows.bat` also.
 	```powershell
 		msbuild -maxcpucount mupdf.sln /m /property:Configuration=Debug /property:MultiProcessorCompilation=true /property:Platform=x64
 		msbuild -maxcpucount mupdf.sln /m /property:Configuration=Release /property:MultiProcessorCompilation=true /property:Platform=x64
@@ -151,7 +174,7 @@ nvim %HOME%\user_installed\sioyek_v8d173d9_250709\keys.config
 7) Open `Developer Command Prompt` in `windows-terminal` and build source
 	- `Developer Command Prompt` registers commands to build like `msbuild`, `nmake` etc..
 	```powershell
-		cd <path>/sioyek/
+		cd <path>/sioyek_build/
 
 		# if you want to non-portable
 		build_windows.bat
