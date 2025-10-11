@@ -47,7 +47,9 @@ mklink /H .\prefs.config %HOME%\.config\Dotfiles\sioyek\development\prefs.config
 > applied to file in `persist/` or `Dotfiles/`
 
 
-> [!CAUTION] Caution: check this file after editing other location
+> [!CAUTION]
+> **check this file after editing other location**
+>
 > hard link cannot means synchronous relationship. The changes are applied when I open the file.
 > **so if you edit file in `apps/` to show immediate change in sioyek, you must open config file in `Dotfiles`
 > before git commit.**
@@ -65,7 +67,7 @@ mklink /H .\prefs.config %HOME%\.config\Dotfiles\sioyek\development\prefs.config
 
 ## build from source
 
-> [!IMPORTANT] Important:
+> [!IMPORTANT]
 > 1) You need to install visual studio build tools with MSVC v142 for VS2019 because `mupdf` needs it to compile.
 > 2) You need to install Qt with MSVC 2022 or 2019 64bit compiler to use MSVC for `qmake`.
 > 3) You need to change
