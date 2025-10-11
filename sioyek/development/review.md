@@ -25,24 +25,26 @@ mklink /H .\prefs.config %HOME%\.config\Dotfiles\sioyek\development\prefs.config
 > [!CAUTION]
 > **link with persist folder**
 >
-> `apps/sioyek/current/keys_user.config` file is hard linked `persist/sioyek/keys_user.config`.
-> Modifying the file like removing file in `persist/` breaks the link between these two files.
+> `apps/sioyek/current/keys_user.config` file is hard linked `persist/sioyek/keys_user.config`. \
+> Modifying the file like removing file in `persist/` breaks the link between these two files. \
 > The possible way to edit is two method.
+>
 > 1) **Concatenate the contents** of file in `persist/` without file manipulating.
 >    but it break the synchronization between two files.
 > 2) Make **symbolic link** in `persist/` and reconnect with `apps/` using `scoop reset sioyek`
 > 3) Make **hard link** in `persist/` and reconnect with `apps/` using `scoop reset sioyek`
+>
 > **I choose 3)**
 >
 > Sioyek reloads config files in `apps/sioyek/current/` automatically immediately whenever the *_user.config file is edited.
-> But if config file in `persist/sioyek/` is edited, this hard link is little weird.
+> But if config file in `persist/sioyek/` is edited, this hard link is little weird. \
 > Synchronization doesn't execute immediately. Changes of files in `apps/` occurs when the file in `apps/`
 > is opened or sioyek instance is restarted.
 >
 > Method 2) has a disadvantage. Config doesn't reload automatically even though I edit the config file in `apps/`
-> It must be applied after sioyek restart.
+> It must be applied after sioyek restart. \
 > Method 3) is similar like 2). Editing file in `persist/` or `Dotfiles/` will be not applied immediately
-> until the config file in `apps/` is opened or sioyek restarts.
+> until the config file in `apps/` is opened or sioyek restarts. \
 > But method 3) can apply immediate change if we edit the config file in `apps/` directly and this change will be
 > applied to file in `persist/` or `Dotfiles/`
 
@@ -50,7 +52,7 @@ mklink /H .\prefs.config %HOME%\.config\Dotfiles\sioyek\development\prefs.config
 > [!CAUTION]
 > **check this file after editing other location**
 >
-> hard link cannot means synchronous relationship. The changes are applied when I open the file.
+> hard link cannot means synchronous relationship. The changes are applied when I open the file. \
 > **so if you edit file in `apps/` to show immediate change in sioyek, you must open config file in `Dotfiles`
 > before git commit.**
 
@@ -107,7 +109,7 @@ mklink /H .\prefs.config %HOME%\.config\Dotfiles\sioyek\development\prefs.config
 	* _Required packages_
 		- [ ] Qt
 			- [ ] Qt 6.8.3
-				- [-] MinGW 13.1.0 64bit (disable)
+				- [ ] MinGW 13.1.0 64bit (disable)
 				- [x] MSVC 2022 64-bit (enable)
 				- [x] Additional Libraries (enable)
 			- [ ] Build Tools
@@ -115,13 +117,13 @@ mklink /H .\prefs.config %HOME%\.config\Dotfiles\sioyek\development\prefs.config
 	- `Additional Libraries` is required to detect library when `qmake` command is executed.
 		- For example, you can be in front of `texttospeech` error if you don't have additional libraries when `qmake` executes like this.
 		```powershell
-			Project ERROR: Unknown module(s) in QT: texttospeech
+		Project ERROR: Unknown module(s) in QT: texttospeech
 		```
 	- Register `<qt_install_path>\Qt\6.8.3\msvc2022_64\bin` in system `PATH`. (use `sysdm.cpl`)
 	- Check `qmake` and check the command is in `msvc2022_64` directory.
 	```powershell
-		@>> where qmake
-		C:\Users\USER\user_installed\Qt\6.8.3\msvc2022_64\bin\qmake.exe
+	@>> where qmake
+	C:\Users\USER\user_installed\Qt\6.8.3\msvc2022_64\bin\qmake.exe
 	```
 
 
@@ -149,26 +151,27 @@ mklink /H .\prefs.config %HOME%\.config\Dotfiles\sioyek\development\prefs.config
 	```
 
 
-6) Modify `build_windows.bat` in `sioyek_build/` like this.
+6) Modify `build_windows.bat` in `sioyek_build/` like this. \
    I attached modified version of `build_windows.bat` also.
 	```powershell
-		msbuild -maxcpucount mupdf.sln /m /property:Configuration=Debug /property:MultiProcessorCompilation=true /property:Platform=x64
-		msbuild -maxcpucount mupdf.sln /m /property:Configuration=Release /property:MultiProcessorCompilation=true /property:Platform=x64
+	msbuild -maxcpucount mupdf.sln /m /property:Configuration=Debug /property:MultiProcessorCompilation=true /property:Platform=x64
+	msbuild -maxcpucount mupdf.sln /m /property:Configuration=Release /property:MultiProcessorCompilation=true /property:Platform=x64
 
-		# below qmake chunk
-		msbuild -maxcpucount sioyek.vcxproj /m /property:Configuration=Release /property:Platform=x64
+	# below qmake chunk
+	msbuild -maxcpucount sioyek.vcxproj /m /property:Configuration=Release /property:Platform=x64
 
-		# you need to add "" to avoid syntax error
-		if "%1" == "portable" (
+	# you need to add "" to avoid syntax error
+	if "%1" == "portable" (
 	```
-	 **`/properfy:Platform=x64` must added to `msbuild` command.**
+
+	- **`/properfy:Platform=x64` must added to `msbuild` command.**
 		- Original scripts doesn't declare `Platform` property.
-		- If you use `visual studio` instead of `visual studio build tools` to build `sioyek/` or `mupdf/` project,
+		- If you use `visual studio` instead of `visual studio build tools` to build `sioyek/` or `mupdf/` project, \
 		  It will set the combination of platform `Release|x64` automatically. You can select them in drop box menu
 		- But If you use `visual studio build tools`, you must specify the `Platform` property.
-		- If you don't set `Platform` property, the combination of platform is set by `Release|Win32` automatically.
-		  It makes the build result is created in `mupdf/platform/win32/{Release,Debug}` instead of `mupdf/platform/win32/x64/{Release,Debug}`
-		  Because `LIBS` variable includes `mupdf/platform/win32/x64/{Release,Debug}` in `sioyek/pdf_viewer_build_config.pro`,
+		- If you don't set `Platform` property, the combination of platform is set by `Release|Win32` automatically. \
+		  It makes the build result is created in `mupdf/platform/win32/{Release,Debug}` instead of `mupdf/platform/win32/x64/{Release,Debug}` \
+		  Because `LIBS` variable includes `mupdf/platform/win32/x64/{Release,Debug}` in `sioyek/pdf_viewer_build_config.pro`, \
 		  you need to match the platform type.
 	- If you use the default `build_windows.bat` file and build by modifying `<AdditionalDependencies>`
 	  from `mupdf\platform\win32\x64\Release\libmupdf.lib` to `mupdf\platform\win32\Release\libmupdf.lib` in `sioyek.vcxproj`
@@ -177,13 +180,13 @@ mklink /H .\prefs.config %HOME%\.config\Dotfiles\sioyek\development\prefs.config
 7) Open `Developer Command Prompt` in `windows-terminal` and build source
 	- `Developer Command Prompt` registers commands to build like `msbuild`, `nmake` etc..
 	```powershell
-		cd <path>/sioyek_build/
+	cd <path>/sioyek_build/
 
-		# if you want to non-portable
-		build_windows.bat
+	# if you want to non-portable
+	build_windows.bat
 
-		# if you want to portable
-		build_windows.bat portable
+	# if you want to portable
+	build_windows.bat portable
 	```
 
 
