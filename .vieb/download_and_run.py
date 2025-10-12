@@ -1,8 +1,30 @@
-"""
+""" Summary
 take web link which indicates file like *.pdf.
 Some high-class pdf viewer like okular can open this web link file inherently but much of viewer don't.
 So Download the file temporally and show the file.
+"""
 
+import os
+import subprocess
+import sys
+import tempfile  # get temp directory
+
+import requests  # file download using http request
+
+""" User guide
+1) set 'download_path' as your vieb download path
+2) set 'cmd_map' as what you want to connect (extension - execution tool) pairs
+3) set shortcut in viebrc
+
+- It downloads current page if this page's filename ends with file extension.
+- At first, it find the filename in download path. If it exists, open it.
+- Secondly, it downloads the page to file in system temp directory by OS
+- and opens the file using related viewer from cmd_map.
+- After closing the file, the file in temp folder is removed.
+- If the file extension is not included in cmd_map, error occurs without download.
+"""
+
+""" About dealing errors
 There are 2 way to notice error to vieb.
 1) print(msg, file=sys.stderr)
 2) _ = sys.stderr.write(msg)
@@ -12,12 +34,6 @@ case 1) shows the error message with big floating window. You needs to close the
 case 2) shows the error message with small notice on the bottom right. It is gone after timeout.
 Because print() add '\n' automatically. if you add '\n' in sys.stderr.write(), it makes big floating window.
 """
-import os
-import subprocess
-import sys
-import tempfile  # get temp directory
-
-import requests  # file download using http request
 
 # set download_path
 download_path:str = os.path.join(os.path.expanduser('~'), 'Desktop')
