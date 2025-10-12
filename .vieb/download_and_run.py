@@ -2,6 +2,15 @@
 take web link which indicates file like *.pdf.
 Some high-class pdf viewer like okular can open this web link file inherently but much of viewer don't.
 So Download the file temporally and show the file.
+
+There are 2 way to notice error to vieb.
+1) print(msg, file=sys.stderr)
+2) _ = sys.stderr.write(msg)
+General print() function doesn't show message in vieb.
+
+case 1) shows the error message with big floating window. You needs to close the window using 'q'
+case 2) shows the error message with small notice on the bottom right. It is gone after timeout.
+Because print() add '\n' automatically. if you add '\n' in sys.stderr.write(), it makes big floating window.
 """
 import os
 import subprocess
@@ -38,7 +47,16 @@ class Args:
         """ set command by file extension """
         _, ext = os.path.splitext(self.filename)
         ext = ext.lower()
-        return cmd_map.get(ext, 'start') # get cmd from map, If not, 'use start'
+        if not ext:
+            _ = sys.stderr.write(f"ERROR : the filename '{self.filename}' doesn't have file extension.")
+            sys.exit(1)
+
+        command = cmd_map.get(ext, '') # get cmd from map, If not, 'use start'
+        if not command:
+            _ = sys.stderr.write(f"ERROR : No command matched with extension '{ext}' in cmd_map" )
+            sys.exit(1)
+
+        return command
 
     def get_temppath(self) -> str:
         """ Create a local temporary file path, regardless of OS. """
@@ -54,6 +72,7 @@ class Args:
 
 def main():
     if len(sys.argv) < 2:
+        _ = sys.stderr.write("ERROR : There are no argument")
         sys.exit(1)
 
     #####################################################
@@ -91,10 +110,10 @@ def main():
             temp_file_downloaded = True
 
         except requests.exceptions.RequestException as e:
-            print(f"An error occurred while downloading: {e}")
+            _ = sys.stderr.write(f"ERROR : An error occurred while downloading: {e}")
             sys.exit(1)
         except Exception as e:
-            print(f"An unexpected error occurred: {e}")
+            _ = sys.stderr.write(f"ERROR : An unexpected error occurred: {e}")
             sys.exit(1)
 
     #####################################################
@@ -107,14 +126,14 @@ def main():
         # run cmd
         _ = subprocess.run(command_with_file)
     except FileNotFoundError:
-        print(f"Error: executable '{args.command}' not found. Please check the path.")
+        _ = sys.stderr.write(f"ERROR : executable '{args.command}' not found. Please check the path.")
     finally:
         # temp file is removed If viewer is closed
         if temp_file_downloaded and os.path.exists(args.temp_path):
             try:
                 os.remove(args.temp_path)
             except OSError as e:
-                print(f"Error: Temp file '{args.temp_path}' cannot be removed. {e}")
+                _ = sys.stderr.write(f"ERROR: Temp file '{args.temp_path}' cannot be removed. {e}")
 
 
 if __name__ == '__main__':
