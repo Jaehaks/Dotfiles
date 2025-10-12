@@ -2,15 +2,25 @@
 
 Dotfiles besides of nvim_config
 
+## Contents
+<!--toc:start-->
+- [Contensts](#contensts)
+- [Installation requirement](#installation-requirement)
+- [For Windows](#for-windows)
+	- [pre-required environment variable](#pre-required-environment-variable)
+	- [using `scoop`](#using-scoop)
+	- [using manual download](#using-manual-download)
+- [plugins](#plugins)
+- [1. [Clink](https://github.com/alacritty/alacritty?tab=readme-ov-file)](#1-clinkhttpsgithubcomalacrittyalacrittytabreadme-ov-file)
+- [2. [FZF](https://github.com/junegunn/fzf)](#2-fzfhttpsgithubcomjunegunnfzf)
+- [3. [z.lua](https://github.com/skywind3000/z.lua)](#3-zluahttpsgithubcomskywind3000zlua)
+- [4. [Alacritty](https://github.com/alacritty/alacritty?tab=readme-ov-file)](#4-alacrittyhttpsgithubcomalacrittyalacrittytabreadme-ov-file)
+- [5.[yazi](https://github.com/sxyazi/yazi)](#5yazihttpsgithubcomsxyaziyazi)
+- [6. [komorebi](https://github.com/LGUG2Z/komorebi)](#6-komorebihttpsgithubcomlgug2zkomorebi)
+- [7. [win-vind](https://github.com/pit-ray/win-vind)](#7-win-vindhttpsgithubcompit-raywin-vind)
+- [8. [sioyek](https://github.com/ahrm/sioyek)](#8-sioyekhttpsgithubcomahrmsioyek)
+<!--toc:end-->
 
-## Contensts
-- [Dotfiles](#dotfiles)
-  - [Contensts](#contensts)
-  - [plugins](#plugins)
-    - [1. [Clink](https://github.com/alacritty/alacritty?tab=readme-ov-file)](#1-clinkhttpsgithubcomalacrittyalacrittytabreadme-ov-file)
-    - [2. [FZF](https://github.com/junegunn/fzf)](#2-fzfhttpsgithubcomjunegunnfzf)
-    - [3. [z.lua](https://github.com/skywind3000/z.lua)](#3-zluahttpsgithubcomskywind3000zlua)
-    - [3. [Alacritty](https://github.com/alacritty/alacritty?tab=readme-ov-file)](#3-alacrittyhttpsgithubcomalacrittyalacrittytabreadme-ov-file)
 
 
 ## Installation requirement
@@ -150,16 +160,28 @@ Dotfiles besides of nvim_config
 
 - **Installation**
     1. Download clink from release page Assets : `clink.1.6.14.93b83f.zip`
-    2. Unzip the zip file to wanted location
-    3. Register the installed location to system path
-    4. Register system variables to recognize configuration path : (`clink info` to confirm inputrc path is right)
+	2. Unzip the zip file to wanted location
+	3. Register the installed location to system path
+	4. Register system variables to recognize configuration path : (`clink info` to confirm inputrc path is right)
         - `CLINK_INPUTRC` : `<Dotfile path>\Dotfiles\clink`
         - `CLINK_SETTINGS` : `<Dotfile path>\Dotfiles\clink`
-    5. Make symbolic link to use `prompt.lua` :
-        - `mklink <clink install path>\prompt.lua <Dotfiles path>\clink\prompt.lua`
-    5. Make symbolic link to use `git_checkout.lua` :
-        - `mklink <clink install path>\git_checkout.lua <Dotfiles path>\clink\git_checkout.lua`
-    6. open `cmd.exe` and do `clink autorun install`
+	5. Make symbolic link to use `prompt.lua` :
+	   ```powershell
+	   mklink <clink install path>\prompt.lua <Dotfiles path>\clink\prompt.lua
+	   ```
+	6. Make symbolic link to use `git_checkout.lua` :
+	   ```powershell
+	   mklink <clink install path>\git_checkout.lua <Dotfiles path>\clink\git_checkout.lua
+	   ```
+	7. Make symbolic link to use `fzf.lua` :
+	   ```powershell
+	   mklink <clink install path>\fzf.lua <Dotfiles path>\clink\fzf.lua
+	   ```
+	8. Make symbolic link to use `highlight_envvars.lua` :
+	   ```powershell
+	   mklink <clink install path>\highlight_envvars.lua <Dotfiles path>\clink\highlight_envvars.lua
+	   ```
+	9. open `cmd.exe` and do `clink autorun install`
 
 <br>
 
