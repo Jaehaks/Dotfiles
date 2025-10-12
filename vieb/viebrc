@@ -105,7 +105,7 @@ set encodeurlext=nospaces
 set notificationduration=5000
 set notificationforpermissions=all
 " -- for debug
-set notificationforsystemcommands=errors
+set notificationforsystemcommands=all
 set notificationlimitsmall=3
 set notificationposition=bottomright
 " -- use vieb notification instead of system
