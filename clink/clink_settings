@@ -24,3 +24,5 @@ color.unrecognized        = sgr 38;5;203
 color.prompt              = sgr 38;5;10
 history.time_stamp        = show
 match.substring           = True
+
+color.envvars			  = sgr 38;5;117
