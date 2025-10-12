@@ -9,56 +9,56 @@ $scoopAppsDir = Join-Path $scoopHome "apps"
 
 # scoop packages (remove ',' of last one)
 $packages = @(
-    '7zip', # neovim, mason
-    'bat', # cmd
-    'clipboard', # yazi, clipboard
-    'cmake', # cmd
-    'curl', # neovim, mason
-    'deno', # neovim, peek.nvim
-    'eza', # cmd
-    'fd', # yazi
-    'ffmpeg', # yazi
-    'fzf', # yazi, fzff, fzfg
-    'gawk', # neovim
-    'gh', # neovim
-    'grep', # neovim
-    'gzip', # neovim, mason
-    'iconv', # fzff, fzfg
-    'imagemagick', # yzi
-    'iconv', # fzff, fzfg
-    'irfanview', # yazi, smart paste
-    'jid', # yazi
-    'jq', # yazi
-    'less', # cmd
-    'lua', # neovim, lua
-    'luarocks', # neovim, lua
-    'mingw', # neovim, compile
-    'mpv', # qutebrowser, video player
-    'neovim', # neovim
-    'neovim-qt', # neovim
-    'openjdk11', # I don't know
-    'poppler', # yazi, pdf
-    'python', # cmd
-    'qutebrowser', # browser
-    'ripgrep', # cmd, neovim
-    # 'rustup', # cmd, some environment cannot install this
-    'scoop-search', # scoop
-    'sed', # cmd
-    'sioyek', # pdf viewer
-    'tar', # cmd
-    'tree-sitter', # neovim
-    'unar', # yazi,lsar
-    'unzip', # cmd
+    '7zip',             # neovim, mason
+    'bat',              # cmd
+    'clipboard',        # yazi, clipboard
+    'cmake',            # cmd
+    'curl',             # neovim, mason
+    'deno',             # neovim, peek.nvim
+    'eza',              # cmd
+    'fd',               # yazi
+    'ffmpeg',           # yazi
+    'fzf',              # yazi, fzff, fzfg
+    'gawk',             # neovim
+    'gh',               # neovim
+    'grep',             # neovim
+    'gzip',             # neovim, mason
+    'iconv',            # fzff, fzfg
+    'imagemagick',      # yzi
+    'iconv',            # fzff, fzfg
+    'irfanview',        # yazi, smart paste
+    'jid',              # yazi
+    'jq',               # yazi
+    'less',             # cmd
+    'lua',              # neovim, lua
+    'luarocks',         # neovim, lua
+    'mingw',            # neovim, compile
+    'mpv',              # qutebrowser, video player
+    'neovim',           # neovim
+    'neovim-qt',        # neovim
+    'openjdk11',        # I don't know
+    'poppler',          # yazi, pdf
+    'python',           # cmd
+	'vieb'              # web browser
+    'ripgrep',          # cmd, neovim
+	# 'rustup', 			# cmd, some environment cannot install this
+    'scoop-search',     # scoop
+    'sed',              # cmd
+    'sioyek',           # pdf viewer
+    'tar',              # cmd
+    'tree-sitter',      # neovim
+    'unar',             # yazi,lsar
+    'unzip',            # cmd
     'uutils-coreutils', # cmd, neovim
-    'uv', # neovim, python-uv
-    'wget', # neovim, mason
-    'win-vind', # window manager
+    'uv',               # neovim, python-uv
+    'wget',             # neovim, mason
+    'win-vind',         # window manager
 	'windows-terminal', # terminal
-	'wox', # window toolbar
-	'yazi', # file explorer
-	'yt-dlp', # youtube downloader
-	'zip', # neovim
-	'zoxide' # cmd, yazi
+	'wox',              # window toolbar
+	'yazi',             # file explorer
+	'yt-dlp',           # youtube downloader
+	'zip',              # neovim
+	'zoxide'            # cmd, yazi
 )
 
 # Indirectly check for the existence of the apps folder
