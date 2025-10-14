@@ -237,6 +237,16 @@ nmap O <:tabnew><toExploreMode>
 nmap go <toExploreMode><End>
 nmap g0 <:buffer 0>
 nmap g$ <:buffer -1>
+map <A-0> <:buffer 0>
+map <A-1> <:buffer 1>
+map <A-2> <:buffer 2>
+map <A-3> <:buffer 3>
+map <A-4> <:buffer 4>
+map <A-5> <:buffer 5>
+map <A-6> <:buffer 6>
+map <A-7> <:buffer 7>
+map <A-8> <:buffer 8>
+map <A-9> <:buffer 9>
 nmap <C-Tab> <:buffer #>
 nmap p <openFromClipboard>
 nmap P <:tabnew><openFromClipboard>
