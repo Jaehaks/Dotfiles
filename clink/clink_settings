@@ -26,3 +26,4 @@ history.time_stamp        = show
 match.substring           = True
 
 color.envvars			  = sgr 38;5;117
+fzf.default_bindings	  = True

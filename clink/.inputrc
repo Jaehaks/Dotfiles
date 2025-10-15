@@ -22,14 +22,4 @@ set visible-stats             on
 # it works only "set keymap emacs"
 "\e[Z": clink-insert-suggested-line
 
-# fzf.lua
-# fzf_file : insert selected file or directory to prompt
-"\C-t": "luafunc:fzf_file"
-# fzf_history : insert selected command history to prompt
-"\C-r": "luafunc:fzf_history"
-# fzf_directory : cd to directory, results include only directories
-"\M-c": "luafunc:fzf_directory"
-# fzf_tab : it is same with fzf_file, but put tab after '**' prefix
-"\t": 	"luafunc:fzf_tab"
-
 $endif
