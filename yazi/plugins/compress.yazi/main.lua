@@ -1,3 +1,5 @@
+--- @since 25.5.31
+
 -- get selected files list with ' ' separator
 local get_selected = ya.sync(function ()
 	local select = cx.active.selected
