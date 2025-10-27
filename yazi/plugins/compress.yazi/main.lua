@@ -1,5 +1,17 @@
 --- @since 25.5.31
 
+---@param items string|string[]
+local function info(items)
+	if type(items) == 'string' then
+		items = {items}
+	end
+
+	ya.notify({
+		title = 'test',
+		content = table.concat(items, '\n'),
+		timeout = 3,
+	})
+end
 -- get selected files list with ' ' separator
 local get_selected = ya.sync(function ()
 	local select = cx.active.selected
