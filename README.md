@@ -259,7 +259,5 @@ Dotfiles besides of nvim_config
 		- It unzips the sioyek executable file and make hard link of `{keys,prefs}_user.config` in `Dotfiles/` to config directory of scoop
 
 	- Set `sioyek` as default pdf viewer
-- **miscellaneous**
-	- I want to test `development` branch, but it has some bug as I think now.
 
 
