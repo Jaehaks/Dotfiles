@@ -12,7 +12,6 @@ $packages = @(
     '7zip',             # neovim, mason
     'bat',              # cmd
     'clipboard',        # yazi, clipboard
-    'cmake',            # cmd
     'curl',             # neovim, mason
     'clink',            # cmd prompt
     'deno',             # neovim, peek.nvim
@@ -34,7 +33,7 @@ $packages = @(
     'less',             # cmd
     'lua',              # neovim, lua
     'luarocks',         # neovim, lua
-    'mingw-winlibs',    # neovim, treesitter
+    'mingw-winlibs',    # neovim, treesitter, gcc, cmake
     'mpv',              # qutebrowser, video player
     'neovim',           # neovim
     'neovim-qt',        # neovim
