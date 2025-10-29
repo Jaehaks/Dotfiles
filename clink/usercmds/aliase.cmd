@@ -29,7 +29,7 @@ REM set lf environment variables
 set LF_CONFIG_HOME=%HOME%\.config\Dotfiles
 
 REM set yazi environment variables
-set "YAZI_FILE_ONE=C:\Program Files\Git\usr\bin\file.exe"
+REM set "YAZI_FILE_ONE=C:\Program Files\Git\usr\bin\file.exe"
 set "YAZI_CONFIG_HOME=%HOME%\.config\Dotfiles\yazi"
 
 REM set environment variables for z.lua
