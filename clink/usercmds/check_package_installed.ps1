@@ -1,4 +1,4 @@
-# require pwsh
+# require [pwsh](https://github.com/PowerShell/PowerShell/releases) for this file and yazi
 
 $ErrorActionPreference = 'Stop' # Stop script execution when an error occurs
 $VerbosePreference = 'Continue' # Display Write-Verbose messages
@@ -25,8 +25,7 @@ $packages = @(
     'grep',             # neovim
     'gzip',             # neovim, mason
     'iconv',            # fzff, fzfg
-    'imagemagick',      # yzi
-    'iconv',            # fzff, fzfg
+    'imagemagick',      # yazi
     'irfanview',        # yazi, smart paste
     'jid',              # yazi
     'jq',               # yazi
