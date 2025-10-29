@@ -30,7 +30,6 @@ $packages = @(
     'irfanview',        # yazi, smart paste
     'jid',              # yazi
     'jq',               # yazi
-    'less',             # cmd
     'lua',              # neovim, lua
     'luarocks',         # neovim, lua
     'mingw-winlibs',    # neovim, treesitter, gcc, cmake
