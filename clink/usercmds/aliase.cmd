@@ -2,14 +2,17 @@
 REM change code page to view git status message properly
 chcp 65001 > nul 2>&1
 
+REM clink library to load
+set CLINK_PATH=%USERPROFILE%\.config\Dotfiles\clink\clink_libs
+
 REM set luarocks config for install library from luarocks
-REM 1) for luautf8
+:: 1) for luautf8
 luarocks config variables.LUA_INCDIR %USERPROFILE%\scoop\apps\lua\current\include > nul
-REM 2) for lua-iconv
+:: 2) for lua-iconv
 luarocks config external_deps_dirs[2] %USERPROFILE%\scoop\apps\mingw\current\x86_64-w64-mingw32 > nul
 set LUA_CPATH=%USERPROFILE%\scoop\persist\luarocks\rocks\lib\lua\5.4\?.dll;%LUA_CPATH%
-REM 3) for fugit2.nvim
-REM luarocks --lua-version=5.1 --local config variables.LUA
+:: 3) for fugit2.nvim
+:: luarocks --lua-version=5.1 --local config variables.LUA
 
 
 
