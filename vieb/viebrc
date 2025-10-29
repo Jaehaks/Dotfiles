@@ -8,7 +8,8 @@ set adblockernotifications=all
 set externalcommand=
 " -- open nvim using terminal, temp files will be removed after vieb is closed"
 " -- write something in textbox right after closing the nvim instance or the text will be removed especially in github
-set vimcommand="start nvim -c \"set filetype=markdown\""
+" -- you must install windows-terminal and register it to PATH
+set vimcommand="wt nvim -c \"set filetype=markdown\""
 set nocleardownloadsoncompleted
 set cleardownloadsonquit
 " -- don't ask
