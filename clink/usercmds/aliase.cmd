@@ -55,6 +55,10 @@ ctrl-e:end-of-line,^
 ctrl-i:toggle-preview,^
 alt-k:preview-half-page-down,^
 alt-j:preview-half-page-up
+:: show relative path of files/directories for fzf_files() in fzf.lua to insert the result
+set FZF_CTRL_T_COMMAND=fd --hidden --follow --exclude .git --color=never
+:: show relative path of directories for fzf_files() in fzf.lua to go to the result
+set FZF_ALT_C_COMMAND=fd --hidden --follow --type directory --exclude .git --color=never
 
 REM bat config
 set "BAT_CONFIG_DIR=%HOME%\.config\Dotfiles\bat"
