@@ -212,7 +212,7 @@ Dotfiles besides of nvim_config
 
 
 ---
-### 6. [komorebi](https://github.com/LGUG2Z/komorebi)
+### 4. [komorebi](https://github.com/LGUG2Z/komorebi)
 
 - **Description**
 	- tiling manager for windows
@@ -228,7 +228,7 @@ Dotfiles besides of nvim_config
 
 
 ---
-### 7. [win-vind](https://github.com/pit-ray/win-vind)
+### 5. [win-vind](https://github.com/pit-ray/win-vind)
 
 - **Description**
 	- GUI control using keyboard
@@ -245,7 +245,7 @@ Dotfiles besides of nvim_config
 
 
 ---
-### 8. [sioyek](https://github.com/ahrm/sioyek)
+### 6. [sioyek](https://github.com/ahrm/sioyek)
 
 - **Description**
 	- vim-like pdf viewer
@@ -263,5 +263,17 @@ Dotfiles besides of nvim_config
 		- It unzips the sioyek executable file and make hard link of `{keys,prefs}_user.config` in `Dotfiles/` to config directory of scoop
 
 	- Set `sioyek` as default pdf viewer
+
+### 7. neovim
+
+- Installation
+	- To install virtual environment in `~/.config/.Nvim_venv/` do this
+	```powershell
+	cd %USERPROFILE%/.config
+	mkdir .Nvim_venv
+	python -m venv .
+	.\scripts\activate # activate virtual environment
+	pip install pynvim # install pynvim for texflow.nvim
+	```
 
 
