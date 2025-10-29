@@ -31,10 +31,14 @@ Dotfiles besides of nvim_config
 #### pre-required environment variable
 
 1. `HOME` : `%USERPROFILE%`
-2. `PATH` :
+2. `PATH` : register manually below paths
 	- `%USERPROFILE%\.config\Dotfiles\clink\usercmds\`
-	- `%USERPROFILE%\user_installed\MikTeX\miktex\bin\x64`
+	- `%USERPROFILE%\scoop\apps\git\current\usr\bin` (use file.exe for yazi)
+	- `%USERPROFILE%\scoop\apps\mpv\current` (use mpv.exe to video player)
 	- `%USERPROFILE%\scoop\apps\openjdk11\current\bin`
+	- `%USERPROFILE%\user_installed\sioyek_current` (pdf viewer)
+	- `%USERPROFILE%\user_installed\MikTeX\miktex\bin\x64`
+	- `%USERPROFILE%\user_installed\Qt\6.10.0\msvc2022_64\bin` (for building sioyek)
 	- `%USERPROFILE%\Vim\vim90`
 3. `CC` : `gcc` (for C compiler)
 4. `XDG_CONFIG_HOME` : `%USERPROFILE%\.config`
