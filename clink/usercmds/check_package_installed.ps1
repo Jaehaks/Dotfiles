@@ -14,6 +14,7 @@ $packages = @(
     'clipboard',        # yazi, clipboard
     'cmake',            # cmd
     'curl',             # neovim, mason
+    'clink',            # cmd prompt
     'deno',             # neovim, peek.nvim
     'eza',              # cmd
     'fd',               # yazi
