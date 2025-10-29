@@ -32,7 +32,7 @@ $packages = @(
     'less',             # cmd
     'lua',              # neovim, lua
     'luarocks',         # neovim, lua
-    'mingw',            # neovim, compile
+    'mingw-winlibs',    # neovim, treesitter
     'mpv',              # qutebrowser, video player
     'neovim',           # neovim
     'neovim-qt',        # neovim
