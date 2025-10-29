@@ -97,14 +97,14 @@ mklink /H .\prefs.config %HOME%\.config\Dotfiles\sioyek\development\prefs.config
 	- `mupdf` needs `MSVC v142 - VS2019` to compile using msbuild.
 	- `mupdf` needs `Windows 10 SDK` to compile. It needs to detect standard library to compile such as `string.h`
 
-3) Download [Qt Online Installer for Windows](https://www.qt.io/download-dev)
+3) Download [Qt Online Installer for Windows](https://download.qt.io/official_releases/online_installers/)
 	- you need to create account and submit your account data to download it
 
 4) Install `Qt` to your preference directory
 	- I installed to `C:\Users\USER\user_installed\Qt`
 	- Open `Qt Maintenance Tools` and select components what you want to install.
 	- Default setting installs Qt with MinGW compiler. **You need to change this to MSVC**
-	- sioyek author recommends Qt version `6.7` or `6.8`.
+	- sioyek author recommends Qt version `6.7` or `6.8`. (It is possible to use `6.10` also.)
 		- `MSVC 2019 64bit` is supported in Qt `v6.7` only. But it doesn't matter if you use `MSVC 2022 64bit`
 	* _Required packages_
 		- [ ] Qt
@@ -179,6 +179,7 @@ mklink /H .\prefs.config %HOME%\.config\Dotfiles\sioyek\development\prefs.config
 
 7) Open `Developer Command Prompt` in `windows-terminal` and build source
 	- `Developer Command Prompt` registers commands to build like `msbuild`, `nmake` etc..
+	- Don't run this command in background because It needs to use `Developer Command Prompt`.
 	```powershell
 	cd <path>/sioyek_build/
 
