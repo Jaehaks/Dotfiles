@@ -1,0 +1,11 @@
+[user]
+	name = Jaehaks
+	email = wogkr3654@naver.com
+[credential]
+	helper = manager
+[core]
+	autocrlf = input
+	editor = nvim -f
+	quotepath = false
+[alias]
+	lg = log --graph --oneline --decorate --all --pretty=format:'%C(auto)%h%Creset %C(auto)%d%Creset %s %C(blue)(%cr)%Creset'
