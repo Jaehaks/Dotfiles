@@ -8,6 +8,7 @@ import os
 import subprocess
 import sys
 import tempfile  # get temp directory
+import shlex # split string to list with safety. white space in "" doesn't be sliced
 
 import requests  # file download using http request
 
@@ -39,7 +40,7 @@ Because print() add '\n' automatically. if you add '\n' in sys.stderr.write(), i
 download_path:str = os.path.join(os.path.expanduser('~'), 'Desktop')
 # set executable program responds to file extension
 cmd_map = {
-    '.pdf' : 'sioyek',
+    '.pdf' : 'sioyek --new-instance',
 }
 
 #####################################################
@@ -137,7 +138,8 @@ def main():
     #####################################################
     try:
         # make command to open file
-        command_with_file = [args.command, file_path]
+        cmd = shlex.split(args.command) # slice with white space and make list
+        command_with_file = cmd + [file_path]
 
         # run cmd
         _ = subprocess.run(command_with_file)
