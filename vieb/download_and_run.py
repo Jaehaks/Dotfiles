@@ -86,6 +86,9 @@ class Args:
         path = os.path.join(download_path, self.filename)
         return path
 
+def info(msg:str):
+    """ send echo message to opened vieb instance immediately """
+    _ = subprocess.run(['vieb',f'--execute=echo {msg}'])
 
 def main():
     if len(sys.argv) < 2:
@@ -116,6 +119,7 @@ def main():
     temp_file_downloaded = False
     if not download_file_exists and not temp_file_exists:
         try:
+            info('Download file starts ...')
             # Download files using requests
             with requests.get(args.file_url, stream=True) as res:
                 res.raise_for_status() # Handle exceptions when HTTP errors (4xx, 5xx) occur
@@ -142,6 +146,7 @@ def main():
         command_with_file = cmd + [file_path]
 
         # run cmd
+        info(f'File opening from {file_path}...')
         _ = subprocess.run(command_with_file)
     except FileNotFoundError:
         _ = sys.stderr.write(f"ERROR : executable '{args.command}' not found. Please check the path.")
