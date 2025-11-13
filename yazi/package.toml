@@ -38,5 +38,10 @@ use = "boydaihungst/file-extra-metadata"
 rev = "116a460"
 hash = "e65cd1dea5feb9ca58c33b870ca3070"
 
+[[plugin.deps]]
+use = "yazi-rs/plugins:types"
+rev = "8f1d971"
+hash = "a097eb6df2b41b1f5973d9a00a855e44"
+
 [flavor]
 deps = []
