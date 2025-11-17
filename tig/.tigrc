@@ -468,31 +468,3 @@ color palette-13                    red     default bold
 color graph-commit                  blue    default
 color search-result                 black   yellow
 
-# Mappings for colors read from git configuration.
-# Set to "no" to disable.
-set git-colors = \
-	branch.current=main-head \
-	branch.local=main-ref \
-	branch.plain=main-ref \
-	branch.remote=main-remote \
-	\
-	diff.meta=diff-header \
-	diff.meta=diff-index \
-	diff.meta=diff-oldmode \
-	diff.meta=diff-newmode \
-	diff.frag=diff-chunk \
-	diff.old=diff-del \
-	diff.new=diff-add \
-	\
-	diff-highlight.oldHighlight=diff-del-highlight \
-	diff-highlight.newHighlight=diff-add-highlight \
-	\
-	grep.filename=grep.file \
-	grep.linenumber=grep.line-number \
-	grep.separator=grep.delimiter \
-	\
-	status.branch=status.header \
-	status.added=stat-staged \
-	status.updated=stat-staged \
-	status.changed=stat-unstaged \
-	status.untracked=stat-untracked
