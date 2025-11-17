@@ -84,6 +84,9 @@ doskey zi=zi $*
 REM qutebrowser (QUTE_CONFIG_DIR / XDG_CONFIG_DIR cannot be recognized. it only is supported on linux)
 doskey qutebrowser=qutebrowser --basedir %HOME%\.config\Dotfiles\qutebrowser
 
+REM tig
+set "TIGRC_USER=%USERPROFILE%\.config\Dotfiles\tig\.tigrc"
+
 doskey ls=ls --color=always $*
 doskey ll=eza --git --git-repos-no-status -al --icons=auto --sort=extension --time-style "+%%Y-%%m-%%d %%H:%%M:%%S" $*
 doskey grep=grep -i --color=auto $*
