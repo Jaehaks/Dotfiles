@@ -71,8 +71,8 @@
 set blame-view	= id:yes,color file-name:auto author:full,width=10 committer:no date:default,local=yes line-number:yes,interval=1 text
 set grep-view	= file-name:no line-number:yes,interval=1 text
 set main-view	= line-number:no date:default,local=yes author:full,width=10 committer:no id:yes commit-title:yes,graph,refs,overflow=no
-set reflog-view	= line-number:no id:yes date:default,local=yes author:no committer:no commit-title:yes,refs,overflow=no
-set refs-view	= line-number:no id:no date:default,local=yes author:full committer:no ref commit-title
+set reflog-view	= line-number:no date:default,local=yes author:no committer:no id:yes commit-title:yes,refs,overflow=no
+set refs-view	= line-number:no date:default,local=yes author:full committer:no ref id:yes commit-title
 set stash-view	= line-number:no id:no date:default,local=yes author:full commit-title
 set status-view	= line-number:no status:short file-name
 set tree-view	= line-number:no mode author:full committer:no file-size:units date:default,local=yes id:no file-name
@@ -133,20 +133,20 @@ set mailmap                     = yes		# Use .mailmap to show canonical name and
 set start-on-head      = no   # Start with cursor on HEAD commit?
 set refresh-mode       = auto # Enum: manual, auto, after-command, periodic
 set refresh-interval   = 10   # Interval in seconds between refreshes
-set ignore-case        = no   # Enum: no, yes, smart-case
+set ignore-case        = smart-case   # Enum: no, yes, smart-case
                               # Ignore case when searching?
-set wrap-search        = yes  # Wrap around to top/bottom of view when searching?
+set wrap-search        = no  # Wrap around to top/bottom of view when searching?
 set focus-child        = yes  # Move focus to child view when opened?
-set send-child-enter   = yes  # Propagate "enter" keypresses to child views?
-set horizontal-scroll  = 50%  # Number of columns to scroll as % of width
-set split-view-height  = 67%  # Height of the bottom view for horizontal splits
-set vertical-split     = auto # Enum: horizontal, vertical, auto; Use auto to
+set send-child-enter   = yes  # Propagate "enter" keypresses to child views?, when focus-child = no
+set horizontal-scroll  = 20%  # Number of columns to scroll as % of width
+set vertical-split     = horizontal # Enum: horizontal, vertical, auto; Use auto to
                               # switch to horizontal split when width allows it
 set split-view-width   = 50%  # Width of right-most view for vertical splits
+set split-view-height  = 67%  # Height of the bottom view for horizontal splits
 set editor-line-number = yes  # Automatically pass line number to editor? Used
                               # for opening file at specific line e.g. from a diff
 set history-size       = 500  # Size of persistent history, 0 to disable
-set mouse              = no   # Enable mouse support?
+set mouse              = no   # Enable mouse support? (not work, always mouse on)
 set mouse-scroll       = 3    # Number of lines to scroll via the mouse
 set mouse-wheel-cursor = no   # Prefer moving the cursor to scrolling the view?
 set pgrp               = no   # Make tig process-group leader?
@@ -154,6 +154,48 @@ set pager-autoscroll   = no   # Scroll the pager view automatically while loadin
 
 # User-defined commands
 # ---------------------
+#
+
+# clear keymaps for preventing with conflict with default keymap
+bind generic g none
+bind generic y none
+bind generic h none
+bind generic l none
+bind generic o none
+bind generic i none
+bind generic v none
+bind generic L none
+bind generic B none
+bind generic G none
+bind generic F none
+bind generic R none
+bind generic T none
+bind generic D none
+bind generic A none
+bind generic W none
+bind generic J none
+bind generic K none
+bind generic X none
+bind generic H none
+bind generic I none
+bind generic <C-C> none
+bind generic <C-L> none
+bind generic <C-K> none
+bind generic <C-J> none
+bind generic <Space> none
+bind generic <SBack> none
+bind generic <SFwd> none
+bind generic - none
+bind generic ~ none
+bind generic | none
+bind generic $ none
+bind generic % none
+bind generic ^ none
+bind generic , none
+bind generic ? none
+
+#
+#
 # These commands allow to run shell commands directly from within Tig.
 # Unless otherwise specified, commands are run in the foreground with
 # their console output shown (as if '!' was specified). When multiple
@@ -172,11 +214,17 @@ set pager-autoscroll   = no   # Scroll the pager view automatically while loadin
 # using the following variable names, which are substituted before
 # commands are run (see 'man tigrc' for the full list):
 #
+# Possible key bindings
+# <Enter>, <Space>, <Backspace>, <Tab>, <Escape> 또는 <Esc>, <Left>, <Right>, <Up>, <Down>, <Insert> 또는 <Ins>,
+# <Delete> 또는 <Del>, <Hash>, <LessThan> 또는 <LT>, <Home>, <End>, <PageUp> 또는 <PgUp>, <PageDown> 또는 <PgDown>,
+# <F1>, <F2>, <F3>, <F4>, <F5>, <F6>, <F7>, <F8>, <F9>, <F10>, <F11>, <F12>
+#
+#
 #   %(head)		The current ref ID. Defaults to HEAD
 #   %(commit)		The current commit ID.
 #   %(blob)		The current blob ID.
-#   %(branch)		The current branch name.
-#   %(remote)		The current remote name.
+#   %(branch)		The current local branch name. if the commit doesn't indicate branch, it is empty
+#   %(remote)		The current remote alias name ex) origin
 #   %(tag)		The current tag name.
 #   %(stash)		The current stash name.
 #   %(directory)	The current directory path in the tree view;
@@ -192,148 +240,153 @@ set pager-autoscroll   = no   # Scroll the pager view automatically while loadin
 #   %(repo:remote)	The remote name associated with the checked out branch.
 #   %(repo:upstream)	The upstream branch associated with the checked out branch.
 
+
 bind main	C	?git cherry-pick %(commit)
-bind status	C	!git commit
-bind stash	A	?git stash apply %(stash)
-bind stash	P	?git stash pop %(stash)
-bind stash	!	?git stash drop %(stash)
-bind refs	C	?git checkout %(branch)
-bind refs	!	?git branch -D %(branch)
-bind reflog	C	?git checkout %(branch)
-bind reflog	!	?git reset --hard %(commit)
+bind main	y	@sh -c "echo -n %(commit) | clip" # copy to clipboard hash
+bind main	R	?git reset --mixed %(commit)
+bind main	p	?git pull %(remote) # git pull
+bind main	P	?git pull --rebase %(remote) # git pull forcely
+
+bind status	C		!git commit # commit and open editor, you should set core.editor in gitconfig
+bind status	P		?git push %(repo:remote)/%(repo:head) # push to remote repo
+bind status	<C-P>	?git push --force %(repo:remote)/%(repo:head) # force to push to remote repo
+
+bind stash	S	!git stash # apply selected stash and delete from list
+bind stash	P	?git stash pop %(stash) # apply selected stash and delete from list
+bind stash	!	?git stash drop %(stash) # delete stash manually
+
+bind refs	B	?git checkout %(branch) # checkout to branch
+bind refs	C	?git branch "%(prompt Branch name to create : )" # create branch
+bind refs	!	?git branch -D %(branch) # delete select branch
+
+bind reflog	R	?git reset --mixed %(commit)
+
+# bind grep	F	?!git grep "%(prompt grep2: )" %(commit)
 
 # Normal commands
 # ---------------
 
 # View switching
-bind generic	m	view-main
-bind generic	d	view-diff
-bind generic	l	view-log
-bind generic	L	view-reflog
-bind generic	t	view-tree
-bind generic	f	view-blob
-bind generic	b	view-blame
-bind generic	r	view-refs
-bind generic	p	view-pager
-bind generic	h	view-help
-bind generic	s	view-status
-bind generic	S	view-status		# Compat binding to avoid going crazy!
-bind generic	c	view-stage
-bind generic	y	view-stash
-bind generic	g	view-grep
+bind generic    m       view-main
+bind generic    d       view-diff
+bind generic    <C-L>   view-log
+bind generic    t       view-tree   # show file tree of selected commit in main view
+bind generic    b       view-blame  # show blame view
+bind generic    f       view-blob
+bind generic    r       view-refs   # show branches
+bind generic    <C-R>   view-reflog # show reference loges
+bind generic    p       view-pager
+bind generic    ?       view-help
+bind generic    s       view-status # git status view to add to be committed
+bind generic    c       view-stage  # show a specific file diff, run in status view
+bind generic    S       view-stash  # show stash list
+bind generic    F       view-grep   # show prompt to search in grep view, If it is first try, show prompt even though current view is not grep
 
 # View manipulation
 bind generic	<Enter>		enter      # Enter and open selected entry
 bind generic	<Lt>   		back       # Go back to the previous view state
 bind generic	<Down> 		next       # Move to next
 bind generic	<C-N>  		next
-bind generic	J      		next
 bind generic	<Up>   		previous   # Move to previous
 bind generic	<C-P>  		previous
-bind generic	K      		previous
-bind generic	,      		parent     # Move to parent
-bind generic	<Tab>  		view-next  # Move focus to the next view
-bind generic	R      		refresh    # Reload and refresh view
-bind generic	<F5>   		refresh
-bind generic	O      		maximize   # Maximize the current view
-bind generic	q      		view-close # Close the current view
+bind generic	<Tab>  		view-next  # Move focus to the next view in split mode(<CR>)
+bind generic	<F5>   		refresh    # Reload and refresh view
+bind generic	O      		maximize   # Maximize the current view, If you open split view using <CR>
+bind generic	q      		view-close # Close the current view, move to previous view
 bind generic	Q      		quit       # Close all views and quit
-bind generic	<C-C>  		quit       # Close all views and quit
+
+bind tree	l  enter       # move to selected entry
+bind tree	h  parent      # move to parent
 
 # View specific
 bind status	u	status-update              # Stage/unstage changes in file
+bind status	s	status-update              # Stage/unstage changes in file
 bind status	!	status-revert              # Revert changes in file
 bind status	M	status-merge               # Open git-mergetool(1)
-# bind status	???	:toggle status			# Show short or long status labels
+# It is more convenient to add parts using open editor with 'e',
+# but it cannot check the contents while committing
 bind stage	u	status-update              # Stage/unstage current diff (c)hunk
-bind stage	1	stage-update-line          # Stage/unstage current line
-bind stage	2	stage-update-part          # Stage/unstage part of chunk
+bind stage	s	status-update              # Stage/unstage current diff (c)hunk -- 'git add' a file
+bind stage	1	stage-update-line          # Stage/unstage current line -- 'git add' a line in diff view
+bind stage	2	stage-update-part          # Stage/unstage part of chunk -- 'git add' a chunk in diff view
+bind stage	\	stage-split-chunk          # Split current diff (c)hunk -- split current region from chunk in diff view, you can add split chunk with status-update
 bind stage	!	status-revert              # Revert current diff (c)hunk
-bind stage	\	stage-split-chunk          # Split current diff (c)hunk
 bind stage	@	:/^@@                      # Jump to next (c)hunk
 bind stage	[	:toggle diff-context -1    # Decrease the diff context
 bind stage	]	:toggle diff-context +1    # Increase the diff context
+
 bind diff	@	:/^@@                      # Jump to next (c)hunk
 bind diff	[	:toggle diff-context -1    # Decrease the diff context
 bind diff	]	:toggle diff-context +1    # Increase the diff context
+
 bind pager	@	:/^@@                      # Jump to next (c)hunk
-bind main	H	:goto HEAD                 # Jump to HEAD commit
-bind main	G	:toggle commit-title-graph # Toggle revision graph visualization
-bind main	F	:toggle commit-title-refs  # Toggle reference display (tags/branches)
-bind reflog	F	:toggle commit-title-refs  # Toggle reference display (tags/branches)
+bind main	~	:goto HEAD                 # Jump to HEAD commit -- move cursor to HEAD commit
 
-# Cursor navigation
-bind generic	k        	move-down
-bind generic	j        	move-up
-bind generic	<C-D>    	move-half-page-down
-bind generic	<C-U>    	move-half-page-up
-bind generic	<PgDown> 	move-page-down
-bind generic	<Space>  	move-page-down
-bind generic	<PgUp>   	move-page-up
-bind generic	-        	move-page-up
-bind generic	<Home>   	move-first-line
-bind generic	<End>    	move-last-line
+# Cursor navigation -- with cursor movement
+bind generic	k        move-down
+bind generic	j        move-up
+bind generic	<C-D>    move-half-page-down
+bind generic	<C-U>    move-half-page-up
+bind generic	<PgDown> move-page-down
+bind generic	<PgUp>   move-page-up
+bind generic	g   	 move-first-line
+bind generic	G    	 move-last-line
 
-# Scrolling
-bind generic 	|        	scroll-first-col
-bind generic 	<Left>   	scroll-left
-bind generic 	<Right>  	scroll-right
-bind generic 	<Ins>    	scroll-line-up
+# Scrolling -- without cursor movement
+bind generic 	0        	scroll-first-col
+bind generic 	h   		scroll-left
+bind generic 	l  			scroll-right
 bind generic 	<C-Y>    	scroll-line-up
-bind generic 	<Del>    	scroll-line-down
 bind generic 	<C-E>    	scroll-line-down
-bind generic 	<SBack>  	scroll-page-up
-bind generic 	<SFwd>   	scroll-page-down
-# bind generic  ??? scroll-half-page-up
-# bind generic  ??? scroll-half-page-down
+# bind generic 	<SBack>  	scroll-page-up
+# bind generic 	<SFwd>   	scroll-page-down
+bind generic  	J 			scroll-half-page-up
+bind generic  	K 			scroll-half-page-down
 
-# Searching
+# Searching -- bind search doesn't work
 bind generic	/		search
-bind generic	?		search-back
+# bind generic	?		search-back
 bind generic	n		find-next
 bind generic	N		find-prev
 # Navigation keys used while searching
 bind search		<Down>	find-next
 bind search		<C-N>	find-next
-bind search		<C-J>	find-next
 bind search		<Up>	find-prev
 bind search		<C-P>	find-prev
-bind search		<C-K>	find-prev
 bind search		<C-C>	view-close
 
 # Option manipulation
-bind generic o      options       # Open the options menu
+# bind generic o      options       # Open the options menu
 # Bindings for toggling settings
-bind generic I      :toggle sort-order                 # Toggle ascending/descending sort order
-bind generic i      :toggle sort-field                 # Toggle field to sort by
-bind generic <Hash> :toggle line-number                # Toggle line numbers
-bind generic D      :toggle date                       # Toggle date display
-bind generic A      :toggle author                     # Toggle author display
-bind generic T      :toggle committer                  # Toggle committer display
+bind generic ,o      :toggle sort-order                 # Toggle ascending/descending sort order
+bind generic ,f      :toggle sort-field                 # Toggle field to sort by
+# bind generic <Hash> :toggle line-number                # Toggle line numbers
+# bind generic D      :toggle date                       # Toggle date display
+# bind generic A      :toggle author                     # Toggle author display
+# bind generic T      :toggle committer                  # Toggle committer display
 # bind generic ???    :toggle commit-title-display       # Toggle commit title display
-bind generic ~      :toggle line-graphics              # Toggle (line) graphics mode
-bind generic F      :toggle file-name                  # Toggle file name display
+# bind generic ~      :toggle line-graphics              # Toggle (line) graphics mode
 # bind generic ???    :toggle show-changes               # Toggle local changes display in the main view
-bind generic W      :toggle ignore-space               # Toggle ignoring whitespace in diffs
+# bind generic W      :toggle ignore-space               # Toggle ignoring whitespace in diffs
 # bind generic ???    :toggle ignore-case                # Toggle ignoring case when searching
 # bind generic ???    :toggle commit-order               # Toggle commit ordering
-bind generic X      :toggle id                         # Toggle commit ID display
-bind generic $      :toggle commit-title-overflow      # Toggle highlighting of commit title overflow
+# bind generic X      :toggle id                         # Toggle commit ID display
+# bind generic $      :toggle commit-title-overflow      # Toggle highlighting of commit title overflow
 # bind generic ???    :toggle file-size                  # Toggle file size format
 # bind generic ???    :toggle status                     # Toggle status display
 # bind generic ???    :toggle status-show-untracked-dirs # Toggle display of file in untracked directories
 # bind generic ???    :toggle vertical-split             # Toggle vertical split
 # bind generic ???    :toggle word-diff                  # Toggle word diff
 # bind generic ???    :toggle diff-indicator             # Toggle display of diff +/- signs
-bind generic %      :toggle file-filter                # Toggle filtering by pathspecs in file-args
-bind generic ^      :toggle rev-filter                 # Toggle filtering by revisions in rev-args
+# bind generic %      :toggle file-filter                # Toggle filtering by pathspecs in file-args
+# bind generic ^      :toggle rev-filter                 # Toggle filtering by revisions in rev-args
 
 # Misc
-bind generic e      edit          # Open in editor
+bind generic e      edit          # Open in external editor, nvim
 bind generic :      prompt        # Open the prompt
-bind generic <C-L>  screen-redraw # Redraw the screen
+# bind generic <C-L>  screen-redraw # Redraw the screen -- it doesn't work
 bind generic z      stop-loading  # Stop all loading views
-bind generic v      show-version  # Show Tig version
+# bind generic v      show-version  # Show Tig version -- useless
 
 # Colors
 # ------
@@ -416,7 +469,7 @@ color cursor                        white   green   bold
 color cursor-blur                   white   green
 color status                        green   default
 color delimiter                     magenta default
-color date                          blue    default
+color date                          yellow  default
 color mode                          cyan    default
 color id                            magenta default
 color overflow                      red     default
@@ -448,7 +501,7 @@ color stat-unstaged                 magenta default
 color stat-untracked                magenta default
 color help-group                    blue    default
 color help-action                   yellow  default
-color diff-stat                     blue    default
+color diff-stat                     cyan    default # function name
 color diff-add-highlight            green   default standout
 color diff-del-highlight            red     default standout
 color palette-0                     magenta default
