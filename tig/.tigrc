@@ -165,7 +165,6 @@ bind generic o none
 bind generic i none
 bind generic v none
 bind generic L none
-bind generic B none
 bind generic G none
 bind generic F none
 bind generic R none
