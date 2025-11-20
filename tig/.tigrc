@@ -68,7 +68,7 @@
 #    - commit-title-overflow (boolint)	: Highlight overflow in log and diff view?
 #
 
-set blame-view	= id:yes,color file-name:auto author:full,width=10 committer:no date:default,local=yes line-number:yes,interval=1 text
+set blame-view	= id:yes,color file-name:auto author:no committer:no date:default,local=yes line-number:yes,interval=1 text
 set grep-view	= file-name:no line-number:yes,interval=1 text
 set main-view	= line-number:no date:default,local=yes author:full,width=10 committer:no id:yes commit-title:yes,graph,refs,overflow=no
 set reflog-view	= line-number:no date:default,local=yes author:no committer:no id:yes commit-title:yes,refs,overflow=no
@@ -157,6 +157,7 @@ set pager-autoscroll   = no   # Scroll the pager view automatically while loadin
 #
 
 # clear keymaps for preventing with conflict with default keymap
+bind generic c none
 bind generic g none
 bind generic y none
 bind generic h none
@@ -240,27 +241,36 @@ bind generic ? none
 #   %(repo:upstream)	The upstream branch associated with the checked out branch.
 
 
-bind main	C	?git cherry-pick %(commit)
-bind main	y	@sh -c "echo -n %(commit) | clip" # copy to clipboard hash
-bind main	R	?git reset --mixed %(commit)
-bind main	p	?git pull %(remote) # git pull
-bind main	P	?git pull --rebase %(remote) # git pull forcely
+# use '@' only for tasks with no possibility of error
+# use '!' when it use external tool to show result
+bind main   gp    ?git cherry-pick %(commit)                       # add specific commit to main
+bind main   y     @sh -c "echo -n %(commit) | clip"                # copy to clipboard hash
+bind main   p     !git pull %(remote)                              # git pull
+bind main   <C-P> !git pull --rebase %(remote)                     # git pull forcely
+bind main   grm   ?@git reset --mixed %(commit)					   # reset to specific commit
+bind main   grh   ?@git reset --hard %(commit)					   # reset to specific commit
+bind main   gc    !git checkout "%(prompt Branch name to checkout: )"
+bind main   gta   !sh -c "git tag -a %(prompt Tag name : ) %(commit) && git push %(repo:remote) --tags"    # add tag and update to remote repo
+bind main   gtd   ?sh -c "git tag -d %(tag) && git push --delete %(repo:remote) %(tag)"    # delete tag and update to remote repo
+bind main   gz    ?sh -c "git archive --format=zip --output=%(prompt Archive name : )_%(repo:head)_%(tag).zip %(commit)"
 
-bind status	C		!git commit # commit and open editor, you should set core.editor in gitconfig
-bind status	P		?git push %(repo:remote)/%(repo:head) # push to remote repo
-bind status	<C-P>	?git push --force %(repo:remote)/%(repo:head) # force to push to remote repo
+bind status c     !git commit                                      # commit and open editor, you should set core.editor in gitconfig
+bind status p     !git pull %(repo:remote) %(repo:head)            # git pull
+bind status P     ?git push -u %(repo:remote) %(repo:head)         # push to remote repo
+bind status <C-P> ?git push --force %(repo:remote) %(repo:head)    # force to push to remote repo
+bind status <C-S> @git add --update                                # add all changed tracked files to commit
+bind status gsa	  @git stash 									   # stash doesn't updated in view-stash, so use it in status-view
 
-bind stash	S	!git stash # apply selected stash and delete from list
-bind stash	P	?git stash pop %(stash) # apply selected stash and delete from list
-bind stash	!	?git stash drop %(stash) # delete stash manually
+bind stash  gsp   @git stash pop %(stash)                          # apply selected stash and delete from list
+bind stash  gsd   ?@git stash drop %(stash)                        # delete stash manually
 
-bind refs	B	?git checkout %(branch) # checkout to branch
-bind refs	C	?git branch "%(prompt Branch name to create : )" # create branch
-bind refs	!	?git branch -D %(branch) # delete select branch
+bind refs   gc    !git checkout %(branch)                          # checkout to branch
+bind refs   gba   !git branch "%(prompt Branch name to create : )" # create branch
+bind refs   gbd    ?git branch -D %(branch)                         # delete select branch
 
-bind reflog	R	?git reset --mixed %(commit)
+bind reflog grm     ?@git reset --mixed %(commit)
+bind reflog grh     ?@git reset --mixed %(commit)
 
-# bind grep	F	?!git grep "%(prompt grep2: )" %(commit)
 
 # Normal commands
 # ---------------
@@ -277,9 +287,10 @@ bind generic    <C-R>   view-reflog # show reference loges
 bind generic    p       view-pager
 bind generic    ?       view-help
 bind generic    s       view-status # git status view to add to be committed
-bind generic    c       view-stage  # show a specific file diff, run in status view
+bind generic    vs      view-stage  # show a specific file diff, run in status view
 bind generic    S       view-stash  # show stash list
 bind generic    F       view-grep   # show prompt to search in grep view, If it is first try, show prompt even though current view is not grep
+									# If you want to grep in specific commit, add <commit> id after <pattern>
 
 # View manipulation
 bind generic	<Enter>		enter      # Enter and open selected entry
@@ -328,7 +339,7 @@ bind generic	<C-D>    move-half-page-down
 bind generic	<C-U>    move-half-page-up
 bind generic	<PgDown> move-page-down
 bind generic	<PgUp>   move-page-up
-bind generic	g   	 move-first-line
+bind generic	gg   	 move-first-line
 bind generic	G    	 move-last-line
 
 # Scrolling -- without cursor movement
