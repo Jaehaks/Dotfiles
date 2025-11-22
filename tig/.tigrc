@@ -243,33 +243,36 @@ bind generic ? none
 
 # use '@' only for tasks with no possibility of error
 # use '!' when it use external tool to show result
-bind main   gp    ?git cherry-pick %(commit)                       # add specific commit to main
-bind main   y     @sh -c "echo -n %(commit) | clip"                # copy to clipboard hash
-bind main   p     !git pull %(remote)                              # git pull
-bind main   <C-P> !git pull --rebase %(remote)                     # git pull forcely
-bind main   grm   ?@git reset --mixed %(commit)					   # reset to specific commit
-bind main   grh   ?@git reset --hard %(commit)					   # reset to specific commit
-bind main   gc    !git checkout "%(prompt Branch name to checkout: )"
-bind main   gta   !sh -c "git tag -a %(prompt Tag name : ) %(commit) && git push %(repo:remote) --tags"    # add tag and update to remote repo
-bind main   gtd   ?sh -c "git tag -d %(tag) && git push --delete %(repo:remote) %(tag)"    # delete tag and update to remote repo
-bind main   gz    ?sh -c "git archive --format=zip --output=%(prompt Archive name : )_%(repo:head)_%(tag).zip %(commit)"
+bind main   gp    ?git cherry-pick %(commit)                        # add specific commit to main
+bind main   y     @sh -c "echo -n %(commit) | clip"                 # copy to clipboard hash
+bind main   p     !git pull %(remote)                               # git pull
+bind main   <C-P> !git pull --rebase %(remote)                      # git pull forcely
+bind main   grm   ?@git reset --mixed %(commit)                     # reset to specific commit
+bind main   grh   ?@git reset --hard %(commit)                      # reset to specific commit
+bind main   gc    !git switch "%(prompt Branch name to checkout: )" # checkout to other branch
+bind main   gC    !git switch --detach %(commit)                    # checkout to other detached commit
+bind main   gta   !sh -c "git tag -a %(prompt Tag name : ) %(commit) && git push %(repo:remote) --tags" # add tag and update to remote repo
+bind main   gtd   ?sh -c "git tag -d %(tag) && git push --delete %(repo:remote) %(tag)"                 # delete tag and update to remote repo
+bind main   gz    !sh -c "git archive --verbose --format=zip --output=$(basename $(git rev-parse --show-toplevel))_%(repo:head)_%(tag)_$(git rev-parse --short %(commit)).zip %(commit)" # archive repo and make zip file
 
 bind status c     !git commit                                      # commit and open editor, you should set core.editor in gitconfig
 bind status p     !git pull %(repo:remote) %(repo:head)            # git pull
 bind status P     ?git push -u %(repo:remote) %(repo:head)         # push to remote repo
 bind status <C-P> ?git push --force %(repo:remote) %(repo:head)    # force to push to remote repo
 bind status <C-S> @git add --update                                # add all changed tracked files to commit
-bind status gsa	  @git stash 									   # stash doesn't updated in view-stash, so use it in status-view
+bind status gsa   @git stash                                       # stash doesn't updated in view-stash, so use it in status-view
 
 bind stash  gsp   @git stash pop %(stash)                          # apply selected stash and delete from list
 bind stash  gsd   ?@git stash drop %(stash)                        # delete stash manually
 
-bind refs   gc    !git checkout %(branch)                          # checkout to branch
+bind refs   gc    !git switch %(branch)                            # checkout to branch
 bind refs   gba   !git branch "%(prompt Branch name to create : )" # create branch
-bind refs   gbd    ?git branch -D %(branch)                         # delete select branch
+bind refs   gbd   ?git branch -D %(branch)                         # delete select branch
+bind refs   gmm   ?git merge --no-ff %(branch)          		   # merge %(branch) using 3way to current branch
+bind refs   gmr   ?git rebase %(branch)         				   # merge %(branch) using linear rewrite to current branch
 
-bind reflog grm     ?@git reset --mixed %(commit)
-bind reflog grh     ?@git reset --mixed %(commit)
+bind reflog grm   ?@git reset --mixed %(commit)
+bind reflog grh   ?@git reset --hard %(commit)
 
 
 # Normal commands
@@ -278,12 +281,12 @@ bind reflog grh     ?@git reset --mixed %(commit)
 # View switching
 bind generic    m       view-main
 bind generic    d       view-diff
-bind generic    <C-L>   view-log
+bind generic    vl      view-log
 bind generic    t       view-tree   # show file tree of selected commit in main view
 bind generic    b       view-blame  # show blame view
 bind generic    f       view-blob
 bind generic    r       view-refs   # show branches
-bind generic    <C-R>   view-reflog # show reference loges
+bind generic    vr      view-reflog # show reference loges
 bind generic    p       view-pager
 bind generic    ?       view-help
 bind generic    s       view-status # git status view to add to be committed
