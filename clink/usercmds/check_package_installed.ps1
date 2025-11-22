@@ -24,14 +24,13 @@ $packages = @(
     'gh',               # neovim
     'grep',             # neovim
     'gzip',             # neovim, mason
-    'iconv',            # fzff, fzfg
     'imagemagick',      # yazi
     'irfanview',        # yazi, smart paste
     'jid',              # yazi
     'jq',               # yazi
     'lua',              # neovim, lua
     'luarocks',         # neovim, lua
-    'mingw-winlibs',    # neovim, treesitter, gcc, cmake
+    'mingw-winlibs',    # neovim, treesitter, gcc, cmake, iconv(fzff, fzfg)
     'mpv',              # qutebrowser, video player
     'neovim',           # neovim
     'neovim-qt',        # neovim
