@@ -19,7 +19,7 @@ $packages = @(
     'fd',               # yazi
     'ffmpeg',           # yazi
     'fzf',              # yazi, fzff, fzfg
-    'git',              # cmd
+    'git',              # cmd, tig(git manager)
     'gawk',             # neovim
     'gh',               # neovim
     'grep',             # neovim
