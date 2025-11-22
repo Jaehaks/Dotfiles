@@ -3,11 +3,15 @@ local yellow  = "\x1b[33m"
 local magenta = "\x1b[95m"
 local cyan    = "\x1b[96m"
 local red     = "\x1b[91m"
+local orange  = "\x1b[38;2;255;165;0m"
+local teal    = "\x1b[38;2;0;128;128m"
+local purple  = "\x1b[38;2;128;0;128m"
 local gray    = "\x1b[38;2;200;200;200m"
 local blue    = "\x1b[38;2;89;131;255m"
 local normal  = "\x1b[0m"
 
 -- prompt filter for getting cwd
+-- os.getcwd() is not supported in pure lua. but clink add getcwd(), chdir(), path.* helpers.
 local cwd_prompt = clink.promptfilter(30)
 function cwd_prompt:filter(prompt)
     return green .. os.getcwd() .. normal
@@ -25,18 +29,20 @@ local git_status = function (status, name)
 
 	if name == 'branch' then
 		result = status.branch and magenta .. ' ' .. status.branch or ''
-	elseif name == 'stagingAdded' then
-		result = status.stagingAdded > 0 and green .. 'A' .. status.stagingAdded or ''
-	elseif name == 'stagingModified' then
-		result = status.stagingModified > 0 and red .. 'M' .. status.stagingModified or ''
-	elseif name == 'stagingDeleted' then
-		result = status.stagingDeleted > 0 and cyan .. 'D' .. status.stagingDeleted or ''
-	elseif name == 'workingAdded' then
-		result = status.workingAdded > 0 and green .. 'A' .. status.workingAdded or ''
 	elseif name == 'workingModified' then
 		result = status.workingModified > 0 and red .. 'M' .. status.workingModified or ''
 	elseif name == 'workingDeleted' then
 		result = status.workingDeleted > 0 and cyan .. 'D' .. status.workingDeleted or ''
+	elseif name == 'stagingAdded' then
+		result = status.stagingAdded > 0 and green .. 'A' .. status.stagingAdded or ''
+	elseif name == 'stagingRenamed' then
+		result = status.stagingRenamed > 0 and teal .. 'R' .. status.stagingRenamed or ''
+	elseif name == 'stagingCopied' then
+		result = status.stagingCopied > 0 and purple .. 'C' .. status.stagingCopied or ''
+	elseif name == 'stagingDeleted' then
+		result = status.stagingDeleted > 0 and cyan .. 'D' .. status.stagingDeleted or ''
+	elseif name == 'stagingConflict' then
+		result = status.stagingConflict > 0 and orange .. 'U' .. status.stagingConflict or ''
 	elseif name == 'untracked' then
 		result = status.untracked > 0 and gray .. '?' .. status.untracked or ''
 	elseif name == 'ignored' then
@@ -62,14 +68,16 @@ function git_branch_prompt:filter(prompt)
 	local status = {
 		branch          = nil,
 		oid             = nil,
-		-- after add
-		stagingAdded    = 0, -- A
-		stagingModified = 0, -- M
-		stagingDeleted  = 0, -- D
 		-- after modified
-		workingAdded    = 0, --  A
+		-- A, R, C mark cannot be shown in status before the files are added
 		workingModified = 0, --  M
 		workingDeleted  = 0, --  D
+		-- after add
+		stagingAdded    = 0, -- A(new untracked file), M(tracked file)
+		stagingRenamed  = 0, -- R
+		stagingCopied   = 0, -- C
+		stagingDeleted  = 0, -- D
+		stagingConflict = 0, -- U(merge conflict)
 		-- etc
 		untracked       = 0, -- ??
 		ignored         = 0, -- !!
@@ -119,17 +127,15 @@ function git_branch_prompt:filter(prompt)
 		end
 
 		-- get status
-		if line:match("^1 A(.+)$") then status.stagingAdded     = status.stagingAdded + 1 end
-        if line:match("^1 M(.+)$") then status.stagingModified  = status.stagingModified + 1 end
-        if line:match("^1 R(.+)$") then status.stagingModified  = status.stagingModified + 1 end
-        if line:match("^1 C(.+)$") then status.stagingModified  = status.stagingModified + 1 end
-        if line:match("^1 D(.+)$") then status.stagingDeleted   = status.stagingDeleted + 1 end
-
-        if line:match("^1 .A(.+)$") then status.workingAdded    = status.workingAdded + 1 end
         if line:match("^1 .M(.+)$") then status.workingModified = status.workingModified + 1 end
-        if line:match("^1 .R(.+)$") then status.workingModified = status.workingModified + 1 end
-        if line:match("^1 .C(.+)$") then status.workingModified = status.workingModified + 1 end
         if line:match("^1 .D(.+)$") then status.workingDeleted  = status.workingDeleted + 1 end
+
+		if line:match("^1 A(.+)$") then status.stagingAdded     = status.stagingAdded + 1 end
+        if line:match("^1 M(.+)$") then status.stagingAdded     = status.stagingAdded + 1 end
+        if line:match("^2 R(.+)$") then status.stagingRenamed   = status.stagingRenamed + 1 end
+        if line:match("^2 C(.+)$") then status.stagingCopied    = status.stagingCopied + 1 end
+        if line:match("^1 D(.+)$") then status.stagingDeleted   = status.stagingDeleted + 1 end
+        if line:match("^u%w%w (.+)$") then status.stagingConflict   = status.stagingConflict + 1 end
 
         if line:match("^%?(.+)$") then status.untracked         = status.untracked + 1 end
         -- if line:match("^%!(.+)$") then status.ignored           = status.ignored + 1 end
@@ -138,21 +144,22 @@ function git_branch_prompt:filter(prompt)
 
 	if status.branch then
 		local git_status_branch = git_status(status, 'branch')
-		local git_status_working = string.format('%s%s%s%s%s%s',
-									git_status(status, 'workingAdded'),
+		local git_status_working = string.format('%s%s%s%s%s',
 									git_status(status, 'workingModified'),
 									git_status(status, 'workingDeleted'),
 									git_status(status, 'untracked'),
 									git_status(status, 'ignored'),
 									git_status(status, 'stash'))
-		local git_status_staging = string.format('\x1b[0m| %s%s%s%s%s',
+		local git_status_staging = string.format('\x1b[0m| %s%s%s%s%s%s%s',
 									git_status(status, 'stagingAdded'),
-									git_status(status, 'stagingModified'),
+									git_status(status, 'stagingRenamed'),
+									git_status(status, 'stagingCopied'),
 									git_status(status, 'stagingDeleted'),
+									git_status(status, 'stagingConflict'),
 									git_status(status, 'commit'),
 									git_status(status, 'behind'))
 
-		if (status.stagingAdded + status.stagingModified + status.stagingDeleted + status.commit + status.behind) == 0 then
+		if (status.stagingAdded + status.stagingRenamed + status.stagingCopied + status.stagingDeleted + status.stagingConflict + status.commit + status.behind) == 0 then
 			return prompt .. ' ' .. git_status_branch .. git_status_working .. normal
 		else
 			return prompt .. ' ' .. git_status_branch .. git_status_working .. git_status_staging .. normal
