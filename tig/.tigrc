@@ -247,8 +247,10 @@ bind main   gp    ?git cherry-pick %(commit)                        # add specif
 bind main   y     @sh -c "echo -n %(commit) | clip"                 # copy to clipboard hash
 bind main   p     !git pull %(remote)                               # git pull
 bind main   <C-P> !git pull --rebase %(remote)                      # git pull forcely
-bind main   grm   ?@git reset --mixed %(commit)                     # reset to specific commit
-bind main   grh   ?@git reset --hard %(commit)                      # reset to specific commit
+bind main   grm   ?@git reset --mixed %(commit)                     # reset to specific commit with mixed version
+bind main   grh   ?@git reset --hard %(commit)                      # reset to specific commit with hard version
+bind main   gRy   ?@git revert %(commit)                  			# revert to specific commit
+bind main   gRn   ?@git revert --no-commit %(commit)       			# revert to specific commit without commit
 bind main   gc    !git switch "%(prompt Branch name to checkout: )" # checkout to other branch
 bind main   gC    !git switch --detach %(commit)                    # checkout to other detached commit
 bind main   gta   !sh -c "git tag -a %(prompt Tag name : ) %(commit) && git push %(repo:remote) --tags" # add tag and update to remote repo
@@ -259,9 +261,10 @@ bind main   gtp   ?git push %(repo:remote) %(tag)  														# Add new tag t
 bind main   gz    !sh -c "git archive --verbose --format=zip --output=$(basename $(git rev-parse --show-toplevel))_%(repo:head)_%(tag)_$(git rev-parse --short %(commit)).zip %(commit)" # archive repo and make zip file
 
 bind status c     !git commit                                      # commit and open editor, you should set core.editor in gitconfig
+bind status C     !git commit --amend                              # modify recent commit message
 bind status p     !git pull %(repo:remote) %(repo:head)            # git pull
 bind status P     ?git push -u %(repo:remote) %(repo:head)         # push to remote repo
-bind status <C-P> ?git push --force %(repo:remote) %(repo:head)    # force to push to remote repo
+bind status <C-P> ?git push --force-with-lease %(repo:remote) %(repo:head)    # force to push to remote repo
 bind status <C-S> @git add --update                                # add all changed tracked files to commit
 bind status gsa   @git stash                                       # stash doesn't updated in view-stash, so use it in status-view
 
@@ -280,6 +283,8 @@ bind refs   gmr   ?git rebase %(branch)         				   # merge %(branch) using l
 
 bind reflog grm   ?@git reset --mixed %(commit)
 bind reflog grh   ?@git reset --hard %(commit)
+bind main   gRy   ?@git revert %(commit)                  			# revert to specific commit
+bind main   gRn   ?@git revert --no-commit %(commit)       			# revert to specific commit without commit
 
 
 # Normal commands
