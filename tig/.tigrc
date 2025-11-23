@@ -252,7 +252,10 @@ bind main   grh   ?@git reset --hard %(commit)                      # reset to s
 bind main   gc    !git switch "%(prompt Branch name to checkout: )" # checkout to other branch
 bind main   gC    !git switch --detach %(commit)                    # checkout to other detached commit
 bind main   gta   !sh -c "git tag -a %(prompt Tag name : ) %(commit) && git push %(repo:remote) --tags" # add tag and update to remote repo
-bind main   gtd   ?sh -c "git tag -d %(tag) && git push --delete %(repo:remote) %(tag)"                 # delete tag and update to remote repo
+bind main   gtd   ?sh -c "git tag -d %(tag) && git push %(repo:remote) --delete %(tag)"                 # delete tag and update to remote repo
+bind main   gtD   ?sh -c "git push %(repo:remote) --delete %(tag)"                 						# delete remote tag
+bind main   gtr   ?sh -c "git tag -a %(prompt New tag name : ) %(tag)^{}"  								# rename tag
+bind main   gtp   ?git push %(repo:remote) %(tag)  														# Add new tag to remote repo
 bind main   gz    !sh -c "git archive --verbose --format=zip --output=$(basename $(git rev-parse --show-toplevel))_%(repo:head)_%(tag)_$(git rev-parse --short %(commit)).zip %(commit)" # archive repo and make zip file
 
 bind status c     !git commit                                      # commit and open editor, you should set core.editor in gitconfig
@@ -267,7 +270,11 @@ bind stash  gsd   ?@git stash drop %(stash)                        # delete stas
 
 bind refs   gc    !git switch %(branch)                            # checkout to branch
 bind refs   gba   !git branch "%(prompt Branch name to create : )" # create branch
-bind refs   gbd   ?git branch -D %(branch)                         # delete select branch
+bind refs   gbd   ?git branch -D %(branch) && git push %(repo:remote) --delete %(branch) # delete select branch and synchronize with remote repo
+bind refs   gbD   ?git push %(repo:remote) --delete %(branch) 	   # delete select branch in remote repo
+bind refs   gbr   !git branch -m %(branch) "%(prompt New branch name : )" # rename select branch when the other branch is checkout
+bind refs   gbR   !git branch -m "%(prompt New branch name : )"    # rename select branch when the current branch is checkout
+bind refs   gbp   ?git push -u %(repo:remote) %(branch) 		   # push this branch to remote branch
 bind refs   gmm   ?git merge --no-ff %(branch)          		   # merge %(branch) using 3way to current branch
 bind refs   gmr   ?git rebase %(branch)         				   # merge %(branch) using linear rewrite to current branch
 
