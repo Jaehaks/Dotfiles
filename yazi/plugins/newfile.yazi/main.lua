@@ -3,28 +3,36 @@ local get_cwd = ya.sync(function (state) --  to make async function
 	return tostring(h)
 end)
 
+local function tbl_contains(T, value)
+	for _, ext in ipairs(T) do
+		if value == ext then
+			return true
+		end
+	end
+	return false
+end
+
 local entry = function ()
-	local curdir = get_cwd()
 	local value, event = ya.input({
-		title = "Make xlsx/pptx",
+		title = "Enter one of xlsx/pptx/pptm",
 		position = {"top-center", y = 3, w = 40},
 	})
 	if event ~= 1 then
 		return
 	end
 
-	-- local ext = value:match('%.(%w+)') -- get extension
-	local ext = value
-	if ext == 'excel' then
-		local status, err = Command('NewFile.cmd'):arg('excel'):spawn():wait()
-	elseif ext == 'ppt' then
-		local status, err = Command('NewFile.cmd'):arg('ppt'):spawn():wait()
+	local ext = ''
+	if value then
+		ext = value
+	end
+	if tbl_contains({'xlsx', 'pptx', 'pptm'}, ext) then
+		Command('NewFile.cmd'):arg(ext):spawn():wait()
 	else
 		ya.notify({
-			title = 'Make xlsx/pptx',
-			content = 'Extension must be .xlsx or .pptx',
+			title = 'NewFile',
+			content = 'Extension must be input as xlsx/pptx/pptm',
 			timeout = 1,
-			level = 'info',
+			level = 'warn',
 		})
 	end
 end
