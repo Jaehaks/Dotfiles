@@ -245,8 +245,10 @@ rules = [
 
 	# file ext
 	{ name = "*.pptx", fg = "#FF9664" },
+	{ name = "*.pptm", fg = "#FF9664" },
 	{ name = "*.ppt" , fg = "#FF9664" },
 	{ name = "*.xlsx", fg = "#C8FFC8" },
+	{ name = "*.xlsm", fg = "#C8FFC8" },
 	{ name = "*.xls" , fg = "#C8FFC8" },
 	{ name = "*.csv" , fg = "#C8FFC8" },
 	{ name = "*.docx", fg = "#4896C8" },
@@ -772,6 +774,7 @@ exts = [
 	{ name = "pp"           , text = "", fg = "#ffa61a"},
 	{ name = "ppt"          , text = "󰈧", fg = "#FF9664"},
 	{ name = "pptx"         , text = "󰈧", fg = "#FF9664"},
+	{ name = "pptm"         , text = "󰈧", fg = "#FF9664"},
 	{ name = "prisma"       , text = "", fg = "#5a67d8"},
 	{ name = "pro"          , text = "", fg = "#e4b854"},
 	{ name = "ps1"          , text = "󰨊", fg = "#4273ca"},
@@ -906,6 +909,7 @@ exts = [
 	{ name = "xcstrings"    , text = "", fg = "#2596be"},
 	{ name = "xls"          , text = "󰈛", fg = "#C8FFC8"},
 	{ name = "xlsx"         , text = "󰈛", fg = "#C8FFC8"},
+	{ name = "xlsm"         , text = "󰈛", fg = "#C8FFC8"},
 	{ name = "xm"           , text = "", fg = "#519aba"},
 	{ name = "xml"          , text = "󰗀", fg = "#e37933"},
 	{ name = "xpi"          , text = "", fg = "#ff1b01"},
