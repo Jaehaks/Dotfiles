@@ -6,123 +6,128 @@
 2) `파일 - 옵션 - 보안센터 - 보안센터 설정 - 신뢰할수 있는 위치` 에 현재 위치를 추가한다
 	- 기본적으로 모든 매크로 제외 설정되어 있어, 파일 열때마다 매크로 미포함 문구가 뜬다
 	- 이를 제거하기 위함
-2) `Alt + F11` 을 눌러 VBA 창을 연다
-3) `삽입 - 모듈` 을 눌러 새 모듈을 만든다
-4) 아래의 VBA 코드를 작성한다
-```vb
-// vb treesitter가 highlight 지원이 안돼서 cpp로 설정. 주석은 '로 시작한다
-Sub ExportAllTextToMD_UTF8()
+3) `Alt + F11` 을 눌러 VBA 창을 연다
+4) `삽입 - 모듈` 을 눌러 새 모듈을 만든다
+5) 아래의 VBA 코드를 작성한다
+	```vb
+	// vb treesitter가 highlight 지원이 안돼서 cpp로 설정. 주석은 '로 시작한다
+	Sub ExportAllTextToMD_UTF8()
 
-    Dim oSlide As Slide
-    Dim oShape As Shape
-    Dim FilePath As String
-    Dim FileNameWithoutExt As String
+		Dim oSlide As Slide
+		Dim oShape As Shape
+		Dim FilePath As String
+		Dim FileNameWithoutExt As String
 
-    ' 1. 파일 이름 및 경로 설정
-    FileNameWithoutExt = Left(ActivePresentation.Name, InStrRev(ActivePresentation.Name, ".") - 1) ' 확장자 제거된 ppt 파일 이름
-    FilePath = ActivePresentation.Path & "\" & FileNameWithoutExt & ".md" ' .md파일 경로 설정
+		' 1. 파일 이름 및 경로 설정
+		FileNameWithoutExt = Left(ActivePresentation.Name, InStrRev(ActivePresentation.Name, ".") - 1) ' 확장자 제거된 ppt 파일 이름
+		FilePath = ActivePresentation.Path & "\" & FileNameWithoutExt & ".md" ' .md파일 경로 설정
 
-    ' ADODB.Stream 개체 선언 (utf-8 encoding으로 파일 열기 위함)
-    ' (참조 설정: Late Binding 방식 선언으로 Microsoft ActiveX Data Objects 2.x Library 불필요)
-    Dim objStream As Object
-    Set objStream = CreateObject("ADODB.Stream")
-    objStream.Type = 2          ' adTypeText (텍스트 모드)
-    objStream.Charset = "utf-8" ' 인코딩을 UTF-8로 명시적 지정
-    objStream.Open              ' 파일 열기
+		' ADODB.Stream 개체 선언 (utf-8 encoding으로 파일 열기 위함)
+		' (참조 설정: Late Binding 방식 선언으로 Microsoft ActiveX Data Objects 2.x Library 불필요)
+		Dim objStream As Object
+		Set objStream = CreateObject("ADODB.Stream")
+		objStream.Type = 2          ' adTypeText (텍스트 모드)
+		objStream.Charset = "utf-8" ' 인코딩을 UTF-8로 명시적 지정
+		objStream.Open              ' 파일 열기
 
-    ' .md파일 제목 작성
-    objStream.WriteText "# " & FileNameWithoutExt & vbLf
-    objStream.WriteText vbLf  ' new line 추가
+		' .md파일 제목 작성
+		objStream.WriteText "# " & FileNameWithoutExt & vbLf
+		objStream.WriteText vbLf  ' new line 추가
 
-    ' 슬라이드 순회하여 텍스트 추출
-    Dim TextBoxNum As Integer  ' 텍스트박스 번호 변수 추가
-    For Each oSlide In ActivePresentation.Slides
+		' 슬라이드 순회하여 텍스트 추출
+		Dim TextBoxNum As Integer  ' 텍스트박스 번호 변수 추가
+		For Each oSlide In ActivePresentation.Slides
 
-        ' 슬라이드 제목 (H2) 작성
-        objStream.WriteText "## Slide " & oSlide.SlideIndex & vbLf
-        objStream.WriteText vbLf
+			' 슬라이드 제목 (H2) 작성
+			objStream.WriteText "## Slide " & oSlide.SlideIndex & vbLf
+			objStream.WriteText vbLf
 
-        TextBoxNum = 0  ' 각 슬라이드마다 텍스트박스 번호 초기화
-        For Each oShape In oSlide.Shapes    ' 슬라이드 내 요소 순회
-            If oShape.HasTextFrame Then
-                If oShape.TextFrame.HasText Then
-                    TextBoxNum = TextBoxNum + 1  ' 텍스트박스 번호 증가
+			TextBoxNum = 0  ' 각 슬라이드마다 텍스트박스 번호 초기화
+			For Each oShape In oSlide.Shapes    ' 슬라이드 내 요소 순회
+				If oShape.HasTextFrame Then
+					If oShape.TextFrame.HasText Then
+						TextBoxNum = TextBoxNum + 1  ' 텍스트박스 번호 증가
 
-                    Dim para As Object
-                    Dim textRange As Object
-                    Dim processedText As String
-                    Dim lineText As String
-                    Dim indentLevel As Long
-                    Dim bulletChar As String
+						Dim para As Object
+						Dim textRange As Object
+						Dim processedText As String
+						Dim lineText As String
+						Dim indentLevel As Long
+						Dim bulletChar As String
 
-                    ' 각 텍스트 박스 번호 표시 작성
-                    objStream.WriteText "<!-- TextBox " & TextBoxNum & " -->"
-                    objStream.WriteText vbLf
+						' 각 텍스트 박스 번호 표시 작성
+						objStream.WriteText "<!-- TextBox " & TextBoxNum & " -->"
+						objStream.WriteText vbLf
 
-                    ' 각 단락(paragraph)을 순회하며 들여쓰기와 글머리 기호 처리
-                    For Each para In oShape.TextFrame.textRange.Paragraphs
-                        If Len(Trim(para.Text)) > 0 Then
-                            Set textRange = para
-                            lineText = textRange.Text
+						' 각 단락(paragraph)을 순회하며 들여쓰기와 글머리 기호 처리
+						For Each para In oShape.TextFrame.textRange.Paragraphs
+							If Len(Trim(para.Text)) > 0 Then
+								Set textRange = para
+								lineText = textRange.Text
 
-                            ' 줄바꿈 문자 정리
-                            lineText = Replace(lineText, vbCrLf, "")
-                            lineText = Replace(lineText, vbCr, "") ' ^M ->비어 있음
-                            lineText = Replace(lineText, vbLf, "")
-                            lineText = Replace(lineText, vbVerticalTab, " ")  ' ^K → 공백
+								' 줄바꿈 문자 정리
+								lineText = Replace(lineText, vbCrLf, "")
+								lineText = Replace(lineText, vbCr, "") ' ^M ->비어 있음
+								lineText = Replace(lineText, vbLf, "")
+								lineText = Replace(lineText, vbVerticalTab, " ")  ' ^K → 공백
 
-                            ' 들여쓰기 레벨 계산 (IndentLevel: 0=첫번째, 1=두번째, ...)
-                            indentLevel = textRange.indentLevel - 1
-                            If indentLevel < 0 Then indentLevel = 0
+								' 들여쓰기 레벨 계산 (IndentLevel: 0=첫번째, 1=두번째, ...)
+								indentLevel = textRange.indentLevel - 1
+								If indentLevel < 0 Then indentLevel = 0
 
-                            ' 글머리 기호 처리
-                            Set pf = textRange.ParagraphFormat
-                            bulletChar = ""
-                            If pf.Bullet.Visible Then
-                                Select Case pf.Bullet.Type
-                                Case ppBulletNumbered       ' 숫자 리스트인 경우, 1),2) 와 같이 작성
-                                    bulletChar = CStr(pf.Bullet.Number) & ") "
-                                Case Else                   ' 문자 리스트인 경우, indent 에 따라 다르게 작성 (md파일용)
-                                    If indentLevel = 0 Then
-                                        bulletChar = "* "
-                                    Else
-                                        bulletChar = "- "
-                                    End If
-                                End Select
-                            End If
+								' 글머리 기호 처리
+								Set pf = textRange.ParagraphFormat
+								bulletChar = ""
+								If pf.Bullet.Visible Then
+									Select Case pf.Bullet.Type
+									Case ppBulletNumbered       ' 숫자 리스트인 경우, 1),2) 와 같이 작성
+										bulletChar = CStr(pf.Bullet.Number) & ") "
+									Case Else                   ' 문자 리스트인 경우, indent 에 따라 다르게 작성 (md파일용)
+										If indentLevel = 0 Then
+											bulletChar = "* "
+										Else
+											bulletChar = "- "
+										End If
+									End Select
+								End If
 
-                            ' 탭으로 들여쓰기 적용
-                            Dim indentSpaces As String
-                            indentSpaces = String(indentLevel, vbTab)
+								' 탭으로 들여쓰기 적용
+								Dim indentSpaces As String
+								indentSpaces = String(indentLevel, vbTab)
 
-                            ' 최종 텍스트 작성
-                            processedText = indentSpaces & bulletChar & lineText
-                            objStream.WriteText processedText & vbLf
-                        End If
+								' 최종 텍스트 작성
+								processedText = indentSpaces & bulletChar & lineText
+								objStream.WriteText processedText & vbLf
+							End If
 
-                    Next para ' for문 닫기, 다음 단락
-                    objStream.WriteText vbLf
-                End If
-            End If
+						Next para ' for문 닫기, 다음 단락
+						objStream.WriteText vbLf
+					End If
+				End If
 
-        Next oShape ' for문 닫기, 다음 슬라이드 요소 확인
-        objStream.WriteText vbLf & vbLf
+			Next oShape ' for문 닫기, 다음 슬라이드 요소 확인
+			objStream.WriteText vbLf & vbLf
 
-    Next oSlide ' for문 닫기, 다음 슬라이드
+		Next oSlide ' for문 닫기, 다음 슬라이드
 
-    ' 4. 파일 저장 및 닫기
-    objStream.SaveToFile FilePath, 2 ' 2 = adSaveCreateOverWrite (덮어쓰기), 같은 이름의 ,md파일이 있으면 덮어씌운다
-    objStream.Close ' 파일 객체 닫기.
-    Set objStream = Nothing '메모리에서 객체 해제(누수 방지)
+		' 4. 파일 저장 및 닫기
+		objStream.SaveToFile FilePath, 2 ' 2 = adSaveCreateOverWrite (덮어쓰기), 같은 이름의 ,md파일이 있으면 덮어씌운다
+		objStream.Close ' 파일 객체 닫기.
+		Set objStream = Nothing '메모리에서 객체 해제(누수 방지)
 
-    MsgBox FilePath & " 에 추출 텍스트 저장 (UTF-8 encoding)"
-End Sub
-```
+		MsgBox FilePath & " 에 추출 텍스트 저장 (UTF-8 encoding)"
+	End Sub
+	```
+6) `Alt+F8` 을 눌러 매크로 대화상자 연다
+7) 위에서 작성한 함수를 선택하고 '실행' 을 누른다
+8) ppt와 같은 폴더 위치에 만들어진다
 
-4) `파일 - 옵션 - 리본사용자 지정`
+
+### 매크로 메뉴 없는 경우
+1) `파일 - 옵션 - 리본사용자 지정`
    오른쪽에 `개발 도구`가 체크해제 되어 있으면 체크 한다
 	![리본사용자지정_매크로.png](pptx_to_txt_convert/리본사용자지정_매크로.png)
-5) `메뉴 - 개발도구 - 매크로` 선택해 매크로 창을 연다
+2) `메뉴 - 개발도구 - 매크로` 선택해 매크로 창을 연다
 	![매크로창.png](pptx_to_txt_convert/매크로창.png)
 	사용하려는 함수를 누르고 `실행` 한다
 
