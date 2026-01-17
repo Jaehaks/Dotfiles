@@ -44,9 +44,11 @@ open = [ # if folder, open explorer location under cursor
 	{ run = 'start "" "%1"', orphan = true, desc = "Open", for = "windows" },
 	{ run = 'termux-open "$1"',             desc = "Open", for = "android" },
 ]
-pdfopen = [
-	# { run = 'sumatraPDF "%1"', orphan = true, desc = "SumatraPDF", for = "windows" },
+sioyekopen = [
 	{ run = 'sioyek --new-window "%1"', orphan = true, desc = "sioyek", for = "windows" },
+]
+sumatraopen = [
+	{ run = 'sumatraPDF "%1"', orphan = true, desc = "SumatraPDF", for = "windows" },
 ]
 reveal = [ # if folder, open explorer current location
 	{ run = 'xdg-open "$(dirname "$1")"',           desc = "Reveal", for = "linux" },
@@ -89,7 +91,7 @@ rules = [
 	{ mime = "application/{json,ndjson}", use = [ "edit", "reveal" ] },
 	{ mime = "*/javascript", use = [ "edit", "reveal" ] },
 	# pdf
-	{ mime = "application/pdf", use = [ "pdfopen", "open" ] },
+	{ mime = "application/pdf", use = [ "open", "sioyekopen", "sumatraopen" ] },
 	# Empty file
 	{ mime = "inode/empty", use = [ "edit", "reveal" ] },
 	# Fallback
