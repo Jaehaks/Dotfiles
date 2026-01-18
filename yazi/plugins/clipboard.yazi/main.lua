@@ -70,16 +70,9 @@ return {
 			-- 'cb' command is related with files/folders only.
 			-- It cannot update the contents when clipboard includes text/image.
 			-- We cannot recognize what type is using 'cb' only.
-			-- Powershell has the same function but it needs to call shell multiple times to judge type and
-			-- pwsh has advantage about Boolean output.
-			child, err = Command("pwsh"):arg({
-				"-c",
-				[[Add-Type -AssemblyName System.Windows.Forms;
-				if ([System.Windows.Forms.Clipboard]::ContainsFileDropList()) {'Files'}
-				elseif ([System.Windows.Forms.Clipboard]::ContainsImage()) {'Image'}
-				elseif ([System.Windows.Forms.Clipboard]::ContainsText()) {'Text'}
-				else {'Other'}]]})
-				:stdin(Command.INHERIT):stdout(Command.PIPED):spawn()
+			-- I made a function to check clipboard contents type to avoid using powershell
+			child, err = Command("checkclipboard.exe")
+						 :stdin(Command.INHERIT):stdout(Command.PIPED):spawn()
 			output, err2 = child:wait_with_output()
 			local cbtype = string.gsub(output.stdout, "%s", "")
 
