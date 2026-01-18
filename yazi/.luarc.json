@@ -4,6 +4,6 @@
 		"version": "Lua 5.4"
 	},
 	"workspace.library": [
-		"%USERPROFILE%/.config/Dotfiles/yazi/plugins/types.yazi/"
+		"%USERPROFILE%\\.config\\Dotfiles\\yazi\\plugins\\types.yazi\\"
 	]
 }
