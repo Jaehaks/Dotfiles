@@ -27,7 +27,7 @@ local entry = function(_, job)
 	local value, event = ya.input({
 		title = "rg options",
 		value = '-t md -t txt',
-		position = {"top-center", y = 3, w = 40},
+		pos = {"top-center", y = 3, w = 40},
 	})
 	if event ~= 1 then
 		return
