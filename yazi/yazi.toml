@@ -107,23 +107,22 @@ image_bound      = [ 10000, 10000 ] # change from (0,0) for limiting memory of l
 suppress_preload = false
 
 [plugin]
-
 prepend_fetchers = [
-	{ id = "mime", url = "local://", run = "mime-ext.local", prio = "high" },
-	{ id = "mime", url = "remote://", run = "mime-ext.remote", prio = "high" },
-]
-fetchers = [
-	# Mimetype
-	# { id = "mime", url = "*", run = "mime", if = "!mime", prio = "high" },
-	{ id = "mime", url = "*/",         run = "mime.dir", prio = "high" },
-	{ id = "mime", url = "local://*",  run = "mime.local", prio = "high" },
-	{ id = "mime", url = "remote://*", run = "mime.remote", prio = "high" },
+	# plugins - mime-ext.yazi
+	{ id = "mime", url = "local://*", run = "mime-ext.local", prio = "high" },
+	{ id = "mime", url = "remote://*", run = "mime-ext.remote", prio = "high" },
 	# plugins - git.yazi
 	{ id = "git", url = "*", run = "git"},
 	{ id = "git", url = "*/", run = "git"},
+	# plugins - githead.yazi
 	{ id = "githead", url = "*", run = "githead"},
 	{ id = "githead", url = "*/", run = "githead"},
 ]
+fetchers = [
+	# Mimetype -- use local/remote from mime-ext plugins
+	{ id = "mime", url = "*/",         run = "mime.dir", prio = "high" },
+]
+
 spotters = [
 	{ url = "*/", run = "folder" },
 	# Code
