@@ -54,7 +54,7 @@ return {
 			return
 		end
 
-		local _permit = ya.hide()
+		local _permit = ui.hide()
 		-- use INHERIT as stdin/stdout/stderr for interactive app like nvim
 		local status, err = Command("nvim"):arg("-d")
 						 	:arg(paths[1]):arg(paths[2])

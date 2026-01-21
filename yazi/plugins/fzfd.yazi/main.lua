@@ -7,7 +7,7 @@ local function fail(s, ...)
 end
 
 local function entry()
-	local _permit = ya.hide()
+	local _permit = ui.hide()
 	local cwd = tostring(state())
 
 	local child_fd, err_fd =
@@ -23,6 +23,10 @@ local function entry()
 		:stderr(Command.INHERIT)
 		:spawn()
 
+	if not child_fd then
+		return fail("Spawn `fd` failed with error code %s. Do you have it installed?", err_fd)
+	end
+
 	local child_fzf, err_fzf =
 		Command('fzf')
 		:stdin(child_fd:take_stdout())
@@ -30,9 +34,7 @@ local function entry()
 		:stderr(Command.INHERIT)
 		:spawn()
 
-	if not child_fd then
-		return fail("Spawn `fd` failed with error code %s. Do you have it installed?", err_fd)
-	elseif not child_fzf then
+	if not child_fzf then
 		return fail("Spawn `fzf` failed with error code %s. Do you have it installed?", err_fzf)
 	end
 

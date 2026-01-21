@@ -1,47 +1,47 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-filter"
-rev = "eaf6920"
-hash = "186268c7330a1b3fea221aeed4d4f2f9"
+rev = "de33976"
+hash = "5c5e375cb93c11168953b485804f4a71"
 
 [[plugin.deps]]
 use = "h-hg/yamb"
-rev = "22af003"
-hash = "7cc42012a7c2099f80064d228feb8d44"
+rev = "5f2e22e"
+hash = "699fe07e0d2d1b4af8dafb84168eeb04"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:git"
-rev = "eaf6920"
-hash = "1a3396ccbc70b3c5f7d756eacc2b1f4a"
+rev = "de33976"
+hash = "3ab7e7541d5947e478e415daf0cd905c"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:mime-ext"
-rev = "eaf6920"
-hash = "d7467b0a216c9b1a43932bf15d8255c7"
+rev = "de33976"
+hash = "22dec1266e598eb7dba353436bc943cc"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:lsar"
-rev = "eaf6920"
-hash = "e1a72978a7c0f9548c1e96be18deafaa"
+rev = "de33976"
+hash = "5d1042678f646cdd092d43003b626dd5"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:toggle-pane"
-rev = "eaf6920"
+rev = "de33976"
 hash = "e218acb81244ecc0dc37f58b72c69eef"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-enter"
-rev = "eaf6920"
+rev = "de33976"
 hash = "afb539b8877c08a04129af6d90aa395c"
 
 [[plugin.deps]]
 use = "boydaihungst/file-extra-metadata"
-rev = "b052d54"
-hash = "4be2c03287112bb645199c4331b746cc"
+rev = "4fbb106"
+hash = "8765a20c837f4be5718f89ab1cf33b4"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:types"
-rev = "eaf6920"
-hash = "a097eb6df2b41b1f5973d9a00a855e44"
+rev = "de33976"
+hash = "f769913a213b45ad916e6440b95c33ea"
 
 [flavor]
 deps = []

@@ -15,7 +15,7 @@ end
 local entry = function ()
 	local value, event = ya.input({
 		title = "Enter one of xlsx/pptx/pptm",
-		position = {"top-center", y = 3, w = 40},
+		pos = {"top-center", y = 3, w = 40},
 	})
 	if event ~= 1 then
 		return

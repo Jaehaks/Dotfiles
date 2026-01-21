@@ -34,7 +34,7 @@ local entry = function(_, job)
 	end
 
 	-- hide yazi
-	local _permit = ya.hide()
+	local _permit = ui.hide()
 	local cwd = tostring(state())
 	local cmd = ''
 

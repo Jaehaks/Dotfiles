@@ -83,7 +83,7 @@ require('git'):setup({
 
 -- [plugins] - yazi-rs/mime-ext.yazi
 -- prefetech file's mime using file extension
-require('mime-ext'):setup({
+require('mime-ext.local'):setup({
 	-- by filename database
 	with_files = {
 
