@@ -1,18 +1,10 @@
 {
     "$help": "https://aka.ms/terminal-documentation",
     "$schema": "https://aka.ms/terminal-profiles-schema",
-    "actions":
+    "actions": 
     [
         {
-            "command":
-            {
-                "action": "moveFocus",
-                "direction": "previousInOrder"
-            },
-            "id": "User.moveFocus.787314EB"
-        },
-        {
-            "command":
+            "command": 
             {
                 "action": "copy",
                 "singleLine": false
@@ -20,12 +12,20 @@
             "id": "User.copy.644BA8F2"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "splitPane",
                 "split": "down"
             },
             "id": "User.splitPane.D5151347"
+        },
+        {
+            "command": 
+            {
+                "action": "moveFocus",
+                "direction": "previousInOrder"
+            },
+            "id": "User.moveFocus.787314EB"
         },
         {
             "command": "scrollUpPage",
@@ -44,14 +44,14 @@
             "id": "User.scrollDownPage"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "scrollUp"
             },
             "id": "User.scrollUp.0"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "scrollDown"
             },
@@ -62,14 +62,14 @@
             "id": "User.paste"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "newTab"
             },
             "id": "User.newTab.5DEADB41"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "splitPane",
                 "split": "right"
@@ -77,26 +77,25 @@
             "id": "User.splitPane.864CD510"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "nextTab"
             },
             "id": "User.nextTab.0"
         }
     ],
-    "confirmCloseAllTabs": false,
     "copyFormatting": "none",
     "copyOnSelect": false,
     "defaultProfile": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
-    "keybindings":
+    "keybindings": 
     [
         {
             "id": null,
-            "keys": "ctrl+shift+d"
+            "keys": "ctrl+shift+tab"
         },
         {
             "id": null,
-            "keys": "ctrl+shift+tab"
+            "keys": "ctrl+shift+d"
         },
         {
             "id": null,
@@ -108,11 +107,11 @@
         },
         {
             "id": null,
-            "keys": "ctrl+shift+3"
+            "keys": "ctrl+numpad_plus"
         },
         {
             "id": null,
-            "keys": "ctrl+plus"
+            "keys": "ctrl+shift+3"
         },
         {
             "id": null,
@@ -120,15 +119,7 @@
         },
         {
             "id": null,
-            "keys": "ctrl+numpad_plus"
-        },
-        {
-            "id": null,
-            "keys": "ctrl+shift+2"
-        },
-        {
-            "id": null,
-            "keys": "ctrl+shift+5"
+            "keys": "ctrl+plus"
         },
         {
             "id": null,
@@ -140,11 +131,15 @@
         },
         {
             "id": null,
-            "keys": "ctrl+shift+period"
+            "keys": "ctrl+shift+5"
         },
         {
             "id": null,
-            "keys": "ctrl+numpad0"
+            "keys": "ctrl+shift+2"
+        },
+        {
+            "id": null,
+            "keys": "ctrl+shift+period"
         },
         {
             "id": null,
@@ -152,11 +147,15 @@
         },
         {
             "id": null,
-            "keys": "ctrl+shift+7"
+            "keys": "ctrl+numpad0"
         },
         {
             "id": null,
             "keys": "ctrl+shift+home"
+        },
+        {
+            "id": null,
+            "keys": "ctrl+shift+7"
         },
         {
             "id": null,
@@ -176,11 +175,11 @@
         },
         {
             "id": null,
-            "keys": "ctrl+alt+2"
+            "keys": "ctrl+alt+9"
         },
         {
             "id": null,
-            "keys": "ctrl+alt+9"
+            "keys": "ctrl+alt+2"
         },
         {
             "id": null,
@@ -188,23 +187,27 @@
         },
         {
             "id": null,
-            "keys": "menu"
+            "keys": "ctrl+shift+a"
         },
         {
             "id": null,
-            "keys": "ctrl+shift+a"
+            "keys": "menu"
         },
         {
             "id": null,
             "keys": "shift+insert"
         },
         {
+            "id": "User.paste",
+            "keys": "ctrl+shift+v"
+        },
+        {
             "id": null,
             "keys": "ctrl+alt+8"
         },
         {
-            "id": "User.paste",
-            "keys": "ctrl+shift+v"
+            "id": null,
+            "keys": "ctrl+shift+n"
         },
         {
             "id": null,
@@ -216,15 +219,11 @@
         },
         {
             "id": null,
-            "keys": "ctrl+shift+n"
-        },
-        {
-            "id": null,
-            "keys": "alt+down"
-        },
-        {
-            "id": null,
             "keys": "ctrl+shift+4"
+        },
+        {
+            "id": null,
+            "keys": "ctrl+shift+t"
         },
         {
             "id": "User.scrollDownPage",
@@ -232,7 +231,7 @@
         },
         {
             "id": null,
-            "keys": "ctrl+shift+t"
+            "keys": "alt+down"
         },
         {
             "id": null,
@@ -241,10 +240,6 @@
         {
             "id": null,
             "keys": "ctrl+shift+1"
-        },
-        {
-            "id": null,
-            "keys": "ctrl+insert"
         },
         {
             "id": "User.closePane",
@@ -256,6 +251,10 @@
         },
         {
             "id": null,
+            "keys": "ctrl+insert"
+        },
+        {
+            "id": null,
             "keys": "ctrl+shift+8"
         },
         {
@@ -264,11 +263,11 @@
         },
         {
             "id": null,
-            "keys": "ctrl+shift+f"
+            "keys": "ctrl+comma"
         },
         {
             "id": null,
-            "keys": "ctrl+comma"
+            "keys": "ctrl+shift+f"
         },
         {
             "id": null,
@@ -303,10 +302,6 @@
             "keys": "alt+shift+minus"
         },
         {
-            "id": null,
-            "keys": "ctrl+alt+5"
-        },
-        {
             "id": "User.copy.644BA8F2",
             "keys": "ctrl+shift+c"
         },
@@ -316,11 +311,15 @@
         },
         {
             "id": null,
-            "keys": "ctrl+alt+1"
+            "keys": "ctrl+alt+5"
         },
         {
             "id": null,
             "keys": "alt+shift+left"
+        },
+        {
+            "id": null,
+            "keys": "ctrl+alt+1"
         },
         {
             "id": null,
@@ -360,11 +359,11 @@
         },
         {
             "id": null,
-            "keys": "ctrl+shift+pgdn"
+            "keys": "ctrl+shift+pgup"
         },
         {
             "id": null,
-            "keys": "ctrl+shift+pgup"
+            "keys": "ctrl+shift+pgdn"
         },
         {
             "id": "User.moveFocus.787314EB",
@@ -399,36 +398,40 @@
             "keys": "alt+s"
         }
     ],
-    "newTabMenu":
+    "newTabMenu": 
     [
         {
             "type": "remainingProfiles"
         }
     ],
-    "profiles":
+    "profiles": 
     {
-        "defaults":
+        "defaults": 
         {
             "cursorShape": "filledBox",
             "experimental.retroTerminalEffect": false,
-            "font":
+            "font": 
             {
-                "face": "FiraCode Nerd Font",
-                "features":
+                "builtinGlyphs": true,
+                "colorGlyphs": true,
+                "face": "FiraCode Nerd Font Mono",
+                "features": 
                 {
                     "calt": 0,
                     "liga": 0
                 },
                 "weight": "semi-bold"
             },
+            "intenseTextStyle": "all",
+            "padding": "8",
             "startingDirectory": "%USERPROFILE%",
-            "unfocusedAppearance":
+            "unfocusedAppearance": 
             {
                 "background": "#333333",
                 "useAcrylic": true
             }
         },
-        "list":
+        "list": 
         [
             {
                 "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
@@ -437,9 +440,11 @@
                 "name": "Windows PowerShell"
             },
             {
-                "commandline": "%SystemRoot%\\System32\\cmd.exe /k %USERPROFILE%\\.config\\Dotfiles\\clink\\aliase.cmd",
+                "closeOnExit": "always",
+                "commandline": "%SystemRoot%\\System32\\cmd.exe /k %USERPROFILE%\\.config\\Dotfiles\\clink\\usercmds\\aliase.cmd",
                 "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
                 "hidden": false,
+                "historySize": 1000,
                 "name": "\uba85\ub839 \ud504\ub86c\ud504\ud2b8"
             },
             {
@@ -449,59 +454,63 @@
                 "source": "Windows.Terminal.PowershellCore"
             },
             {
-                "guid": "{17bf3de4-5353-5709-bcf9-835bd952a95e}",
-                "hidden": true,
-                "name": "Ubuntu-22.04",
-                "source": "Windows.Terminal.Wsl"
-            },
-            {
                 "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
                 "hidden": true,
                 "name": "Azure Cloud Shell",
                 "source": "Windows.Terminal.Azure"
             },
             {
-                "guid": "{9b9a00ec-9c37-58f6-9003-0037a7a34bd6}",
-                "hidden": true,
-                "name": "Developer Command Prompt for VS 2022",
-                "source": "Windows.Terminal.VisualStudio"
-            },
-            {
-                "guid": "{4f7b0018-2adf-5096-8e49-026c1feb16cb}",
-                "hidden": true,
-                "name": "Developer PowerShell for VS 2022",
-                "source": "Windows.Terminal.VisualStudio"
-            },
-            {
-                "guid": "{4ff56d04-d9cf-57ea-bae2-ad396374e7e3}",
-                "hidden": true,
-                "name": "Ubuntu 22.04.5 LTS",
-                "source": "CanonicalGroupLimited.Ubuntu22.04LTS_79rhkp1fndgsc"
-            },
-            {
                 "altGrAliasing": true,
                 "antialiasingMode": "grayscale",
                 "closeOnExit": "automatic",
                 "colorScheme": "Campbell",
-                "commandline": "%SystemRoot%\\System32\\cmd.exe /k %USERPROFILE%\\.config\\Dotfiles\\clink\\aliase.cmd",
+                "commandline": "%SystemRoot%\\System32\\cmd.exe /k %USERPROFILE%\\.config\\Dotfiles\\clink\\usercmds\\aliase.cmd",
                 "elevate": true,
-                "font":
+                "font": 
                 {
                     "features": {},
                     "size": 12
                 },
                 "guid": "{ed86d3d7-943a-4e42-a745-1e4dfd22fd0e}",
                 "hidden": false,
-                "historySize": 9001,
+                "historySize": 1000,
                 "icon": "ms-appx:///ProfileIcons/{0caa0dad-35be-5f56-a8ff-afceeeaa6101}.png",
                 "name": "\uba85\ub839 \ud504\ub86c\ud504\ud2b8 (Admin)",
                 "padding": "8, 8, 8, 8",
                 "snapOnInput": true,
                 "useAcrylic": false
+            },
+            {
+                "colorScheme": "Campbell",
+                "guid": "{adda7cf9-d554-5fbb-840c-aae3ff84cdf4}",
+                "hidden": false,
+                "name": "Ubuntu-24.04",
+                "source": "Microsoft.WSL"
+            },
+            {
+                "guid": "{24515781-869c-5a01-9249-41fffaca6ab6}",
+                "hidden": false,
+                "name": "archlinux",
+                "source": "Microsoft.WSL"
+            },
+            {
+                "commandline": "cmd.exe /k \"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat\" -startdir=none -arch=x64 -host_arch=x64 &&  %USERPROFILE%\\.config\\Dotfiles\\clink\\usercmds\\aliase.cmd",
+                "guid": "{93dc213f-cceb-51dd-9532-573cc0f81dcd}",
+                "hidden": false,
+                "name": "Developer Command Prompt for VS 2022",
+                "source": "Windows.Terminal.VisualStudio"
+            },
+            {
+                "guid": "{5a75cb13-50d4-5517-a321-25a4d726d2f0}",
+                "hidden": false,
+                "name": "Developer PowerShell for VS 2022",
+                "source": "Windows.Terminal.VisualStudio"
             }
         ]
     },
+    "rendering.software": true,
     "schemes": [],
     "tabSwitcherMode": "disabled",
-    "themes": []
+    "themes": [],
+    "warning.confirmCloseAllTabs": false
 }
