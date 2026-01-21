@@ -1,3 +1,4 @@
+--- @since 25.6.11
 -- get branch contents from status
 local get_branch = ya.sync(function (state, status)
 	local branch = status:match('On branch (%S+)')
@@ -92,7 +93,7 @@ local setup = function(state, args)
 
 	-- githead main function
 	function Header:githead()
-		ya.render() -- it needs to erase branch fast out of git repo
+		ui.render() -- it needs to erase branch fast out of git repo
 
 		return ui.Line{ -- must not be nil, it branch is nil, header isn't shown
 			ui.Span(state.branch):fg('bright magenta'),

@@ -119,7 +119,7 @@ return {
 		local archive_name, event = ya.input({
 			title = plugin_name,
 			value = name,
-			position = {'top-center', w = 50},
+			pos = {'top-center', w = 50},
 		})
 		if 		event == 0 then ya.notify({ title = plugin_name, content = 'Faile to zip', timeout = 1, })
 		elseif 	event == 2 then return

@@ -165,11 +165,11 @@ prepend_keymap = [
 	# plugin : yamb.yazi
 	# -- if cursor under the file => current directory is bookmarked
 	# -- if cursor under the folder => the selected folder is bookmarked
-	{ on = [ "u", "m" ], 	 run = "plugin yamb 'save'", 		 desc = "Add bookmark"},
-	{ on = [ "'" ],  	 run = "plugin yamb 'jump_by_key'", desc = "Jump to a bookmark"},
-	{ on = [ "\"" ],  	 run = "plugin yamb 'jump_by_fzf'", desc = "Jump to a bookmark by fzf"},
-	{ on = [ "u", "d" ], run = "plugin yamb 'delete_by_fzf'", 	 desc = "Delete a bookmark by fzf"},
-	{ on = [ "u", "r" ], run = "plugin yamb 'rename_by_fzf'", 	 desc = "rename a bookmark by fzf"},
+	{ on = [ "u", "m" ], run = "plugin yamb -- save", 		 	desc = "Add bookmark"},
+	{ on = [ "'" ],  	 run = "plugin yamb -- jump_by_key", 	desc = "Jump to a bookmark"},
+	{ on = [ "\"" ],  	 run = "plugin yamb -- jump_by_fzf", 	desc = "Jump to a bookmark by fzf"},
+	{ on = [ "u", "d" ], run = "plugin yamb -- delete_by_fzf", 	desc = "Delete a bookmark by fzf"},
+	{ on = [ "u", "r" ], run = "plugin yamb -- rename_by_fzf", 	desc = "rename a bookmark by fzf"},
 
 	# plugin : diff.yazi
 	# -- diff result is copied to clibboard. check with pasting other editor

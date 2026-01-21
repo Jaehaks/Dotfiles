@@ -11,14 +11,17 @@ dark = ""
 
 # : }}}
 
+# : App {{{
+
+[app]
+overall = {}
+
+# : }}}
+
 # : Manager {{{
 
 [mgr]
 cwd = { fg = "cyan" }
-
-# Hovered
-hovered         = { reversed = true }
-preview_hovered = { underline = true }
 
 # Find
 find_keyword  = { fg = "yellow", bold = true, italic = true, underline = true }
@@ -47,12 +50,6 @@ syntect_theme = ""
 
 # : }}}
 
-
-# # Tab
-# tab_active   = { reversed = true }
-# tab_inactive = {}
-# tab_width    = 12
-
 # : Tabs {{{
 
 [tabs]
@@ -79,6 +76,16 @@ select_alt  = { fg = "red", bg = "gray" }
 # Unset mode
 unset_main = { bg = "red", bold = true }
 unset_alt  = { fg = "red", bg = "gray" }
+
+# : }}}
+
+# : Indicator of hovered file {{{
+
+[indicator]
+parent  = { reversed = true }
+current = { reversed = true }
+preview = { underline = true }
+padding = { open = "", close = "" }
 
 # : }}}
 
@@ -124,7 +131,7 @@ separator_style = { fg = "darkgray" }
 [confirm]
 border     = { fg = "blue" }
 title      = { fg = "blue" }
-content    = {}
+body       = {}
 list       = {}
 btn_yes    = { reversed = true }
 btn_no     = {}
@@ -202,7 +209,7 @@ icon_command = ""
 [tasks]
 border  = { fg = "blue" }
 title   = {}
-hovered = { fg = "magenta", underline = true }
+hovered = { fg = "magenta", bold = true }
 
 # : }}}
 
@@ -238,39 +245,40 @@ rules = [
 
 	# Empty files
 	# { mime = "inode/empty", fg = "red" },
+	{ mime = "vfs/{absent,stale}", fg = "gray" },
 
 	# Special files
-	{ name = "*", is = "orphan", bg = "red" },
-	{ name = "*", is = "exec"  , fg = "green" },
+	{ url = "*", is = "orphan", bg = "red" },
+	{ url = "*", is = "exec"  , fg = "green" },
 
 	# file ext
-	{ name = "*.pptx", fg = "#FF9664" },
-	{ name = "*.pptm", fg = "#FF9664" },
-	{ name = "*.ppt" , fg = "#FF9664" },
-	{ name = "*.xlsx", fg = "#C8FFC8" },
-	{ name = "*.xlsm", fg = "#C8FFC8" },
-	{ name = "*.xls" , fg = "#C8FFC8" },
-	{ name = "*.csv" , fg = "#C8FFC8" },
-	{ name = "*.docx", fg = "#4896C8" },
-	{ name = "*.doc" , fg = "#4896C8" },
-	{ name = "*.hwp" , fg = "#4896C8" },
-	{ name = "*.pdf" , fg = "#FF6464" },
-	{ name = "*.lnk" , fg = "#FFFF96" },
-	{ name = "*.md"  , fg = "#EEAEFF" },
-	{ name = "*.dat" , fg = "#C258DE" },
-	{ name = "*.mf4" , fg = "#C258DE" },
-	{ name = "*.exe" , fg = "green" },
-	{ name = "*.reg" , fg = "#DAFF99" },
+	{ url = "*.pptx", fg = "#FF9664" },
+	{ url = "*.pptm", fg = "#FF9664" },
+	{ url = "*.ppt" , fg = "#FF9664" },
+	{ url = "*.xlsx", fg = "#C8FFC8" },
+	{ url = "*.xlsm", fg = "#C8FFC8" },
+	{ url = "*.xls" , fg = "#C8FFC8" },
+	{ url = "*.csv" , fg = "#C8FFC8" },
+	{ url = "*.docx", fg = "#4896C8" },
+	{ url = "*.doc" , fg = "#4896C8" },
+	{ url = "*.hwp" , fg = "#4896C8" },
+	{ url = "*.pdf" , fg = "#FF6464" },
+	{ url = "*.lnk" , fg = "#FFFF96" },
+	{ url = "*.md"  , fg = "#EEAEFF" },
+	{ url = "*.dat" , fg = "#C258DE" },
+	{ url = "*.mf4" , fg = "#C258DE" },
+	{ url = "*.exe" , fg = "green" },
+	{ url = "*.reg" , fg = "#DAFF99" },
 
 	# symlink -- {mime 'inode/symlink'} doesn't work
 
 	# Dummy files
-	{ name = "*", is = "link", fg = "#00E6E6" }, # for file
-	{ name = "*/", is = "link", fg = "#00E6E6" }, # for dir
+	{ url = "*", is = "dummy", bg = "red" }, # for file
+	{ url = "*/", is = "dummy", bg = "red" }, # for dir
 
 	# Fallback
-	# { name = "*", fg = "white" },
-	{ name = "*/", fg = "#3B78FF" },
+	# { url = "*", fg = "white" },
+	{ url = "*/", fg = "#3B78FF" },
 
 ]
 
@@ -304,7 +312,7 @@ files = [
 	{ name = ".bashrc", text = "", fg = "#89e051" },
 	{ name = ".clang-format", text = "", fg = "#6d8086" },
 	{ name = ".clang-tidy", text = "", fg = "#6d8086" },
-	{ name = ".codespellrc", text = "󰓆", fg = "#35da60" },
+	{ name = ".codespellrc", text = "", fg = "#35da60" },
 	{ name = ".condarc", text = "", fg = "#43b02a" },
 	{ name = ".dockerignore", text = "󰡨", fg = "#458ee6" },
 	{ name = ".ds_store", text = "", fg = "#41535b" },
@@ -644,7 +652,7 @@ exts = [
 	{ name = "htm"          , text = "", fg = "#e34c26"},
 	{ name = "html"         , text = "", fg = "#e44d26"},
 	{ name = "huff"         , text = "󰡘", fg = "#4242c7"},
-	{ name = "hurl"         , text = "", fg = "#ff0288"},
+	{ name = "hname"         , text = "", fg = "#ff0288"},
 	{ name = "hx"           , text = "", fg = "#ea8220"},
 	{ name = "hxx"          , text = "", fg = "#a074c4"},
 	{ name = "ical"         , text = "", fg = "#2b2e83"},
