@@ -33,39 +33,39 @@ ueberzug_offset = [ 0, 0, 0, 0 ]
 # open file using terminal program like nvim without 'block = true', Error invokes
 # 'orphan' keep the process even if yazi is exited, but it is regardless of setting when I open gui program
 edit = [
-	{ run = '${EDITOR:-vi} "$@"', block = true    , desc = "$EDITOR", for = "unix" }   ,
-	{ run = 'nvim %*'           , block = true    , desc = "nvim"   , for = "windows" },
-	{ run = 'nvim-qt %*'        , orphan = true   , desc = "nvim-qt", for = "windows" },
-	{ run = 'excel /e "%1"'     , orphan = true   , desc = "excel",   for = "windows" },
+	{ run = '${EDITOR:-vi} %s'  , block = true    , desc = "$EDITOR", for = "unix" }   ,
+	{ run = 'nvim %s'           , block = true    , desc = "nvim"   , for = "windows" },
+	{ run = 'nvim-qt %s'        , orphan = true   , desc = "nvim-qt", for = "windows" },
+	{ run = 'excel /e %s'     , orphan = true   , desc = "excel",   for = "windows" },
 ]
 open = [ # if folder, open explorer location under cursor
-	{ run = 'xdg-open "$1"',                desc = "Open", for = "linux" },
-	{ run = 'open "$@"',                    desc = "Open", for = "macos" },
-	{ run = 'start "" "%1"', orphan = true, desc = "Open", for = "windows" },
-	{ run = 'termux-open "$1"',             desc = "Open", for = "android" },
+	{ run = 'xdg-open "%s1"',                desc = "Open", for = "linux" },
+	{ run = 'open "%s"',                    desc = "Open", for = "macos" },
+	{ run = 'start "" "%s1"', orphan = true, desc = "Open", for = "windows" },
+	{ run = 'termux-open "%s1"',             desc = "Open", for = "android" },
 ]
 sioyekopen = [
-	{ run = 'sioyek --new-window "%1"', orphan = true, desc = "sioyek", for = "windows" },
+	{ run = 'sioyek --new-window %s1', orphan = true, desc = "sioyek", for = "windows" },
 ]
 sumatraopen = [
-	{ run = 'sumatraPDF "%1"', orphan = true, desc = "SumatraPDF", for = "windows" },
+	{ run = 'sumatraPDF %s1', orphan = true, desc = "SumatraPDF", for = "windows" },
 ]
 reveal = [ # if folder, open explorer current location
-	{ run = 'xdg-open "$(dirname "$1")"',           desc = "Reveal", for = "linux" },
-	{ run = 'open -R "$1"',                         desc = "Reveal", for = "macos" },
-	{ run = 'explorer /select,"%1"', orphan = true, desc = "Reveal", for = "windows" },
-	{ run = 'termux-open "$(dirname "$1")"',        desc = "Reveal", for = "android" },
-	{ run = '''exiftool "$1"; echo "Press enter to exit"; read _''', block = true, desc = "Show EXIF", for = "unix" },
+	{ run = 'xdg-open %d``',           desc = "Reveal", for = "linux" },
+	{ run = 'open -R %s1',                         desc = "Reveal", for = "macos" },
+	{ run = 'explorer /select,%s1', orphan = true, desc = "Reveal", for = "windows" },
+	{ run = 'termux-open %d1',        desc = "Reveal", for = "android" },
+	{ run = "clear; exiftool %s1; echo 'Press enter to exit'; read _", desc = "Show EXIF", for = "unix", block = true },
 ]
 extract = [
-	{ run = 'ya pub extract --list "$@"', desc = "Extract here", for = "unix" },
+	{ run = "ya pub extract --list %s", desc = "Extract here", for = "linux"},
 	# { run = 'bandizip bx -target:auto %*',   desc = "Extract here", for = "windows" },
 	{ run = '7z x -aoa -o* %*',   desc = "Extract here", for = "windows" },
 ]
 play = [
-	{ run = 'mpv --force-window "$@"', orphan = true, for = "unix" },
-	{ run = 'start "" "%1"', orphan = true,  for = "windows" },
-	{ run = '''mediainfo "$1"; echo "Press enter to exit"; read _''', block = true, desc = "Show media info", for = "unix" },
+	{ run = 'mpv --force-window %s1', orphan = true, for = "unix" },
+	{ run = 'start "" %s1', orphan = true,  for = "windows" },
+	{ run = '''mediainfo %s1; echo "Press enter to exit"; read _''', block = true, desc = "Show media info", for = "unix" },
 ]
 
 [open] # set rules for opening for specific file + show open list
@@ -256,7 +256,7 @@ overwrite_offset  = [ 0, 0, 50, 15 ]
 
 # quit
 quit_title   = "Quit?"
-quit_body = "The following tasks are still running, are you sure you want to quit?"
+quit_body   = "There are unfinished tasks, quit anyway?\n(Open task manager with default key 'w')"
 quit_origin  = "center"
 quit_offset  = [ 0, 0, 50, 15 ]
 
