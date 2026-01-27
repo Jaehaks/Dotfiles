@@ -29,6 +29,7 @@ find_position = { fg = "magenta", bg = "reset", bold = true, italic = true }
 
 # Symlink
 symlink_target = { italic = true }
+
 # Marker
 marker_copied   = { fg = "lightgreen",  bg = "lightgreen" }
 marker_cut      = { fg = "lightred",    bg = "lightred" }
@@ -249,6 +250,8 @@ rules = [
 
 	# Special files
 	{ url = "*", is = "orphan", bg = "red" },
+	{ url = "*/", is = "link", fg = "lightcyan" },
+	{ url = "*", is = "link", fg = "lightcyan" },
 	{ url = "*", is = "exec"  , fg = "green" },
 
 	# file ext
