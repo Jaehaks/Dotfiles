@@ -98,7 +98,7 @@ return {
 				local filename, event = ya.input({
 					title = 'Input filename only' .. ' (' .. cbtype .. ')',
 					value = '',
-					position = {"top-center", y = 3, w = 50},
+					pos = {"top-center", y = 3, w = 50},
 				})
 				if event ~= 1 then
 					return
