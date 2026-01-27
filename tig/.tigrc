@@ -322,6 +322,7 @@ bind generic	Q      		quit       # Close all views and quit
 
 bind tree	l  enter       # move to selected entry
 bind tree	h  parent      # move to parent
+bind tree   L  !>sh -c "tig -- %(file)" # open tig with selected file, if it closed, reopen previous tig instance
 
 # View specific
 bind status	u	status-update              # Stage/unstage changes in file
