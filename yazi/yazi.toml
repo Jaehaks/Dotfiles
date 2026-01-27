@@ -39,10 +39,10 @@ edit = [
 	{ run = 'excel /e %s'     , orphan = true   , desc = "excel",   for = "windows" },
 ]
 open = [ # if folder, open explorer location under cursor
-	{ run = 'xdg-open "%s1"',                desc = "Open", for = "linux" },
-	{ run = 'open "%s"',                    desc = "Open", for = "macos" },
-	{ run = 'start "" "%s1"', orphan = true, desc = "Open", for = "windows" },
-	{ run = 'termux-open "%s1"',             desc = "Open", for = "android" },
+	{ run = 'xdg-open %s1',                desc = "Open", for = "linux" },
+	{ run = 'open %s',                    desc = "Open", for = "macos" },
+	{ run = 'start "" %s1', orphan = true, desc = "Open", for = "windows" },
+	{ run = 'termux-open %s1',             desc = "Open", for = "android" },
 ]
 sioyekopen = [
 	{ run = 'sioyek --new-window %s1', orphan = true, desc = "sioyek", for = "windows" },
