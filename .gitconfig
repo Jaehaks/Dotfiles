@@ -5,7 +5,14 @@
 	helper = manager
 [core]
 	autocrlf = input
-	editor = nvim -f
+	editor = nvim
 	quotepath = false
 [alias]
 	lg = log --graph --oneline --decorate --all --pretty=format:'%C(auto)%h%Creset %C(auto)%d%Creset %s %C(blue)(%cr)%Creset'
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+[commit]
+	verbose = true
