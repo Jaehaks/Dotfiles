@@ -48,7 +48,6 @@ $packages = @(
     'unar',             # yazi,lsar
     'unzip',            # cmd
     'uutils-coreutils', # cmd, neovim
-    'uv',               # neovim, python-uv
     'wget',             # neovim, mason
     'win-vind',         # window manager
 	'windows-terminal', # terminal
