@@ -34,26 +34,22 @@ $packages = @(
     'mpv',              # qutebrowser, video player
     'neovim',           # neovim
     'neovim-qt',        # neovim
-    'openjdk11',        # I don't know
     'poppler',          # yazi, pdf
-    'python',           # cmd
 	'vieb'              # web browser
     'ripgrep',          # cmd, neovim
 	# 'rustup', 			# cmd, some environment cannot install this
     'scoop-search',     # scoop
     'sed',              # cmd
-    'sioyek',           # pdf viewer
     'tar',              # cmd
     'tree-sitter',      # neovim
     'unar',             # yazi,lsar
     'unzip',            # cmd
     'uutils-coreutils', # cmd, neovim
     'wget',             # neovim, mason
-    'win-vind',         # window manager
+    # 'win-vind',         # window manager
 	'windows-terminal', # terminal
 	'wox',              # window toolbar
 	'yazi',             # file explorer
-	'yt-dlp',           # youtube downloader
 	'zip',              # neovim
 	'zoxide'            # cmd, yazi
 )
