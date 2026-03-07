@@ -10,3 +10,4 @@ qutebrowser/config/greasemonkey/
 qutebrowser/config/autoconfig.yml
 qutebrowser/config/quickmarks
 qutebrowser/data/*
+__pycache__
