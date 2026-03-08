@@ -7,10 +7,18 @@ It copies the apps/persist/shims folder.
 Required external tool: rg, robocopy (built-in to Windows)
 Required Python packages: rich
 Run:
+    If you want to move scoop dir from PC1 to PC2.
+
+    * from PC1
+    open cmd prompt
+    edit SRC_DIR / DST_DIR / APPS
+    executes `uv run backup_scoop.py backup --new-user <username>` : To copy APPS directories only to backup
+    send these backup dirs in DST_DIR to PC2
+
+    * from PC2
     open cmd prompt with administer mode to make symbolic link
-    edit SRC_DIR / DEST_DIR / APPS
-    1) executes `uv run backup_scoop.py backup --new-user <username>` : To copy APPS directories only to backup
-    2) executes `uv run backup_scoop.py create_symlink` : To create symbolic links for each apps in destination PC
+    paste the backup dirs to SRC_DIR like home()/scoop/
+    executes `uv run backup_scoop.py create_symlink` : To create symbolic links for each apps in destination PC
 """
 
 import argparse
@@ -198,37 +206,6 @@ def copy_app(app: str) -> CopyResult:
     }
 
 
-def create_symlink():
-    console.print("\n==== Create symbolic links for each apps ====\n")
-    apps_dir = DEST_DIR / "apps"
-
-    for cur_dir in apps_dir.iterdir():
-        if not apps_dir.is_dir():
-            continue
-
-        target_link = cur_dir / "current" # target symbolic link
-
-        # check "current" directory exists, remove if it is yes.
-        if target_link.exists():
-            target_link.unlink()
-
-        # check all version directory and select the latest one
-        # versions : absolute directories list in cur_dir
-        versions = [d for d in cur_dir.iterdir() if d.is_dir() and d.name != "current"]
-        if not versions:
-            continue
-
-        latest_version = sorted(versions)[-1]
-
-        try:
-            # make symbolic directory link "current" for latest version
-            # symbolic is relative path from target_link when argument is given as relative path
-            target_link.symlink_to(latest_version.name, target_is_directory=True)
-            console.print(f"Linked for [green]{cur_dir.name}[/] : {latest_version.name} -> {target_link}")
-        except OSError as e:
-            console.print(f"[red]Failed[/]: {cur_dir.name} {e}")
-            return
-
 # ══════════════════════════════════════════════════════════════
 #  main loop
 # ══════════════════════════════════════════════════════════════
@@ -277,6 +254,39 @@ def backup(new_user: str):
     elapsed = time.perf_counter() - start
     console.print(f"[bold green]completed:[/] {elapsed:.1f}s")
 
+def create_symlink():
+    """
+    make symlinks for installed scoop apps
+    """
+    console.print("\n==== Create symbolic links for each apps ====\n")
+    apps_dir = SRC_DIR / "apps" # for test, use DST_DIR
+
+    for cur_dir in apps_dir.iterdir():
+        if not apps_dir.is_dir():
+            continue
+
+        target_link = cur_dir / "current" # target symbolic link
+
+        # check "current" directory exists, remove if it is yes.
+        if target_link.exists():
+            target_link.unlink()
+
+        # check all version directory and select the latest one
+        # versions : absolute directories list in cur_dir
+        versions = [d for d in cur_dir.iterdir() if d.is_dir() and d.name != "current"]
+        if not versions:
+            continue
+
+        latest_version = sorted(versions)[-1]
+
+        try:
+            # make symbolic directory link "current" for latest version
+            # symbolic is relative path from target_link when argument is given as relative path
+            target_link.symlink_to(latest_version.name, target_is_directory=True)
+            console.print(f"Linked for [green]{cur_dir.name}[/] : {latest_version.name} -> {target_link}")
+        except OSError as e:
+            console.print(f"[red]Failed[/]: {cur_dir.name} {e}")
+            return
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
