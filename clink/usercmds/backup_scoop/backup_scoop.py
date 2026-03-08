@@ -29,7 +29,7 @@ console = Console()  # for pretty console regardless of multi threading
 
 # ══ settings ════════════════════════════════════════════════════════════
 SRC_DIR = Path.home() / "scoop"    # source path
-DEST_DIR  = Path(r"c:\Users\USER\Desktop\scoop") # destination path
+DST_DIR  = Path.home() / "Desktop" / "scoop" # destination path
 # use r"" to use '\' literally
 
 # Recommend (PY_THREADS × ROBO_THREADS ≤ 32)
@@ -140,7 +140,7 @@ def copy_shims(app: str) -> int:
         -g "*.shim": glob for .shim files only
     """
     src_shim  = SRC_DIR / "shims"
-    dest_shim = DEST_DIR / "shims"
+    dest_shim = DST_DIR / "shims"
 
     # get shim file list with unit string format which is matched with app name
     result = subprocess.run(
@@ -186,8 +186,8 @@ def copy_app(app: str) -> CopyResult:
     dict
     """
 
-    apps_ok = copy_dir(SRC_DIR / "apps" / app, DEST_DIR / "apps" / app)
-    persist_ok = copy_dir(SRC_DIR / "persist" / app, DEST_DIR / "persist" / app)
+    apps_ok = copy_dir(SRC_DIR / "apps" / app, DST_DIR / "apps" / app)
+    persist_ok = copy_dir(SRC_DIR / "persist" / app, DST_DIR / "persist" / app)
     shim_count = copy_shims(app)
 
     return {
@@ -238,14 +238,14 @@ def backup(new_user: str):
     # make subdirectory under destination
     # parents : if DEST_DIR is not existed, make it.
     # exist_ok : If target sub_dir is existed, don't occur error.
-    (DEST_DIR / "apps").mkdir(parents=True, exist_ok=True)
-    (DEST_DIR / "shims").mkdir(parents=True, exist_ok=True)
-    (DEST_DIR / "persist").mkdir(parents=True, exist_ok=True)
+    (DST_DIR / "apps").mkdir(parents=True, exist_ok=True)
+    (DST_DIR / "shims").mkdir(parents=True, exist_ok=True)
+    (DST_DIR / "persist").mkdir(parents=True, exist_ok=True)
 
     # colored : [colorname] ~ [/]
     console.print(
         f"[bold cyan]Source:[/]         {SRC_DIR}\n" +
-        f"[bold cyan]Destination:[/]    {DEST_DIR}\n" +
+        f"[bold cyan]Destination:[/]    {DST_DIR}\n" +
         f"[bold cyan]Apps:[/]           {len(APPS)}\n" +
         f"[bold cyan]Threads:[/]        {PY_THREADS}\n" +
         f"[bold cyan]Robocopy /MT:[/]   {ROBO_THREADS}\n"
@@ -271,7 +271,7 @@ def backup(new_user: str):
             console.print(f"[yellow]{completed_apps}/{len(APPS)}[/] : {futures[future]} is completly copied")
 
     # edit username of path in file contents
-    modify_username(DEST_DIR, new_user)
+    modify_username(DST_DIR, new_user)
 
     # result
     elapsed = time.perf_counter() - start
