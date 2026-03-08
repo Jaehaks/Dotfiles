@@ -21,7 +21,7 @@ def modify_username(dest: Path, new_user: str):
 
     # if you want to use f"", use \\\\ instead of \\
     result = subprocess.run(
-        ["rg", '-lai', r"[Cc]:[\\/]+Users[\\/]+USER", str(dest)],
+        ["rg", '-l', r"[Cc]:[\\/]+Users[\\/]+USER[\\/]+", str(dest)],
         capture_output=True,
         text=True,
         encoding="utf-8",
@@ -34,6 +34,7 @@ def modify_username(dest: Path, new_user: str):
         console.print("There are no result to modify path contents")
         return False
 
+    console.print(result.stdout)
     console.print(f"Detected {len(files)} files whose paths were modified in file contents")
 
     # separate files by chunk for windows
@@ -52,8 +53,8 @@ def modify_username(dest: Path, new_user: str):
         # use * to unpack list
         subprocess.run(
             ["sd",
-             r"([Cc]):([\\/]+)Users([\\/]+)USER",
-             f"${{1}}:${{2}}Users${{3}}{new_user}",
+             r"([Cc]):([\\/]+)Users([\\/]+)USER([\\/])",
+             f"${{1}}:${{2}}Users${{3}}{new_user}${{4}}",
              *[str(file) for file in chunk]]
         )
         console.print(f"completed for chunk {i//batch_size+1}/{total_chunks}")
