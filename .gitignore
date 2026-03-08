@@ -11,3 +11,4 @@ qutebrowser/config/autoconfig.yml
 qutebrowser/config/quickmarks
 qutebrowser/data/*
 __pycache__
+.venv/
