@@ -93,7 +93,7 @@ doskey grep=grep -i --color=auto $*
 doskey lf=lfcd $*
 
 
-:: check package installed
-call check_package_installed.cmd
+:: check package installed (use manually)
+REM call check_package_installed.cmd
 
 @echo on
