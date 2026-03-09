@@ -26,3 +26,6 @@ send these backup dirs in DST_DIR to PC2
 open cmd prompt with administer mode to make symbolic link
 paste the backup dirs to SRC_DIR like home()/scoop/
 executes `uv run backup_scoop.py create_symlink` : To create symbolic links for each apps in destination PC
+
+---
+## User guide - backup_nvim.py
