@@ -12,3 +12,5 @@ qutebrowser/config/quickmarks
 qutebrowser/data/*
 __pycache__
 .venv/
+sioyek*.7z
+sioyek*.zip
