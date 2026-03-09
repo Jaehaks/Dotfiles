@@ -50,7 +50,7 @@ APPS = [
     "biber",
     "cacert",
     "clink",
-    "clipboard",
+    "clipboard", # it needs libcrypto.dll
     "curl",
     "deno",
     "eza",
@@ -71,6 +71,7 @@ APPS = [
     "mpv",
     "neovim",
     "neovim-qt",
+    "openssl1", # for clipboard, supports libcrypto-1.1
     "poppler",
     "ripgrep",
     "sed",
