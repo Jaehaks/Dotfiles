@@ -74,6 +74,7 @@ APPS = [
     "poppler",
     "ripgrep",
     "sed",
+    "sd",
     "tar",
     "tree-sitter",
     "unar",
