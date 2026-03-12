@@ -20,6 +20,7 @@ def modify_username(dest: Path, new_user: str):
     console.print("\n==== Start modifying path ====\n")
 
     # if you want to use f"", use \\\\ instead of \\
+    # rg is slow at first try, because there is no OS cache.
     result = subprocess.run(
         ["rg", '-l', r"[Cc]:[\\/]+Users[\\/]+USER[\\/]+", str(dest)],
         capture_output=True,

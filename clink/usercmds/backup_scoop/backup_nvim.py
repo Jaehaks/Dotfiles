@@ -146,13 +146,12 @@ def backup(new_user: str):
     copy nvim-data / nvim directories to DST_DIR with necessary directories
     """
 
-
-    # get nvim-data task list
+    # add nvim-data/ to task list
     LIST_DATA = create_datadir_list()
     if not LIST_DATA:
         return
 
-    # get nvim task list
+    # add nvim/ to task list
     nvim_dir = { SRC_DIR / "nvim" : DST_DIR / "nvim" }
     LIST = LIST_DATA | nvim_dir
 
