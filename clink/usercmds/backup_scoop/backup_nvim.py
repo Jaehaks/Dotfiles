@@ -27,6 +27,7 @@ import subprocess
 import time
 from pathlib import Path
 from typing import cast
+import shutil
 
 from rich.console import Console
 
@@ -107,10 +108,21 @@ def create_datadir_list() -> dict[Path, Path]|None:
         "blink-cmp-dat-word",
         "oklch-color-picker"
     ]
+    FILES_LIST = [
+        "cache/nvim/sqlite3.dll",
+    ]
 
     if not src.exists():
         console.print("[red]Failed[/] : Could not find original path.")
         return
+
+    # copy specific files in FILES_LIST
+    console.print("\n==== Copy specific files ====\n")
+    for item in FILES_LIST:
+        dst_file = dst / item
+        dst_file.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(src / item, dst_file)
+        console.print(f"[green]{dst_file.name}[/] is copied")
 
     for item in src.iterdir():
         # except files, because the most of files in nvim-data are logs
