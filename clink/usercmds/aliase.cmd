@@ -82,6 +82,7 @@ doskey ls=ls --color=always $*
 doskey ll=eza --git --git-repos-no-status -al --icons=auto --sort=extension --time-style "+%%Y-%%m-%%d %%H:%%M:%%S" $*
 doskey grep=grep -i --color=auto $*
 doskey lf=lfcd $*
+doskey nv=nvim -R -c "let g:no_man_maps = 1 | set ft=man" -
 
 
 :: check package installed (use manually)
