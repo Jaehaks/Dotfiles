@@ -47,7 +47,9 @@ end
 
 -- Add directory to the database.
 local function __zoxide_add(dir)
-  os.execute('zoxide add -- "' .. dir:gsub('^(.-)\\*$', '%1') .. '"')
+  -- To avoid \" from the last backslash
+  local cur_dir = dir:gsub('^(.-)\\*$', '%1') -- remove the last backslash and remain captured %1 in ().
+  os.execute('start "" /b zoxide add "' .. cur_dir .. '" >nul 2>nul')
 end
 
 -- =============================================================================
