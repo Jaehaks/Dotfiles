@@ -1,26 +1,41 @@
 @echo off
 setlocal enabledelayedexpansion
+:: required : set 'file.exe' to system PATH
+:: If you install Git for windows, add "Git/bin" and "Git/usr/bin" to PATH
 
-:: select file path using fzf and save temp file
-fd --hidden --type file %* . | fzf --layout=reverse --border > %TEMP%\fzff.txt
+:: get previous chcp value
+for /f "tokens=*" %%a in ('chcp') do (
+    for %%b in (%%a) do set "PREV_CP=%%b"
+)
 
-:: change utf-8 to cp949
-iconv -f utf-8 -t cp949 %TEMP%\fzff.txt > %TEMP%\fzff_cp949.txt
+:: set chcp to "65001" to avoid encoding proble when using fd and fzf
+chcp 65001 > nul
 
-:: process of file path
-:: open file if it is text file, or open using default app
-for /f "delims=" %%i in (%TEMP%\fzff_cp949.txt) do (
-	set "FILE_PATH=%%i"
-	for /f "usebackq tokens=*" %%m in (`file --mime-type -b "!FILE_PATH!"`) do (
-		set "MIME_TYPE=%%m"
-	)
+:: show result of fd using fzf. and move to selected folder
+set "FILE_PATH="
+for /f "delims=" %%i in ('fd --hidden --type file %* . ^| fzf --layout^=reverse --border') do (
+    set "FILE_PATH=%%i"
+)
 
-	if "!MIME_TYPE:~0,5!" == "text/" (
-		nvim "!FILE_PATH!"
-	) else (
-		start "" "!FILE_PATH!"
-	)
+:: If cancelled (ESC), exit after chcp recovery
+if not defined FILE_PATH (
+    chcp !PREV_CP! > nul
+    exit /b
+)
+
+:: check mime type
+for /f "usebackq tokens=*" %%m in (`file --mime-type -b "!FILE_PATH!"`) do (
+    set "MIME_TYPE=%%m"
+)
+
+:: restore chcp
+chcp !PREV_CP! > nul
+
+:: run the file using nvim when it is text
+if "!MIME_TYPE:~0,5!" == "text/" (
+    nvim "!FILE_PATH!"
+) else (
+    start "" "!FILE_PATH!"
 )
 
 endlocal
-:end

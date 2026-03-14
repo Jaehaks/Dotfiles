@@ -1,5 +1,18 @@
 :: you can give a path as argument
 @echo off
-fd --hidden --type directory . %1 | fzf --layout=reverse --border > %TMP%\fzfd.txt
-iconv -f utf-8 -t cp949 %TMP%\fzfd.txt > %TMP%\fzfd_cp949.txt
-for /f "delims=" %%i in (%TMP%\fzfd_cp949.txt) do cd /d %%i
+
+:: get previous chcp value
+for /f "tokens=*" %%a in ('chcp') do (
+    for %%b in (%%a) do set "PREV_CP=%%b"
+)
+
+:: set chcp to "65001" to avoid encoding proble when using fd and fzf
+chcp 65001 > nul
+
+:: show result of fd using fzf. and move to selected folder
+for /f "delims=" %%i in ('fd --hidden --type directory . %1 ^| fzf --layout^=reverse --border') do (
+	cd /d "%%i"
+)
+
+:: restore chcp
+chcp %PREV_CP% > nul

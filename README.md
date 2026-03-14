@@ -126,6 +126,17 @@ Dotfiles besides of nvim_config
 - **Reference**
     * Detailed configuration : [Clink manual page](https://chrisant996.github.io/clink/clink.html)
 
+---
+### 2. [Git](https://git-scm.com/install/windows)
+
+- **Description**
+    - Git, you know.
+
+<br>
+
+* Set these path to system PATH
+    1. `<install_path>\Git\bin` : for `git` and `tig`
+    1. `<install_path>\Git\usr\bin` : for `file` to use in yazi.
 
 ---
 ### 2. [FZF](https://github.com/junegunn/fzf)
