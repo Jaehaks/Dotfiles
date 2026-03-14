@@ -23,6 +23,7 @@ Run:
 
 import argparse
 import concurrent.futures
+import os
 import shutil
 import subprocess
 import time
@@ -37,6 +38,8 @@ console = Console()  # for pretty console regardless of multi threading
 
 
 # ══ settings ════════════════════════════════════════════════════════════
+TEST_MODE = 0 # if 1, it is test mode, the target directory of create_symlink is destination folder
+
 # move SRC_DIR/nvim, nvim-data to DST_DIR/nvim, nvim-data
 SRC_DIR = Path.home() / ".config"
 DST_DIR = Path.home() / "Desktop"
@@ -204,7 +207,7 @@ def create_symlinks():
     make symlinks for installed treesitter parsers
     """
     console.print("\n==== Create symbolic links for each treesitter parsers ====\n")
-    data_dir = SRC_DIR # for test, use DST_DIR
+    data_dir = SRC_DIR if TEST_MODE == 0 else DST_DIR
     parser_dir = data_dir / "nvim-data/site/parser"
 
     def make_symlink(parser: Path) -> bool:
@@ -243,6 +246,59 @@ def create_symlinks():
         ok = make_symlink(parser)
         if not ok:
             return False
+
+    # -- reinstall specific mason packages
+    # because python packages have their venv and .exe file, the exe file include their python path which
+    # is called by command to install.
+    python_packages = [
+        'basedpyright',
+        'debugpy',
+        'pyrefly',
+        'ruff',
+    ]
+
+    mason_dir = data_dir / "nvim-data/mason/packages"
+    for package in python_packages:
+        package_dir = mason_dir / package
+
+        # remove previous venv
+        if package_dir.exists():
+            try:
+                console.print(f"[green]{package}[/] venv is being removed ...")
+                shutil.rmtree(package_dir / "venv")
+            except Exception as e:
+                console.print(f"Error while venv of [green]{package}[/] is removed: {e}")
+                return False
+
+        # install venv using python of current system version
+        # it includes all global packages
+        console.print("venv is being installed ...")
+        subprocess.run(
+            ["python", "-m", "venv", "--system-site-packages", "venv"],
+            check=True,
+            cwd=package_dir,
+            stdout=subprocess.DEVNULL, # prevent stdout
+        )
+
+        # upgrade pip
+        # WARN: command doesn't be affected by cwd, if you use "pip" using cwd, the "pip" of system is used instead of one of cwd.
+        console.print("pip is being upgraded ...")
+        venv_py_dir = package_dir / "venv" / ("Scripts/" if os.name == "nt" else "bin/")
+        subprocess.run(
+            [ str(venv_py_dir / "python"), "-m", "pip", "install", "--upgrade", "pip"],
+            check=True,
+            stdout=subprocess.DEVNULL, # prevent stdout
+        )
+
+        # install package
+        console.print(f"{package} is being installed ...")
+        subprocess.run(
+            [ str(venv_py_dir / "python"), "-m", "pip", "install", "--ignore-installed", package],
+            check=True,
+            stdout=subprocess.DEVNULL, # prevent stdout
+        )
+
+    return True
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
