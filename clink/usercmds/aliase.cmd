@@ -55,15 +55,17 @@ ctrl-e:end-of-line,^
 ctrl-i:toggle-preview,^
 alt-k:preview-half-page-down,^
 alt-j:preview-half-page-up
-:: show relative path of files/directories for fzf_files() in fzf.lua to insert the result
+
+:: ========= for fzf.lua of clink ==========
 :: --hidden : show hidden file, dot started file
 :: --no-ignore : Apart from --hidden, fd ignores some files by its rules. like .gitignore, zip file etc..
 ::				 This option makes fd find all files without ignore.
 :: --follow : it includes result of symlink directory files.
 :: --exclude : exclude pattern
-set FZF_CTRL_T_COMMAND=fd --hidden --no-ignore --follow --exclude .git --color=never
+:: show relative path of files/directories for fzf_files() in fzf.lua to insert the result
+set FZF_CTRL_T_COMMAND=fd --hidden --no-ignore --follow --exclude .git --color=never . $dir
 :: show relative path of directories for fzf_files() in fzf.lua to go to the result
-set FZF_ALT_C_COMMAND=fd --hidden --no-ignore --follow --type directory --exclude .git --color=never
+set FZF_ALT_C_COMMAND=fd --hidden --no-ignore --follow --type directory --exclude .git --color=never . $dir
 
 REM bat config
 set "BAT_CONFIG_DIR=%HOME%\.config\Dotfiles\bat"
