@@ -23,11 +23,11 @@ Run:
 
 import argparse
 import concurrent.futures
+import shutil
 import subprocess
 import time
 from pathlib import Path
 from typing import cast
-import shutil
 
 from rich.console import Console
 
