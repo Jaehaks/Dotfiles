@@ -201,18 +201,15 @@ def backup(new_user: str):
     elapsed = time.perf_counter() - start
     console.print(f"[bold green]completed:[/] {elapsed:.1f}s")
 
-def Reinstall_venv(dst_dir: Path) -> bool:
-    # -- reinstall specific mason packages
-    # because python packages have their venv and .exe file, the exe file include their python path which
-    # is called by command to install.
-    python_packages = [
-        'basedpyright',
-        'debugpy',
-        'pyrefly',
-        'ruff',
-    ]
 
-    mason_dir = dst_dir / "nvim-data/mason/packages"
+python_packages = [
+    'basedpyright',
+    'debugpy',
+    'pyrefly',
+    'ruff',
+]
+
+def Remove_venv(mason_dir: Path) -> bool:
     for package in python_packages:
         package_dir = mason_dir / package
 
@@ -220,10 +217,32 @@ def Reinstall_venv(dst_dir: Path) -> bool:
         if package_dir.exists():
             try:
                 console.print(f"[green]{package}[/] venv is being removed ...")
-                shutil.rmtree(package_dir / "venv")
+                subprocess.run(
+                    ["fastcopy" , "/cmd=delete", "/no_confirm_del", "/auto_close", "/no_ui", str(package_dir / "venv")],
+                    check=True,
+                    stdout=subprocess.DEVNULL, # prevent stdout
+                )
             except Exception as e:
                 console.print(f"Error while venv of [green]{package}[/] is removed: {e}")
                 return False
+    return True
+
+
+def Reinstall_venv(dst_dir: Path) -> bool:
+    # -- reinstall specific mason packages
+    # because python packages have their venv and .exe file, the exe file include their python path which
+    # is called by command to install.
+
+    mason_dir = dst_dir / "nvim-data/mason/packages"
+
+    # remove existing venv
+    ok = Remove_venv(mason_dir)
+    if not ok:
+        return False
+
+    # reinstall venv
+    for package in python_packages:
+        package_dir = mason_dir / package
 
         # install venv using python of current system version
         # it includes all global packages
