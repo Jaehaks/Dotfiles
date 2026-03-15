@@ -142,8 +142,8 @@
 
 // others
 	copy: Some(( code: Char('y'), modifiers: "")),
-	view_submodules: Some(( code: Char('s'), modifiers: "")),
+	view_submodules: Some(( code: Char('V'), modifiers: "SHIFT")), // open submodules view
 	view_submodule_parent: Some(( code: Char('p'), modifiers: "")),
-	update_submodule: Some(( code: Char('u'), modifiers: "")),
+	update_submodule: Some(( code: Char('u'), modifiers: "")),	// update submodules
 )
 
