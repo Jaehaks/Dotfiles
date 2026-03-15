@@ -54,6 +54,7 @@ APPS = [
     "curl",
     "deno",
     "eza",
+    "fastcopy", # for remove file quickly
     "fd",
     "ffmpeg",
     "fzf",

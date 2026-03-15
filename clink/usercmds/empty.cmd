@@ -16,17 +16,10 @@ if not exist "%target%" (
 	exit /b
 )
 
-echo Remove "%target%"
+echo Removing... "%target%"
 
 :: make empty directory temporarily
-if not exist "%temp%\empty_dir" mkdir "%temp%\empty_dir"
-:: if you use /MT,  no log flags like /NFL, /NDL doesn't work
-robocopy "%temp%\empty_dir" "%target%" /MIR /MT:8 > nul
-
-:: remove temp dir
-rmdir "%temp%\empty_dir"
-:: remove target dir
-rmdir /s /q "%target%"
+fastcopy /cmd=delete /no_confirm_del /auto_close "%target%"
 
 echo Remove completed
 
