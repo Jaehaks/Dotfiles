@@ -201,6 +201,60 @@ def backup(new_user: str):
     elapsed = time.perf_counter() - start
     console.print(f"[bold green]completed:[/] {elapsed:.1f}s")
 
+def Reinstall_venv(dst_dir: Path) -> bool:
+    # -- reinstall specific mason packages
+    # because python packages have their venv and .exe file, the exe file include their python path which
+    # is called by command to install.
+    python_packages = [
+        'basedpyright',
+        'debugpy',
+        'pyrefly',
+        'ruff',
+    ]
+
+    mason_dir = dst_dir / "nvim-data/mason/packages"
+    for package in python_packages:
+        package_dir = mason_dir / package
+
+        # remove previous venv
+        if package_dir.exists():
+            try:
+                console.print(f"[green]{package}[/] venv is being removed ...")
+                shutil.rmtree(package_dir / "venv")
+            except Exception as e:
+                console.print(f"Error while venv of [green]{package}[/] is removed: {e}")
+                return False
+
+        # install venv using python of current system version
+        # it includes all global packages
+        console.print("venv is being installed ...")
+        subprocess.run(
+            ["python", "-m", "venv", "--system-site-packages", "venv"],
+            check=True,
+            cwd=package_dir,
+            stdout=subprocess.DEVNULL, # prevent stdout
+        )
+
+        # upgrade pip
+        # WARN: command doesn't be affected by cwd, if you use "pip" using cwd, the "pip" of system is used instead of one of cwd.
+        console.print("pip is being upgraded ...")
+        venv_py_dir = package_dir / "venv" / ("Scripts/" if os.name == "nt" else "bin/")
+        subprocess.run(
+            [ str(venv_py_dir / "python"), "-m", "pip", "install", "--upgrade", "pip"],
+            check=True,
+            stdout=subprocess.DEVNULL, # prevent stdout
+        )
+
+        # install package
+        console.print(f"{package} is being installed ...")
+        subprocess.run(
+            [ str(venv_py_dir / "python"), "-m", "pip", "install", "--ignore-installed", package],
+            check=True,
+            stdout=subprocess.DEVNULL, # prevent stdout
+        )
+
+    return True
+
 
 def create_symlinks():
     """
@@ -247,56 +301,10 @@ def create_symlinks():
         if not ok:
             return False
 
-    # -- reinstall specific mason packages
-    # because python packages have their venv and .exe file, the exe file include their python path which
-    # is called by command to install.
-    python_packages = [
-        'basedpyright',
-        'debugpy',
-        'pyrefly',
-        'ruff',
-    ]
-
-    mason_dir = data_dir / "nvim-data/mason/packages"
-    for package in python_packages:
-        package_dir = mason_dir / package
-
-        # remove previous venv
-        if package_dir.exists():
-            try:
-                console.print(f"[green]{package}[/] venv is being removed ...")
-                shutil.rmtree(package_dir / "venv")
-            except Exception as e:
-                console.print(f"Error while venv of [green]{package}[/] is removed: {e}")
-                return False
-
-        # install venv using python of current system version
-        # it includes all global packages
-        console.print("venv is being installed ...")
-        subprocess.run(
-            ["python", "-m", "venv", "--system-site-packages", "venv"],
-            check=True,
-            cwd=package_dir,
-            stdout=subprocess.DEVNULL, # prevent stdout
-        )
-
-        # upgrade pip
-        # WARN: command doesn't be affected by cwd, if you use "pip" using cwd, the "pip" of system is used instead of one of cwd.
-        console.print("pip is being upgraded ...")
-        venv_py_dir = package_dir / "venv" / ("Scripts/" if os.name == "nt" else "bin/")
-        subprocess.run(
-            [ str(venv_py_dir / "python"), "-m", "pip", "install", "--upgrade", "pip"],
-            check=True,
-            stdout=subprocess.DEVNULL, # prevent stdout
-        )
-
-        # install package
-        console.print(f"{package} is being installed ...")
-        subprocess.run(
-            [ str(venv_py_dir / "python"), "-m", "pip", "install", "--ignore-installed", package],
-            check=True,
-            stdout=subprocess.DEVNULL, # prevent stdout
-        )
+    # reinstall venv of python lsp
+    ok = Reinstall_venv(data_dir)
+    if not ok:
+        return False
 
     return True
 
