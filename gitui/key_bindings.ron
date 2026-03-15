@@ -7,34 +7,143 @@
 // Note:
 // find `KeysList` type in src/keys/key_list.rs for all possible keys.
 // every key not overwritten via the config file will use the default specified there
-(
-    open_help: Some(( code: F(1), modifiers: "")),
 
+
+// NOTE : config path of gitui is strict. make symlink this gitui/ directory to %APPDATA%/Roaming/gitui
+// NOTE : if modifier is 'SHIFT', you write character in code with shifted state
+//        for example, insert 'C' not 'c' in key config when you use the code with 'SHIFT'
+// 		  Similarly, use 'BackTab' not 'Tab' with 'SHIFT'
+// NOTE : There is no way to disable keymap. set unused keymap for this.
+// NOTE : To push to remote, openssh service must be running in services.msc
+
+(
+// move key between tabs
+    tab_status: Some(( code: Char('1'), modifiers: "")), 			// stage, unstage
+	toggle_workarea: Some(( code: Char('w'), modifiers: "")), 		// toggle focus between stage/unstage area in status view
+    tab_log: Some(( code: Char('2'), modifiers: "")), 				// git log oneline
+    tab_files: Some(( code: Char('3'), modifiers: "")), 			// file tree of current git project
+    tab_stashing: Some(( code: Char('4'), modifiers: "")), 			// view to add stash
+    tab_stashes: Some(( code: Char('5'), modifiers: "")), 			// view to show stashed list
+    tab_toggle: Some(( code: F(11), modifiers: "SHIFT")), 			// don't use it
+    tab_toggle_reverse: Some(( code: F(12), modifiers: "SHIFT")), 	// don't use it
+
+// move key as default
     move_left: Some(( code: Char('h'), modifiers: "")),
-    move_right: Some(( code: Char('l'), modifiers: "")),
+    move_right: Some(( code: Char('l'), modifiers: "")), // show diff in status view
     move_up: Some(( code: Char('j'), modifiers: "")),
     move_down: Some(( code: Char('k'), modifiers: "")),
-    
-    popup_up: Some(( code: Char('p'), modifiers: "CONTROL")),
-    popup_down: Some(( code: Char('n'), modifiers: "CONTROL")),
     page_up: Some(( code: Char('u'), modifiers: "CONTROL")),
     page_down: Some(( code: Char('d'), modifiers: "CONTROL")),
     home: Some(( code: Char('g'), modifiers: "")),
     end: Some(( code: Char('G'), modifiers: "SHIFT")),
-    shift_up: Some(( code: Char('K'), modifiers: "SHIFT")),
-    shift_down: Some(( code: Char('J'), modifiers: "SHIFT")),
 
-    edit_file: Some(( code: Char('I'), modifiers: "SHIFT")),
+// move key in popup
+	// control-j is line delete in popup window. it is hardcoded
+    popup_up: Some(( code: Char('p'), modifiers: "CONTROL")), 	// move cursor to select in list when popup view (fuzzy, blame, branch )
+    popup_down: Some(( code: Char('n'), modifiers: "CONTROL")),	// move cursor to select in list when popup view (fuzzy, blame, branch )
+    shift_up: Some(( code: Char('J'), modifiers: "SHIFT")), 	// home in blame/revlog/tags/commit/tree
+    shift_down: Some(( code: Char('K'), modifiers: "SHIFT")), 	// end in popup
+    exit_popup: Some(( code: Char('o'), modifiers: "CONTROL")), // use this if you want to insert 'q' character
 
-    status_reset_item: Some(( code: Char('U'), modifiers: "SHIFT")),
+// window keys
+    exit: Some(( code: Char('Q'), modifiers: "SHIFT")),
+    quit: Some(( code: Char('q'), modifiers: "")),
+    open_help: Some(( code: Char('?'), modifiers: "SHIFT")), 	// show shortcut help
+    open_options: Some(( code: Char('\\'), modifiers: "")), 	// show options
+    cmd_bar_toggle: Some(( code: Char(';'), modifiers: "")), 	// toggle expanding keymap hint bar
 
-    diff_reset_lines: Some(( code: Char('u'), modifiers: "")),
-    diff_stage_lines: Some(( code: Char('s'), modifiers: "")),
+// commit
+    open_commit: Some(( code: Char('c'), modifiers: "")), 					// open editor for commit
+    newline: Some(( code: Enter, modifiers: "")), 							// new line in  commit msg box
+    open_commit_editor: Some(( code: Char('e'), modifiers: "CONTROL")), 	// using external editor
+    commit_amend: Some(( code: Char('a'), modifiers: "CONTROL")), 			// WARN: do it with empty commit msg box
+    commit: Some(( code: Char('c'), modifiers: "CONTROL")),					// commit finally
+    commit_history_next: Some(( code: Char('n'), modifiers: "CONTROL")), 	// insert previous commit message to commit msg box
+    toggle_signoff: Some(( code: F(9), modifiers: "SHIFT")), 				// not use, insert signature in commit msg
+    toggle_verify: Some(( code: F(10), modifiers: "SHIFT")), 				// not use, when commit hook is set
+	undo_commit: Some(( code: Char('x'), modifiers: "SHIFT")),				// reset commit to HEAD~1 in status view
 
-    stashing_save: Some(( code: Char('w'), modifiers: "")),
-    stashing_toggle_index: Some(( code: Char('m'), modifiers: "")),
+// staging
+    edit_file: Some(( code: Char('e'), modifiers: "")), 				// edit file using editor. use "core.editor" in .gitconfig
+    stage_unstage_item: Some(( code: Char('s'), modifiers: "")), 		// toggle stage/unstage
+    status_stage_all: Some(( code: Char('s'), modifiers: "CONTROL")), 	// stage all
+    status_reset_item: Some(( code: Char('x'), modifiers: "")), 		// reset unstaged file to HEAD state (Status) / Revert (Log)
+    status_ignore_file: Some(( code: Char('i'), modifiers: "")), 		// insert select file to .gitignore in status view
+    blame: Some(( code: Char('b'), modifiers: "")),						// show blame of current file (Status/Files)
+	// file_history - show commit history of selected file
+	// 1) In (status) view and file selected
+	// 2) In (Files) view and move focus to preview
+    file_history: Some(( code: Char('L'), modifiers: "SHIFT")),
 
-    stash_open: Some(( code: Char('l'), modifiers: "")),
+// diff
+    diff_stage_lines: Some(( code: Char('s'), modifiers: "")), 		// stage current hunk in diff view
+    diff_reset_lines: Some(( code: Char('x'), modifiers: "")), 		// restore the hunk to HEAD state
+    diff_hunk_next: Some(( code: Char('n'), modifiers: "")), 		// go to next hunk in diff view
+    diff_hunk_prev: Some(( code: Char('N'), modifiers: "SHIFT")), 	// go to prev hunk in diff view
 
-    abort_merge: Some(( code: Char('M'), modifiers: "SHIFT")),
+// stash
+    stashing_save: Some(( code: Char('S'), modifiers: "SHIFT")),		// stash current state
+    stashing_toggle_untracked: Some(( code: Char('u'), modifiers: "")), // toggle option - include untracked files
+    stashing_toggle_index: Some(( code: Char('i'), modifiers: "")), 	// toggle option - include staged files
+    stash_apply: Some(( code: Char('a'), modifiers: "")), 				// apply selected stash to local repo
+    stash_open: Some(( code: Char('l'), modifiers: "")), 				// inspect preview of selected stash
+    stash_drop: Some(( code: Char('D'), modifiers: "SHIFT")), 			// delete stash in stash list
+	// (default) code: "Enter" - pop stash
+
+// branch
+    select_branch: Some(( code: Char('b'), modifiers: "")), 		// show branch list box (=Branch mode)
+    create_branch: Some(( code: Char('b'), modifiers: "SHIFT")), 	// create new branch in (Log)
+    rename_branch: Some(( code: Char('r'), modifiers: "")), 		// rename selected branch (Branch)
+    delete_branch: Some(( code: Char('D'), modifiers: "SHIFT")), 	// delete selected branch (Branch)
+    merge_branch: Some(( code: Char('m'), modifiers: "SHIFT")), 	// merge selected branch in (Branch) to current branch
+    rebase_branch: Some(( code: Char('R'), modifiers: "SHIFT")),
+    reset_branch: Some(( code: Char('X'), modifiers: "SHIFT")),
+    compare_commits: Some(( code: Char('C'), modifiers: "SHIFT")),
+    branch_find: Some(( code: Char('/'), modifiers: "")),
+	abort_merge: Some(( code: Char('M'), modifiers: "SHIFT")),	// cancel merge conflict commit, return before merge
+																// abort revert too. cancel revert process
+																// WARN: abort_revert will remove all changed contents.
+																//       you need to save or stash before abort_revert
+
+// tags
+	log_tag_commit: Some(( code: Char('t'), modifiers: "")), 		// insert tag to current commit in (Logs)
+    tags: Some(( code: Char('T'), modifiers: "SHIFT")), 			// show all tag list
+    tag_annotate: Some(( code: Char('a'), modifiers: "CONTROL")), 	// after insert tag name, <C-a> show annotation box
+    delete_tag: Some(( code: Char('d'), modifiers: "")),	 		// in (tags), delete tag
+    select_tag: Some(( code: Enter, modifiers: "")),				// in (tags), go to commit location in (Logs) which is matched with tag
+
+// remotes
+    push: Some(( code: Char('P'), modifiers: "SHIFT")), 			// push to remote, (Status, Logs), It doesn't confirm
+	force_push: Some(( code: Char('P'), modifiers: "CONTROL")),
+	fetch: Some(( code: Char('F'), modifiers: "SHIFT")),			// In (Status)
+	pull: Some(( code: Char('f'), modifiers: "")),					// In (Status)
+	view_remotes: Some(( code: Char('v'), modifiers: "")),			// In (Branches), show (view remotes)
+	update_remote_name: Some(( code: Char('r'), modifiers: "")),	// In (Branches - view remotes)
+	update_remote_URL: Some(( code: Char('R'), modifiers: "SHIFT")),// In (Branches - view remotes)
+	add_remote: Some(( code: Char('a'), modifiers: "")),			// In (Branches - view remotes)
+	delete_remote: Some(( code: Char('D'), modifiers: "SHIFT")),	// In (Branches - view remotes)
+
+// logs
+	log_mark_commit: Some(( code: Char('m'), modifiers: "")),		// check commits (Log)
+																	// <S-c>, compare these commits
+																	// batch operation
+	log_checkout_commit: Some(( code: Char('c'), modifiers: "")), 	// checkout to commit
+	log_reset_commit: Some(( code: Char('X'), modifiers: "SHIFT")), // reset to specified commit
+	log_reword_commit: Some(( code: Char('r'), modifiers: "")),		// rewrite commit
+	log_find: Some(( code: Char('/'), modifiers: "")),				// search using fuzzy
+	find_commit_sha: Some(( code: Char('F'), modifiers: "SHIFT")),  // not work?
+	open_file_tree: Some(( code: Char('l'), modifiers: "")),		// open file tree of the commit
+
+// file tree
+	// l, h is default expand / collapse key
+	tree_expand_recursive: Some(( code: Char('L'), modifiers: "SHIFT")), 	// expand all for selected directory
+	tree_collapse_recursive: Some(( code: Char('H'), modifiers: "SHIFT")), 	// collapse all for selected directory
+	file_find: Some(( code: Char('/'), modifiers: "")), 					// find files using fuzzy search
+
+// others
+	copy: Some(( code: Char('y'), modifiers: "")),
+	view_submodules: Some(( code: Char('s'), modifiers: "")),
+	view_submodule_parent: Some(( code: Char('p'), modifiers: "")),
+	update_submodule: Some(( code: Char('u'), modifiers: "")),
 )
+
