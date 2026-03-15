@@ -45,6 +45,14 @@ SRC_DIR = Path.home() / ".config"
 DST_DIR = Path.home() / "Desktop"
 # use r"" to use '\' literally
 
+# python mason lsp packages which is reinstall venv
+python_packages = [
+    'basedpyright',
+    'debugpy',
+    'pyrefly',
+    'ruff',
+]
+
 # Recommend (PY_THREADS × ROBO_THREADS ≤ 32)
 PY_THREADS   = 8  # the number of python multi threading
 ROBO_THREADS = 4   # the number of thread of Robocopy
@@ -156,6 +164,33 @@ def create_datadir_list() -> dict[Path, Path]|None:
                     tasks[subdir] = dst / "site" / subdir.name
     return tasks
 
+
+def Remove_venv(mason_dir: Path) -> bool:
+    """
+    Remove existing venv directory of python lsp in mason_dir
+
+    Parameters:
+    ------
+    mason_dir : absolute path of mason/packages directory
+    """
+    for package in python_packages:
+        venv_dir = mason_dir / package / "venv"
+
+        # remove previous venv
+        if venv_dir.exists():
+            try:
+                console.print(f"[green]{package}[/] : venv is being removed ...")
+                subprocess.run(
+                    ["fastcopy" , "/cmd=delete", "/no_confirm_del", "/auto_close", "/no_ui", str(venv_dir)],
+                    check=True,
+                    stdout=subprocess.DEVNULL, # prevent stdout
+                )
+            except Exception as e:
+                console.print(f"Error while venv of [green]{package}[/] is removed: {e}")
+                return False
+    return True
+
+
 def backup(new_user: str):
     """
     copy nvim-data / nvim directories to DST_DIR with necessary directories
@@ -197,38 +232,20 @@ def backup(new_user: str):
     # edit username of path in file contents
     modify_username(DST_DIR / "nvim-data", new_user)
 
+    # remove venv
+    Remove_venv(DST_DIR / "nvim-data/mason/packages")
+
     # result
     elapsed = time.perf_counter() - start
     console.print(f"[bold green]completed:[/] {elapsed:.1f}s")
 
 
-python_packages = [
-    'basedpyright',
-    'debugpy',
-    'pyrefly',
-    'ruff',
-]
-
-def Remove_venv(mason_dir: Path) -> bool:
-    for package in python_packages:
-        package_dir = mason_dir / package
-
-        # remove previous venv
-        if package_dir.exists():
-            try:
-                console.print(f"[green]{package}[/] venv is being removed ...")
-                subprocess.run(
-                    ["fastcopy" , "/cmd=delete", "/no_confirm_del", "/auto_close", "/no_ui", str(package_dir / "venv")],
-                    check=True,
-                    stdout=subprocess.DEVNULL, # prevent stdout
-                )
-            except Exception as e:
-                console.print(f"Error while venv of [green]{package}[/] is removed: {e}")
-                return False
-    return True
-
-
 def Reinstall_venv(dst_dir: Path) -> bool:
+    """
+    Parameters:
+    ------
+    dst_dir : absolute path of destination directory
+    """
     # -- reinstall specific mason packages
     # because python packages have their venv and .exe file, the exe file include their python path which
     # is called by command to install.
@@ -246,7 +263,7 @@ def Reinstall_venv(dst_dir: Path) -> bool:
 
         # install venv using python of current system version
         # it includes all global packages
-        console.print("venv is being installed ...")
+        console.print(f"[green]{package}[/] : venv is being installed ...")
         subprocess.run(
             ["python", "-m", "venv", "--system-site-packages", "venv"],
             check=True,
@@ -256,7 +273,7 @@ def Reinstall_venv(dst_dir: Path) -> bool:
 
         # upgrade pip
         # WARN: command doesn't be affected by cwd, if you use "pip" using cwd, the "pip" of system is used instead of one of cwd.
-        console.print("pip is being upgraded ...")
+        console.print(f"[green]{package}[/] : pip is being upgraded ...")
         venv_py_dir = package_dir / "venv" / ("Scripts/" if os.name == "nt" else "bin/")
         subprocess.run(
             [ str(venv_py_dir / "python"), "-m", "pip", "install", "--upgrade", "pip"],
@@ -265,7 +282,7 @@ def Reinstall_venv(dst_dir: Path) -> bool:
         )
 
         # install package
-        console.print(f"{package} is being installed ...")
+        console.print(f"[green]{package}[/] : {package} is being installed ...")
         subprocess.run(
             [ str(venv_py_dir / "python"), "-m", "pip", "install", "--ignore-installed", package],
             check=True,
