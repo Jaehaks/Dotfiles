@@ -23,6 +23,7 @@ Run:
 
 import argparse
 import concurrent.futures
+import os
 import subprocess
 import time
 from pathlib import Path
@@ -36,6 +37,8 @@ console = Console()  # for pretty console regardless of multi threading
 
 
 # ══ settings ════════════════════════════════════════════════════════════
+TEST_MODE = 0 # if 1, it is test mode, the target directory of create_symlink is destination folder
+
 SRC_DIR = Path.home() / "scoop"    # source path
 DST_DIR  = Path.home() / "Desktop" / "scoop" # destination path
 # use r"" to use '\' literally
@@ -60,6 +63,7 @@ APPS = [
     "fzf",
     "gawk",
     "ghostscript",
+    "gitui",
     "grep",
     "gzip",
     "imagemagick",
@@ -262,7 +266,8 @@ def create_symlink():
     make symlinks for installed scoop apps
     """
     console.print("\n==== Create symbolic links for each apps ====\n")
-    apps_dir = SRC_DIR / "apps" # for test, use DST_DIR
+    data_dir = SRC_DIR if TEST_MODE == 0 else DST_DIR
+    apps_dir = data_dir / "apps" # for test, use DST_DIR
 
     for cur_dir in apps_dir.iterdir():
         if not apps_dir.is_dir():
@@ -290,6 +295,18 @@ def create_symlink():
         except OSError as e:
             console.print(f"[red]Failed[/]: {cur_dir.name} {e}")
             return
+
+    # gitui config
+    console.print("\n==== Create additional symbolic links for others ====\n")
+    cur_dir = Path.home() / ".config/Dotfiles/gitui"
+    target_link = Path(os.environ['APPDATA']) / "gitui"
+    try:
+        target_link.symlink_to(cur_dir, target_is_directory=True)
+        console.print(f"Linked for [green]{cur_dir.name}[/] : {cur_dir.name} -> {target_link}")
+    except OSError as e:
+        console.print(f"[red]Failed[/]: {cur_dir.name} {e}")
+        return
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
