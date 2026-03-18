@@ -1,0 +1,31 @@
+(
+ // -- Set using hex code to set same color at anywhere
+ // 'Blue' is different color between neovim and terminal
+
+	selected_tab: Some("Reset"),
+	command_fg: Some("#ffffff"),
+	selection_bg: Some("#0000ff"),
+	selection_fg: Some("#ffffff"),
+	use_selection_fg: Some(true),
+	cmdbar_bg: Some("#1A1B26"),
+	cmdbar_extra_lines_bg: Some("#1A1B26"),
+	disabled_fg: Some("#a9a9a9"),
+	diff_line_add: Some("#0FFF50"),
+	diff_line_delete: Some("#FF0055"),
+	diff_file_added: Some("#A6E22E"),
+	diff_file_removed: Some("#F92672"),
+	diff_file_moved: Some("#AE81FF"),
+	diff_file_modified: Some("#E6DB74"),
+	commit_hash: Some("#ff00ff"),
+	commit_time: Some("#C4A000"),
+	commit_author: Some("#00ff00"),
+	danger_fg: Some("#ff0000"),
+	push_gauge_bg: Some("#0000ff"),
+	push_gauge_fg: Some("Reset"),
+	tag_fg: Some("#00fff0"),
+	branch_fg: Some("#ff00ff"),
+	line_break: Some(""),
+	block_title_focused: Some("Reset"),
+	syntax: Some("base16-ocean.dark"),
+)
+
