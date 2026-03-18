@@ -90,6 +90,7 @@ APPS = [
     "vcredist2022",
     "wget",
     "windows-terminal",
+    "windows-virtualdesktop-helper",
     "yazi",
     "zip",
     "zoxide",
