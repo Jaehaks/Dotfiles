@@ -72,6 +72,13 @@ local git_state = {
 	prompt = "",
 	running = false,
 }
+
+-- initialize cache whenever user executes command
+-- To avoid unchanged git state
+clink.onendedit(function ()
+	git_state.check_dir = ""
+end)
+
 local git_branch_prompt = clink.promptfilter(65)
 function git_branch_prompt:filter(prompt)
 
