@@ -114,7 +114,7 @@
 
 // remotes
     push: Some(( code: Char('P'), modifiers: "SHIFT")), 			// push to remote, (Status, Logs), It doesn't confirm
-	force_push: Some(( code: Char('P'), modifiers: "CONTROL")),
+	force_push: Some(( code: Char('p'), modifiers: "CONTROL")),
 	fetch: Some(( code: Char('F'), modifiers: "SHIFT")),			// In (Status)
 	pull: Some(( code: Char('f'), modifiers: "")),					// In (Status)
 	view_remotes: Some(( code: Char('v'), modifiers: "")),			// In (Branches), show (view remotes)
