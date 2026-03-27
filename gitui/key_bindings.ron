@@ -24,8 +24,8 @@
     tab_files: Some(( code: Char('3'), modifiers: "")), 			// file tree of current git project
     tab_stashing: Some(( code: Char('4'), modifiers: "")), 			// view to add stash
     tab_stashes: Some(( code: Char('5'), modifiers: "")), 			// view to show stashed list
-    tab_toggle: Some(( code: F(11), modifiers: "SHIFT")), 			// don't use it
-    tab_toggle_reverse: Some(( code: F(12), modifiers: "SHIFT")), 	// don't use it
+    tab_toggle: Some(( code: Tab, modifiers: "")), 					// switch tabs / branches
+    tab_toggle_reverse: Some(( code: BackTab, modifiers: "SHIFT")), // switch tabs / branches
 
 // move key as default
     move_left: Some(( code: Char('h'), modifiers: "")),
