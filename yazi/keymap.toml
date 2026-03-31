@@ -85,7 +85,7 @@ keymap = [
 	{ on = ["z", "g"],  run = "plugin fg 'fzf'",      desc = "Search files by content (fuzzy match)" },
 	{ on = ["z", "l"],  run = "plugin logfzf",     		     desc = "Search git logs with fzf" },
 	{ on = "<C-s>",     run = "escape --search",             desc = "Cancel the ongoing search" },
-	{ on = ["z", "z"],  run = "plugin zoxide",               desc = "Jump to a directory using zoxide" },
+	{ on = ["z", "z"],  run = "plugin zoxide-fast",               desc = "Jump to a directory using zoxide" },
 	{ on = ["z", "f"],  run = "plugin fzf",                  desc = "Jump to a directory or reveal a file using fzf" },
 	{ on = ["z", "d"],  run = "plugin fzfd",                 desc = "Jump to a directory using fzf" },
 

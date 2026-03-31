@@ -33,7 +33,7 @@ require('smart-enter'):setup {
 }
 
 -- [plugins] - zoxide (builtin)
-require("zoxide"):setup {
+require("zoxide-fast"):setup {
 	update_db = true, -- update db.zo automatically whenever move directories
 }
 
