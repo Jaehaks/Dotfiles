@@ -1,100 +1,112 @@
-local M = {}
+--- @since 26.1.22
 
-local cached_opts = nil
+--- set or get state
+local state = ya.sync(function(state, value)
+    if value then
+        state.query = value
+    end
+    return state.query or ""
+end)
 
+--- get current directory path
 local get_cwd = ya.sync(function()
     return tostring(cx.active.current.cwd)
 end)
 
-function M:setup(opts)
+
+--- setup funciton
+local function setup(self, opts)
     opts = opts or {}
-    if opts.update_db then
-        ps.sub("cd", function()
-            local cwd = get_cwd()
-            Command("zoxide"):arg({ "add", cwd }):spawn()
-        end)
-    end
+
+	ya.async(function()
+		local child = Command("zoxide"):arg({ "query", "-l" }):stdout(Command.PIPED):spawn()
+		-- check zoxide is installed
+		if not child then
+			ya.notify ({
+				title = 'zoxide-fast',
+				content = 'zoxide not found! please ensure it is installed',
+				timeout = 3,
+				level = 'error'
+			})
+			return
+		end
+
+		-- fill state cache at first
+		local output = child:wait_with_output()
+		if output and output.status.success then
+			state(output.stdout)
+		end
+	end)
+
+	if opts.update_db then
+		-- whenever 'cd' occurs in yazi (ps.sub is sync)
+		ps.sub("cd", function()
+			local cwd = get_cwd()
+			ya.async(function()
+				-- add cwd to db asynchronously
+				local status, _ = Command("zoxide"):arg({ "add", cwd }):status()
+				-- ya.notify { title = "zoxide-fast", content = tostring(status), timeout = 3 }
+				ya.dbg(opts)
+
+				-- if zoxide add is succeeded, update query to global variable
+				if status and status.success then
+					local child = Command("zoxide"):arg({ "query", "-l" }):stdout(Command.PIPED):spawn()
+					if child then
+						local output = child:wait_with_output()
+						if output and output.status.success then
+							state(output.stdout)
+						end
+					end
+				end
+			end)
+		end)
+	end
 end
 
-function M:entry()
-    local cwd = get_cwd()
+local function entry()
+	-- get query from saved global variable
+    local queries = state()
+
+    if queries == "" then
+        ya.notify { title = "zoxide-fast", content = "Query is empty. Try moving to a folder first.", timeout = 3 }
+        return
+    end
+
+	-- hide yazi
     local permit = ui.hide()
 
-    local target, err = M.run_with(cwd)
-
-    permit:drop()
-
-    if not target then
-        ya.notify { title = "Zoxide", content = tostring(err), timeout = 5, level = "error" }
-    elseif target ~= "" then
-        ya.emit("cd", { target, raw = true })
-    end
-end
-
-function M.get_options()
-    if cached_opts then
-        return cached_opts
-    end
-
-    local default = {
-        "--exact",
-        "--no-sort",
-        "--bind=ctrl-z:ignore,btab:up,tab:down",
-        "--cycle",
-        "--keep-right",
-        "--layout=reverse",
-        "--height=100%",
-        "--border",
-        "--scrollbar=▌",
-        "--info=inline",
-        "--tabstop=1",
-        "--exit-0",
-    }
-
-    if ya.target_family() == "unix" then
-        default[#default + 1] = "--preview-window=down,30%,sharp"
-        if ya.target_os() == "linux" then
-            default[#default + 1] = [[--preview='\command -p ls -Cp --color=always --group-directories-first {2..}']]
-        else
-            default[#default + 1] = [[--preview='\command -p ls -Cp {2..}']]
-        end
-    end
-
-    cached_opts = (os.getenv("FZF_DEFAULT_OPTS") or "")
-        .. " "
-        .. table.concat(default, " ")
-        .. " "
-        .. (os.getenv("YAZI_ZOXIDE_OPTS") or "")
-
-    return cached_opts
-end
-
----@param cwd string
----@return string?, Error?
-function M.run_with(cwd)
-    local child, err = Command("zoxide")
-        :arg({ "query", "-i", "--exclude", cwd })
-        :env("SHELL", "sh")
-        :env("CLICOLOR", "1")
-        :env("CLICOLOR_FORCE", "1")
-        :env("_ZO_FZF_OPTS", M.get_options())
-        :stdin(Command.INHERIT)
+	-- call fzf
+    local child, _ = Command("fzf")
+        :arg({ "--exact", "--no-sort", "--layout=reverse", "--height=100%" })
+        :stdin(Command.PIPED)
         :stdout(Command.PIPED)
-        :stderr(Command.PIPED)
         :spawn()
 
     if not child then
-        return nil, Err("Failed to start zoxide, error: %s", err)
+        permit:drop()
+        return
     end
 
-    local output, err = child:wait_with_output()
-    if not output then
-        return nil, Err("Cannot read zoxide output, error: %s", err)
-    elseif not output.status.success and output.status.code ~= 130 then
-        return nil, Err("zoxide exited with code %s: %s", output.status.code, output.stderr:gsub("^zoxide:%s*", ""))
-    end
+    -- Inject the queries into fzf's stdin directly to show list
+	-- entry() is already an async context, so it can be written immediately
+    -- child:take_stdin():write(queries)
+    child:write_all(queries)
 
-    return output.stdout:gsub("\n$", ""), nil
+	-- wait until user select some directories
+    local output, _ = child:wait_with_output()
+    permit:drop()
+
+	-- if output is valid, go to cd
+    if output and output.status.success then
+        local target = output.stdout:gsub("\n$", "")
+        if target ~= "" then
+            ya.emit("cd", { target, raw = true })
+        end
+    end
 end
 
-return M
+
+return {
+	setup = setup,
+	entry = entry,
+}
