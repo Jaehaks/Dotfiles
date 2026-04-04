@@ -79,6 +79,7 @@ APPS = [
     "openssl1", # for clipboard, supports libcrypto-1.1
     "poppler",
     "ripgrep",
+    "scoop",
     "sed",
     "sd",
     "tar",
