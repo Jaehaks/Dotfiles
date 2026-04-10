@@ -48,7 +48,7 @@ PY_THREADS   = 16  # the number of python multi threading
 ROBO_THREADS = 2   # the number of thread of Robocopy
 
 APPS = [
-    "7zip",
+    "7zip-zstd",
     "bat",
     "biber",
     "cacert",

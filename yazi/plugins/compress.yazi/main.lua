@@ -1,4 +1,5 @@
 --- @since 25.5.31
+--- requirements : 7zip-zstd
 
 ---@param items string|string[]
 local function info(items)
@@ -129,7 +130,7 @@ return {
 		local output, err = Command('7z')
 							:arg('a')         -- compression operation
 							:arg('-t7z')      -- for .7z
-							:arg('-m0=lzma2') -- compress algorithm is LZMA2 (recent)
+							:arg('-m0=zstd')  -- compress algorithm is ZSTD (recent)
 							:arg('-mx=5')     -- compression level = 5(typical) : it's preset of other size option
 							:arg('-ms=on')    -- set solid mode (improve compression ratio)
 							:arg('-mmt=on')   -- set multi thread mode
