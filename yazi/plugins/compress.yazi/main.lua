@@ -14,14 +14,17 @@ local function info(items)
 	})
 end
 
+--- get filename part of path
 ---@param path string file path to manipulate
 ---@param format string category
 ---@return string manipulated path
 local path_fnamemodify = function (path, format)
-	if format == 'name_only' then -- show filename without extension or directory name only
-		return string.match(path, '.*[\\/]([^\\/.]+)[%.]?.*$')
-	elseif format == 'name' then -- show filename with extension or directory name only
-		return string.match(path, '([^\\/]+)$')
+	local name = path:match('^.*[\\/]([^\\/]+)$') -- extract all filename with extension
+	if format == 'name' then
+		return name
+	elseif format == 'name_only' then
+		local res = name:match('(.+)%.[^%.]+$') -- check filename only before dot(.)
+		return res or name -- if res is nil, it is '.dotfile' format. so use whole 'name'
 	else
 		return ''
 	end
