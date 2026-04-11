@@ -130,6 +130,7 @@ return {
 		end
 
 		-- archive file using 7z
+		local permit = ui.hide()
 		local output, err = Command('7z')
 							:arg('a')         -- compression operation
 							:arg('-t7z')      -- for .7z
@@ -137,12 +138,16 @@ return {
 							:arg('-mx=5')     -- compression level = 5(typical) : it's preset of other size option
 							:arg('-ms=on')    -- set solid mode (improve compression ratio)
 							:arg('-mmt=on')   -- set multi thread mode
-							:arg('-bsp0')     -- don't show process
+							:arg('-bsp1')     -- don't show process
 							:arg('-bso0')     -- don't show output
 							:arg('--')
 							:arg(archive_name .. '.7z')
 							:arg(files)
-							:spawn():wait()
+							:stdout(Command.INHERIT)
+							:stderr(Command.INHERIT)
+							:status()
+							-- :spawn():wait()
+		permit:drop()
 
 		if err then
 			ya.notify({
