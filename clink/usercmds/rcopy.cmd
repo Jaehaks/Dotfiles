@@ -45,5 +45,6 @@ goto end
 echo Usage: rcopy [source dir or file] [destination dir]
 echo        rcopy c:\Desktop\a c:\Desktop\test  =^> copied to c:\Desktop\test\a
 echo        rcopy c:\Desktop\a.txt c:\Desktop\test  =^> copied to c:\Desktop\test\a.txt
+echo It doesn't need to check '\' is added to end of line.
 
 :end
