@@ -12,7 +12,7 @@ if "%target%"=="" (
 )
 
 if not exist "%target%" (
-	echo [Error] %target% doesn't exist
+	echo [Error] "%target%" doesn't exist
 	exit /b
 )
 
