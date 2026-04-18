@@ -9,18 +9,22 @@ $scoopAppsDir = Join-Path $scoopHome "apps"
 
 # scoop packages (remove ',' of last one)
 $packages = @(
-    '7zip',             # neovim, mason
-    'bat',              # cmd
+    '7zip-zstd',        # neovim, mason, yazi
+    'bat',              # bat
+	'biber',			# latex
+	'cacert',
     'clipboard',        # yazi, clipboard
     'curl',             # neovim, mason
     'clink',            # cmd prompt
     'deno',             # neovim, peek.nvim
     'eza',              # cmd
+    'fastcopy',         # empty.cmd
     'fd',               # yazi
     'ffmpeg',           # yazi
     'fzf',              # yazi, fzff, fzfg
     'gawk',             # neovim
     'gh',               # neovim
+    'gitui',            # git integration
     'grep',             # neovim
     'gzip',             # neovim, mason
     'imagemagick',      # yazi
@@ -33,11 +37,12 @@ $packages = @(
     'mpv',              # qutebrowser, video player
     'neovim',           # neovim
     'neovim-qt',        # neovim
+    'openssl1',         # clipboard, dll
     'poppler',          # yazi, pdf
-	'vieb'              # web browser
     'ripgrep',          # cmd, neovim
-	# 'rustup', 			# cmd, some environment cannot install this
+	'rustup', 			# cmd, some environment cannot install this
     'scoop-search',     # scoop
+    'sd',               # backup_scoop. fast sed
     'sed',              # cmd
     'tar',              # cmd
     'tree-sitter',      # neovim
@@ -45,9 +50,8 @@ $packages = @(
     'unzip',            # cmd
     'uutils-coreutils', # cmd, neovim
     'wget',             # neovim, mason
-    # 'win-vind',         # window manager
 	'windows-terminal', # terminal
-	'wox',              # window toolbar
+	'windows-virtualdesktop-helper', # virtual desktop numbering at tray
 	'yazi',             # file explorer
 	'zip',              # neovim
 	'zoxide'            # cmd, yazi
