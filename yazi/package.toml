@@ -19,11 +19,6 @@ rev = "de33976"
 hash = "22dec1266e598eb7dba353436bc943cc"
 
 [[plugin.deps]]
-use = "yazi-rs/plugins:lsar"
-rev = "de33976"
-hash = "5d1042678f646cdd092d43003b626dd5"
-
-[[plugin.deps]]
 use = "yazi-rs/plugins:toggle-pane"
 rev = "de33976"
 hash = "e218acb81244ecc0dc37f58b72c69eef"

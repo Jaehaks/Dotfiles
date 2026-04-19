@@ -159,8 +159,8 @@ preloaders = [
 ]
 prepend_previewers = [
 	# plugin : lsar.yazi / preview zip file
-	# { mime = "application/x-{tar,bzip*,7z-compressed,rar,xz}" , run = "lsar" }, # for zip
-	# { mime = "application/{,g}zip" , run = "lsar" }, # for zip
+	{ mime = "application/x-{tar,bzip*,7z-compressed,rar,xz}" , run = "zipname" }, # for zip
+	{ mime = "application/{,g}zip" , run = "zipname" }, # for zip
 ]
 previewers = [
 	{ url = "*/", run = "folder" },
