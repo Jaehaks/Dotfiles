@@ -1,7 +1,7 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-filter"
-rev = "de33976"
-hash = "5c5e375cb93c11168953b485804f4a71"
+rev = "442d908"
+hash = "2a47ffe1808d588484eba4a29c0b282c"
 
 [[plugin.deps]]
 use = "h-hg/yamb"
