@@ -134,6 +134,7 @@ return {
 		local output, err = Command('7z')
 							:arg('a')         -- compression operation
 							:arg('-t7z')      -- for .7z
+							:arg('-sccUTF-8') -- for .7z
 							:arg('-m0=zstd')  -- compress algorithm is ZSTD (recent)
 							:arg('-mx=5')     -- compression level = 5(typical) : it's preset of other size option
 							:arg('-ms=on')    -- set solid mode (improve compression ratio)
