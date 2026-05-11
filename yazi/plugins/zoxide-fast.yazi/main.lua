@@ -44,18 +44,13 @@ local function setup(self, opts)
 			local cwd = get_cwd()
 			ya.async(function()
 				-- add cwd to db asynchronously
-				local status, _ = Command("zoxide"):arg({ "add", cwd }):status()
-				-- ya.notify { title = "zoxide-fast", content = tostring(status), timeout = 3 }
-				ya.dbg(opts)
+				local output, _ = Command("zoxide"):arg({ "add", cwd }):output()
 
 				-- if zoxide add is succeeded, update query to global variable
-				if status and status.success then
-					local child = Command("zoxide"):arg({ "query", "-l" }):stdout(Command.PIPED):spawn()
-					if child then
-						local output = child:wait_with_output()
-						if output and output.status.success then
-							state(output.stdout)
-						end
+				if output and output.status.success then
+					local query_out, _ = Command("zoxide"):arg({ "query", "-l" }):stdout(Command.PIPED):output()
+					if query_out and query_out.status.success then
+						state(query_out.stdout)
 					end
 				end
 			end)
