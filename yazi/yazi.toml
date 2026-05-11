@@ -60,7 +60,7 @@ reveal = [ # if folder, open explorer current location
 extract = [
 	{ run = "ya pub extract --list %s", desc = "Extract here", for = "linux"},
 	# { run = 'bandizip bx -target:auto %*',   desc = "Extract here", for = "windows" },
-	{ run = '7z x -aoa -o* %*',   desc = "Extract here", for = "windows" },
+	{ run = '7z x -aoa -o* %*', block = true,   desc = "Extract here", for = "windows" },
 ]
 play = [
 	{ run = 'mpv --force-window %s1', orphan = true, for = "unix" },
