@@ -2,6 +2,9 @@
 REM change code page to view git status message properly
 chcp 65001 > nul 2>&1
 
+REM external editor for codex
+set "EDITOR=nvim"
+
 REM clink library to load
 set CLINK_PATH=%USERPROFILE%\.config\Dotfiles\clink\clink_libs
 
