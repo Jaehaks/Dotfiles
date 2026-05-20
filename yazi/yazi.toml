@@ -76,6 +76,7 @@ rules = [
 	# user: unknown file extension (some files are recognized as octet_stream like binary)
 	{ mime = "application/octet-stream", use = [ "edit", "reveal" ] },
 	{ mime = "application/tex", use = [ "edit", "reveal" ] },
+	{ mime = "application/msg", use = [ "open", "reveal" ] },
 	# csv
 	{ mime = "text/csv", use = [ "open", "reveal" ] },
 	# Text

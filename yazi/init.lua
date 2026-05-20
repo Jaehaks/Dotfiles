@@ -121,6 +121,7 @@ require('mime-ext.local'):setup({
 
 		-- for email
 		pst = "application/outlook",
+		msg = "application/msg",
 
 		-- for archive
 		["7z"] = "application/x-7z-compressed",
