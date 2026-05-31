@@ -1,15 +1,16 @@
 # A TOML linter such as https://taplo.tamasfe.dev/ can use this schema to validate your config.
 # If you encounter any issues, please make an issue at https://github.com/yazi-rs/schemas.
-"$schema" = "https://yazi-rs.github.io/schemas/keymap.json"
+
+#:schema https://yazi-rs.github.io/schemas/keymap.json
 
 [mgr]
 
 keymap = [
-	{ on = "<Esc>", run = "escape",             desc = "Exit visual mode, clear selected, or cancel search" },
-	{ on = "<C-o>", run = ["escape", "unyank"],             desc = "Exit visual mode, clear selected, or cancel search" },
-	{ on = "q",     run = "quit",               desc = "Exit the process" },
-	{ on = "Q",     run = "quit --no-cwd-file", desc = "Exit the process without writing cwd-file" },
-	{ on = "<C-c>", run = "close",              desc = "Close the current tab, or quit if it is last tab" },
+	{ on = "<Esc>", run = "escape",             desc = "Exit visual mode, clear selection, or cancel search" },
+	{ on = "<C-o>", run = ["escape", "unyank"], desc = "Exit visual mode, clear selection, or cancel search" },
+	{ on = "q",     run = "quit",               desc = "Quit the process" },
+	{ on = "Q",     run = "quit --no-cwd-file", desc = "Quit without outputting cwd-file" },
+	{ on = "<C-c>", run = "close",              desc = "Close the current tab, or quit if it's last" },
 	{ on = "<C-z>", run = "suspend",            desc = "Suspend the process" },
 
 	# Hopping
@@ -37,25 +38,28 @@ keymap = [
 	{ on = "h", run = "leave", desc = "Back to the parent directory" },
 	{ on = "l", run = "plugin smart-enter", desc = "Enter or Open" },
 
-	{ on = "<Left>",  run = "leave",    desc = "Go back to the parent directory" },
+	{ on = "<Left>",  run = "leave", desc = "Back to the parent directory" },
 	{ on = "<Right>", run = "enter",    desc = "Enter the child directory" },
 
-	{ on = "H", run = "back",    desc = "Go back to the previous directory" },
-	{ on = "L", run = "forward", desc = "Go forward to the next directory" },
+	{ on = "H", run = "back",    desc = "Back to previous directory" },
+	{ on = "L", run = "forward", desc = "Forward to next directory" },
 
-	# Scrolling in preview
+	# Toggle
+	{ on = "<Space>", run = [ "toggle", "arrow 1" ], desc = "Toggle the current selection state" },
+	{ on = "<C-a>",   run = "toggle_all --state=on", desc = "Select all files" },
+	{ on = "<C-v>",   run = "toggle_all",            desc = "Invert selection of all files" },
+
+	# Visual mode
+	{ on = "v", run = "visual_mode",         desc = "Enter visual mode (selection mode)" },
+	# { on = "V", run = "visual_mode --unset", desc = "Enter visual mode (unset mode)" },
+
+	# Seeking
 	{ on = "J", run = "seek -5", desc = "Seek up 5 units in the preview" },
 	{ on = "K", run = "seek 5",  desc = "Seek down 5 units in the preview" },
 
 	# Spot
 	{ on = "<Tab>", run = "spot",  desc = "Spot hovered file" },
 
-	# Selection
-	{ on = "<Space>", run = [ "toggle" , "arrow next" ], desc = "Toggle the current selection state" },
-	{ on = "v",       run = "visual_mode"           , desc = "Enter visual mode (selection mode)" },
-	# { on = "V",       run = "visual_mode --unset",                desc = "Enter visual mode (unset mode)" },
-	{ on = "<C-a>",   run = "toggle_all --state=on" , desc = "Select all files" },
-	{ on = "<C-v>",   run = "toggle_all"            , desc = "Inverse selection of all files" },
 
 	# Operation
 	{ on = "o",         run = "plugin open-nvim",            desc = "Open selected files" },
@@ -113,19 +117,19 @@ keymap = [
 	{ on = "N", run = "find_arrow --previous",   desc = "Previous found" },
 
 	# Sorting
-	{ on = [ ",", "t" ], run = [ "sort mtime --reverse"       , "linemode size_and_mtime" ] , desc = "Sort by modified time (reverse)" },
-	{ on = [ ",", "T" ], run = [ "sort mtime --reverse=no"    , "linemode size_and_mtime" ] , desc = "Sort by modified time" },
-	{ on = [ ",", "c" ], run = [ "sort btime --reverse"          , "linemode btime" ]          , desc = "Sort by created time (reverse)" },
-	{ on = [ ",", "C" ], run = [ "sort btime --reverse=no"       , "linemode btime" ]          , desc = "Sort by created time" },
-	{ on = [ ",", "e" ], run = [ "sort extension --reverse=no"   , "linemode size_and_mtime "] , desc = "Sort by extension" },
-	{ on = [ ",", "E" ], run = [ "sort extension --reverse"      , "linemode size_and_mtime "] , desc = "Sort by extension (reverse)" },
-	{ on = [ ",", "a" ], run = [ "sort alphabetical --reverse=no", "linemode size_and_mtime "] , desc = "Sort alphabetically" },
-	{ on = [ ",", "A" ], run = [ "sort alphabetical --reverse"   , "linemode size_and_mtime "] , desc = "Sort alphabetically (reverse)" },
-	{ on = [ ",", "n" ], run = [ "sort natural --reverse=no"     , "linemode size_and_mtime" ] , desc = "Sort naturally" },
-	{ on = [ ",", "N" ], run = [ "sort natural --reverse"        , "linemode size_and_mtime" ] , desc = "Sort naturally (reverse)" },
-	{ on = [ ",", "s" ], run = [ "sort size --reverse"           , "linemode size_and_mtime" ] , desc = "Sort by size (reverse)" },
-	{ on = [ ",", "S" ], run = [ "sort size --reverse=no"        , "linemode size_and_mtime" ] , desc = "Sort by size" },
-	{ on = [ ",", "r" ], run = "sort random --reverse=no"                                      , desc = "Sort randomly" },
+	{ on = [ ",", "t" ], run = [ "sort mtime --reverse=yes",        "linemode size_and_mtime" ], desc = "Sort by modified time (reverse)" },
+	{ on = [ ",", "T" ], run = [ "sort mtime --reverse=no",         "linemode size_and_mtime" ], desc = "Sort by modified time" },
+	{ on = [ ",", "c" ], run = [ "sort btime --reverse=yes",        "linemode btime" ],          desc = "Sort by created time (reverse)" },
+	{ on = [ ",", "C" ], run = [ "sort btime --reverse=no",         "linemode btime" ],          desc = "Sort by created time" },
+	{ on = [ ",", "e" ], run = [ "sort extension --reverse=no",     "linemode size_and_mtime "], desc = "Sort by extension" },
+	{ on = [ ",", "E" ], run = [ "sort extension --reverse=yes",    "linemode size_and_mtime "], desc = "Sort by extension (reverse)" },
+	{ on = [ ",", "a" ], run = [ "sort alphabetical --reverse=no",  "linemode size_and_mtime "], desc = "Sort alphabetically" },
+	{ on = [ ",", "A" ], run = [ "sort alphabetical --reverse=yes", "linemode size_and_mtime "], desc = "Sort alphabetically (reverse)" },
+	{ on = [ ",", "n" ], run = [ "sort natural --reverse=no",       "linemode size_and_mtime" ], desc = "Sort naturally" },
+	{ on = [ ",", "N" ], run = [ "sort natural --reverse=yes",      "linemode size_and_mtime" ], desc = "Sort naturally (reverse)" },
+	{ on = [ ",", "s" ], run = [ "sort size --reverse=yes",         "linemode size_and_mtime" ], desc = "Sort by size (reverse)" },
+	{ on = [ ",", "S" ], run = [ "sort size --reverse=no",          "linemode size_and_mtime" ], desc = "Sort by size" },
+	{ on = [ ",", "r" ], run = "sort random --reverse=no",          desc = "Sort randomly" },
 
 	# Goto
 	{ on = "~",    run = "cd ~", desc = "go to the home directory" },
@@ -136,6 +140,7 @@ keymap = [
 
 	# Tabs
 	{ on = "t", run = "tab_create --current", desc = "Create a new tab with CWD" },
+	# { on = [ "t", "r" ], run = "tab_rename --interactive", desc = "Rename current tab" },
 
 	{ on = "1", run = "tab_switch 0", desc = "Switch to first tab" },
 	{ on = "2", run = "tab_switch 1", desc = "Switch to second tab" },
@@ -261,7 +266,7 @@ keymap = [
 	{ on = "<Up>",    run = "arrow prev", desc = "Previous line" },
 	{ on = "<Down>",  run = "arrow next",  desc = "Next line" },
 	{ on = "<Left>",  run = "swipe prev", desc = "Swipe to previous file" },
-	{ on = "<Right>", run = "swipe next",  desc = "Swipe to previous file" },
+	{ on = "<Right>", run = "swipe next", desc = "Swipe to next file" },
 
 	# Copy
 	{ on = [ "c", "c" ], run = "copy cell", desc = "Copy selected cell" },
@@ -270,6 +275,7 @@ keymap = [
 	{ on = "~",    run = "help", desc = "Open help" },
 	{ on = "<F1>", run = "help", desc = "Open help" },
 ]
+
 [pick]
 
 keymap = [
@@ -299,12 +305,16 @@ keymap = [
 
 	# Mode
 	{ on = "i", run = "insert",                              desc = "Enter insert mode" },
-	{ on = "I", run = [ "move first-char", "insert" ],             desc = "Move to the BOL, and enter insert mode" },
+	{ on = "I", run = [ "move first-char", "insert" ],       desc = "Move to the BOL, and enter insert mode" },
 	{ on = "a", run = "insert --append",                     desc = "Enter append mode" },
 	{ on = "A", run = [ "move eol", "insert --append" ],     desc = "Move to the EOL, and enter append mode" },
 	{ on = "v", run = "visual",                              desc = "Enter visual mode" },
-	{ on = "r", run = "replace",                         desc = "Replace a single character" },
+	{ on = "r", run = "replace",                             desc = "Replace a single character" },
+
+	# Selection
 	{ on = "V", run = [ "move bol", "visual", "move eol" ], desc = "Select from BOL to EOL" },
+	# { on = "<C-A>", run = [ "move eol", "visual", "move bol" ], desc = "Select from EOL to BOL" },
+	# { on = "<C-E>", run = [ "move bol", "visual", "move eol" ], desc = "Select from BOL to EOL" },
 
 	# Character-wise movement
 	{ on = "h",       run = "move -1", desc = "Move back a character" },
@@ -323,6 +333,8 @@ keymap = [
 	# { on = "E",     run = "forward --far --end-of-word", desc = "Move forward to the end of the current or next WORD" },
 	{ on = "<A-b>", run = "backward",              desc = "Move back to the start of the current or previous word" },
 	{ on = "<A-f>", run = "forward --end-of-word", desc = "Move forward to the end of the current or next word" },
+	# { on = "<C-Left>",  run = "backward",                    desc = "Move back to the start of the current or previous word" },
+	# { on = "<C-Right>", run = "forward --end-of-word",       desc = "Move forward to the end of the current or next word" },
 
 	# Line-wise movement
 	{ on = "0",      run = "move bol", desc = "Move to the BOL" },
@@ -345,6 +357,8 @@ keymap = [
 	{ on = "<C-k>", run = "kill eol",      desc = "Kill forwards to the EOL" },
 	{ on = "<C-w>", run = "kill backward", desc = "Kill backwards to the start of the current word" },
 	{ on = "<A-d>", run = "kill forward",  desc = "Kill forwards to the end of the current word" },
+	# { on = "<C-Backspace>", run = "kill backward", desc = "Kill backwards to the start of the current word" },
+	# { on = "<C-Delete>",    run = "kill forward",  desc = "Kill forwards to the end of the current word" },
 
 	# Cut/Yank/Paste
 	{ on = "d", run = "delete --cut",                              desc = "Cut selected characters" },
@@ -360,13 +374,17 @@ keymap = [
 
 	# Undo/Redo
 	{ on = "u",     run = "undo", desc = "Undo the last operation" },
+	# { on = "U",     run = "casefy upper",             desc = "Uppercase" },
+	# { on = "<C-r>", run = "redo",                     desc = "Redo the last operation" },
 	{ on = "U", 	run = "redo", desc = "Redo the last operation" },
 
 	# Help
+	# { on = "~",    run = "help", desc = "Open help" },
 	{ on = "<F1>", run = "help", desc = "Open help" },
 ]
 
 [confirm]
+
 keymap = [
 	{ on = "<Esc>",   run = "close",          desc = "Cancel the confirm" },
 	{ on = "<C-o>",   run = "close",          desc = "Cancel the confirm" },
@@ -424,5 +442,5 @@ keymap = [
 	{ on = "<Down>", run = "arrow next",  desc = "Next line" },
 
 	# Filtering
-	{ on = "f", run = "filter", desc = "filter help items" },
+	{ on = "f", run = "filter", desc = "Filter help items" },
 ]

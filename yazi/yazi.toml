@@ -1,6 +1,7 @@
-# A TOML linter such as https://taplo.tamasfe.dev/ can use this schema to validate your config.
-# If you encounter any issues, please make an issue at https://github.com/yazi-rs/schemas.
-"$schema" = "https://yazi-rs.github.io/schemas/yazi.json"
+# A TOML linter such as Tombi can use this schema to validate your config.
+# If you encounter any problems, please file an issue at https://github.com/yazi-rs/schemas.
+
+#:schema https://yazi-rs.github.io/schemas/yazi.json
 
 [mgr]
 ratio          = [ 1, 4, 3 ]
@@ -9,12 +10,12 @@ sort_sensitive = false
 sort_reverse   = false
 sort_dir_first = true
 sort_translit  = false # for hungarian char
+sort_fallback  = "alphabetical"
 linemode       = "size_and_mtime"
 show_hidden    = true
-show_symlink   = false
+show_symlink   = false # it will be shown in status bar
 scrolloff      = 5
 mouse_events   = [ "click", "scroll" ]
-title_format   = "Yazi: {cwd}"
 
 [preview]
 wrap			= "no"
@@ -25,7 +26,6 @@ cache_dir       = ""
 image_delay     = 30
 image_filter    = "triangle"
 image_quality   = 75 # doesn't works in windows-terminal
-# sixel_fraction  = 15
 ueberzug_scale  = 1
 ueberzug_offset = [ 0, 0, 0, 0 ]
 
@@ -33,39 +33,48 @@ ueberzug_offset = [ 0, 0, 0, 0 ]
 # open file using terminal program like nvim without 'block = true', Error invokes
 # 'orphan' keep the process even if yazi is exited, but it is regardless of setting when I open gui program
 edit = [
-	{ run = '${EDITOR:-vi} %s'  , block = true    , desc = "$EDITOR", for = "unix" }   ,
+	{ run = "${EDITOR:-vi} %s", desc = "$EDITOR",      for = "unix", block = true },
+	# { run = "code %s",          desc = "code",         for = "windows", orphan = true },
+	# { run = "code -w %s",       desc = "code (block)", for = "windows", block = true },
 	{ run = 'nvim %s'           , block = true    , desc = "nvim"   , for = "windows" },
 	{ run = 'nvim-qt %s'        , orphan = true   , desc = "nvim-qt", for = "windows" },
 	{ run = 'excel /e %s'     , orphan = true   , desc = "excel",   for = "windows" },
 ]
+play = [
+	{ run = "xdg-open %s1",    desc = "Play", for = "linux", orphan = true },
+	{ run = "open %s",         desc = "Play", for = "macos" },
+	{ run = 'start "" %s1',    desc = "Play", for = "windows", orphan = true },
+	{ run = "termux-open %s1", desc = "Play", for = "android" },
+	{ run = "mediainfo %s1; echo 'Press enter to exit'; read _", block = true, desc = "Show media info", for = "unix" },
+	{ run = "mediainfo %s1 & pause", block = true, desc = "Show media info", for = "windows" },
+]
 open = [ # if folder, open explorer location under cursor
-	{ run = 'xdg-open %s1',                desc = "Open", for = "linux" },
-	{ run = 'open %s',                    desc = "Open", for = "macos" },
-	{ run = 'start "" %s1', orphan = true, desc = "Open", for = "windows" },
-	{ run = 'termux-open %s1',             desc = "Open", for = "android" },
+	{ run = "xdg-open %s1",    desc = "Open", for = "linux" },
+	{ run = "open %s",         desc = "Open", for = "macos" },
+	{ run = 'start "" %s1',    desc = "Open", for = "windows", orphan = true },
+	{ run = "termux-open %s1", desc = "Open", for = "android" },
+]
+reveal = [ # if folder, open explorer current location
+	{ run = "xdg-open %d1",         desc = "Reveal", for = "linux" },
+	{ run = "open -R %s1",          desc = "Reveal", for = "macos" },
+	{ run = "explorer /select,%s1", desc = "Reveal", for = "windows", orphan = true },
+	{ run = "termux-open %d1",      desc = "Reveal", for = "android" },
+	{ run = "clear; exiftool %s1; echo 'Press enter to exit'; read _", desc = "Show EXIF", for = "unix", block = true },
+]
+extract = [
+	{ run = "ya pub extract --list %s", desc = "Extract here", for = "linux" },
+	# { run = 'bandizip bx -target:auto %*',   desc = "Extract here", for = "windows" },
+	{ run = '7z x -aoa -sccUTF-8 -o* %s', desc = "Extract here", for = "windows", block = true },
+]
+download = [
+	{ run = "ya emit download --open %S", desc = "Download and open" },
+	{ run = "ya emit download %S",        desc = "Download" },
 ]
 sioyekopen = [
 	{ run = 'sioyek --new-window %s1', orphan = true, desc = "sioyek", for = "windows" },
 ]
 sumatraopen = [
 	{ run = 'sumatraPDF %s1', orphan = true, desc = "SumatraPDF", for = "windows" },
-]
-reveal = [ # if folder, open explorer current location
-	{ run = 'xdg-open %d``',           desc = "Reveal", for = "linux" },
-	{ run = 'open -R %s1',                         desc = "Reveal", for = "macos" },
-	{ run = 'explorer /select,%s1', orphan = true, desc = "Reveal", for = "windows" },
-	{ run = 'termux-open %d1',        desc = "Reveal", for = "android" },
-	{ run = "clear; exiftool %s1; echo 'Press enter to exit'; read _", desc = "Show EXIF", for = "unix", block = true },
-]
-extract = [
-	{ run = "ya pub extract --list %s", desc = "Extract here", for = "linux"},
-	# { run = 'bandizip bx -target:auto %*',   desc = "Extract here", for = "windows" },
-	{ run = '7z x -aoa -sccUTF-8 -o* %*', block = true,   desc = "Extract here", for = "windows" },
-]
-play = [
-	{ run = 'mpv --force-window %s1', orphan = true, for = "unix" },
-	{ run = 'start "" %s1', orphan = true,  for = "windows" },
-	{ run = '''mediainfo %s1; echo "Press enter to exit"; read _''', block = true, desc = "Show media info", for = "unix" },
 ]
 
 [open] # set rules for opening for specific file + show open list
@@ -85,46 +94,52 @@ rules = [
 	{ mime = "image/*", use = [ "open", "reveal" ] },
 	# Media
 	{ mime = "{audio,video}/*", use = [ "play", "reveal" ] },
+	# Code
+	{ mime = "application/{json,ndjson,javascript,wine-extension-ini}", use = [ "edit", "reveal" ] },
 	# Archive
-	{ mime = "application/{,g}zip", use = [ "extract", "reveal" ] },
-	{ mime = "application/{tar,bzip*,x-7z-compressed,xz,rar}", use = [ "extract", "reveal" ] },
-	# JSON
-	{ mime = "application/{json,ndjson}", use = [ "edit", "reveal" ] },
-	{ mime = "*/javascript", use = [ "edit", "reveal" ] },
+	{ mime = "application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", use = [ "extract", "reveal" ] },
+	{ mime = "application/{x-7z-compressed}", use = [ "extract", "reveal" ] },
 	# pdf
 	{ mime = "application/pdf", use = [ "open", "sioyekopen", "sumatraopen" ] },
 	# Empty file
 	{ mime = "inode/empty", use = [ "edit", "reveal" ] },
+	# Virtual file system
+	{ mime = "vfs/{absent,stale}", use = "download" },
 	# Fallback
 	{ url = "*", use = [ "open", "reveal" ] },
 ]
 
-[tasks]
-micro_workers    = 10
-macro_workers    = 25 # (macro_workers, bizarre_retry) = (10,3) at default because of conservative value for USB flash drives
-bizarre_retry    = 3
-image_alloc      = 536870912  # 512MB
+[tasks] # NonZeroU8 = 1~255 value
+file_workers     = 3 # file copy / delete / move,
+plugin_workers   = 5 # plugin execution
+fetch_workers    = 5 # get metadata (spotter?)
+preload_workers  = 2 # preview cache
+process_workers  = 5 # run external processor
+bizarre_retry    = 3 # retry count when error, if high, delay will increase
+image_alloc      = 1073741824  # 1GB allocation for higher RAM over 8GB
 image_bound      = [ 10000, 10000 ] # change from (0,0) for limiting memory of large image preview
-suppress_preload = false
+suppress_preload = false # preload to show preview faster
 
 [plugin]
 prepend_fetchers = [
-	# plugins - mime-ext.yazi
-	{ id = "mime", url = "local://*", run = "mime-ext.local", prio = "high" },
-	{ id = "mime", url = "remote://*", run = "mime-ext.remote", prio = "high" },
 	# plugins - git.yazi
-	{ id = "git", url = "*", run = "git"},
-	{ id = "git", url = "*/", run = "git"},
+	{ url = "*",  run = "git",  group = "git" },
+	{ url = "*/",  run = "git", group = "git" },
 	# plugins - githead.yazi
-	{ id = "githead", url = "*", run = "githead"},
-	{ id = "githead", url = "*/", run = "githead"},
+	{ url = "*",  run = "githead",  group = "githead" },
+	{ url = "*/",  run = "githead", group = "githead" },
 ]
 fetchers = [
 	# Mimetype -- use local/remote from mime-ext plugins
-	{ id = "mime", url = "*/",         run = "mime.dir", prio = "high" },
+	{ url = "*/",         run = "mime.dir",    prio = "high", group = "mime" },
+	{ url = "local://*",  run = "mime-ext.local",  prio = "high", group = "mime" }, # plugins - mime-ext.yazi
+	{ url = "remote://*", run = "mime-ext.remote", prio = "high", group = "mime" }, # plugins - mime-ext.yazi
 ]
 
 spotters = [
+	# Multi-file
+	{ mime = "multi/*", run = "multi" },
+	# Folder
 	{ url = "*/", run = "folder" },
 	# Code
 	# { mime = "text/*", run = "code" },
@@ -140,10 +155,7 @@ spotters = [
 	# Error
 	{ mime = "null/*", run = "null" },
 	# Fallback
-	{ url = "*", run = "file" },
-]
-append_spotters = [
-	{ url = '*', run = "file-extra-metadata" }, # plugin : file-extra-metadata
+	{ url = "*", run = "file-extra-metadata" }, # plugin : file-extra-metadata
 ]
 preloaders = [
 	# Image
@@ -157,11 +169,6 @@ preloaders = [
 	# Font
 	{ mime = "font/*", run = "font" },
 	{ mime = "application/ms-opentype", run = "font" },
-]
-prepend_previewers = [
-	# plugin : lsar.yazi / preview zip file
-	{ mime = "application/x-{tar,bzip*,7z-compressed,rar,xz}" , run = "zipname" }, # for zip
-	{ mime = "application/{,g}zip" , run = "zipname" }, # for zip
 ]
 previewers = [
 	{ url = "*/", run = "folder" },
@@ -179,8 +186,8 @@ previewers = [
 	# PDF
 	{ mime = "application/pdf", run = "pdf" },
 	# Archive
-	{ mime = "application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", run = "archive" },
-	{ mime = "application/x-{7z-compressed,rar,xz}", run = "archive" },
+	{ mime = "application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", run = "zipname" }, # plugin : zipname.yazi
+	{ mime = "application/{x-7z-compressed}", run = "zipname"}, # plugin : zipname.yazi
 	{ mime = "application/{debian*-package,redhat-package-manager,rpm,android.package-archive}", run = "archive" },
 	{ url = "*.{AppImage,appimage}", run = "archive" },
 	# Virtual Disk / Disk Image
@@ -192,11 +199,12 @@ previewers = [
 	{ mime = "application/ms-opentype", run = "font" },
 	# Empty file
 	{ mime = "inode/empty", run = "empty" },
+	# Virtual file system
+	{ mime = "vfs/*", run = "vfs" },
+	# Error
+	{ mime = "null/*", run = "null" },
 	# Fallback
-	# { url = "*", run = "filename" },
-]
-append_previewers = [
-	{ url = "*" , run = "file-extra-metadata" }, # plugin : file-extra-metadata
+	{ url = "*", run = "file-extra-metadata" }, # plugin : file-extra-metadata
 ]
 
 
