@@ -2,12 +2,6 @@
 # it can set "Readline configuration variables" and "Bindasble Commands"
 # (!warning) if "clinks_settings" is set in this file, clink does not work properly
 
-######## special shortcut #######
-# <C-A-c> : copy command line to clip board ('y' yank is applyed in terminal only)
-# <C-A-e> : expand environment variable under cursor
-# <C-A-u> / <S-up> : up directory
-# <C-u> : add ..\ in command line
-# <A-h> : show active keymaps
 $if clink
 
 set blink-matching-paren      on
@@ -19,7 +13,26 @@ set colored-stats             on
 set show-mode-in-prompt       on
 set visible-stats             on
 
-# it works only "set keymap emacs"
+######################################
+## special shortcut
+######################################
+# TIP : run "clink echo", and press any keys to check which keycode is pressed
+# TIP : <A-h> : show active all keymap list
+# TIP :
+
+# <C-A-c> : copy command line to clip board ('y' yank is applyed in terminal only)
+# <C-A-e> : expand environment variable under cursor
+# <C-A-u> / <S-up> : up directory
+# <C-u> : add ..\ in command line
+# <C-A-h> : backward-kill-word
+
+####### it works only "set keymap emacs"
+# accept inline autosuggestion
 "\e[Z": clink-insert-suggested-line
+# mapped for down (history / suggestionlist)
+"\C-j": "\e[A"
+# mapped for up (history / suggestionlist)
+"\C-k": "\e[B"
+
 
 $endif

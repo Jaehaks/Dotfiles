@@ -1,6 +1,13 @@
 # name: Show usage hint for automatic suggestions
 # type: boolean
 autosuggest.hint = False
+# use gray text suggestion inline like before v1.9.25
+autosuggest.inline = False
+# suggestion list is off automatically after end of Esc / Enter
+suggestionlist.autooff = False
+# After v1.8.0, suggestionlist is shown instead of inline autosuggestion.
+# use it default (if autosuggest.inline is true, it false) you can turn on with F2
+suggestionlist.default = True
 
 color.arginfo             = sgr 38;5;172
 color.argmatcher          = sgr 1;38;5;40
