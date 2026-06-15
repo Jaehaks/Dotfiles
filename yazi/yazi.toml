@@ -87,7 +87,7 @@ rules = [
 	{ mime = "application/tex", use = [ "edit", "reveal" ] },
 	{ mime = "application/msg", use = [ "open", "reveal" ] },
 	# csv
-	{ mime = "text/csv", use = [ "open", "reveal" ] },
+	{ mime = "text/{csv,html}", use = [ "open", "reveal" ] },
 	# Text
 	{ mime = "text/*", use = [ "edit", "reveal" ] },
 	# Image
