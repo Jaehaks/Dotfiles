@@ -34,3 +34,12 @@ match.substring           = True
 
 color.envvars			  = sgr 38;5;117
 fzf.default_bindings	  = True
+
+# don't show copyright message at startup
+clink.logo 				  = none
+# don't show update message at startup
+clink.autoupdate 		  = off
+
+###################################
+# 'clink.path' to load lua setting files is declared in aliase.cmd as %CLINK_PATH%
+# If there is no value of clink.path, detect %CLINK_PATH% instead of it.
