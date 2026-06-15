@@ -662,7 +662,7 @@ function fzf_complete_internal(rl_buffer, line_state, force, completion_command)
     else
         -- Intercept matches Use match filtering to let
         fzf_complete_intercept = true
-        rl.invokecommand(completion_command or 'complete')
+        rl.invokecommand(completion_command or 'menu-complete')
         if fzf_complete_intercept then
             rl_buffer:ding()
         end
