@@ -34,5 +34,15 @@ set visible-stats             on
 # mapped for up (history / suggestionlist)
 "\C-k": "\e[B"
 
+######################################
+## clink-fzf shortcut
+######################################
+# <C-t> : [insert] all files/directories recursively under cwd
+# <C-r> : [insert] all command histories
+# <A-c> : [move] all directories under cwd
+# <A-b> : [show only] all key bindings
+# <Tab> : [insert] with '**', the completion will be shown
+# <C-Space> : [insert] all completion candidates list starting with prefix
+# Let's think about it a bit more about fzf-rg / fzf-git
 
 $endif
