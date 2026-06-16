@@ -662,7 +662,7 @@ function fzf_complete_internal(rl_buffer, line_state, force, completion_command)
     else
         -- Intercept matches Use match filtering to let
         fzf_complete_intercept = true
-        rl.invokecommand(completion_command or 'menu-complete')
+        rl.invokecommand(completion_command or 'menu-complete') -- kjh : change menu-complete to avoid bug
         if fzf_complete_intercept then
             rl_buffer:ding()
         end
@@ -694,8 +694,9 @@ local function apply_default_bindings()
             rl.setbinding([["\C-r"]], [["luafunc:fzf_history"]], keymap)
             rl.setbinding([["\M-c"]], [["luafunc:fzf_directory"]], keymap)
             rl.setbinding([["\M-b"]], [["luafunc:fzf_bindings"]], keymap)
-            rl.setbinding([["\t"]], [["luafunc:fzf_tab"]], keymap)
-            rl.setbinding([["\e[27;5;32~"]], [["luafunc:fzf_complete_force"]], keymap)
+            -- rl.setbinding([["\t"]], [["luafunc:fzf_tab"]], keymap)
+            -- rl.setbinding([["\e[27;5;32~"]], [["luafunc:fzf_complete_force"]], keymap)
+            rl.setbinding([["\t"]], [["luafunc:fzf_complete_force"]], keymap)
         end
     end
 end
