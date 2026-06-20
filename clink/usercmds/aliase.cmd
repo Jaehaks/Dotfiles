@@ -7,6 +7,8 @@ set "EDITOR=nvim"
 
 REM clink library to load
 set "CLINK_PATH=%USERPROFILE%\.config\Dotfiles\clink\clink_libs"
+set "CLINK_PATH=%CLINK_PATH%;%USERPROFILE%\.config\Dotfiles\clink\clink_libs\clink-completions"
+set "CLINK_PATH=%CLINK_PATH%;%USERPROFILE%\.config\Dotfiles\clink\clink_libs\clink-gizmos"
 set "CLINK_THEMES_DIR=%USERPROFILE%\.config\Dotfiles\clink\themes"
 set "CLINK_COLORTHEME=Minimal"
 

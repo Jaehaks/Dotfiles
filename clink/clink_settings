@@ -18,6 +18,13 @@ clink.logo 				  = none
 # don't show update message at startup
 clink.autoupdate 		  = off
 
+# plugin - gizmos matchicons on (except 'cd', completion shows file/dir icons)
+# It shows color also. but If you integrate with fzf.lua, the colors are disabled
+matchicons.enable		  = True
+# plugin - gizmos tilde_autoexpand (you can use ~ as linux)
+tilde.autoexpand 		  = True
+
+
 ###################################
 # 'clink.path' to load lua setting files is declared in aliase.cmd as %CLINK_PATH%
 # If there is no value of clink.path, detect %CLINK_PATH% instead of it.
