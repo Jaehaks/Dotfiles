@@ -1,22 +1,30 @@
 [set]
+# git "add"
+color.arg          		  = #ffaf00
+# git add "-A" "--oneline"
+color.flag                = #87d7ff
+# git clone "url"  (default foreground color)
+color.input               = #ffffff
+# doskey command
+color.doskey              = bold #5fafff
+
 color.argmatcher          = bold #00d700
 color.cmd                 = bold bright blue
 color.cmdredir            = #d78700
 color.cmdsep              = #af5fff
 color.comment_row         = #5fffff on #000087
 color.description         = bright cyan
-color.doskey              = bold #5fafff
 color.executable          = bold #0087ff
 color.filtered            = bold
-color.flag                = #87d7ff
 color.hidden              = #d70000
 color.histexpand          = bright white on #5f00af
 color.horizscroll         = black on #008787
-color.input               = #ffaf00
 color.readonly            = #008700
 color.selected_completion = reverse
 color.selection           = black on #d7af5f
 color.unrecognized        = #ff5f5f
 color.prompt              = bright green
+
+# %USERPROFILE%
 color.envvars             = #87d7ff
 
