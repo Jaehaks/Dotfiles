@@ -6,7 +6,9 @@ REM external editor for codex
 set "EDITOR=nvim"
 
 REM clink library to load
-set CLINK_PATH=%USERPROFILE%\.config\Dotfiles\clink\clink_libs
+set "CLINK_PATH=%USERPROFILE%\.config\Dotfiles\clink\clink_libs"
+set "CLINK_THEMES_DIR=%USERPROFILE%\.config\Dotfiles\clink\themes"
+set "CLINK_COLORTHEME=Minimal"
 
 REM set komorebi environment variable
 set KOMOREBI_CONFIG_HOME=%HOME%\.config\Dotfiles\komorebi
