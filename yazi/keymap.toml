@@ -199,12 +199,12 @@ prepend_keymap = [
 
 	# manual : clipboard.yazi
 	# -- yank selected file from and to system-clipboard
-	{ on = "Y", 		 run = "plugin clipboard 'copy'",      	       desc = "Yank selected files to system clipboard" },
-	{ on = "P", 		 run = "plugin clipboard 'paste'",     	       desc = "Paste files or contents from system clipboard" },
-	{ on = [ "c", "a" ], run = "plugin clipboard 'copy_fullpath'"    , desc = "Copy the entire path include filename" },
-	{ on = [ "c", "d" ], run = "plugin clipboard 'copy_dirpath'"     , desc = "Copy the directory path" },
-	{ on = [ "c", "f" ], run = "plugin clipboard 'copy_filename'"    , desc = "Copy the filename" },
-	{ on = [ "c", "n" ], run = "plugin clipboard 'copy_filenameonly'", desc = "Copy the filename without extension" },
+	{ on = "Y", 		 run = "plugin clipboard-copy 'copy'",      	       desc = "Yank selected files to system clipboard" },
+	{ on = "P", 		 run = "plugin clipboard-copy 'paste'",     	       desc = "Paste files or contents from system clipboard" },
+	{ on = [ "c", "a" ], run = "plugin clipboard-copy 'copy_fullpath'"    , desc = "Copy the entire path include filename" },
+	{ on = [ "c", "d" ], run = "plugin clipboard-copy 'copy_dirpath'"     , desc = "Copy the directory path" },
+	{ on = [ "c", "f" ], run = "plugin clipboard-copy 'copy_filename'"    , desc = "Copy the filename" },
+	{ on = [ "c", "n" ], run = "plugin clipboard-copy 'copy_filenameonly'", desc = "Copy the filename without extension" },
 
 	# plugin : copy-file-contents
 	{ on = ['c', 'g'], run = "plugin copy-file-contents",      desc = "copy contents of file" },
