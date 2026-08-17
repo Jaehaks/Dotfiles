@@ -1,4 +1,4 @@
---- @since 25.5.31
+--- @since 26.8.15
 --- requirements : 7zip-zstd
 
 ---@param items string|string[]
@@ -36,11 +36,11 @@ local get_selected = ya.sync(function ()
 	local select = cx.active.selected
 	local paths_tb = {}
 	if #select > 0 then
-		for _, path in pairs(select) do
-			paths_tb[#paths_tb+1] = tostring(path)
+		for _, url in pairs(select) do
+			paths_tb[#paths_tb+1] = tostring(url.path)
 		end
 	else
-		paths_tb = {tostring(cx.active.current.hovered.url)}
+		paths_tb = {tostring(cx.active.current.hovered.url.path)}
 	end
 	return paths_tb
 end)
