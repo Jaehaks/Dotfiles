@@ -78,6 +78,7 @@ keymap = [
 	# { on = "d",         run = "remove --force",              desc = "Trash selected files" },
 	{ on = "D",         run = "remove --force",        		 desc = "Trash selected files" },
 	{ on = "a",         run = "create",                      desc = "Create a file (ends with / for directories)" },
+	{ on = "B",         run = "bulk create",                 desc = "Bulk create files" },
 	{ on = "A",         run = "plugin newfile",       	 	 desc = "Create xlsx or pptx file" },
 	{ on = "r",         run = "rename --cursor=before_ext",  desc = "Rename selected file(s)" },
 	{ on = ":",         run = "shell --interactive",         desc = "Run a shell command" },
@@ -240,7 +241,7 @@ keymap = [
 	{ on = "k", run = "arrow next",  desc = "Next task" },
 
 	{ on = "<Up>",   run = "arrow prev", desc = "Previous task" },
-	{ on = "<Down>", run = "arrow next",  desc = "Next task" },
+	{ on = "<Down>", run = "arrow next", desc = "Next task" },
 
 	{ on = "<Enter>", run = "inspect", desc = "Inspect the task" },
 	{ on = "x",       run = "cancel",  desc = "Cancel the task" },
@@ -259,12 +260,12 @@ keymap = [
 	{ on = "<Tab>", run = "close", desc = "Close the spot" },
 
 	{ on = "k", run = "arrow prev", desc = "Previous line" },
-	{ on = "j", run = "arrow next",  desc = "Next line" },
+	{ on = "j", run = "arrow next", desc = "Next line" },
 	{ on = "h", run = "swipe prev", desc = "Swipe to previous file" },
-	{ on = "l", run = "swipe next",  desc = "Swipe to next file" },
+	{ on = "l", run = "swipe next", desc = "Swipe to next file" },
 
 	{ on = "<Up>",    run = "arrow prev", desc = "Previous line" },
-	{ on = "<Down>",  run = "arrow next",  desc = "Next line" },
+	{ on = "<Down>",  run = "arrow next", desc = "Next line" },
 	{ on = "<Left>",  run = "swipe prev", desc = "Swipe to previous file" },
 	{ on = "<Right>", run = "swipe next", desc = "Swipe to next file" },
 
@@ -288,7 +289,7 @@ keymap = [
 	{ on = "k", run = "arrow next",  desc = "Next option" },
 
 	{ on = "<Up>",   run = "arrow prev", desc = "Previous option" },
-	{ on = "<Down>", run = "arrow next",  desc = "Next option" },
+	{ on = "<Down>", run = "arrow next", desc = "Next option" },
 
 	# Help
 	{ on = "~",    run = "help", desc = "Open help" },
@@ -337,40 +338,40 @@ keymap = [
 	# { on = "<C-Right>", run = "forward --end-of-word",       desc = "Move forward to the end of the current or next word" },
 
 	# Line-wise movement
-	{ on = "0",      run = "move bol", desc = "Move to the BOL" },
-	{ on = "$",      run = "move eol",  desc = "Move to the EOL" },
+	{ on = "0",      run = "move bol",        desc = "Move to the BOL" },
+	{ on = "$",      run = "move eol",        desc = "Move to the EOL" },
 	{ on = "_",      run = "move first-char", desc = "Move to the first non-whitespace character" },
 	{ on = "^",      run = "move first-char", desc = "Move to the first non-whitespace character" },
-	{ on = "<C-a>",  run = "move bol", desc = "Move to the BOL" },
-	{ on = "<C-e>",  run = "move eol",  desc = "Move to the EOL" },
-	{ on = "<Home>", run = "move bol", desc = "Move to the BOL" },
-	{ on = "<End>",  run = "move eol",  desc = "Move to the EOL" },
+	{ on = "<C-a>",  run = "move bol",        desc = "Move to the BOL" },
+	{ on = "<C-e>",  run = "move eol",        desc = "Move to the EOL" },
+	{ on = "<Home>", run = "move bol",        desc = "Move to the BOL" },
+	{ on = "<End>",  run = "move eol",        desc = "Move to the EOL" },
 
 	# Delete
-	{ on = "<Backspace>", run = "backspace",	       desc = "Delete the character before the cursor" },
+	{ on = "<Backspace>", run = "backspace",         desc = "Delete the character before the cursor" },
 	{ on = "<Delete>",    run = "backspace --under", desc = "Delete the character under the cursor" },
 	# { on = "<C-h>",       run = "backspace",         desc = "Delete the character before the cursor" },
 	{ on = "<C-d>",       run = "backspace --under", desc = "Delete the character under the cursor" },
 
 	# Kill
-	{ on = "<C-u>", run = "kill bol",      desc = "Kill backwards to the BOL" },
-	{ on = "<C-k>", run = "kill eol",      desc = "Kill forwards to the EOL" },
-	{ on = "<C-w>", run = "kill backward", desc = "Kill backwards to the start of the current word" },
-	{ on = "<A-d>", run = "kill forward",  desc = "Kill forwards to the end of the current word" },
+	{ on = "<C-u>",         run = "kill bol",      desc = "Kill backwards to the BOL" },
+	{ on = "<C-k>",         run = "kill eol",      desc = "Kill forwards to the EOL" },
+	{ on = "<C-w>",         run = "kill backward", desc = "Kill backwards to the start of the current word" },
+	{ on = "<A-d>",         run = "kill forward",  desc = "Kill forwards to the end of the current word" },
 	# { on = "<C-Backspace>", run = "kill backward", desc = "Kill backwards to the start of the current word" },
 	# { on = "<C-Delete>",    run = "kill forward",  desc = "Kill forwards to the end of the current word" },
 
 	# Cut/Yank/Paste
-	{ on = "d", run = "delete --cut",                              desc = "Cut selected characters" },
-	{ on = "D", run = [ "delete --cut", "move eol" ],              desc = "Cut until EOL" },
-	{ on = "c", run = "delete --cut --insert",                     desc = "Cut selected characters, and enter insert mode" },
-	{ on = "C", run = [ "delete --cut --insert", "move eol" ],     desc = "Cut until EOL, and enter insert mode" },
+	{ on = "d", run = "delete --cut",                                      desc = "Cut selected characters" },
+	{ on = "D", run = [ "delete --cut", "move eol" ],                      desc = "Cut until EOL" },
+	{ on = "c", run = "delete --cut --insert",                             desc = "Cut selected characters, and enter insert mode" },
+	{ on = "C", run = [ "delete --cut --insert", "move eol" ],             desc = "Cut until EOL, and enter insert mode" },
 	{ on = "s", run = [ "delete --cut --insert", "move 1" ],               desc = "Cut current character, and enter insert mode" },
 	{ on = "S", run = [ "move bol", "delete --cut --insert", "move eol" ], desc = "Cut from BOL until EOL, and enter insert mode" },
-	{ on = "x", run = [ "delete --cut", "move 1 --in-operating" ], desc = "Cut current character" },
-	{ on = "y", run = "yank",           desc = "Copy selected characters" },
-	{ on = "p", run = "paste",          desc = "Paste copied characters after the cursor" },
-	{ on = "P", run = "paste --before", desc = "Paste copied characters before the cursor" },
+	{ on = "x", run = [ "delete --cut", "move 1 --in-operating" ],         desc = "Cut current character" },
+	{ on = "y", run = "yank",                                              desc = "Copy selected characters" },
+	{ on = "p", run = "paste",                                             desc = "Paste copied characters after the cursor" },
+	{ on = "P", run = "paste --before",                                    desc = "Paste copied characters before the cursor" },
 
 	# Undo/Redo
 	{ on = "u",     run = "undo", desc = "Undo the last operation" },
@@ -413,13 +414,13 @@ keymap = [
 	{ on = "<Enter>", run = [ "close --submit", "input:close --submit" ], desc = "Complete and submit the input" },
 
 	{ on = "<A-k>", run = "arrow prev", desc = "Previous item" },
-	{ on = "<A-j>", run = "arrow next",  desc = "Next item" },
+	{ on = "<A-j>", run = "arrow next", desc = "Next item" },
 
 	{ on = "<Up>",   run = "arrow prev", desc = "Previous item" },
-	{ on = "<Down>", run = "arrow next",  desc = "Next item" },
+	{ on = "<Down>", run = "arrow next", desc = "Next item" },
 
 	{ on = "<C-p>", run = "arrow prev", desc = "Previous item" },
-	{ on = "<C-n>", run = "arrow next",  desc = "Next item" },
+	{ on = "<C-n>", run = "arrow next", desc = "Next item" },
 
 	# Help
 	{ on = "~",    run = "help", desc = "Open help" },

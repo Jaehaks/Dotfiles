@@ -33,7 +33,7 @@ cwd = { fg = "cyan" }
 find_keyword  = { fg = "yellow", bold = true, italic = true, underline = true }
 find_position = { fg = "magenta", bg = "reset", bold = true, italic = true }
 
-# Slink
+# Symlink
 symlink_target = { italic = true }
 
 # Marker
@@ -124,6 +124,7 @@ progress_error  = { fg = "yellow", bg = "red" }
 # : Which {{{
 
 [which]
+border          = { fg = "blue" }
 cols            = 3
 mask            = { bg = "black" }
 cand            = { fg = "lightcyan" }
@@ -228,9 +229,8 @@ hovered = { fg = "magenta", bold = true }
 [help]
 on      = { fg = "cyan" }
 run     = { fg = "magenta" }
-desc    = {}
+action  = {}
 hovered = { reversed = true, bold = true }
-footer  = { fg = "black", bg = "white" }
 
 # : }}}
 
@@ -240,13 +240,13 @@ footer  = { fg = "black", bg = "white" }
 [filetype]
 rules = [
 	# Images
-	{ mime = "image/*", fg = "yellow" },
+	{ mime = "**/image/*", fg = "yellow" },
 
 	# Media
-	{ mime = "{audio,video}/*", fg = "magenta" },
+	{ mime = "**/{audio,video}/*", fg = "magenta" },
 
 	# Archives
-	{ mime = "application/{x-7z*,zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", fg = "red" },
+	{ mime = "**/application/{x-7z*,zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", fg = "red" },
 
 	# Documents
 	# { mime = "application/{pdf,doc,rtf}", fg = "cyan" },

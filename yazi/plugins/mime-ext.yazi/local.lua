@@ -1,4 +1,4 @@
---- @since 25.12.29
+--- @since 26.5.6
 --- See https://www.iana.org/assignments/media-types/media-types.xhtml
 
 local FILES = {
@@ -42,6 +42,7 @@ local EXTS = {
 	afm = "application/font-type1",
 	afp = "application/ibm.modcap",
 	ahead = "application/ahead.space",
+	ahk = "text/plain",
 	ai = "application/postscript",
 	aif = "audio/aiff",
 	aifc = "audio/aiff",
@@ -84,6 +85,7 @@ local EXTS = {
 	bin = "application/octet-stream",
 	blb = "application/blorb",
 	blend = "application/blender",
+	blend1 = "application/blender",
 	blorb = "application/blorb",
 	bmi = "application/bmi",
 	bmp = "image/bmp",
@@ -231,6 +233,7 @@ local EXTS = {
 	edx = "application/novadigm.edx",
 	efif = "application/picsel",
 	ei6 = "application/pg.osasli",
+	el = "text/plain",
 	elc = "application/octet-stream",
 	emf = "application/msmetafile",
 	eml = "message/rfc822",
@@ -327,6 +330,7 @@ local EXTS = {
 	gv = "text/graphviz",
 	gxf = "application/gxf",
 	gxt = "application/geonext",
+	gz = "application/gzip",
 	h = "text/c",
 	h261 = "video/h261",
 	h263 = "video/h263",
@@ -410,6 +414,8 @@ local EXTS = {
 	kpr = "application/kde.kpresenter",
 	kpt = "application/kde.kpresenter",
 	kpxx = "application/ds-keypoint",
+	kra = "application/krita",
+	["kra~"] = "application/krita",
 	ksp = "application/kde.kspread",
 	ktr = "application/kahootz",
 	ktx = "image/ktx",
@@ -431,11 +437,16 @@ local EXTS = {
 	lostxml = "application/lost+xml",
 	lrf = "application/octet-stream",
 	lrm = "application/ms-lrm",
+	lrz = "application/lrzip",
 	ltf = "application/frogans.ltf",
 	lua = "text/lua",
 	lvp = "audio/lucent.voice",
 	lwp = "application/lotus-wordpro",
+	lz = "application/lzip",
+	lz4 = "application/lz4",
 	lzh = "application/lzh-compressed",
+	lzma = "application/lzma",
+	lzo = "application/lzop",
 	m13 = "application/msmediaview",
 	m14 = "application/msmediaview",
 	m1v = "video/mpeg",
@@ -850,6 +861,7 @@ local EXTS = {
 	tif = "image/tiff",
 	tiff = "image/tiff",
 	tmo = "application/tmobile-livetv",
+	tofu = "text/hcl",
 	toml = "text/toml",
 	torrent = "application/bittorrent",
 	tpl = "application/groove-tool-template",
@@ -917,6 +929,7 @@ local EXTS = {
 	vcg = "application/groove-vcard",
 	vcs = "text/vcalendar",
 	vcx = "application/vcx",
+	vim = "text/plain",
 	vis = "application/visionary",
 	viv = "video/vivo",
 	vob = "video/ms-vob",
@@ -1049,6 +1062,7 @@ local EXTS = {
 	zirz = "application/zul",
 	zmm = "application/handheld-entertainment+xml",
 	zsh = "text/shellscript",
+	zst = "application/zstd",
 }
 
 local options = ya.sync(
@@ -1127,6 +1141,23 @@ function M.fallback_builtin(job, unknown, state)
 		end
 	end
 	return state
+end
+
+-- TODO: remove
+if ya.throttle then
+	local old_fetch = M.fetch
+	M.fetch = function(self, job)
+		old_fetch(self, job)
+		return require("noop"):fetch(job)
+	end
+
+	M.fallback_builtin = function(job, unknown)
+		local next = require("mime.local"):fetch(ya.dict_merge(job, { files = unknown }))
+		local file, value = next()
+		while file do
+			file, value = next(coroutine.yield(file, value))
+		end
+	end
 end
 
 return M

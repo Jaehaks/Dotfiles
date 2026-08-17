@@ -1,9 +1,10 @@
---- @since 25.12.29
+--- @since 26.5.6
 local M = {}
 
 local function stale_cache(file)
 	local url = file.url
-	local lock = url.scheme.cache:join(string.format("%%lock/%s", url:hash(true)))
+	local cache = url.spec and (url.spec.stamp or url.spec.cache) or url.scheme.cache -- TODO: remove
+	local lock = cache:join(string.format("%%lock/%s", url:hash(true)))
 
 	local f = io.open(tostring(lock), "r")
 	if not f then
@@ -57,6 +58,23 @@ function M.fallback_local(job, unknown, state)
 		end
 	end
 	return state
+end
+
+-- TODO: remove
+if ya.throttle then
+	local old_fetch = M.fetch
+	M.fetch = function(self, job)
+		old_fetch(self, job)
+		return require("noop"):fetch(job)
+	end
+
+	M.fallback_local = function(job, unknown)
+		local next = require(".local"):fetch(ya.dict_merge(job, { files = unknown }))
+		local file, value = next()
+		while file do
+			file, value = next(coroutine.yield(file, value))
+		end
+	end
 end
 
 return M

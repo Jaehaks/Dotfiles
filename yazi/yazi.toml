@@ -15,7 +15,7 @@ linemode       = "size_and_mtime"
 show_hidden    = true
 show_symlink   = false # it will be shown in status bar
 scrolloff      = 5
-mouse_events   = [ "click", "scroll" ]
+mouse_events   = [ "click", "scroll", "drag" ]
 
 [preview]
 wrap			= "no"
@@ -105,6 +105,8 @@ rules = [
 	{ mime = "inode/empty", use = [ "edit", "reveal" ] },
 	# Virtual file system
 	{ mime = "vfs/{absent,stale}", use = "download" },
+	# Trash
+	{ mime = "trash/**", use = [ "open", "trash" ] },
 	# Fallback
 	{ url = "*", use = [ "open", "reveal" ] },
 ]
@@ -139,6 +141,8 @@ fetchers = [
 spotters = [
 	# Multi-file
 	{ mime = "multi/*", run = "multi" },
+	# Trash
+	{ mime = "trash/**", run = "trash" },
 	# Folder
 	{ url = "*/", run = "folder" },
 	# Code
@@ -169,6 +173,8 @@ preloaders = [
 	# Font
 	{ mime = "font/*", run = "font" },
 	{ mime = "application/ms-opentype", run = "font" },
+	# Trash
+	{ mime = "trash/**", run = "trash" },
 ]
 previewers = [
 	{ url = "*/", run = "folder" },
@@ -201,6 +207,8 @@ previewers = [
 	{ mime = "inode/empty", run = "empty" },
 	# Virtual file system
 	{ mime = "vfs/*", run = "vfs" },
+	# Trash
+	{ mime = "trash/**", run = "trash" },
 	# Error
 	{ mime = "null/*", run = "null" },
 	# Fallback

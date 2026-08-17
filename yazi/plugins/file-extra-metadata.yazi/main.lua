@@ -1,4 +1,4 @@
---- @since 25.5.28
+--- @since 26.5.6
 
 local M = {}
 
@@ -100,9 +100,17 @@ local function get_filesystem_extra(file)
 	}
 	local h = file
 	local file_url = h.url
-	local is_virtual = file_url.scheme and file_url.scheme.is_virtual
-	file_url = is_virtual and (file.path or Url(file_url.scheme.cache .. tostring(file_url.path)))
-		or (file_url.path or file_url.url)
+	local is_virtual
+	if not file_url.spec then
+		is_virtual = file_url.scheme and file_url.scheme.is_virtual
+		file_url = is_virtual
+				and (file.path or Url(file_url.scheme and file_url.scheme.cache .. tostring(file_url.path)))
+			or file_url
+	else
+		is_virtual = file_url.spec and file_url.spec.is_virtual
+		file_url = is_virtual and file.path or file_url
+	end
+
 	if not h or ya.target_family() ~= "unix" then
 		return result
 	end
@@ -193,9 +201,17 @@ local function attributes(file)
 	if h.cha.is_link then
 		file_url = Url(h.link_to)
 	end
-	local is_virtual = file_url.scheme and file_url.scheme.is_virtual
-	file_url = is_virtual and (file.path or Url(file_url.scheme.cache .. tostring(file_url.path))) or file_url
 
+	local is_virtual
+	if not file_url.spec then
+		is_virtual = file_url.scheme and file_url.scheme.is_virtual
+		file_url = is_virtual
+				and (file.path or Url(file_url.scheme and file_url.scheme.cache .. tostring(file_url.path)))
+			or file_url
+	else
+		is_virtual = file_url.spec and file_url.spec.is_virtual
+		file_url = is_virtual and file.path or file_url
+	end
 	if not h or ya.target_family() ~= "unix" then
 		return ""
 	end
@@ -305,24 +321,51 @@ function M:render_table(job, opts)
 	)
 	if opts and opts.show_plugins_section then
 		-- TODO: Remove this after the next release
-		local is_yazi_nightly, _ = pcall(require, "mime.dir")
-		local spotter = rt.plugin.spotter(is_yazi_nightly and job.file or job.file.url, job.mime)
-		local previewer = rt.plugin.previewer(is_yazi_nightly and job.file or job.file.url, job.mime)
-		local fetchers = rt.plugin.fetchers(job.file, job.mime)
-		local preloaders = rt.plugin.preloaders(is_yazi_nightly and job.file or job.file.url, job.mime)
-
-		for i, v in ipairs(fetchers) do
-			fetchers[i] = v.cmd
-		end
-		for i, v in ipairs(preloaders) do
-			preloaders[i] = v.cmd
-		end
+		local spotter, previewer, fetchers, preloaders = nil, nil, {}, {}
 
 		rows[#rows + 1] = ui.Row({ { "", "Plugins" }, "" }):height(2):style(styles.header)
-		row(prefix .. "Spotter:", spotter and spotter.cmd or "(none)")
-		row(prefix .. "Previewer:", previewer and previewer.cmd or "(none)")
-		row(prefix .. "Fetchers:", #fetchers ~= 0 and fetchers or "(none)")
-		row(prefix .. "Preloaders:", #preloaders ~= 0 and preloaders or "(none)")
+		if type(rt.plugin.spotters.match) ~= "nil" then
+			local pair = { file = job.file, mime = job.mime }
+			for _, v in pairs(rt.plugin.spotters:match(pair)) do
+				spotter = v
+				break
+			end
+
+			for _, v in pairs(rt.plugin.previewers:match(pair)) do
+				previewer = v
+				break
+			end
+
+			for _, v in pairs(rt.plugin.fetchers:match(pair)) do
+				fetchers[#fetchers + 1] = v.name
+			end
+			fetchers = #fetchers ~= 0 and fetchers or { "(none)" }
+
+			for _, v in pairs(rt.plugin.preloaders:match(pair)) do
+				preloaders[#preloaders + 1] = v.name
+			end
+			preloaders = #preloaders ~= 0 and preloaders or { "(none)" }
+			row(prefix .. "Spotter:", spotter and spotter.name or "(none)")
+			row(prefix .. "Previewer:", previewer and previewer.name or "(none)")
+			row(prefix .. "Fetchers:", fetchers)
+			row(prefix .. "Preloaders:", preloaders)
+		else
+			local is_yazi_nightly, _ = pcall(require, "mime.dir")
+			spotter = rt.plugin.spotter(is_yazi_nightly and job.file or job.file.url, job.mime)
+			previewer = rt.plugin.previewer(is_yazi_nightly and job.file or job.file.url, job.mime)
+			fetchers = rt.plugin.fetchers(job.file, job.mime)
+			preloaders = rt.plugin.preloaders(is_yazi_nightly and job.file or job.file.url, job.mime)
+			for i, v in ipairs(fetchers) do
+				fetchers[i] = v.cmd
+			end
+			for i, v in ipairs(preloaders) do
+				preloaders[i] = v.cmd
+			end
+			row(prefix .. "Spotter:", spotter and spotter.cmd or "(none)")
+			row(prefix .. "Previewer:", previewer and previewer.cmd or "(none)")
+			row(prefix .. "Fetchers:", #fetchers ~= 0 and fetchers or "(none)")
+			row(prefix .. "Preloaders:", #preloaders ~= 0 and preloaders or "(none)")
+		end
 	end
 
 	return ui.Table(rows):area(job.area):row(1):col(1):col_style(styles.row_value):widths({
