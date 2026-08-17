@@ -1,99 +1,71 @@
---- @since 25.6.11
--- get branch contents from status
-local get_branch = ya.sync(function (state, status)
+--- @since 26.8.15
+
+--- update git status message
+local update_git_state = ya.sync(function(state, status)
+	-- set empty state
+	state.branch = ""
+	state.stash = ""
+	state.commit = ""
+	state.staged = ""
+	state.unstaged = ""
+	state.untracked = ""
+
+	if not status or status == "" then
+		return true
+	end
+
+	-- Branch
 	local branch = status:match('On branch (%S+)')
 	state.branch = branch and '  ' .. branch or ""
-end)
 
--- get stash contents from status
-local get_stash = ya.sync(function (state, status)
+	-- Stash
 	local stash = status:match('Your stash currently has (%S+)')
 	state.stash = stash and ' $' .. stash or ""
-end)
 
--- get commit contents from status
-local get_commit = ya.sync(function (state, status)
+	-- Commit
 	local commit = status:match('onto (%S+)')
 	state.commit = commit and ' @' .. commit or ""
-end)
 
--- get staged contents from status
-local get_staged = ya.sync(function (state, status)
-	local result = status:match('Changes to be committed:%s*(.-)%s*\n\n')
-	if result then
-		local list = result:gsub("^[%s]*%b()[%s]*", "")
-
-		local staged = 0
-		for line in list:gmatch("[^\r\n]+") do
-			if line:match("%S") then
-				staged = staged + 1
-			end
+	-- Staged
+	local result_staged = status:match('Changes to be committed:%s*(.-)%s*\n\n')
+	if result_staged then
+		local count = 0
+		for line in result_staged:gsub("^[%s]*%b()[%s]*", ""):gmatch("[^\r\n]+") do
+			if line:match("%S") then count = count + 1 end
 		end
-		state.staged = " A" .. staged
-	else
-		state.staged = ""
+		state.staged = count > 0 and (" A" .. count) or ""
+	end
+
+	-- Unstaged
+	local result_unstaged = status:match('Changes not staged for commit:%s*(.-)%s*\n\n')
+	if result_unstaged then
+		local count = 0
+		for line in result_unstaged:gsub("^[%s]*%b()[\r\n]*", ""):gsub("^[%s]*%b()[\r\n]*", ""):gmatch("[^\r\n]+") do
+			if line:match("%S") then count = count + 1 end
+		end
+		state.unstaged = count > 0 and (" M" .. count) or ""
+	end
+
+	-- Untracked
+	local result_untracked = status:match('Untracked files:%s*(.-)%s*\n\n')
+	if result_untracked then
+		local count = 0
+		for line in result_untracked:gsub("^[%s]*%b()[\r\n]*", ""):gmatch("[^\r\n]+") do
+			if line:match("%S") then count = count + 1 end
+		end
+		state.untracked = count > 0 and (" ?" .. count) or ""
 	end
 end)
 
--- get unstaged contents from status
-local get_unstaged = ya.sync(function (state, status)
-	local result = status:match('Changes not staged for commit:%s*(.-)%s*\n\n')
-	if result then
-		local list = result:gsub("^[%s]*%b()[\r\n]*", ""):gsub("^[%s]*%b()[\r\n]*", "")
-
-		local unstaged = 0
-		for line in list:gmatch("[^\r\n]+") do
-			if line:match("%S") then
-				unstaged = unstaged + 1
-			end
-		end
-		state.unstaged = " M" .. unstaged
-	else
-		state.unstaged = ""
-	end
-end)
-
--- get untracked contents from status
-local get_untracked = ya.sync(function (state, status)
-	local result = status:match('Untracked files:%s*(.-)%s*\n\n')
-	if result then
-		local list = result:gsub("^[%s]*%b()[\r\n]*", "")
-
-		local untracked = 0
-		for line in list:gmatch("[^\r\n]+") do
-			if line:match("%S") then
-				untracked = untracked + 1
-			end
-		end
-		state.untracked = " ?" .. untracked
-	else
-		state.untracked = ""
-	end
-end)
-
--- get behind_ahead contents from status
--- local get_behind_ahead = ya.sync(function (state, status)
--- 	local result_ahead, result_behind = status:match("have (%d+) and (%d+) different")
--- 	if result then
--- 		state.untracked = " ?" .. untracked
--- 	else
--- 		state.untracked = ""
--- 	end
---
--- end)
 
 -- setup function to register Header
 local setup = function(state, args)
-	state.branch = ''
-	state.stash = ''
-	state.staged = ''
-	state.unstaged = ''
-	state.commit = ''
-	state.untracked = ''
+	-- initialize
+	update_git_state(nil)
 
 	-- githead main function
 	function Header:githead()
-		ui.render() -- it needs to erase branch fast out of git repo
+		-- ui.render() -- it needs to erase branch fast out of git repo
 
 		return ui.Line{ -- must not be nil, it branch is nil, header isn't shown
 			ui.Span(state.branch):fg('bright magenta'),
@@ -110,6 +82,14 @@ local setup = function(state, args)
 end
 
 
+--- cache to call git command at once whenever user enter a directory
+---@class git_cache
+---@field cwd string
+---@field time number
+local git_cache = {
+	cwd = '',
+	time = 0,
+}
 
 -- fetch contents whenever entities have some changes
 -- it seems that once fetch,
@@ -123,9 +103,22 @@ local fetch = function (self, job)
 	-- I think all files are fetched at first time entering
 	-- it will be waste time to show correct branch name because if they have lots of files to fetch
 
-	-- local cwd = job.files[1].url:parent() -- get cwd
 	local cwd = job.files[1].url.parent -- get cwd
-	-- if return is done early, branch is changed too slowly
+	local current_time = os.time()
+	-- check cache
+	-- fetch() will be called for every file in directory. To prevent duplicated fetch call in cwd, use cache and check cwd.
+	-- or If timeout is over, the fetch will be executed because file changing checker of yazi will call it.
+	if git_cache.cwd == cwd and (current_time - git_cache.time) < 2 then
+		return true
+	end
+	git_cache.cwd = cwd
+	git_cache.time = current_time
+
+	-- ya.notify({
+	-- 	title = 'githead',
+	-- 	content = cwd,
+	-- 	timeout = 2,
+	-- })
 
 	-- if there are no --no-optional-locks options, command call permanently
 	-- if `2>nul` is added, it works in terminal to delete stderr,
@@ -143,18 +136,30 @@ local fetch = function (self, job)
 						:stdout(Command.PIPED)
 						:output()
 	if not status then
-		status.stdout = ""
+		update_git_state(nil)
+		return true, Err("Cannot spawn `git` command, error: %s", err)
 	end
-	-- save branch name
-	get_branch(status.stdout)
-	get_stash(status.stdout)
-	get_staged(status.stdout)
-	get_unstaged(status.stdout)
-	get_commit(status.stdout)
-	get_untracked(status.stdout)
-	return false
 
+	-- save branch name
+	update_git_state(status.stdout)
+	return false
+end
+
+-- INFO: it follows git.yazi
+-- INFO: I don't know why, but 'fetch' in return item must return function not one of fetch()
+-- INFO: If not, 'error converting Lua boolean to function' error is shown.
+local function fetch_compact(self, job)
+	if ya.throttle then
+		fetch(self, job)
+		return ya.co(function()
+			for _, file in ipairs(job.files) do
+				coroutine.yield(file, { retry = true })
+			end
+		end)
+	else
+		return fetch(self, job)
+	end
 end
 
 
-return {setup = setup, fetch = fetch}
+return {setup = setup, fetch = fetch_compact}
