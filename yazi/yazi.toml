@@ -25,7 +25,7 @@ max_height      = 930 # image preview size is fixed under this value, and cannot
 cache_dir       = ""
 image_delay     = 30
 image_filter    = "triangle"
-image_quality   = 75 # doesn't works in windows-terminal
+image_quality   = 75 # pdf previewer quality 50~90
 ueberzug_scale  = 1
 ueberzug_offset = [ 0, 0, 0, 0 ]
 
@@ -169,7 +169,7 @@ preloaders = [
 	# Video
 	{ mime = "video/*", run = "video" },
 	# PDF
-	{ mime = "application/pdf", run = "pdf" },
+	{ mime = "application/pdf", run = "mupdf" },
 	# Font
 	{ mime = "font/*", run = "font" },
 	{ mime = "application/ms-opentype", run = "font" },
@@ -190,7 +190,7 @@ previewers = [
 	# Video
 	{ mime = "video/*", run = "video" },
 	# PDF
-	{ mime = "application/pdf", run = "pdf" },
+	{ mime = "application/pdf", run = "mupdf" },
 	# Archive
 	{ mime = "application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", run = "zipname" }, # plugin : zipname.yazi
 	{ mime = "application/{x-7z-compressed}", run = "zipname"}, # plugin : zipname.yazi
