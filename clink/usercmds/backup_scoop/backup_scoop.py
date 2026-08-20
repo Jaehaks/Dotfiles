@@ -62,7 +62,7 @@ APPS = [
     "ffmpeg",
     "fzf",
     "gawk",
-    "ghostscript",
+    "ghostscript", # for imagemagick
     "gitui",
     "grep",
     "gzip",
@@ -74,6 +74,7 @@ APPS = [
     "lua",
     "mingw-winlibs",
     "mpv",
+    "mupdf", # mutool for pdf preview in yazi
     "neovim",
     "neovim-qt",
     "openssl1", # for clipboard, supports libcrypto-1.1
