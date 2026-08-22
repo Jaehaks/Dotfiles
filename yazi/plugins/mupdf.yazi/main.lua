@@ -4,6 +4,12 @@
 local M = {}
 
 function M:peek(job)
+	-- don't do peek() until preview window is opened
+	-- peek() is periodically called when preview window is opened, so it doesn't need to call it explicitly in keymap file
+	if job.area.w < 1 or job.area.h < 1 then
+		return
+	end
+
 	local start, cache = os.clock(), ya.file_cache(job)
 	if not cache then
 		return
