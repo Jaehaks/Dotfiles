@@ -24,11 +24,6 @@ rev = "3d25b67"
 hash = "eddc504a5718e3735475e18c8319b1e7"
 
 [[plugin.deps]]
-use = "yazi-rs/plugins:smart-enter"
-rev = "3d25b67"
-hash = "b99cda925dfd7969cb888e086408decc"
-
-[[plugin.deps]]
 use = "boydaihungst/file-extra-metadata"
 rev = "8bb639d"
 hash = "8c5f14c09c981a496afaab5184e4aa08"
@@ -37,6 +32,11 @@ hash = "8c5f14c09c981a496afaab5184e4aa08"
 use = "yazi-rs/plugins:types"
 rev = "3d25b67"
 hash = "682e8f7d6c3530d8eb42ff9d8f3fcad4"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:smart-enter"
+rev = "72f9e3c"
+hash = "b99cda925dfd7969cb888e086408decc"
 
 [flavor]
 deps = []

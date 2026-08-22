@@ -76,6 +76,9 @@ sioyekopen = [
 sumatraopen = [
 	{ run = 'sumatraPDF %s1', orphan = true, desc = "SumatraPDF", for = "windows" },
 ]
+pdfopen = [
+	{ run = 'open_pdf %s1', orphan = true, desc = "open_pdf.cmd", for = "windows" },
+]
 
 [open] # set rules for opening for specific file + show open list
 # mime is detected by `file --mime-type {}` function
@@ -100,7 +103,7 @@ rules = [
 	{ mime = "application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", use = [ "extract", "reveal" ] },
 	{ mime = "application/{x-7z-compressed}", use = [ "extract", "reveal" ] },
 	# pdf
-	{ mime = "application/pdf", use = [ "open", "sioyekopen", "sumatraopen" ] },
+	{ mime = "application/pdf", use = [ "pdfopen", "sioyekopen", "sumatraopen" ] },
 	# Empty file
 	{ mime = "inode/empty", use = [ "edit", "reveal" ] },
 	# Virtual file system
