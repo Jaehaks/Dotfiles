@@ -111,6 +111,7 @@ rules = [
 	# Trash
 	{ mime = "trash/**", use = [ "open", "trash" ] },
 	# Fallback
+	{ mime = "application/*", use = [ "open", "reveal" ] },
 	{ url = "*", use = [ "open", "reveal" ] },
 ]
 

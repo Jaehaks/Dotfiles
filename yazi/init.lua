@@ -116,6 +116,10 @@ require('mime-ext.local'):setup({
 		pst = "application/outlook",
 		msg = "application/msg",
 
+		-- for others
+		hwp = "application/x-hwp",
+		hwpx = "application/x-hwp",
+
 		-- for archive
 		["7z"] = "application/x-7z-compressed",
 	},
