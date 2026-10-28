@@ -49,7 +49,8 @@ DST_DIR = Path.home() / "Desktop"
 python_packages = [
     'basedpyright',
     'debugpy',
-    'pyrefly',
+    # 'pyrefly',
+    'ty',
     'ruff',
 ]
 
